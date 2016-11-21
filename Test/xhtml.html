@@ -1,7 +1,3 @@
-<!--
-Some notes.
-Do we want fixed tab size? Or is the auto-resizing that's present right now acceptable?
--->
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,8 +5,15 @@ Do we want fixed tab size? Or is the auto-resizing that's present right now acce
   <title>Week 15 Players</title>
 
   <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/Grsmto/simplebar/master/src/simplebar.css">
-  <link rel="stylesheet" type="text/css" href="./xcss.css">
   <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="xcss.css">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  <!-- TODO replace with # entities and the sheet url -->
+  <script type=text/javascript>
+    var numEntities = 2;
+    var key = "13xmabPQmaCy6m4aXlJHmxDhUb8y_-IZSVigkb1gtibY";
+  </script>
 </head>
 
 
@@ -47,31 +50,30 @@ Do we want fixed tab size? Or is the auto-resizing that's present right now acce
 <div class='toast' style='display:none'></div>
 
 <!-- Script load -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 <script src="https://cdn.rawgit.com/Grsmto/simplebar/master/src/simplebar.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.13/clipboard.min.js"></script>
 <script src="https://use.fontawesome.com/1cdaab7178.js"></script>
 </body>
 
-<!-- Templates and actual use javascript -->
+<!-- Templates and javscript -->
 <script src="xjs.js"></script>
-<script id="overview-template" type="text/x-custom-template">
-<tr>
+<script id="overview-template" type="text/x-template">
+<tr id="overview##">
 <td class="alignleft"><span class="accent##">&block;&ensp;</span><span id="overview##-name">Loading...</span></td>
 <td><span id="overview##-hp">Loading...</span><span class="shrink"> HP</span></td>
 <td><span id="overview##-atk">Loading...</span><span class="shrink"> ATK</span></td>
 <td><span id="overview##-def">Loading...</span><span class="shrink"> DEF</span></td>
 <td><textarea rows="1" type="hidden" readonly="true" class="overview-cp" id="overview##-cp" value="LOADING..."></textarea>
-<button class="btn" data-clipboard-target="#overview##-cp"><i class="fa fa-clipboard" aria-hidden="true" alt="C/P"></i>
+<button class="btn" data-clipboard-target="#overview##-cp"><i class="fa fa-clipboard accent##" aria-hidden="true" alt="C/P"></i>
 </button></td>
 </tr>
 </script>
 
-<script id="tab-template" type="text/x-custom-template">
+<script id="tab-template" type="text/x-template">
 <li><a href="#" class="tab accent##" id="id##-tab">Loading...</a></li>
 </script>
 
-<script id="content-template" type="text/x-custom-template">
+<script id="content-template" type="text/x-template">
 <div class="content">PLACEHOLDER</div>
 </script>
 

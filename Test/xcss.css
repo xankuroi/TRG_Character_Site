@@ -1,6 +1,8 @@
 /* Main styling */
 body {
+  padding-top:10px;
   font-family: "Roboto", sans-serif;
+  min-width:320px;
   max-width:768px;
   margin:0 auto;
 }
@@ -17,7 +19,6 @@ body {
 
 .tabcontainer{
   width:100%;
-  position:relative;
 }
 
 .tabs {
@@ -59,13 +60,10 @@ body {
 .shrink{display:none;} /* hides this text on mobile size */
 /* CP Toasts */
 .toast {
-  width:200px;
-  height:20px;
-  height:auto;
+  max-width:75%;
   position:absolute;
-  left:50%;
-  margin-left:-100px;
-  bottom:10px;
+  top:40px;
+  right:10px;
   background-color: #383838;
   color: #F0F0F0;
   font-size: 20px;
@@ -114,11 +112,11 @@ body {
   width:50%;
 }
 .table-second{
-  min-width:100px;
+  min-width:80px;
   max-width:125px;
 }
 .table-thirds{
-  min-width:60px;
+  min-width:30px;
   max-width:100px;
 }
 .table-small{

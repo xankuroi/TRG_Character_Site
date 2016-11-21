@@ -1,5 +1,3 @@
-var numEntities = 2; // TODO fill in number of entities to be shown
-
 //LOAD PAGE
 $(document).ready(function() {
   tab_template = $('#tab-template').html();
@@ -31,9 +29,8 @@ $(function() {
 // Fill in the damn information.
 function fill(id) {
   var sheet = id + 5;
-  $.getJSON("https://spreadsheets.google.com/feeds/list/13xmabPQmaCy6m4aXlJHmxDhUb8y_-IZSVigkb1gtibY/" + sheet + "/public/values?alt=json", function(data) {
+  $.getJSON("https://spreadsheets.google.com/feeds/list/"+key+"/" + sheet + "/public/values?alt=json", function(data) {
     /* collect data that shows up multiple times */
-    els = document.getElementsByClassName('accent' + id);
     color = data.feed.entry[7]['gsx$type']['$t'];
     name = data.feed.entry[0]['gsx$data']['$t'];
     cp = data.feed.entry[3]['gsx$cp']['$t'];
@@ -45,7 +42,9 @@ function fill(id) {
     // Apply accent colors
     if(color.toLowerCase()=="dead"){
       color = "gray";
+      $("#overview"+id).addClass("accent"+id);
     }
+    els = document.getElementsByClassName('accent' + id);
     for (i = 0; i < els.length; i++) {
       els[i].style.color = color;
     }
@@ -54,7 +53,7 @@ function fill(id) {
     document.getElementById('id' + id + '-tab').innerHTML = name;
     document.getElementById('overview'+id+'-name').innerHTML = name;
     $('#overview'+id+'-cp').val(cp);
-    document.getElementById('overview'+id+'-hp').innerHTML = currhp.substring(0, currhp.length - 2) + "/ " + totalhp;
+    document.getElementById('overview'+id+'-hp').innerHTML = currhp.substring(0, currhp.length - 3) + "/" + totalhp;
     document.getElementById('overview'+id+'-atk').innerHTML = atk;
     document.getElementById('overview'+id+'-def').innerHTML = def;
 /*
