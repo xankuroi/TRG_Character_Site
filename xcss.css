@@ -1,0 +1,150 @@
+/* Main styling */
+body {
+  font-family: "Roboto", sans-serif;
+  max-width:768px;
+  margin:0 auto;
+}
+
+.container {
+  overflow: hidden;
+  outline: 1px solid lightgray;
+}
+
+.content {
+  padding: 10px;
+  display:none;
+}
+
+.tabcontainer{
+  width:100%;
+  position:relative;
+}
+
+.tabs {
+  outline: 1px solid lightgray;
+  height:50px;
+  max-width:768px;
+  white-space:nowrap;
+  overflow-x: auto;
+  background: white;
+}
+.tabs ul{
+  list-style: none;
+  padding:5px;
+  margin:5px;
+}
+.tabs li{
+  display:inline-block;
+  padding:0;
+}
+
+.tabs li a{
+  height:100%;
+  text-decoration:none;
+}
+.tab{padding:5px 20px;margin:0;}
+.tabs li a:hover{
+  background-color:lightgray;
+}
+.tabs .active a
+{
+  background-color:#BBBBBB;
+}
+
+
+/* CSS components */
+/* Helpful Alterations */
+.floatleft{float:left;}
+.alignleft{text-align:left;}
+.shrink{display:none;} /* hides this text on mobile size */
+/* CP Toasts */
+.toast {
+  width:200px;
+  height:20px;
+  height:auto;
+  position:absolute;
+  left:50%;
+  margin-left:-100px;
+  bottom:10px;
+  background-color: #383838;
+  color: #F0F0F0;
+  font-size: 20px;
+  padding:10px;
+  text-align:center;
+  border-radius: 2px;
+}
+/* Refresh button */
+.refresh {
+  display:block;
+  border:none;
+  padding:5px;
+}
+.refresh:hover{
+  cursor:pointer;
+}
+/* Overview */
+#overview{
+  color:black;
+}
+.overview table{
+  width:100%;
+}
+.overview th{
+  background-color:#383838;
+  color:#F0F0F0;
+}
+.overview tr{
+  text-align:center;
+}
+.overview tr:nth-child(even) {
+  background-color:lightgray;
+}
+.overview tr:nth-child(odd) {
+  background-color:#BBBBBB;
+}
+.overview-cp{
+  width:10px;
+  border:none;
+  resize:none;
+  position:fixed;
+  top:-100px;
+}
+.table-first{
+  min-width:100px;
+  width:50%;
+}
+.table-second{
+  min-width:100px;
+  max-width:125px;
+}
+.table-thirds{
+  min-width:60px;
+  max-width:100px;
+}
+.table-small{
+  min-width:30px;
+}
+.btn{width:100%;margin:0;}
+/* Main container */
+
+/* Equipment - Pins */
+/* Equipment - Threads */
+/* Inventory - Pins */
+/* Inventory - Threads */
+/* Inventory - Swag */
+
+
+/* Window Resizing */
+/* Default is SMALL size */
+/* Large size */
+@media (min-width: 769px) {
+  .content {
+    padding:10px 40px 40px 40px;
+  }
+  .shrink {
+    display:inline;
+  }
+  .tab{
+    padding:5px 40px;
+  }
+}
