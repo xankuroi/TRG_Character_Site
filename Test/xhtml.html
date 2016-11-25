@@ -3,7 +3,7 @@
 <head>
   <!-- TODO actually fill out the header lmao -->
   <title>Week 15 Players</title>
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/Grsmto/simplebar/master/src/simplebar.css">
   <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="xcss.css">
@@ -11,8 +11,9 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
   <!-- TODO replace with # entities and the sheet url -->
   <script type=text/javascript>
-    var numEntities = 2;
-    var key = "13xmabPQmaCy6m4aXlJHmxDhUb8y_-IZSVigkb1gtibY";
+  var numEntities = 2;
+  var key = "13xmabPQmaCy6m4aXlJHmxDhUb8y_-IZSVigkb1gtibY";
+  var ptype = "player";
   </script>
 </head>
 
@@ -28,7 +29,11 @@
 
 
   <div class="container">
-    <div class="corner"><button class="refresh"><i class="fa fa-refresh fa-lg" aria-hidden="true"></i></button></div>
+    <div class="corner">
+      <button class="refresh"><i class="fa fa-refresh fa-lg" aria-hidden="true"></i></button>
+      <span class="smol line">Content automatically updates every 10 min.</span>
+      <span class="smol line">Click on the button to manually trigger an update.</span>
+    </div>
     <div class="content overview">
       <table>
         <thead>
@@ -47,7 +52,7 @@
   </div>
 </div>
 
-<div class='toast' style='display:none'></div>
+<div class="toasty"><div class='toast' style='display:none'></div></div>
 
 <!-- Script load -->
 <script src="https://cdn.rawgit.com/Grsmto/simplebar/master/src/simplebar.js"></script>
@@ -58,23 +63,79 @@
 <!-- Templates and javscript -->
 <script src="xjs.js"></script>
 <script id="overview-template" type="text/x-template">
-<tr id="overview##">
-<td class="alignleft"><span class="accent##">&block;&ensp;</span><span id="overview##-name">Loading...</span></td>
-<td><span id="overview##-hp">Loading...</span><span class="shrink"> HP</span></td>
-<td><span id="overview##-atk">Loading...</span><span class="shrink"> ATK</span></td>
-<td><span id="overview##-def">Loading...</span><span class="shrink"> DEF</span></td>
-<td><textarea rows="1" type="hidden" readonly="true" class="overview-cp" id="overview##-cp" value="LOADING..."></textarea>
-<button class="btn" data-clipboard-target="#overview##-cp"><i class="fa fa-clipboard accent##" aria-hidden="true" alt="C/P"></i>
-</button></td>
-</tr>
+  <tr id="overview##">
+    <td class="alignleft"><span class="accent##">&block;&ensp;</span><span id="overview##-name">Loading...</span></td>
+    <td><span id="overview##-hp">Loading...</span><span class="shrink"> HP</span></td>
+    <td><span id="overview##-atk">Loading...</span><span class="shrink"> ATK</span></td>
+    <td><span id="overview##-def">Loading...</span><span class="shrink"> DEF</span></td>
+    <td><textarea rows="1" type="hidden" readonly="true" class="overview-cp" id="overview##-cp" value="LOADING..."></textarea>
+      <button class="btn" data-clipboard-target="#overview##-cp">
+        <i class="fa fa-clipboard accent##" aria-hidden="true" alt="C/P"></i>
+      </button>
+    </td>
+  </tr>
 </script>
 
 <script id="tab-template" type="text/x-template">
-<li><a href="#" class="tab accent##" id="id##-tab">Loading...</a></li>
+  <li><a href="#" class="tab accent##" id="id##-tab">Loading...</a></li>
 </script>
 
-<script id="content-template" type="text/x-template">
-<div class="content">PLACEHOLDER</div>
+<script id="player-template" type="text/x-template">
+  <div class="content" id="id##-content">
+    <div class="topkek">
+      <img id="id##-image"></img>
+      <div class="head">
+        <div class="clicky">
+          <div class="munfo floatright">
+            <h1>
+              <i class="fa fa-user accent##" aria-hidden="true" alt="Mun Info"></i>
+              <i class="fa fa-skype accent##" aria-hidden="true" alt="Skype"></i>
+              <i class="fa fa-tumblr-square accent##" aria-hidden="true" alt="Blog"></i>
+              <i class="fa fa-clock-o accent##" aria-hidden="true" alt="Timezone"></i>
+            </h1>
+          </div>
+        </div>
+
+        <h1 class="notimage accent##" id="id##-name"></h1><br>
+      </div>
+      <div class="notimage">
+        <div class="details">
+          <span id="id##-fullname"></span> |
+          <span id="id##-age"></span> |
+          <span id="id##-pronouns"></span><br>
+          <i class="fa fa-handshake-o accent##" aria-hidden="true" alt="Timezone"></i> <span id="id##-partner"></span>
+        </div>
+      </div>
+      <div class="stats">
+        <div class="hpblock">
+        </div>
+      </div>
+      <div class="moolah">
+      </div>
+    </div>
+    <div class="about">
+      <h3 class="accent##">About</h3>
+    </div>
+    <div class="food">
+      <h3 class="accent##">Food</h3>
+    </div>
+    <div class="equipment">
+      <h3 class="accent##">Equipment</h3>
+      <div class="pinquip">
+      </div>
+      <div class="threquip">
+      </div>
+    </div>
+    <div class="inventory">
+      <h3 class="accent##">Inventory</h3>
+      <div class="pinventory">
+      </div>
+      <div class="tinventory">
+      </div>
+      <div class="swag">
+      </div>
+    </div>
+  </div>
 </script>
 
 </html>

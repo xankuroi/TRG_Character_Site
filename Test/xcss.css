@@ -1,15 +1,17 @@
 /* Main styling */
 body {
-  padding-top:10px;
+  padding-top:20px;
   font-family: "Roboto", sans-serif;
-  min-width:320px;
-  max-width:768px;
-  margin:0 auto;
+  font-size:10pt;
+  min-width:280px;
+  max-width:740px;
+  margin:0 10px;
 }
 
 .container {
   overflow: hidden;
   outline: 1px solid lightgray;
+  min-width:280px;
 }
 
 .content {
@@ -19,9 +21,11 @@ body {
 
 .tabcontainer{
   width:100%;
+  min-width:280px;
 }
 
 .tabs {
+  font-size:12pt;
   outline: 1px solid lightgray;
   height:50px;
   max-width:768px;
@@ -56,24 +60,30 @@ body {
 /* CSS components */
 /* Helpful Alterations */
 .floatleft{float:left;}
+.floatright{float:right;}
 .alignleft{text-align:left;}
 .shrink{display:none;} /* hides this text on mobile size */
+.smol{font-size:8pt;}
+.line{display:inline-block;}
 /* CP Toasts */
 .toast {
   max-width:75%;
-  position:absolute;
-  top:40px;
+  position:fixed;
+  top:10px;
   right:10px;
   background-color: #383838;
   color: #F0F0F0;
-  font-size: 20px;
+  font-size: 15px;
   padding:10px;
   text-align:center;
   border-radius: 2px;
 }
 /* Refresh button */
-.refresh {
+.corner{
   display:block;
+  outline:1px solid lightgray;
+}
+.refresh {
   border:none;
   padding:5px;
 }
@@ -108,11 +118,11 @@ body {
   top:-100px;
 }
 .table-first{
-  min-width:100px;
+  min-width:90px;
   width:50%;
 }
 .table-second{
-  min-width:80px;
+  min-width:70px;
   max-width:125px;
 }
 .table-thirds{
@@ -123,8 +133,43 @@ body {
   min-width:30px;
 }
 .btn{width:100%;margin:0;}
-/* Main container */
 
+/* CONTENT */
+h3{
+  background-color:lightgray;
+  text-align:center;
+  padding:5px 0;
+}
+/* Summary */
+.topkek{
+  display:block;
+  height:200px;
+}
+.topkek img{
+  max-width:200px;
+  display:none;
+  float:left;
+}
+.notimage{
+  float:left;
+}
+.head{
+  display:block;
+  height:35px;
+}
+h1{
+  margin:0;
+}
+.clicky{
+  display:inline;
+  float:right;
+}
+.details{
+  display:block;
+}
+.stats{
+
+}
 /* Equipment - Pins */
 /* Equipment - Threads */
 /* Inventory - Pins */
@@ -135,14 +180,25 @@ body {
 /* Window Resizing */
 /* Default is SMALL size */
 /* Large size */
-@media (min-width: 769px) {
+@media only screen and (min-width: 760px) {
   .content {
     padding:10px 40px 40px 40px;
   }
+  .tab{
+    padding:5px 40px;
+  }
+  body{
+    margin: 0 auto;
+  }
+}
+@media only screen and (min-width:550px){
   .shrink {
     display:inline;
   }
-  .tab{
-    padding:5px 40px;
+  .topkek img{
+    display:inline;
+  }
+  .notimage{
+    margin-left:20px;
   }
 }
