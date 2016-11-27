@@ -45,7 +45,7 @@
             <th class="table-small">C/P</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody id="ov">
         </tbody>
       </table>
     </div>
@@ -63,13 +63,13 @@
 <!-- Templates and javscript -->
 <script src="xjs.js"></script>
 <script id="overview-template" type="text/x-template">
-  <tr id="overview##">
-    <td class="alignleft"><span class="accent##">&block;&ensp;</span><span id="overview##-name">Loading...</span></td>
-    <td><span id="overview##-hp">Loading...</span><span class="shrink"> HP</span></td>
-    <td><span id="overview##-atk">Loading...</span><span class="shrink"> ATK</span></td>
-    <td><span id="overview##-def">Loading...</span><span class="shrink"> DEF</span></td>
-    <td><textarea rows="1" type="hidden" readonly="true" class="overview-cp" id="overview##-cp" value="LOADING..."></textarea>
-      <button class="btn" data-clipboard-target="#overview##-cp">
+  <tr>
+    <td class="alignleft"><span class="accent##">&block;&ensp;</span><span id="ov##-name">Loading...</span></td>
+    <td><span id="ov##-hp">Loading...</span><span class="shrink"> HP</span></td>
+    <td><span id="ov##-atk">Loading...</span><span class="shrink"> ATK</span></td>
+    <td><span id="ov##-def">Loading...</span><span class="shrink"> DEF</span></td>
+    <td>
+      <button class="btn" data-clipboard-target="#ov##-cp">
         <i class="fa fa-clipboard accent##" aria-hidden="true" alt="C/P"></i>
       </button>
     </td>
@@ -78,6 +78,10 @@
 
 <script id="tab-template" type="text/x-template">
   <li><a href="#" class="tab accent##" id="id##-tab">Loading...</a></li>
+</script>
+
+<script id="cp-template" type="text/x-template">
+  <textarea rows="1" type="hidden" readonly="true" class="cp-target" id="ov##-cp" value="LOADING..."></textarea>
 </script>
 
 <script id="player-template" type="text/x-template">
@@ -96,38 +100,102 @@
           </div>
         </div>
 
-        <h1 class="notimage accent##" id="id##-name"></h1><br>
+      <h1 class="notimage accent##" id="id##-name"></h1><br>
       </div>
+      <div class="neck">
       <div class="notimage">
         <div class="details">
           <span id="id##-fullname"></span> |
           <span id="id##-age"></span> |
           <span id="id##-pronouns"></span><br>
-          <i class="fa fa-handshake-o accent##" aria-hidden="true" alt="Timezone"></i> <span id="id##-partner"></span>
+          <i class="fa fa-handshake-o accent##" aria-hidden="true" alt="Timezone"></i> <span id="id##-p"></span>
         </div>
       </div>
+    </div>
+      <div class="block">
       <div class="stats">
-        <div class="hpblock">
-        </div>
+        <table class="stattable">
+          <thead>
+            <tr>
+              <th class="fourths"></th>
+              <th class="fourths">HP</th>
+              <th class="fourths">ATK</th>
+              <th class="fourths">DEF</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="colhead">Current</td>
+              <td id="id##-currhp">300 /</td>
+              <td></td>
+              <td></td>
+            </tr>
+          <tr>
+            <td class="colhead">Total</td>
+            <td id="id##-totalhp">0</td>
+            <td id="id##-totalatk">0</td>
+            <td id="id##-totaldef">0</td>
+          </tr>
+          <tr>
+            <td class="colhead">Base</td>
+            <td id="id##-basehp">0</td>
+            <td id="id##-baseatk">0</td>
+            <td id="id##-basedef">0</td>
+          </tr>
+          <tr>
+            <td class="colhead">Clothes</td>
+            <td id="id##-threadhp">0</td>
+          	<td id="id##-threadatk">0</td>
+          	<td id="id##-threaddef">0</td>
+          </tr>
+          <tr>
+            <td class="colhead">Misc</td>
+            <td id="id##-mischp">0</td>
+          	<td id="id##-miscatk">0</td>
+          	<td id="id##-miscdef">0</td>
+          </tr>
+        </tbody>
+        </table>
       </div>
       <div class="moolah">
+        <button class="btn" data-clipboard-target="#ov##-cp">
+          <i class="fa fa-clipboard accent##" aria-hidden="true" alt="C/P"></i>
+        </button>
+        <table class="moot">
+          <tbody>
+            <tr>
+              <td id="id##-yen">1000 ¥</td>
+            </tr>
+            <tr>
+              <td id="id##-pp">100 PP</td>
+            </tr>
+            <tr>
+              <td id="id##-brv">100 BRV</td>
+            </tr>
+            <tr>
+              <td id="id##-sync">75% SYNC</td>
+            </tr>
+
+          </tbody>
+        </table>
       </div>
     </div>
+    </div>
     <div class="about">
-      <h3 class="accent##">About</h3>
+      <h3 class="accent##-bg">About</h3>
     </div>
     <div class="food">
-      <h3 class="accent##">Food</h3>
+      <h3 class="accent##-bg">Food</h3>
     </div>
     <div class="equipment">
-      <h3 class="accent##">Equipment</h3>
+      <h3 class="accent##-bg">Equipment</h3>
       <div class="pinquip">
       </div>
       <div class="threquip">
       </div>
     </div>
     <div class="inventory">
-      <h3 class="accent##">Inventory</h3>
+      <h3 class="accent##-bg">Inventory</h3>
       <div class="pinventory">
       </div>
       <div class="tinventory">
@@ -137,5 +205,5 @@
     </div>
   </div>
 </script>
-
+<!-- TODO add reaper & noise -->
 </html>

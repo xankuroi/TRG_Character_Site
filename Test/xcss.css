@@ -90,6 +90,14 @@ body {
 .refresh:hover{
   cursor:pointer;
 }
+/* Copy-paste textarea */
+.cp-target{
+  width:10px;
+  border:none;
+  resize:none;
+  position:fixed;
+  top:-100px;
+}
 /* Overview */
 #overview{
   color:black;
@@ -109,13 +117,6 @@ body {
 }
 .overview tr:nth-child(odd) {
   background-color:#BBBBBB;
-}
-.overview-cp{
-  width:10px;
-  border:none;
-  resize:none;
-  position:fixed;
-  top:-100px;
 }
 .table-first{
   min-width:90px;
@@ -160,6 +161,10 @@ h3{
 h1{
   margin:0;
 }
+.neck{
+  display:block;
+  height:35px;
+}
 .clicky{
   display:inline;
   float:right;
@@ -167,8 +172,36 @@ h1{
 .details{
   display:block;
 }
+.block{
+  padding-top:10px;
+  display:block;
+}
 .stats{
-
+  width:75%;
+  float:left;
+}
+.stattable{
+  text-align:center;
+  width:90%;
+}
+.fourths{
+  width:25%;
+}
+.colhead{
+  font-weight: bold;
+  text-align: right;
+}
+.moolah{
+  width:25%;
+  float:right;
+  text-align: center;
+  font-weight: bold;
+}
+.moot{
+  width:100%;
+}
+.moot td{
+  padding:4px;
 }
 /* Equipment - Pins */
 /* Equipment - Threads */
@@ -182,13 +215,17 @@ h1{
 /* Large size */
 @media only screen and (min-width: 760px) {
   .content {
-    padding:10px 40px 40px 40px;
+    padding:10px 40px 10px 40px;
   }
   .tab{
     padding:5px 40px;
   }
   body{
     margin: 0 auto;
+  }
+  .block{
+    margin-left:210px;
+    margin-right:0px;
   }
 }
 @media only screen and (min-width:550px){
@@ -200,5 +237,8 @@ h1{
   }
   .notimage{
     margin-left:20px;
+  }
+  .block{
+    margin-left:220px;
   }
 }
