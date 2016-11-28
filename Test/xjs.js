@@ -2,12 +2,23 @@
 $(document).ready(function() {
   var tab_template = $('#tab-template').html();
   var content_template = $('#'+ptype+'-template').html();
+  /* TODO switch to content_template for final version */
+  var player_template = $('#player-template').html();
+  var reaper_template = $('#reaper-template').html();
   var overview_template = $('#overview-template').html();
   var cp_template = $('#cp-template').html();
   for (i = 0; i < numEntities; i++) {
     $('body').append(cp_template.replace(/##/g, i.toString()));
     $('ul').append(tab_template.replace(/##/g, i.toString()));
+    /* TODO switch to content_template for final version
     $('.container').append(content_template.replace(/##/g, i.toString()));
+    */
+    if(i == 0){
+      $('.container').append(player_template.replace(/##/g, i.toString()));
+    }
+    else{
+      $('.container').append(reaper_template.replace(/##/g, i.toString()));
+    }
     $('#ov').append(overview_template.replace(/##/g, i.toString()));
   }
   setInterval(refresh("Updated!"), 300000);
@@ -86,9 +97,10 @@ function fill(id) {
     /* Top card */
     if(img != ""){
       document.getElementById('id'+id+'-image').src = img;
+      document.getElementById('id'+id+'-imagecpy').src = img;
     }
     else{
-      document.getElementById('id'+id+'-image').src = "http://placehold.it/200";
+      document.getElementById('id'+id+'-image').src = "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Placeholder_no_text.svg/200px-Placeholder_no_text.svg.png";
     }
     document.getElementById('id' + id + '-name').innerHTML = name;
     document.getElementById('id'+id+'-fullname').innerHTML = data.feed.entry[1]['gsx$data']['$t'];
@@ -114,7 +126,7 @@ function fill(id) {
     document.getElementById('id'+id+'-rpp').innerHTML = data.feed.entry[8]['gsx$hp']['$t'];
     document.getElementById('id'+id+'-brv').innerHTML = data.feed.entry[7]['gsx$def']['$t'];
     document.getElementById('id'+id+'-syncbp').innerHTML = data.feed.entry[8]['gsx$def']['$t'];
-    /* About
+    /* About */
     document.getElementById('id'+id+'-personality').innerHTML = data.feed.entry[5]['gsx$data']['$t'];
     document.getElementById('id'+id+'-fee').innerHTML = data.feed.entry[6]['gsx$data']['$t'];
     document.getElementById('id'+id+'-reason').innerHTML = data.feed.entry[7]['gsx$data']['$t'];
@@ -126,34 +138,163 @@ function fill(id) {
     document.getElementById('id'+id+'-blog').innerHTML = data.feed.entry[13]['gsx$data']['$t'];
     */
     /* Food */
-    /*
-    for(i = 1; i < 14; i++){
-    document.getElementById('id'+id+'-food'+i).innerHTML = data.feed.entry[14+i]['gsx$data']['$t'];
-    document.getElementById('id'+id+'-foodn'+i).innerHTML = data.feed.entry[14+i]['gsx$n']['$t'];
-    document.getElementById('id'+id+'-foodb'+i).innerHTML = data.feed.entry[14+i]['gsx$b']['$t']
-  }
-  */
-  /*Threads*/
-  /*
-  for(i = 1; i < 10; i++){
-  equip = data.feed.entry[10+i]['gsx$data']['$t'];
-  if(!isNaN(Integer.parseInt(equip)))
-  {
-  document.getElementById('id'+id+'-threadename'+equip).innerHTML = data.feed.entry
-}
-}
-*/
-/*Pins*/
-/*
-for(i = 1; i < 10; i++){
-}
-*/
+    $("#id"+id+"-food tr").remove();
+    var food_template = $("#food-template").html();
+    for(i = 0; i < 13; i++){
+      var food = data.feed.entry[15+i]['gsx$data']['$t'];
+      var quantity = data.feed.entry[15+i]['gsx$n']['$t'];
+      if(food != "" && quantity != "")
+      {
+        var healio = data.feed.entry[7+i]['gsx$heal']['$t'];
+        healio = healio.replace("HP", "<span class='rink'>HP</span>");
+        var entry = food_template.replace("FOOD", food);
+        entry = entry.replace("BOOSTS", prep(data.feed.entry[15+i]['gsx$b']['$t']));
+        entry = entry.replace("QUANTITY", quantity);
+        entry = entry.replace("HEAL", healio);
+        $('#id'+id+'-food').append(entry);
+      }
+    }
+    /* Pins and Threads and Swag */
+    // Clear out the current tables
+    $("#id"+id+"-tinventory tr").remove();
+    $("#id"+id+"-pinventory tr").remove();
+    $("#id"+id+"-threquip tr").remove();
+    $("#id"+id+"-pinquip tr").remove();
+    $("#id"+id+"-swag tr").remove();
+    var swag_template = $("#swag-template").html();
+    var pin_template = $("#pin-template").html();
+    var thread_template = $("#thread-template").html();
+    var equipped_threads = new Array(4);
+    var equipped_pins = new Array(6);
+    for(i = 0; i < 9; i++){
+      //Pins
+      var pid = data.feed.entry[11+i]['gsx$id']['$t'];
+      if(pid != ""){
+        var equipslot = data.feed.entry[11+i]['gsx$e']['$t'];
+        var entry = pin_template.replace("ID", pid);
+        entry = entry.replace("PIN", data.feed.entry[11+i]['gsx$name']['$t']);
+        entry = entry.replace("ATK", data.feed.entry[11+i]['gsx$atk']['$t']);
+        entry = entry.replace("EFFECT", data.feed.entry[11+i]['gsx$effect']['$t']);
+        if(equipslot == ""){ //not equipped; put it in the inventory
+          $('#id'+id+'-pinventory').append(entry);
+        }
+        else{ // equip it
+          equipped_pins[parseInt(equipslot)] = entry;
+        }
+      }
+      //Threads and Swag
+      if(i < 7){
+        //Threads
+        var eid = data.feed.entry[21+i]['gsx$id']['$t'];
+        if(eid != ""){
+          var equipslot = data.feed.entry[21+i]['gsx$e']['$t'];
+          var entry = thread_template.replace("ID", eid);
+          entry = entry.replace("THREAD", data.feed.entry[21+i]['gsx$name']['$t']);
+          entry = entry.replace("TYPE", thread_type(data.feed.entry[21+i]['gsx$type']['$t']));
+          entry = entry.replace("EFFECT", data.feed.entry[21+i]['gsx$effect']['$t']);
+          var ehp = data.feed.entry[21+i]['gsx$hp']['$t'];
+          var eatk = data.feed.entry[21+i]['gsx$atk']['$t'];
+          var edef = data.feed.entry[21+i]['gsx$def']['$t'];
+          entry = entry.replace("STATS", stat(ehp, eatk, edef));
+          entry = entry.replace("BRV", data.feed.entry[21+i]['gsx$cp']['$t'] + " BRV");
+          if(data.feed.entry[21+i]['gsx$equip']['$t'] == "no"){
+            entry = entry.replace(" BRV", "* BRV");
+          }
+          if(equipslot == ""){ //not equipped; put it in the inventory
+            $('#id'+id+'-tinventory').append(entry);
+          }
+          else{ //equip it
+            equipped_threads[parseInt(equipslot)] = entry;
+          }
+        }
+        var sweg = data.feed.entry[29+i]['gsx$b']['$t'];
+        if(sweg != ""){
+          var entry = swag_template.replace("SWAG", sweg);
+          entry = entry.replace("DESC", data.feed.entry[29+i]['gsx$data']['$t']);
+          $("#id"+id+"-swag").append(entry);
+        }
+      }
+    }
 
+    /* Equip */
+    for(i = 0; i < equipped_pins.length; i++){
+      $('#id'+id+'-pinquip').append(equipped_pins[i]);
+    }
+    for(i = 0; i < equipped_threads.length; i++){
+      $('#id'+id+'-threquip').append(equipped_threads[i]);
+    }
+
+
+
+/* Noise Form */
+if(ptype == "reaper"){
+  document.getElementById('id'+id+'noiseimg').src = "http://i.imgur.com/fMgAHKF.png";
+  // TODO finish
+}
 });
 }
-//END TRIM (remove last few characters)
+//TRIM (remove last few characters)
 function trim(str, num){
   return str.substring(str, str.length - num);
+}
+//BOOST PREP
+function prep(str){
+  var tokens = str.split(",");
+  if(tokens.length == 1){
+    return str;
+  }
+  var ans = "";
+  for(i = 0; i < tokens.length - 2; i++){
+    ans += "<span class='nobreak'>" + tokens[i] +",</span> ";
+  }
+  return ans + "<span class='nobreak'>" + tokens[i] +"</span> ";;
+}
+// STAT COMPILATION
+function stat(hp, atk, def){
+  var ans = "";
+  if(hp.charAt(0) == '-'){
+    ans += "<span class='nobreak'>" + hp + ",</span> ";
+  }
+  else if(hp.length > 0){
+    ans += "<span class='nobreak'>" + "+" + hp + ",</span> ";
+  }
+  if(atk.charAt(0) == '-'){
+    ans += "<span class='nobreak'>" + atk + ",</span> ";
+  }
+  else if(atk.length > 0){
+    ans += "<span class='nobreak'>" + "+" + atk + ",</span> ";
+  }
+  if(def.charAt(0) == '-'){
+    ans += "<span class='nobreak'>" + def + ",</span> ";
+  }
+  else if(def.length > 0){
+    ans += "<span class='nobreak'>" + "+" + def + ",</span> ";
+  }
+  if(ans.length > 0){
+    return ans.substring(0, ans.length-9) + "</span>";
+  }
+  return ans;
+}
+// Return a less lengthy version of the string
+// TODO replace with icons
+function thread_type(str){
+  if(str.charAt(0) == "T"){
+    if(str.length > 3){
+      return "T&B";
+    }
+    else{
+      return "Top";
+    }
+  }
+  if(str.charAt(0) == "H"){
+    return "Head";
+  }
+  if(str.charAt(0) == "A"){
+    return "Acc";
+  }
+  if(str.charAt(0) == "F"){
+    return "Foot";
+  }
 }
 //COLOR RESOLUTION -- nicked from here:
 // https://gist.github.com/njvack/02ad8efcb0d552b0230d
@@ -184,13 +325,17 @@ color_convert = function() {
 }();
 
 
+// TOGGLE
+$(function () {
+  $('.toggle-heading').on('click', function() {
+    $(this).next('.toggle-content').slideToggle(200);
+  });
+});
 
 
 //REFRESH
-$(document).ready(function(){
-  $(".refresh").click(function(){
-    refresh("Updated!");
-  });
+$(".refresh").click(function(){
+  refresh("Updated!");
 });
 function refresh(message) // TODO refresh button
 {

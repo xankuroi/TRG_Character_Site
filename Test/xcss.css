@@ -63,11 +63,15 @@ body {
 .floatright{float:right;}
 .alignleft{text-align:left;}
 .alignright{text-align:right;}
+.aligncenter{text-align:center;}
+.nobreak{white-space:nowrap;}
 .shrink{display:none;} /* hides this text on mobile size */
 .smol{font-size:8pt;}
+.smal{font-size:9pt;}
 .line{display:inline-block;}
 .boldy{font-weight:bold; font-size:9pt;}
 .bold{font-weight:bold;}
+.padtop{padding-top:10px;}
 /* CP Toasts */
 .toast {
   max-width:75%;
@@ -139,12 +143,10 @@ body {
 .btn{width:100%;margin:0;}
 
 /* CONTENT */
-h3{
-  background-color:lightgray;
-  text-align:center;
-  padding:5px 0;
-}
 /* Summary */
+h1{
+  margin:0;
+}
 .topkek{
   display:block;
   height:200px;
@@ -160,9 +162,6 @@ h3{
 .head{
   display:block;
   height:35px;
-}
-h1{
-  margin:0;
 }
 .neck{
   display:block;
@@ -219,17 +218,94 @@ h1{
 .shr1nk{
   display:none;
 }
-/* Equipment - Pins */
-/* Equipment - Threads */
-/* Inventory - Pins */
-/* Inventory - Threads */
-/* Inventory - Swag */
+/* Toggle */
+h3{
+  background-color:lightgray;
+  text-align:center;
+  padding:5px 0;
+}
+.toggle-heading{
+  margin-bottom:0;
+}
+.toggle-heading:hover{
+  cursor:pointer;
+}
+.toggle-content{
+/*  display:none; */
+  padding-bottom:0px;
+}
+/* About */
+.aboot{
+  padding-left: 5px;
+  padding-right: 5px;
+}
+.imgcontainer{
+  width:100%;
+}
+.toggle-content img{
+  display:block;
+  margin:auto;
+}
+.toggle-content p{
+  margin-top:0;
+}
+.toggle-content h4{
+  margin-bottom:0;
+}
+/* Content Tables */
+.toggle-content table{
+  width:100%;
+  text-align:center;
+}
+
+.toggle-content td:first-child{
+  text-align:left;
+}
+.toggle-content tr:nth-child(even){
+  background-color:lightgray;
+}
+.toggle-content tr:nth-child(odd){
+  background-color:#bbbbbb;
+}
+.toggle-content th{
+  background-color:#383838;
+  color:#F0F0F0;
+}
+.rink{
+  display:none;
+}
+.table-title{
+  background-color:#383838;
+  color:#F0F0F0;
+  font-weight:bold;
+  text-align:center;
+  margin:10px 2px 0 2px;
+  height:18px;
+}
+.scol{
+  width:1px;
+}
+.fcol{
+  width:50px;
+}
+.tstat{
+  max-width:150px;
+}
+.swegl{
+  width:1px;
+}
+.swegr{
+  width:2px;
+}
 
 
 /* Window Resizing */
 /* Default is SMALL size */
 @media only screen and (min-width:400px){
   .shr1nk{
+    display:inline;
+  }
+  .rink{
     display:inline;
   }
 }
@@ -258,6 +334,9 @@ h1{
   .topkek img{
     display:inline;
   }
+  .toggle-content img{
+    display:none;
+  }
   .notimage{
     margin-left:20px;
   }
@@ -266,6 +345,9 @@ h1{
   }
   .shr1nk{
     display:none;
+  }
+  .mcol{
+    width:50px;
   }
 }
 @media only screen and (min-width:600px){
