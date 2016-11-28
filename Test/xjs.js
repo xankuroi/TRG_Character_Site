@@ -4,7 +4,7 @@ $(document).ready(function() {
   var content_template = $('#'+ptype+'-template').html();
   var overview_template = $('#overview-template').html();
   var cp_template = $('#cp-template').html();
-  for (i = 1; i <= numEntities; i++) {
+  for (i = 0; i < numEntities; i++) {
     $('body').append(cp_template.replace(/##/g, i.toString()));
     $('ul').append(tab_template.replace(/##/g, i.toString()));
     $('.container').append(content_template.replace(/##/g, i.toString()));
@@ -15,7 +15,8 @@ $(document).ready(function() {
   $('.overview').css('display', 'block');
   $('#overview').addClass('active');
   */
-  $('#id1-content').css('display', 'block'); //TODO switch to overview before pushing final
+  $('#id0-content').css('display', 'block'); //TODO switch to overview before pushing final
+  $('#id0').addClass('active');
   // Alternatively, add cookies to keep track of which tab person was on
 
 
@@ -37,16 +38,16 @@ $(function() {
 
 // Fill in the damn information.
 function fill(id) {
-  var sheet = id + 5;
+  var sheet = id + 6;
   $.getJSON("https://spreadsheets.google.com/feeds/list/"+key+"/" + sheet + "/public/values?alt=json", function(data) {
     /* collect data that shows up multiple times */
     var color = data.feed.entry[7]['gsx$type']['$t'];
     var name = data.feed.entry[0]['gsx$data']['$t'];
     var cp = data.feed.entry[3]['gsx$cp']['$t'];
-    var totalhp = data.feed.entry[1]['gsx$hp']['$t'];
-    var currhp = data.feed.entry[0]['gsx$hp']['$t'];
-    var atk = data.feed.entry[1]['gsx$atk']['$t'];
-    var def = data.feed.entry[1]['gsx$def']['$t'];
+    var totalhp = trim(data.feed.entry[1]['gsx$hp']['$t'], 3);
+    var currhp = trim(data.feed.entry[0]['gsx$hp']['$t'], 3);
+    var atk = trim(data.feed.entry[1]['gsx$atk']['$t'], 4);
+    var def = trim(data.feed.entry[1]['gsx$def']['$t'], 4);
     var img = data.feed.entry[4]['gsx$data']['$t'];
     // Apply accent colors
     if(color.toLowerCase()=="dead"){
@@ -73,30 +74,52 @@ function fill(id) {
       bg_els[i].style.color = text_color;
     }
     //Fill in text fields
-    //document.getElementById('id' + id + '-name').innerHTML = name;
+    /* Tab */
     document.getElementById('id' + id + '-tab').innerHTML = name;
-    document.getElementById('id' + id + '-name').innerHTML = name;
+    /* Overview */
     document.getElementById('ov'+id+'-name').innerHTML = name;
     $('#ov'+id+'-cp').val(cp);
-    document.getElementById('ov'+id+'-hp').innerHTML = currhp.substring(0, currhp.length - 3) + "/" + totalhp;
+    document.getElementById('ov'+id+'-hp').innerHTML = currhp + "/" + totalhp;
     document.getElementById('ov'+id+'-atk').innerHTML = atk;
     document.getElementById('ov'+id+'-def').innerHTML = def;
-    document.getElementById('id'+id+'-fullname').innerHTML = data.feed.entry[1]['gsx$data']['$t'];
-    document.getElementById('id'+id+'-pronouns').innerHTML = data.feed.entry[2]['gsx$data']['$t'];
-    document.getElementById('id'+id+'-age').innerHTML = data.feed.entry[3]['gsx$data']['$t'];
+
+    /* Top card */
     if(img != ""){
       document.getElementById('id'+id+'-image').src = img;
     }
     else{
       document.getElementById('id'+id+'-image').src = "http://placehold.it/200";
     }
-    document.getElementById('id'+id+'-p').innerHTML = data.feed.entry[9]['gsx$data']['$t'];
-            /*
+    document.getElementById('id' + id + '-name').innerHTML = name;
+    document.getElementById('id'+id+'-fullname').innerHTML = data.feed.entry[1]['gsx$data']['$t'];
+    document.getElementById('id'+id+'-pronouns').innerHTML = data.feed.entry[2]['gsx$data']['$t'];
+    document.getElementById('id'+id+'-age').innerHTML = data.feed.entry[3]['gsx$data']['$t'];
+    document.getElementById('id'+id+'-part').innerHTML = data.feed.entry[9]['gsx$data']['$t'];
+    /* Stats */
+    document.getElementById('id'+id+'-currhp').innerHTML = currhp;
+    document.getElementById('id'+id+'-totalhp').innerHTML = totalhp;
+    document.getElementById('id'+id+'-basehp').innerHTML = trim(data.feed.entry[2]['gsx$hp']['$t'], 3);
+    document.getElementById('id'+id+'-thrdhp').innerHTML = trim(data.feed.entry[3]['gsx$hp']['$t'], 3);
+    document.getElementById('id'+id+'-mischp').innerHTML = trim(data.feed.entry[4]['gsx$hp']['$t'], 3);
+    document.getElementById('id'+id+'-totalatk').innerHTML = atk;
+    document.getElementById('id'+id+'-baseatk').innerHTML = trim(data.feed.entry[2]['gsx$atk']['$t'], 4);
+    document.getElementById('id'+id+'-thrdatk').innerHTML = trim(data.feed.entry[3]['gsx$atk']['$t'], 4);
+    document.getElementById('id'+id+'-miscatk').innerHTML = trim(data.feed.entry[4]['gsx$atk']['$t'], 4);
+    document.getElementById('id'+id+'-totaldef').innerHTML = def;
+    document.getElementById('id'+id+'-basedef').innerHTML = trim(data.feed.entry[2]['gsx$def']['$t'], 4);
+    document.getElementById('id'+id+'-thrddef').innerHTML = trim(data.feed.entry[3]['gsx$def']['$t'], 4);
+    document.getElementById('id'+id+'-miscdef').innerHTML = trim(data.feed.entry[4]['gsx$def']['$t'], 4);
+    /* Currency */
+    document.getElementById('id'+id+'-yen').innerHTML = data.feed.entry[7]['gsx$hp']['$t'];
+    document.getElementById('id'+id+'-rpp').innerHTML = data.feed.entry[8]['gsx$hp']['$t'];
+    document.getElementById('id'+id+'-brv').innerHTML = data.feed.entry[7]['gsx$def']['$t'];
+    document.getElementById('id'+id+'-syncbp').innerHTML = data.feed.entry[8]['gsx$def']['$t'];
+    /* About
     document.getElementById('id'+id+'-personality').innerHTML = data.feed.entry[5]['gsx$data']['$t'];
     document.getElementById('id'+id+'-fee').innerHTML = data.feed.entry[6]['gsx$data']['$t'];
     document.getElementById('id'+id+'-reason').innerHTML = data.feed.entry[7]['gsx$data']['$t'];
     document.getElementById('id'+id+'-appearance').innerHTML = data.feed.entry[8]['gsx$data']['$t'];
-    d
+    /* Tooltips
     document.getElementById('id'+id+'-mun').innerHTML = data.feed.entry[10]['gsx$data']['$t'];
     document.getElementById('id'+id+'-timezone').innerHTML = data.feed.entry[11]['gsx$data']['$t'];
     document.getElementById('id'+id+'-skype').innerHTML = data.feed.entry[12]['gsx$data']['$t'];
@@ -127,6 +150,10 @@ for(i = 1; i < 10; i++){
 */
 
 });
+}
+//END TRIM (remove last few characters)
+function trim(str, num){
+  return str.substring(str, str.length - num);
 }
 //COLOR RESOLUTION -- nicked from here:
 // https://gist.github.com/njvack/02ad8efcb0d552b0230d
@@ -167,7 +194,7 @@ $(document).ready(function(){
 });
 function refresh(message) // TODO refresh button
 {
-  for (i = 1; i <= numEntities; i++) {
+  for (i = 0; i < numEntities; i++) {
     fill(i);
   }
   toast(message, 1000);

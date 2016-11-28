@@ -3,7 +3,7 @@ body {
   padding-top:20px;
   font-family: "Roboto", sans-serif;
   font-size:10pt;
-  min-width:280px;
+  min-width:300px;
   max-width:740px;
   margin:0 10px;
 }
@@ -62,9 +62,12 @@ body {
 .floatleft{float:left;}
 .floatright{float:right;}
 .alignleft{text-align:left;}
+.alignright{text-align:right;}
 .shrink{display:none;} /* hides this text on mobile size */
 .smol{font-size:8pt;}
 .line{display:inline-block;}
+.boldy{font-weight:bold; font-size:9pt;}
+.bold{font-weight:bold;}
 /* CP Toasts */
 .toast {
   max-width:75%;
@@ -176,32 +179,45 @@ h1{
   padding-top:10px;
   display:block;
 }
-.stats{
-  width:75%;
-  float:left;
+.block table{
+  border:none;
+  border-collapse:collapse;
 }
-.stattable{
+.block th,
+.block td{
+  border-bottom: 1px solid lightgray;
+}
+.block td:first-child,
+.block td:nth-child(n+4){
+  border-right: 1px solid lightgray;
+}
+.block th:first-child,
+.block th:last-child,
+.block th:nth-child(7),
+.block td:last-child,
+.block td:nth-child(7){
+  border:none;
+}
+.block td:first-child{
+  border-bottom:none;
+}
+.bwuh{
+  width:100%;
   text-align:center;
-  width:90%;
-}
-.fourths{
-  width:25%;
 }
 .colhead{
-  font-weight: bold;
   text-align: right;
+  width: 60px;
+  padding-right:5px;
 }
-.moolah{
-  width:25%;
-  float:right;
-  text-align: center;
-  font-weight: bold;
+.blonk{
+  min-width:10px;
 }
-.moot{
-  width:100%;
+.bweh{
+  color:gray;
 }
-.moot td{
-  padding:4px;
+.shr1nk{
+  display:none;
 }
 /* Equipment - Pins */
 /* Equipment - Threads */
@@ -212,7 +228,11 @@ h1{
 
 /* Window Resizing */
 /* Default is SMALL size */
-/* Large size */
+@media only screen and (min-width:400px){
+  .shr1nk{
+    display:inline;
+  }
+}
 @media only screen and (min-width: 760px) {
   .content {
     padding:10px 40px 10px 40px;
@@ -227,6 +247,9 @@ h1{
     margin-left:210px;
     margin-right:0px;
   }
+  .shr1nk{
+    display:inline;
+  }
 }
 @media only screen and (min-width:550px){
   .shrink {
@@ -240,5 +263,13 @@ h1{
   }
   .block{
     margin-left:220px;
+  }
+  .shr1nk{
+    display:none;
+  }
+}
+@media only screen and (min-width:600px){
+  .shr1nk{
+    display:inline;
   }
 }
