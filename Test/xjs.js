@@ -66,7 +66,6 @@ function fill(id) {
       $("#overview"+id).addClass("accent"+id);
     }
     var els = document.getElementsByClassName('accent' + id);
-    var bg_els = document.getElementsByClassName('accent'+id+"-bg");
     for (i = 0; i < els.length; i++) {
       els[i].style.color = color;
     }
@@ -76,14 +75,19 @@ function fill(id) {
     var rgb = color_convert.to_rgba_array(color);
     var luma = 0.2126 * rgb[0] + 0.7152 * rgb[1] + 0.0722 * rgb[2];
     var text_color = "black";
+    var bgcolor = "#383838";
     if(luma <= 125){
       text_color = "white";
+      bgcolor = "#C7C7C7";
     }
     // Fill in background colors and apply appropriate text color
+    var bg_els = document.getElementsByClassName('accent'+id+"-bg");
+    //$('.toggle-heading.accent'+id).css("background-color", bgcolor);
     for (i = 0; i < bg_els.length; i++) {
-      bg_els[i].style.background = color;
+      bg_els[i].style.backgroundColor = color;
       bg_els[i].style.color = text_color;
     }
+
     //Fill in text fields
     /* Tab */
     document.getElementById('id' + id + '-tab').innerHTML = name;
@@ -128,15 +132,17 @@ function fill(id) {
     document.getElementById('id'+id+'-syncbp').innerHTML = data.feed.entry[8]['gsx$def']['$t'];
     /* About */
     document.getElementById('id'+id+'-personality').innerHTML = data.feed.entry[5]['gsx$data']['$t'];
-    document.getElementById('id'+id+'-fee').innerHTML = data.feed.entry[6]['gsx$data']['$t'];
-    document.getElementById('id'+id+'-reason').innerHTML = data.feed.entry[7]['gsx$data']['$t'];
+    if(ptype == "player" && id == 0){ // TODO revert to ptype only for final version
+      document.getElementById('id'+id+'-fee').innerHTML = data.feed.entry[6]['gsx$data']['$t'];
+      document.getElementById('id'+id+'-reason').innerHTML = data.feed.entry[7]['gsx$data']['$t'];
+    }
     document.getElementById('id'+id+'-appearance').innerHTML = data.feed.entry[8]['gsx$data']['$t'];
-    /* Tooltips
+    /* Tooltips */
     document.getElementById('id'+id+'-mun').innerHTML = data.feed.entry[10]['gsx$data']['$t'];
     document.getElementById('id'+id+'-timezone').innerHTML = data.feed.entry[11]['gsx$data']['$t'];
     document.getElementById('id'+id+'-skype').innerHTML = data.feed.entry[12]['gsx$data']['$t'];
     document.getElementById('id'+id+'-blog').innerHTML = data.feed.entry[13]['gsx$data']['$t'];
-    */
+
     /* Food */
     $("#id"+id+"-food tr").remove();
     var food_template = $("#food-template").html();
@@ -337,7 +343,7 @@ $(function () {
 $(".refresh").click(function(){
   refresh("Updated!");
 });
-function refresh(message) // TODO refresh button
+function refresh(message)
 {
   for (i = 0; i < numEntities; i++) {
     fill(i);
