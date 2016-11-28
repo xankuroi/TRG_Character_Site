@@ -228,18 +228,18 @@ function fill(id) {
       // Stats
       console.log("boop");
       var noisehp = trim(data.feed.entry[32]['gsx$hp']['$t'], 3);
-      document.getElementById('noise'+id+'-totalhp').innerHTML = noisehp + " / " + noisehp + " HP";
-      document.getElementById('noise'+id+'-rawhp').innerHTML = data.feed.entry[33]['gsx$hp']['$t'];
-      document.getElementById('noise'+id+'-trainhp').innerHTML = data.feed.entry[34]['gsx$hp']['$t'];
-      document.getElementById('noise'+id+'-mischp').innerHTML = data.feed.entry[35]['gsx$hp']['$t'];
-      document.getElementById('noise'+id+'-totalatk').innerHTML = data.feed.entry[32]['gsx$atk']['$t'];
-      document.getElementById('noise'+id+'-rawatk').innerHTML = data.feed.entry[33]['gsx$atk']['$t'];
-      document.getElementById('noise'+id+'-trainatk').innerHTML = data.feed.entry[34]['gsx$atk']['$t'];
-      document.getElementById('noise'+id+'-miscatk').innerHTML = data.feed.entry[35]['gsx$atk']['$t'];
-      document.getElementById('noise'+id+'-totaldef').innerHTML = data.feed.entry[32]['gsx$def']['$t'];
-      document.getElementById('noise'+id+'-rawdef').innerHTML = data.feed.entry[33]['gsx$def']['$t'];
-      document.getElementById('noise'+id+'-traindef').innerHTML = data.feed.entry[34]['gsx$def']['$t'];
-      document.getElementById('noise'+id+'-miscdef').innerHTML = data.feed.entry[35]['gsx$def']['$t'];
+      document.getElementById('noise'+id+'-totalhp').innerHTML = noisehp + "/" + noisehp;
+      document.getElementById('noise'+id+'-rawhp').innerHTML = trim(data.feed.entry[33]['gsx$hp']['$t'], 3);
+      document.getElementById('noise'+id+'-trainhp').innerHTML = trim(data.feed.entry[34]['gsx$hp']['$t'], 3);
+      document.getElementById('noise'+id+'-mischp').innerHTML = trim(data.feed.entry[35]['gsx$hp']['$t'], 3);
+      document.getElementById('noise'+id+'-totalatk').innerHTML = trim(data.feed.entry[32]['gsx$atk']['$t'], 4);
+      document.getElementById('noise'+id+'-rawatk').innerHTML = trim(data.feed.entry[33]['gsx$atk']['$t'], 4);
+      document.getElementById('noise'+id+'-trainatk').innerHTML = trim(data.feed.entry[34]['gsx$atk']['$t'], 4);
+      document.getElementById('noise'+id+'-miscatk').innerHTML = trim(data.feed.entry[35]['gsx$atk']['$t'], 4);
+      document.getElementById('noise'+id+'-totaldef').innerHTML = trim(data.feed.entry[32]['gsx$def']['$t'], 4);
+      document.getElementById('noise'+id+'-rawdef').innerHTML = trim(data.feed.entry[33]['gsx$def']['$t'], 4);
+      document.getElementById('noise'+id+'-traindef').innerHTML = trim(data.feed.entry[34]['gsx$def']['$t'], 4);
+      document.getElementById('noise'+id+'-miscdef').innerHTML = trim(data.feed.entry[35]['gsx$def']['$t'], 4);
 
       // Abilities
       $('#noise'+id+'-abilities tr').remove;

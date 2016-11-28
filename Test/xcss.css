@@ -231,8 +231,8 @@ h1{
 }
 /* About */
 .aboot{
-  padding-left: 5px;
-  padding-right: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 .imgcontainer{
   width:100%;
@@ -330,10 +330,6 @@ h1{
   display:inline-block;
   padding-bottom:10px;
 }
-.geh{
-  padding-left:5px;
-  padding-right:5px;
-}
 .geh img{
   display:block;
   margin:0 auto;
@@ -369,7 +365,7 @@ h1{
 .noise-stats tr:last-child td:nth-child(n+2){
   border-bottom:1px solid lightgray;
 }
-
+.dink{display:none;}
 
 
 /* Helpful Alterations */
@@ -389,6 +385,9 @@ h1{
 .greh{color:gray;}
 /* Window Resizing */
 /* Default is SMALL size */
+@media only screen and (min-width:350px){
+  .dink{display:inline;}
+}
 @media only screen and (min-width:400px){
   .shr1nk{
     display:inline;
