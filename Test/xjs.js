@@ -8,26 +8,32 @@ $(document).ready(function() {
   var overview_template = $('#overview-template').html();
   var cp_template = $('#cp-template').html();
   for (i = 0; i < numEntities; i++) {
-    $('body').append(cp_template.replace(/##/g, i.toString()));
-    $('ul').append(tab_template.replace(/##/g, i.toString()));
+    var istr = i.toString();
+    $('body').append(cp_template.replace(/##/g, istr));
+      // TODO remove i == 1 for final version
+    if(ptype == "reaper" || i == 1){
+      var noise_template = $('#noisecp-template').html();
+      $('body').append(noise_template.replace(/##/g, istr));
+    }
+    $('ul').append(tab_template.replace(/##/g, istr));
     /* TODO switch to content_template for final version
-    $('.container').append(content_template.replace(/##/g, i.toString()));
+    $('.container').append(content_template.replace(/##/g, istr));
     */
     if(i == 0){
-      $('.container').append(player_template.replace(/##/g, i.toString()));
+      $('.container').append(player_template.replace(/##/g, istr));
     }
     else{
-      $('.container').append(reaper_template.replace(/##/g, i.toString()));
+      $('.container').append(reaper_template.replace(/##/g, istr));
     }
-    $('#ov').append(overview_template.replace(/##/g, i.toString()));
+    $('#ov').append(overview_template.replace(/##/g, istr));
   }
   setInterval(refresh("Updated!"), 300000);
-/*
+  /*
   $('.overview').css('display', 'block');
   $('#overview').addClass('active');
   */
-  $('#id0-content').css('display', 'block'); //TODO switch to overview before pushing final
-  $('#id0').addClass('active');
+  $('#id1-content').css('display', 'block'); //TODO switch to overview before pushing final
+  $('#id1').addClass('active');
   // Alternatively, add cookies to keep track of which tab person was on
 
 
@@ -60,34 +66,11 @@ function fill(id) {
     var atk = trim(data.feed.entry[1]['gsx$atk']['$t'], 4);
     var def = trim(data.feed.entry[1]['gsx$def']['$t'], 4);
     var img = data.feed.entry[4]['gsx$data']['$t'];
-    // Apply accent colors
     if(color.toLowerCase()=="dead"){
       color = "gray";
       $("#overview"+id).addClass("accent"+id);
+      name += " (erased)";
     }
-    var els = document.getElementsByClassName('accent' + id);
-    for (i = 0; i < els.length; i++) {
-      els[i].style.color = color;
-    }
-
-    //Determine whether to use white or black text
-    //Luma value is only an estimate; will require testing
-    var rgb = color_convert.to_rgba_array(color);
-    var luma = 0.2126 * rgb[0] + 0.7152 * rgb[1] + 0.0722 * rgb[2];
-    var text_color = "black";
-    var bgcolor = "#383838";
-    if(luma <= 125){
-      text_color = "white";
-      bgcolor = "#C7C7C7";
-    }
-    // Fill in background colors and apply appropriate text color
-    var bg_els = document.getElementsByClassName('accent'+id+"-bg");
-    //$('.toggle-heading.accent'+id).css("background-color", bgcolor);
-    for (i = 0; i < bg_els.length; i++) {
-      bg_els[i].style.backgroundColor = color;
-      bg_els[i].style.color = text_color;
-    }
-
     //Fill in text fields
     /* Tab */
     document.getElementById('id' + id + '-tab').innerHTML = name;
@@ -114,15 +97,15 @@ function fill(id) {
     /* Stats */
     document.getElementById('id'+id+'-currhp').innerHTML = currhp;
     document.getElementById('id'+id+'-totalhp').innerHTML = totalhp;
-    document.getElementById('id'+id+'-basehp').innerHTML = trim(data.feed.entry[2]['gsx$hp']['$t'], 3);
+    document.getElementById('id'+id+'-rawhp').innerHTML = trim(data.feed.entry[2]['gsx$hp']['$t'], 3);
     document.getElementById('id'+id+'-thrdhp').innerHTML = trim(data.feed.entry[3]['gsx$hp']['$t'], 3);
     document.getElementById('id'+id+'-mischp').innerHTML = trim(data.feed.entry[4]['gsx$hp']['$t'], 3);
     document.getElementById('id'+id+'-totalatk').innerHTML = atk;
-    document.getElementById('id'+id+'-baseatk').innerHTML = trim(data.feed.entry[2]['gsx$atk']['$t'], 4);
+    document.getElementById('id'+id+'-rawatk').innerHTML = trim(data.feed.entry[2]['gsx$atk']['$t'], 4);
     document.getElementById('id'+id+'-thrdatk').innerHTML = trim(data.feed.entry[3]['gsx$atk']['$t'], 4);
     document.getElementById('id'+id+'-miscatk').innerHTML = trim(data.feed.entry[4]['gsx$atk']['$t'], 4);
     document.getElementById('id'+id+'-totaldef').innerHTML = def;
-    document.getElementById('id'+id+'-basedef').innerHTML = trim(data.feed.entry[2]['gsx$def']['$t'], 4);
+    document.getElementById('id'+id+'-rawdef').innerHTML = trim(data.feed.entry[2]['gsx$def']['$t'], 4);
     document.getElementById('id'+id+'-thrddef').innerHTML = trim(data.feed.entry[3]['gsx$def']['$t'], 4);
     document.getElementById('id'+id+'-miscdef').innerHTML = trim(data.feed.entry[4]['gsx$def']['$t'], 4);
     /* Currency */
@@ -204,7 +187,7 @@ function fill(id) {
           entry = entry.replace("STATS", stat(ehp, eatk, edef));
           entry = entry.replace("BRV", data.feed.entry[21+i]['gsx$cp']['$t'] + " BRV");
           if(data.feed.entry[21+i]['gsx$equip']['$t'] == "no"){
-            entry = entry.replace(" BRV", "* BRV");
+            entry = entry.replace(" BRV", "<span class='bold accent"+id+"'>*</span> BRV");
           }
           if(equipslot == ""){ //not equipped; put it in the inventory
             $('#id'+id+'-tinventory').append(entry);
@@ -230,14 +213,73 @@ function fill(id) {
       $('#id'+id+'-threquip').append(equipped_threads[i]);
     }
 
+    /* TODO add handling for empty inventory (just tack on an empty row) */
+    /* Noise Form */
+    if(ptype == "reaper" || id == 1){ //TODO remove id == 1
+      document.getElementById('noise'+id+'-name').innerHTML = data.feed.entry[29]['gsx$def']['$t'];
+      document.getElementById('noise'+id+'-species').innerHTML = data.feed.entry[30]['gsx$def']['$t'];
+      var noiseimg = data.feed.entry[29]['gsx$type']['$t'];
+      if(noiseimg == ""){
+        document.getElementById('noise'+id+'-image').src = "http://i.imgur.com/fMgAHKF.png";
+      }
+      else{document.getElementById('noise'+id+'-image').src = noiseimg;}
+      $('#noise'+id+'-cp').val(data.feed.entry[6]['gsx$cp']['$t']);
+
+      // Stats
+      console.log("boop");
+      var noisehp = trim(data.feed.entry[32]['gsx$hp']['$t'], 3);
+      document.getElementById('noise'+id+'-totalhp').innerHTML = noisehp + " / " + noisehp + " HP";
+      document.getElementById('noise'+id+'-rawhp').innerHTML = data.feed.entry[33]['gsx$hp']['$t'];
+      document.getElementById('noise'+id+'-trainhp').innerHTML = data.feed.entry[34]['gsx$hp']['$t'];
+      document.getElementById('noise'+id+'-mischp').innerHTML = data.feed.entry[35]['gsx$hp']['$t'];
+      document.getElementById('noise'+id+'-totalatk').innerHTML = data.feed.entry[32]['gsx$atk']['$t'];
+      document.getElementById('noise'+id+'-rawatk').innerHTML = data.feed.entry[33]['gsx$atk']['$t'];
+      document.getElementById('noise'+id+'-trainatk').innerHTML = data.feed.entry[34]['gsx$atk']['$t'];
+      document.getElementById('noise'+id+'-miscatk').innerHTML = data.feed.entry[35]['gsx$atk']['$t'];
+      document.getElementById('noise'+id+'-totaldef').innerHTML = data.feed.entry[32]['gsx$def']['$t'];
+      document.getElementById('noise'+id+'-rawdef').innerHTML = data.feed.entry[33]['gsx$def']['$t'];
+      document.getElementById('noise'+id+'-traindef').innerHTML = data.feed.entry[34]['gsx$def']['$t'];
+      document.getElementById('noise'+id+'-miscdef').innerHTML = data.feed.entry[35]['gsx$def']['$t'];
+
+      // Abilities
+      $('#noise'+id+'-abilities tr').remove;
+      for(i = 0; i < 5; i++){
+        var ability = data.feed.entry[31+i]['gsx$name']['$t'];
+        var desc = data.feed.entry[31+i]['gsx$type']['$t'];
+        if(ability != "" || desc != ""){
+          var entry = swag_template.replace("SWAG", ability);
+          entry = entry.replace("DESC", desc);
+          $('#noise'+id+'-abilities').append(entry);
+        }
+      }
+    }
 
 
-/* Noise Form */
-if(ptype == "reaper"){
-  document.getElementById('id'+id+'noiseimg').src = "http://i.imgur.com/fMgAHKF.png";
-  // TODO finish
-}
-});
+
+    // Apply accent colors
+    var els = document.getElementsByClassName('accent' + id);
+    for (i = 0; i < els.length; i++) {
+      els[i].style.color = color;
+    }
+
+    //Determine whether to use white or black text
+    //Luma value is only an estimate; will require testing
+    var rgb = color_convert.to_rgba_array(color);
+    var luma = 0.2126 * rgb[0] + 0.7152 * rgb[1] + 0.0722 * rgb[2];
+    var text_color = "black";
+    var bgcolor = "#383838";
+    if(luma <= 125){
+      text_color = "white";
+      bgcolor = "#C7C7C7";
+    }
+    // Fill in background colors and apply appropriate text color
+    var bg_els = document.getElementsByClassName('accent'+id+"-bg");
+    //$('.toggle-heading.accent'+id).css("background-color", bgcolor);
+    for (i = 0; i < bg_els.length; i++) {
+      bg_els[i].style.backgroundColor = color;
+      bg_els[i].style.color = text_color;
+    }
+  });
 }
 //TRIM (remove last few characters)
 function trim(str, num){
@@ -258,49 +300,29 @@ function prep(str){
 // STAT COMPILATION
 function stat(hp, atk, def){
   var ans = "";
-  if(hp.charAt(0) == '-'){
-    ans += "<span class='nobreak'>" + hp + ",</span> ";
-  }
-  else if(hp.length > 0){
-    ans += "<span class='nobreak'>" + "+" + hp + ",</span> ";
-  }
-  if(atk.charAt(0) == '-'){
-    ans += "<span class='nobreak'>" + atk + ",</span> ";
-  }
-  else if(atk.length > 0){
-    ans += "<span class='nobreak'>" + "+" + atk + ",</span> ";
-  }
-  if(def.charAt(0) == '-'){
-    ans += "<span class='nobreak'>" + def + ",</span> ";
-  }
-  else if(def.length > 0){
-    ans += "<span class='nobreak'>" + "+" + def + ",</span> ";
-  }
-  if(ans.length > 0){
-    return ans.substring(0, ans.length-9) + "</span>";
-  }
+  if(hp.charAt(0) == '-'){ans += "<span class='nobreak'>" + hp + ",</span> ";}
+  else if(hp.length > 0){ans += "<span class='nobreak'>" + "+" + hp + ",</span> ";}
+
+  if(atk.charAt(0) == '-'){ans += "<span class='nobreak'>" + atk + ",</span> ";}
+  else if(atk.length > 0){ans += "<span class='nobreak'>" + "+" + atk + ",</span> ";}
+
+  if(def.charAt(0) == '-'){ans += "<span class='nobreak'>" + def + ",</span> ";}
+  else if(def.length > 0){ans += "<span class='nobreak'>" + "+" + def + ",</span> ";}
+
+  if(ans.length > 0){return ans.substring(0, ans.length-9) + "</span>";}
+
   return ans;
 }
 // Return a less lengthy version of the string
 // TODO replace with icons
 function thread_type(str){
   if(str.charAt(0) == "T"){
-    if(str.length > 3){
-      return "T&B";
-    }
-    else{
-      return "Top";
-    }
+    if(str.length > 3){return "T&B";}
+    else{return "Top";}
   }
-  if(str.charAt(0) == "H"){
-    return "Head";
-  }
-  if(str.charAt(0) == "A"){
-    return "Acc";
-  }
-  if(str.charAt(0) == "F"){
-    return "Foot";
-  }
+  if(str.charAt(0) == "H"){return "Head";}
+  if(str.charAt(0) == "A"){return "Acc";}
+  if(str.charAt(0) == "F"){return "Foot";}
 }
 //COLOR RESOLUTION -- nicked from here:
 // https://gist.github.com/njvack/02ad8efcb0d552b0230d
@@ -313,12 +335,12 @@ color_convert = function() {
 
   pub.to_rgba_array = function(color) {
     /**
-     * Turns any valid canvas fillStyle into a 4-element Uint8ClampedArray with bytes
-     * for R, G, B, and A. Invalid styles will return [0, 0, 0, 0]. Examples:
-     * color_convert.to_rgb_array('red')  # [255, 0, 0, 255]
-     * color_convert.to_rgb_array('#ff0000')  # [255, 0, 0, 255]
-     * color_convert.to_rgb_array('garbagey')  # [0, 0, 0, 0]
-     */
+    * Turns any valid canvas fillStyle into a 4-element Uint8ClampedArray with bytes
+    * for R, G, B, and A. Invalid styles will return [0, 0, 0, 0]. Examples:
+    * color_convert.to_rgb_array('red')  # [255, 0, 0, 255]
+    * color_convert.to_rgb_array('#ff0000')  # [255, 0, 0, 255]
+    * color_convert.to_rgb_array('garbagey')  # [0, 0, 0, 0]
+    */
     // Setting an invalid fillStyle leaves this unchanged
     context.fillStyle = 'rgba(0, 0, 0, 0)';
     // We're reusing the canvas, so fill it with something predictable

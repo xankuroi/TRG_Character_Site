@@ -54,24 +54,11 @@ body {
 .tabs .active a
 {
   background-color:#BBBBBB;
+  font-weight:bold;
 }
 
 
 /* CSS components */
-/* Helpful Alterations */
-.floatleft{float:left;}
-.floatright{float:right;}
-.alignleft{text-align:left;}
-.alignright{text-align:right;}
-.aligncenter{text-align:center;}
-.nobreak{white-space:nowrap;}
-.shrink{display:none;} /* hides this text on mobile size */
-.smol{font-size:8pt;}
-.smal{font-size:9pt;}
-.line{display:inline-block;}
-.boldy{font-weight:bold; font-size:9pt;}
-.bold{font-weight:bold;}
-.padtop{padding-top:10px;}
 /* CP Toasts */
 .toast {
   max-width:75%;
@@ -150,11 +137,13 @@ h1{
 .topkek{
   display:block;
   height:200px;
+  margin-bottom:10px;
 }
 .topkek img{
   max-width:200px;
   display:none;
   float:left;
+  background-color:gray;
 }
 .notimage{
   float:left;
@@ -217,31 +206,28 @@ h1{
 .blonk{
   min-width:10px;
 }
-.bweh{
-  color:gray;
-}
 .shr1nk{
   display:none;
 }
 /* Toggle */
-h3{
+.toggle-heading{
+  margin:0;
   background-color:#383838;
+  color:white;
+  border-bottom: 1px solid white;
   text-align:center;
   padding:5px 0;
   font-size:11pt;
-}
-.toggle-heading{
-  margin-bottom:0;
-  background-color:#383838;
-  color:white;
 }
 .toggle-heading:hover{
   cursor:pointer;
 }
 .toggle-content{
   display:none;
-  padding-bottom:10px;
+  padding:10px 0;
+  margin-bottom:10px;
   border: 1px lightgray solid;
+  border-top:none;
 }
 /* About */
 .aboot{
@@ -251,9 +237,9 @@ h3{
 .imgcontainer{
   width:100%;
 }
-.toggle-content img{
+.aboot img{
   display:block;
-  margin:auto;
+  margin:5px auto;
 }
 .toggle-content p{
   margin-top:0;
@@ -266,10 +252,6 @@ h3{
 .toggle-content table{
   width:100%;
   text-align:center;
-}
-
-.toggle-content td:first-child{
-  text-align:left;
 }
 .toggle-content tbody tr:nth-child(even){
   background-color:lightgray;
@@ -289,7 +271,7 @@ h3{
   color:#F0F0F0;
   font-weight:bold;
   text-align:center;
-  margin:10px 2px 0 2px;
+  margin:0 2px;
   height:18px;
 }
 .scol{
@@ -309,10 +291,12 @@ h3{
   min-width:50px;
 }
 .swegl{
-  width:1px;
+  width:100px;
+  text-align:left;
 }
 .swegr{
-  width:2px;
+  width:200px;
+  text-align:left;
 }
 
 /* Tooltips */
@@ -340,6 +324,69 @@ h3{
     visibility: visible;
 }
 
+/* Noise */
+.toggle-content h1{
+  margin:0;
+  display:inline-block;
+  padding-bottom:10px;
+}
+.geh{
+  padding-left:5px;
+  padding-right:5px;
+}
+.geh img{
+  display:block;
+  margin:0 auto;
+}
+.gweh{
+  max-width:500px;
+  margin:0 auto;
+}
+.noise-stats{
+  border-collapse:collapse;
+  margin:10px auto;
+  max-width:300px;
+}
+.noise-stats th,
+.noise-stats td{
+  background-color:white;
+  font-weight:normal;
+}
+.noise-stats tr:first-child td:first-child{
+  font-weight:bold;
+}
+.noise-stats th{
+  color:black;
+}
+.noise-stats td:first-child,
+.noise-stats td:nth-child(2){
+  text-align:right;
+}
+.noise-stats td{
+  border-right:1px solid lightgray;
+}
+.noise-stats th:nth-child(n+2),
+.noise-stats tr:last-child td:nth-child(n+2){
+  border-bottom:1px solid lightgray;
+}
+
+
+
+/* Helpful Alterations */
+.floatleft{float:left;}
+.floatright{float:right;}
+.alignleft{text-align:left;}
+.alignright{text-align:right;}
+.aligncenter{text-align:center;}
+.nobreak{white-space:nowrap;}
+.shrink{display:none;} /* hides this text on mobile size */
+.smol{font-size:8pt;}
+.smal{font-size:9pt;}
+.line{display:inline-block;}
+.boldy{font-weight:bold; font-size:9pt;}
+.bold{font-weight:bold;}
+.notop{margin-top:0;}
+.greh{color:gray;}
 /* Window Resizing */
 /* Default is SMALL size */
 @media only screen and (min-width:400px){
@@ -374,7 +421,7 @@ h3{
   .topkek img{
     display:inline;
   }
-  .toggle-content img{
+  .aboot img{
     display:none;
   }
   .notimage{
@@ -385,9 +432,6 @@ h3{
   }
   .shr1nk{
     display:none;
-  }
-  .mcol{
-    width:50px;
   }
 }
 @media only screen and (min-width:600px){

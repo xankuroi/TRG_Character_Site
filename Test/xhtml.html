@@ -83,13 +83,17 @@
   <textarea rows="1" type="hidden" readonly="true" class="cp-target" id="ov##-cp" value="LOADING..."></textarea>
 </script>
 
+<script id="noisecp-template" type="text/x-template">
+  <textarea rows="1" type="hidden" readonly="true" class="cp-target" id="noise##-cp" value="LOADING..."></textarea>
+</script>
+
 <script id="food-template" type="text/x-template">
   <tr><td>FOOD</td><td>BOOSTS</td><td>HEAL</td><td>QUANTITY</td></tr>
 </script>
 
 <script id="pin-template" type="text/x-template">
   <tr>
-    <td class="smal scol">ID</td><td class="pcol">PIN</td>
+    <td class="smal scol aligncenter">ID</td><td class="pcol">PIN</td>
     <td class="smal tcol1">ATK</td><td class="smal tcol3">EFFECT</td>
   </tr>
 </script>
@@ -130,15 +134,12 @@
             </h1>
           </div>
         </div>
-
         <h1 class="notimage accent##" id="id##-name"></h1><br>
       </div>
       <div class="neck">
         <div class="notimage">
           <div class="details">
-            <span id="id##-fullname"></span> |
-            <span id="id##-age"></span> |
-            <span id="id##-pronouns"></span><br>
+            <span id="id##-fullname"></span> | <span id="id##-age"></span> | <span id="id##-pronouns"></span><br>
             <i class="fa fa-handshake-o accent##" aria-hidden="true" alt="Timezone"></i> <span id="id##-part"></span>
           </div>
         </div>
@@ -147,12 +148,7 @@
         <table class="bwuh">
           <thead>
             <tr>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th>HP</th>
-              <th>ATK</th>
-              <th>DEF</th>
+              <th></th><th></th><th></th><th>HP</th><th>ATK</th><th>DEF</th>
               <th class="blonk"></th>
               <th>
                 <button class="btn" data-clipboard-target="#ov##-cp">
@@ -164,43 +160,32 @@
           <tbody>
             <tr>
               <td class="colhead bold accent##">Total</td>
-              <td><span id="id##-currhp">LOADING...</span></td>
-              <td>/</td>
+              <td><span id="id##-currhp">LOADING...</span></td><td>/</td>
               <td><span id="id##-totalhp">LOADING...</span> <span class="shr1nk">HP</span></td>
               <td><span id="id##-totalatk">LOADING...</span> <span class="shr1nk">ATK</span></td>
               <td><span id="id##-totaldef">LOADING...</span> <span class="shr1nk">DEF<span></td>
-              <td></td>
-              <td><span id="id##-yen">LOADING...</span><span class="boldy accent##">¥</span></td>
+              <td></td><td><span id="id##-yen">LOADING...</span><span class="boldy accent##">¥</span></td>
             </tr>
             <tr>
-              <td class="colhead">Base</td>
-              <td></td>
-              <td></td>
-              <td class="bweh"><span id="id##-basehp">LOADING...</span> <span class="shr1nk">HP</span></td>
-              <td class="bweh"><span id="id##-baseatk">LOADING...</span> <span class="shr1nk">ATK</span></td>
-              <td class="bweh"><span id="id##-basedef">LOADING...</span> <span class="shr1nk">DEF<span></td>
-              <td></td>
-              <td><span id="id##-rpp">LOADING...</span> <span class="boldy accent##">PP</span></td>
+              <td class="colhead">Raw</td><td></td><td></td>
+              <td class="greh"><span id="id##-rawhp">LOADING...</span> <span class="shr1nk">HP</span></td>
+              <td class="greh"><span id="id##-rawatk">LOADING...</span> <span class="shr1nk">ATK</span></td>
+              <td class="greh"><span id="id##-rawdef">LOADING...</span> <span class="shr1nk">DEF<span></td>
+              <td></td><td><span id="id##-rpp">LOADING...</span> <span class="boldy accent##">PP</span></td>
             </tr>
             <tr>
-              <td class="colhead">Threads</td>
-              <td></td>
-              <td></td>
-              <td class="bweh"><span id="id##-thrdhp">LOADING...</span> <span class="shr1nk">HP</span></td>
-              <td class="bweh"><span id="id##-thrdatk">LOADING...</span> <span class="shr1nk">ATK</span></td>
-              <td class="bweh"><span id="id##-thrddef">LOADING...</span> <span class="shr1nk">DEF<span></td>
-              <td></td>
-              <td><span id="id##-brv">LOADING...</span> <span class="boldy accent##">BRV</span></td>
+              <td class="colhead">Threads</td><td></td><td></td>
+              <td class="greh"><span id="id##-thrdhp">LOADING...</span> <span class="shr1nk">HP</span></td>
+              <td class="greh"><span id="id##-thrdatk">LOADING...</span> <span class="shr1nk">ATK</span></td>
+              <td class="greh"><span id="id##-thrddef">LOADING...</span> <span class="shr1nk">DEF<span></td>
+              <td></td><td><span id="id##-brv">LOADING...</span> <span class="boldy accent##">BRV</span></td>
             </tr>
             <tr>
-              <td class="colhead">Misc</td>
-              <td></td>
-              <td></td>
-              <td class="bweh"><span id="id##-mischp">LOADING...</span> <span class="shr1nk">HP</span></td>
-              <td class="bweh"><span id="id##-miscatk">LOADING...</span> <span class="shr1nk">ATK</span></td>
-              <td class="bweh"><span id="id##-miscdef">LOADING...</span> <span class="shr1nk">DEF<span></td>
-              <td></td>
-              <td><span id="id##-syncbp">LOADING...</span> <span class="boldy accent##">SYNC</span></td>
+              <td class="colhead">Misc</td><td></td><td></td>
+              <td class="greh"><span id="id##-mischp">LOADING...</span> <span class="shr1nk">HP</span></td>
+              <td class="greh"><span id="id##-miscatk">LOADING...</span> <span class="shr1nk">ATK</span></td>
+              <td class="greh"><span id="id##-miscdef">LOADING...</span> <span class="shr1nk">DEF<span></td>
+              <td></td><td><span id="id##-syncbp">LOADING...</span> <span class="boldy accent##">SYNC</span></td>
             </tr>
           </tbody>
         </table>
@@ -210,28 +195,20 @@
       <h3 class="toggle-heading accent##-bg">About</h3>
       <div class="toggle-content aboot">
         <img id="id##-imagecpy"></img>
-        <h4>Entry Fee</h4>
-        <p id="id##-fee"><p>
-        <h4>Reason to Live</h4>
-        <p id="id##-reason"><p>
-        <h4>Personality</h4>
-        <p id="id##-personality"><p>
-        <h4>Appearance</h4>
-        <p id="id##-appearance"><p>
+        <h4 class="notop">Entry Fee</h4><p id="id##-fee"><p>
+        <h4>Reason to Live</h4><p id="id##-reason"><p>
+        <h4>Personality</h4><p id="id##-personality"><p>
+        <h4>Appearance</h4><p id="id##-appearance"><p>
       </div>
     </div>
     <div class="food">
       <h3 class="toggle-heading accent##-bg">Food</h3>
       <div class="toggle-content">
-        <table class="padtop">
+        <table>
           <thead>
-            <th>Name</th>
-            <th>Boosts</th>
-            <th>Heal</th>
-            <th>Amt.</th>
+            <tr><th>Name</th><th>Boosts</th><th>Heal</th><th>Amt.</th></tr>
           </thead>
-          <tbody id="id##-food">
-          </tbody>
+          <tbody id="id##-food"></tbody>
         </table>
       </div>
     </div>
@@ -239,32 +216,22 @@
       <h3 class="toggle-heading accent##-bg">Equipment</h3>
       <div class="toggle-content">
         <div class="table-title">Pins</div>
-        <table>
-          <tbody id="id##-pinquip"></tbody>
-        </table>
+        <table><tbody id="id##-pinquip"></tbody></table>
         <div class="table-title">Threads</div>
-        <table>
-          <tbody id="id##-threquip"></tbody>
-        </table>
-        <div class="smol alignright">* not enough brave</div>
+        <table><tbody id="id##-threquip"></tbody></table>
+        <div class="smol alignright"><span class="bold accent##">*</span> not enough BRV</div>
       </div>
     </div>
     <div class="inventory">
       <h3 class="toggle-heading accent##-bg">Inventory</h3>
       <div class="toggle-content">
         <div class="table-title">Pins</div>
-        <table>
-          <tbody id="id##-pinventory"></tbody>
-        </table>
+        <table><tbody id="id##-pinventory"></tbody></table>
         <div class="table-title">Threads</div>
-        <table>
-          <tbody id="id##-tinventory"></tbody>
-        </table>
-        <div class="smol alignright">* not enough brave</div>
+        <table><tbody id="id##-tinventory"></tbody></table>
         <div class="table-title">Swag</div>
-        <table>
-          <tbody id="id##-swag"></tbody>
-        </table>
+        <table><tbody id="id##-swag"></tbody></table>
+        <div class="smol alignright"><span class="bold accent##">*</span> not enough BRV</div>
       </div>
     </div>
   </div>
@@ -297,15 +264,12 @@
             </h1>
           </div>
         </div>
-
         <h1 class="notimage accent##" id="id##-name"></h1><br>
       </div>
       <div class="neck">
         <div class="notimage">
           <div class="details">
-            <span id="id##-fullname"></span> |
-            <span id="id##-age"></span> |
-            <span id="id##-pronouns"></span><br>
+            <span id="id##-fullname"></span> | <span id="id##-age"></span> | <span id="id##-pronouns"></span><br>
             <i class="fa fa-briefcase accent##" aria-hidden="true" alt="Timezone"></i> <span id="id##-part"></span>
           </div>
         </div>
@@ -314,12 +278,7 @@
         <table class="bwuh">
           <thead>
             <tr>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th>HP</th>
-              <th>ATK</th>
-              <th>DEF</th>
+              <th></th><th></th><th></th><th>HP</th><th>ATK</th><th>DEF</th>
               <th class="blonk"></th>
               <th>
                 <button class="btn" data-clipboard-target="#ov##-cp">
@@ -331,70 +290,107 @@
           <tbody>
             <tr>
               <td class="colhead bold accent##">Total</td>
-              <td><span id="id##-currhp">LOADING...</span></td>
-              <td>/</td>
+              <td><span id="id##-currhp">LOADING...</span></td><td>/</td>
               <td><span id="id##-totalhp">LOADING...</span> <span class="shr1nk">HP</span></td>
               <td><span id="id##-totalatk">LOADING...</span> <span class="shr1nk">ATK</span></td>
               <td><span id="id##-totaldef">LOADING...</span> <span class="shr1nk">DEF<span></td>
-              <td></td>
-              <td><span id="id##-yen">LOADING...</span><span class="boldy accent##">¥</span></td>
+              <td></td><td><span id="id##-yen">LOADING...</span><span class="boldy accent##">¥</span></td>
             </tr>
             <tr>
-              <td class="colhead">Base</td>
-              <td></td>
-              <td></td>
-              <td class="bweh"><span id="id##-basehp">LOADING...</span> <span class="shr1nk">HP</span></td>
-              <td class="bweh"><span id="id##-baseatk">LOADING...</span> <span class="shr1nk">ATK</span></td>
-              <td class="bweh"><span id="id##-basedef">LOADING...</span> <span class="shr1nk">DEF<span></td>
-              <td></td>
-              <td><span id="id##-rpp">LOADING...</span> <span class="boldy accent##">RP</span></td>
+              <td class="colhead">Raw</td><td></td><td></td>
+              <td class="greh"><span id="id##-rawhp">LOADING...</span> <span class="shr1nk">HP</span></td>
+              <td class="greh"><span id="id##-rawatk">LOADING...</span> <span class="shr1nk">ATK</span></td>
+              <td class="greh"><span id="id##-rawdef">LOADING...</span> <span class="shr1nk">DEF<span></td>
+              <td></td><td><span id="id##-rpp">LOADING...</span> <span class="boldy accent##">RP</span></td>
             </tr>
             <tr>
-              <td class="colhead">Threads</td>
-              <td></td>
-              <td></td>
-              <td class="bweh"><span id="id##-thrdhp">LOADING...</span> <span class="shr1nk">HP</span></td>
-              <td class="bweh"><span id="id##-thrdatk">LOADING...</span> <span class="shr1nk">ATK</span></td>
-              <td class="bweh"><span id="id##-thrddef">LOADING...</span> <span class="shr1nk">DEF<span></td>
-              <td></td>
-              <td><span id="id##-syncbp">LOADING...</span> <span class="boldy accent##">BP</span></td>
+              <td class="colhead">Threads</td><td></td><td></td>
+              <td class="greh"><span id="id##-thrdhp">LOADING...</span> <span class="shr1nk">HP</span></td>
+              <td class="greh"><span id="id##-thrdatk">LOADING...</span> <span class="shr1nk">ATK</span></td>
+              <td class="greh"><span id="id##-thrddef">LOADING...</span> <span class="shr1nk">DEF<span></td>
+              <td></td><td><span id="id##-syncbp">LOADING...</span> <span class="boldy accent##">BP</span></td>
             </tr>
             <tr>
-              <td class="colhead">Misc</td>
-              <td></td>
-              <td></td>
-              <td class="bweh"><span id="id##-mischp">LOADING...</span> <span class="shr1nk">HP</span></td>
-              <td class="bweh"><span id="id##-miscatk">LOADING...</span> <span class="shr1nk">ATK</span></td>
-              <td class="bweh"><span id="id##-miscdef">LOADING...</span> <span class="shr1nk">DEF<span></td>
-              <td></td>
-              <td><span id="id##-brv">LOADING...</span> <span class="boldy accent##">BRV</span></td>
+              <td class="colhead">Misc</td><td></td><td></td>
+              <td class="greh"><span id="id##-mischp">LOADING...</span> <span class="shr1nk">HP</span></td>
+              <td class="greh"><span id="id##-miscatk">LOADING...</span> <span class="shr1nk">ATK</span></td>
+              <td class="greh"><span id="id##-miscdef">LOADING...</span> <span class="shr1nk">DEF<span></td>
+              <td></td><td><span id="id##-brv">LOADING...</span> <span class="boldy accent##">BRV</span></td>
             </tr>
           </tbody>
         </table>
+      </div>
+    </div>
+    <div class="noise">
+      <h3 class="toggle-heading accent##-bg">Noise Form</h3>
+      <div class="toggle-content geh">
+        <div class="gweh">
+          <h1 id="noise##-name" class="accent##">LOADING...</h1>&ensp;
+          <span id="noise##-species">LOADING</span>
+          <img class="gweh" id="noise##-image"></img>
+          <table class="noise-stats">
+            <thead>
+            <tr>
+              <th class="tcol1">
+                <button class="btn" data-clipboard-target="#noise##-cp">
+                  <i class="fa fa-clipboard accent##" aria-hidden="true" alt="C/P"></i>
+                </button>
+              </th>
+              <th >HP</th><th>ATK</th><th>DEF</th>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="accent##">Total</td>
+                <td id="noise##-totalhp">LOADING...</td>
+                <td id="noise##-totalatk">LOADING...</td>
+                <td id="noise##-totaldef">LOADING...</td>
+              </tr>
+              <tr>
+                <td>Raw</td>
+                <td class="greh" id="noise##-rawhp">LOADING...</td>
+                <td class="greh" id="noise##-rawatk">LOADING...</td>
+                <td class="greh" id="noise##-rawdef">LOADING...</td>
+              </tr>
+              <tr>
+                <td>Training</td>
+                <td class="greh" id="noise##-trainhp">LOADING...</td>
+                <td class="greh" id="noise##-trainatk">LOADING...</td>
+                <td class="greh" id="noise##-traindef">LOADING...</td>
+              </tr>
+              <tr>
+                <td>Misc</td>
+                <td class="greh" id="noise##-mischp">LOADING...</td>
+                <td class="greh" id="noise##-miscatk">LOADING...</td>
+                <td class="greh" id="noise##-miscdef">LOADING...</td>
+              </tr>
+            </tbody>
+          </table>
+          <table>
+            <thead><tr>
+              <th>Ability Name</th>
+              <th>Description</th>
+            </tr></thead>
+            <tbody id="noise##-abilities"></tbody>
+          </table>
+        </div>
       </div>
     </div>
     <div class="about">
       <h3 class="toggle-heading accent##-bg">About</h3>
       <div class="toggle-content aboot">
         <img id="id##-imagecpy"></img>
-        <h4>Personality</h4>
-        <p id="id##-personality"><p>
-        <h4>Appearance</h4>
-        <p id="id##-appearance"><p>
+        <h4 class="notop">Personality</h4><p id="id##-personality"><p>
+        <h4>Appearance</h4><p id="id##-appearance"><p>
       </div>
     </div>
     <div class="food">
       <h3 class="toggle-heading accent##-bg">Food</h3>
       <div class="toggle-content">
-        <table class="padtop">
+        <table>
           <thead>
-            <th>Name</th>
-            <th>Boosts</th>
-            <th>Heal</th>
-            <th>Amt.</th>
+            <th>Name</th><th>Boosts</th><th>Heal</th><th>Amt.</th>
           </thead>
-          <tbody id="id##-food">
-          </tbody>
+          <tbody id="id##-food"></tbody>
         </table>
       </div>
     </div>
@@ -402,32 +398,22 @@
       <h3 class="toggle-heading accent##-bg">Equipment</h3>
       <div class="toggle-content">
         <div class="table-title">Pins</div>
-        <table>
-          <tbody id="id##-pinquip"></tbody>
-        </table>
+        <table><tbody id="id##-pinquip"></tbody></table>
         <div class="table-title">Threads</div>
-        <table>
-          <tbody id="id##-threquip"></tbody>
-        </table>
-        <div class="smol alignright">* not enough brave</div>
+        <table><tbody id="id##-threquip"></tbody></table>
+        <div class="smol alignright"><span class="bold accent##">*</span> not enough BRV</div>
       </div>
     </div>
     <div class="inventory">
       <h3 class="toggle-heading accent##-bg">Inventory</h3>
       <div class="toggle-content">
         <div class="table-title">Pins</div>
-        <table>
-          <tbody id="id##-pinventory"></tbody>
-        </table>
+        <table><tbody id="id##-pinventory"></tbody></table>
         <div class="table-title">Threads</div>
-        <table>
-          <tbody id="id##-tinventory"></tbody>
-        </table>
-        <div class="smol alignright">* not enough brave</div>
+        <table><tbody id="id##-tinventory"></tbody></table>
         <div class="table-title">Swag</div>
-        <table>
-          <tbody id="id##-swag"></tbody>
-        </table>
+        <table><tbody id="id##-swag"></tbody></table>
+        <div class="smol alignright"><span class="bold accent##">*</span> not enough BRV</div>
       </div>
     </div>
   </div>
