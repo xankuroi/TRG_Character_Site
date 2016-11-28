@@ -298,6 +298,13 @@ h1{
   width:200px;
   text-align:left;
 }
+.blenk{
+  margin:0 2px;
+  background-color:lightgray;
+  color:black;
+  text-align:center;
+  padding:5px 0;
+}
 
 /* Tooltips */
 .tooltip{

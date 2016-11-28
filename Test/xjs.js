@@ -28,15 +28,10 @@ $(document).ready(function() {
     $('#ov').append(overview_template.replace(/##/g, istr));
   }
   setInterval(refresh("Updated!"), 300000);
-  /*
+
   $('.overview').css('display', 'block');
   $('#overview').addClass('active');
-  */
-  $('#id1-content').css('display', 'block'); //TODO switch to overview before pushing final
-  $('#id1').addClass('active');
-  // Alternatively, add cookies to keep track of which tab person was on
-
-
+  // TODO add cookies to keep track of which tab person was on
 });
 
 //TAB SELECTION
@@ -213,7 +208,37 @@ function fill(id) {
       $('#id'+id+'-threquip').append(equipped_threads[i]);
     }
 
-    /* TODO add handling for empty inventory (just tack on an empty row) */
+    $("#empty"+id+"-food").removeClass("blenk").html("");
+    $("#empty"+id+"-tinventory").removeClass("blenk").html("");
+    $("#empty"+id+"-pinventory").removeClass("blenk").html("");
+    $("#empty"+id+"-threquip").removeClass("blenk").html("");
+    $("#empty"+id+"-pinquip").removeClass("blenk").html("");
+    if(!($("#id"+id+"-food tr").exists())){
+      var entry = food_template.replace("FOOD", "EMPTY");
+      $("#empty"+id+"-food").addClass("blenk").html("EMPTY");
+    }
+    if(!($("#id"+id+"-tinventory tr").exists())){
+      var entry = thread_template.replace(/ID|STATS|EFFECT|TYPE|BRV/g, "");
+      $("#empty"+id+"-tinventory").addClass("blenk").html("EMPTY");
+    }
+    if(!($("#id"+id+"-pinventory tr").exists())){
+      var entry = pin_template.replace(/ID|ATK|EFFECT/g, "");
+      $("#empty"+id+"-pinventory").addClass("blenk").html("EMPTY");
+    }
+    if(!($("#id"+id+"-threquip tr").exists())){
+      var entry = thread_template.replace(/ID|STATS|EFFECT|TYPE|BRV/g, "");
+      $("#empty"+id+"-threquip").addClass("blenk").html("EMPTY");
+    }
+    if(!($("#id"+id+"-pinquip tr").exists())){
+      var entry = pin_template.replace(/ID|ATK|EFFECT/g, "");
+      $("#empty"+id+"-pinquip").addClass("blenk").html("EMPTY");
+    }
+    if(!($("#id"+id+"-swag tr").exists())){
+      var entry = swag_template.replace("SWAG", "NOTHING");
+      entry = entry.replace("DESC", "You don't have any swag! I wonder how you could acquire some...")
+      $("#id"+id+"-swag").append(entry);
+    }
+
     /* Noise Form */
     if(ptype == "reaper" || id == 1){ //TODO remove id == 1
       document.getElementById('noise'+id+'-name').innerHTML = data.feed.entry[29]['gsx$def']['$t'];
@@ -226,7 +251,6 @@ function fill(id) {
       $('#noise'+id+'-cp').val(data.feed.entry[6]['gsx$cp']['$t']);
 
       // Stats
-      console.log("boop");
       var noisehp = trim(data.feed.entry[32]['gsx$hp']['$t'], 3);
       document.getElementById('noise'+id+'-totalhp').innerHTML = noisehp + "/" + noisehp;
       document.getElementById('noise'+id+'-rawhp').innerHTML = trim(data.feed.entry[33]['gsx$hp']['$t'], 3);
@@ -242,7 +266,7 @@ function fill(id) {
       document.getElementById('noise'+id+'-miscdef').innerHTML = trim(data.feed.entry[35]['gsx$def']['$t'], 4);
 
       // Abilities
-      $('#noise'+id+'-abilities tr').remove;
+      $('#noise'+id+'-abilities tr').remove();
       for(i = 0; i < 5; i++){
         var ability = data.feed.entry[31+i]['gsx$name']['$t'];
         var desc = data.feed.entry[31+i]['gsx$type']['$t'];
@@ -280,6 +304,9 @@ function fill(id) {
       bg_els[i].style.color = text_color;
     }
   });
+}
+$.fn.exists = function () {
+  return this.length !== 0;
 }
 //TRIM (remove last few characters)
 function trim(str, num){
