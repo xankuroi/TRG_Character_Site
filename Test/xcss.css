@@ -223,6 +223,7 @@ h3{
   background-color:lightgray;
   text-align:center;
   padding:5px 0;
+  font-size:11pt;
 }
 .toggle-heading{
   margin-bottom:0;
@@ -248,6 +249,7 @@ h3{
 }
 .toggle-content p{
   margin-top:0;
+  font-size:10pt;
 }
 .toggle-content h4{
   margin-bottom:0;
@@ -285,11 +287,18 @@ h3{
 .scol{
   width:1px;
 }
-.fcol{
+.pcol{
+  width:100px;
+}
+.tcol1{
   width:50px;
 }
-.tstat{
-  max-width:150px;
+.tcol2{
+  width:120px;
+}
+.tcol3{
+  width:300px;
+  min-width:50px;
 }
 .swegl{
   width:1px;
