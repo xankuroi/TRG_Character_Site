@@ -337,7 +337,7 @@ function fill(id, message) {
 
 
     // Apply accent color
-    if(color == ""){color = "black";}
+    if(color == ""){color = "#383838";}
     var els = document.getElementsByClassName('accent' + id);
     for (var i = 0; i < els.length; i++) {
       els[i].style.color = color;

@@ -408,7 +408,7 @@ h1{
 .noise-stats td:first-child{
   border:none;
 }
-.noise-stats tbody tr:first-child td:nth-child(3){
+.noise-stats tbody tr:first-child td:nth-child(n+2){
   border-top:1px solid darkgray;
 }
 .noise-stats td:nth-child(3){
@@ -449,7 +449,9 @@ h1{
 .bold{font-weight:bold;}
 .notop{margin-top:0;}
 .nobot{margin-bottom:0;}
-.greh{color:gray;}
+.grey{color:gray;}
+.greh{color:#aaa;}
+.greh:hover{color:#383838;}
 .blah{color:black;}
 .hide{display:none;}
 .padr{margin-right:2px;}
