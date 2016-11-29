@@ -33,8 +33,9 @@ body {
   height:50px;
   max-width:768px;
   white-space:nowrap;
-  overflow-x: auto;
   background: white;
+  overflow-x:auto;
+  overflow:hidden;
 }
 .tabs ul{
   list-style: none;

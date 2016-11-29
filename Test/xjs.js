@@ -56,6 +56,7 @@ $(function() {
 // Fill in the damn information.
 function fill(id, message) {
   var sheet = id + 6;
+  sheet = id%2 + 6; // TODO remove for final version
   $.getJSON("https://spreadsheets.google.com/feeds/list/"+key+"/" + sheet + "/public/values?alt=json", function(data) {
     /* collect data that shows up multiple times */
     var color = data.feed.entry[7]['gsx$type']['$t'];
@@ -73,7 +74,7 @@ function fill(id, message) {
     }
     //Fill in text fields
     /* Tab */
-    document.getElementById('id' + id + '-tab').innerHTML = name;
+    document.getElementById('id' + id + '-tab').innerHTML = id; //TODO use name for final version
     /* Overview */
     document.getElementById('ov'+id+'-name').innerHTML = name;
     $('#ov'+id+'-cp').val(cp);
@@ -295,7 +296,7 @@ function fill(id, message) {
     }
 
     /* Noise Form */
-    if(ptype == "reaper" || id == 1){ //TODO remove id == 1
+    if(ptype == "reaper" || id%2 == 1){ //TODO remove id == 1
       document.getElementById('noise'+id+'-name').innerHTML = data.feed.entry[29]['gsx$def']['$t'];
       document.getElementById('noise'+id+'-species').innerHTML = data.feed.entry[30]['gsx$def']['$t'];
       var noiseimg = data.feed.entry[29]['gsx$type']['$t'];
@@ -369,7 +370,7 @@ function fill(id, message) {
       outs[i].style.border = "1px solid "+color;
     }
 
-    if(ptype == "reaper" || id == 1){ // TODO remove id for final version
+    if(ptype == "reaper" || id%2 == 1){ // TODO remove id for final version
       $('#id'+id+'-ahead>tr>th').css("background-color", color);
       $('#id'+id+'-ahead>tr>th').css("color", text_color);
     }
@@ -473,12 +474,10 @@ $(".refresh").click(function(){
 });
 function refresh(message)
 {
-  var i = 0;
-  for (i; i < numEntities; i++) {
-    fill(i, message);
+  for (var i = 0; i < numEntities; i++) {
+    fill(i, message); //TODO add asynch handling
   }
 }
-
 
 //BUTTON LISTENER
 var clipboard = new Clipboard('.btn');
