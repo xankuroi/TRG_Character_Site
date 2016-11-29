@@ -120,16 +120,40 @@ function fill(id, message) {
       document.getElementById('id'+id+'-reason').innerHTML = data.feed.entry[7]['gsx$data']['$t'];
     }
     document.getElementById('id'+id+'-appearance').innerHTML = data.feed.entry[8]['gsx$data']['$t'];
-    /* Tooltips */
+    /* Mun Information */
+    document.getElementById('id'+id+'-munfo').innerHTML = "";
     var mun = data.feed.entry[10]['gsx$data']['$t'];
     var zone = data.feed.entry[11]['gsx$data']['$t'];
     var skype = data.feed.entry[12]['gsx$data']['$t'];
     var blog = data.feed.entry[13]['gsx$data']['$t'];
-    if(mun != ""){document.getElementById('id'+id+'-mun').innerHTML = mun;}
-    if(zone != ""){document.getElementById('id'+id+'-timezone').innerHTML = zone;}
-    if(skype != ""){document.getElementById('id'+id+'-skype').innerHTML = skype;}
-    if(blog != ""){document.getElementById('id'+id+'-blog').innerHTML = blog;}
-
+    var mun_template = $('#munfo-template').html();
+    mun_template = mun_template.replace(/##/g, id);
+    var entries = new Array(4);
+    entries[0] = mun_template.replace("ICONID", "user");
+    entries[1] = mun_template.replace("ICONID", "clock-o");
+    if(mun != ""){
+      entries[0] = entries[0].replace("???", mun);
+    }
+    if(zone != ""){
+      entries[1] = entries[1].replace("???", zone);
+    }
+    if(skype != ""){
+      entries[2] = mun_template.replace("ICONID", "skype");
+      entries[2] = entries[2].replace("???", skype);
+    }
+    if(blog != ""){
+      entries[3] = mun_template.replace("ICONID", "tumblr-square");
+      if(blog.includes(".")){
+        var index = blog.indexOf('.');
+        blog = blog.substring(0, index);
+      }
+      entries[3] = entries[3].replace("???", blog);
+      entries[3] = entries[3].replace("<i", "<a href='http://"+blog+".tumblr.com'><i");
+      entries[3] = entries[3].replace("</i>", "</i></a>");
+    }
+    for(var i = 0 ; i < 4; i++){
+      $('#id'+id+'-munfo').append(entries[i]);
+    }
     /* Food */
     $("#id"+id+"-food tr").remove();
     var food_template = $("#food-template").html();
@@ -343,7 +367,7 @@ function fill(id, message) {
       outs[i].style.border = "1px solid "+color;
     }
 
-    if(ptype == "reapr" || id == 1){ // TODO remove id for final version
+    if(ptype == "reaper" || id == 1){ // TODO remove id for final version
       $('#id'+id+'-ahead>tr>th').css("background-color", color);
       $('#id'+id+'-ahead>tr>th').css("color", text_color);
     }

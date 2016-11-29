@@ -67,7 +67,7 @@
     <td><span id="ov##-def">Loading...</span><span class="shrink"> DEF</span></td>
     <td>
       <button class="btn" data-clipboard-target="#ov##-cp">
-        <i class="fa fa-clipboard accent##" aria-hidden="true" alt="C/P"></i>
+        <i class="fa fa-clipboard accent##" aria-hidden="true"></i>
       </button>
     </td>
   </tr>
@@ -84,7 +84,12 @@
 <script id="noisecp-template" type="text/x-template">
   <textarea rows="1" type="hidden" readonly="true" class="cp-target" id="noise##-cp" value="LOADING..."></textarea>
 </script>
-
+<script id="munfo-template" type="text/x-template">
+  <div class="tooltip">
+    <i class="fa fa-ICONID accent##" aria-hidden="true"></i>
+    <span class="tooltiptext sal">???</span>
+  </div>
+</script>
 <script id="food-template" type="text/x-template">
   <tr><td>FOOD</td><td>BOOSTS</td><td>HEAL</td><td>QUANTITY</td></tr>
 </script>
@@ -109,27 +114,11 @@
 <script id="player-template" type="text/x-template">
   <div class="content" id="id##-content">
     <div class="topkek">
-      <img class="accent##-out" id="id##-image"></img>
+      <div class="imgcontainer accent##-out"><img id="id##-image"></img></div>
       <div class="head">
         <div class="clicky">
-          <div class="munfo floatright">
-            <h1>
-              <div class="tooltip">
-                <i class="fa fa-user accent##" aria-hidden="true" alt="Mun Info"></i>
-                <span id="id##-mun" class="tooltiptext sal">N/A</span>
-              </div>
-              <div class="tooltip">
-                <a id="id##-bloglink"><i class="fa fa-skype accent##" aria-hidden="true" alt="Skype"></i></a>
-                <span id="id##-skype" class="tooltiptext sal">N/A</span>
-              </div>
-              <div class="tooltip">
-                <i class="fa fa-tumblr-square accent##" aria-hidden="true" alt="Blog"></i>
-                <span id="id##-blog" class="tooltiptext sal">N/A</span>
-              </div>
-              <div class="tooltip">
-                <i class="fa fa-clock-o accent##" aria-hidden="true" alt="Timezone"></i>
-                <span id="id##-timezone" class="tooltiptext sal">N/A</span>
-              </div>
+          <div class="floatright">
+            <h1 id="id##-munfo">
             </h1>
           </div>
         </div>
@@ -140,7 +129,7 @@
           <div class="details">
             <span id="id##-fullname"></span> | <span id="id##-age"></span> | <span id="id##-pronouns"></span><br>
             <div class="pad"></div>
-            <i class="fa fa-handshake-o accent##" aria-hidden="true" alt="Timezone"></i> <span id="id##-part"></span>
+            <i class="fa fa-handshake-o accent##" aria-hidden="true"></i> <span id="id##-part"></span>
           </div>
         </div>
       </div>
@@ -152,7 +141,7 @@
               <th class="blonk"></th>
               <th>
                 <button class="btn" data-clipboard-target="#ov##-cp">
-                  <i class="fa fa-clipboard accent##" aria-hidden="true" alt="C/P"></i>
+                  <i class="fa fa-clipboard accent##" aria-hidden="true"></i>
                 </button>
               </th>
             </tr>
@@ -226,7 +215,7 @@
     </div>
     <div class="inventory">
       <h3 class="toggle-heading accent##-bg">Inventory</h3>
-      <div class="toggle-content accent##-out">
+      <div class="toggle-content nobot accent##-out">
         <div class="table-title accent##-bg lopacity">Pins</div>
         <table><tbody id="id##-pinventory"></tbody></table>
         <div id="empty##-pinvetory"></div>
@@ -243,27 +232,11 @@
 <script id="reaper-template" type="text/x-template">
   <div class="content" id="id##-content">
     <div class="topkek">
-      <img class="accent##-out" id="id##-image"></img>
+      <div class="imgcontainer accent##-out"><img id="id##-image"></img></div>
       <div class="head">
         <div class="clicky">
-          <div class="munfo floatright">
-            <h1>
-              <div class="tooltip">
-                <i class="fa fa-user accent##" aria-hidden="true" alt="Mun Info"></i>
-                <span id="id##-mun" class="tooltiptext sal">N/A</span>
-              </div>
-              <div class="tooltip">
-                <i class="fa fa-skype accent##" aria-hidden="true" alt="Skype"></i>
-                <span id="id##-skype" class="tooltiptext sal">N/A</span>
-              </div>
-              <div class="tooltip">
-                <i class="fa fa-tumblr-square accent##" aria-hidden="true" alt="Blog"></i>
-                <span id="id##-blog" class="tooltiptext sal">N/A</span>
-              </div>
-              <div class="tooltip">
-                <i class="fa fa-clock-o accent##" aria-hidden="true" alt="Timezone"></i>
-                <span id="id##-timezone" class="tooltiptext sal">N/A</span>
-              </div>
+          <div class="floatright">
+            <h1 id="id##-munfo">
             </h1>
           </div>
         </div>
@@ -274,7 +247,7 @@
           <div class="details">
             <span id="id##-fullname"></span> | <span id="id##-age"></span> | <span id="id##-pronouns"></span><br>
             <div class="pad"></div>
-            <i class="fa fa-briefcase accent##" aria-hidden="true" alt="Timezone"></i> <span id="id##-part"></span>
+            <i class="fa fa-briefcase accent##" aria-hidden="true"></i> <span id="id##-part"></span>
           </div>
         </div>
       </div>
@@ -286,7 +259,7 @@
               <th class="blonk"></th>
               <th>
                 <button class="btn" data-clipboard-target="#ov##-cp">
-                  <i class="fa fa-clipboard accent##" aria-hidden="true" alt="C/P"></i>
+                  <i class="fa fa-clipboard accent##" aria-hidden="true"></i>
                 </button>
               </th>
             </tr>
@@ -334,7 +307,7 @@
           <img class="accent##-out" id="noise##-image"></img>
           <div class="ncpbtn">
             <button class="btn" data-clipboard-target="#noise##-cp">
-              <i class="fa fa-clipboard accent##" aria-hidden="true" alt="C/P"></i>
+              <i class="fa fa-clipboard accent##" aria-hidden="true"></i>
             </button>
           </div>
           <div style="margin-right:10px">
@@ -421,7 +394,7 @@
     </div>
     <div class="inventory">
       <h3 class="toggle-heading accent##-bg">Inventory</h3>
-      <div class="toggle-content accent##-out">
+      <div class="toggle-content nobot accent##-out">
         <div class="table-title accent##-bg lopacity">Pins</div>
         <table><tbody id="id##-pinventory"></tbody></table>
         <div id="empty##-pinventory"></div>
