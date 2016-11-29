@@ -148,7 +148,7 @@ function fill(id, message) {
         blog = blog.substring(0, index);
       }
       entries[3] = entries[3].replace("???", blog);
-      entries[3] = entries[3].replace("<i", "<a href='http://"+blog+".tumblr.com'><i");
+      entries[3] = entries[3].replace("<i", "<a href='http://"+blog+".tumblr.com' target='_blank'><i");
       entries[3] = entries[3].replace("</i>", "</i></a>");
     }
     for(var i = 0 ; i < 4; i++){
@@ -194,7 +194,7 @@ function fill(id, message) {
         entry = entry.replace("ATK", data.feed.entry[11+i]['gsx$atk']['$t']);
         entry = entry.replace("EFFECT", data.feed.entry[11+i]['gsx$effect']['$t']);
         var track = 0;
-        if(data.feed.entry[11+i]['gsx$hp']['$t'] == "yes"){//CD boost
+        if(data.feed.entry[11+i]['gsx$hp']['$t'].includes("y")){//CD boost
           var saa = hover_template.replace("BASE", "<sup class='uline accent"+id+"'><i class='fa fa-play-circle-o' aria-hidden='true'></i></sup>");
           saa = saa.replace("HOVERTEXT", "Boosted by CD!");
           entry = entry.replace(" ATK", saa+" ATK");
@@ -336,7 +336,8 @@ function fill(id, message) {
 
 
 
-    // Apply accent colors
+    // Apply accent color
+    if(color == ""){color = "black";}
     var els = document.getElementsByClassName('accent' + id);
     for (var i = 0; i < els.length; i++) {
       els[i].style.color = color;
@@ -345,14 +346,15 @@ function fill(id, message) {
 
     //Determine whether to use white or black text
     //Luma value is only an estimate; will require testing
+    /*
     var rgb = color_convert.to_rgba_array(color);
     var luma = 0.2126 * rgb[0] + 0.7152 * rgb[1] + 0.0722 * rgb[2];
-    var text_color = "black";
-    var bgcolor = "black";
-    if(luma < 126){
-      text_color = "white";
-      bgcolor = "white";
-    }
+    var text_color = "#383838";
+    var bgcolor = "black"; */
+    //if(luma < 130){
+    var text_color = "white";
+    var bgcolor = "white";
+    //}
     // Fill in background colors and apply appropriate text color
     var bg_els = document.getElementsByClassName('accent'+id+"-bg");
     $('.table-title.accent'+id).css("background-color", bgcolor);
@@ -428,6 +430,7 @@ function thread_type(str){
 }
 //COLOR RESOLUTION -- nicked from here:
 // https://gist.github.com/njvack/02ad8efcb0d552b0230d
+/*
 color_convert = function() {
   var pub = {}, canvas, context;
   canvas = document.createElement('canvas');
@@ -442,7 +445,7 @@ color_convert = function() {
     * color_convert.to_rgb_array('red')  # [255, 0, 0, 255]
     * color_convert.to_rgb_array('#ff0000')  # [255, 0, 0, 255]
     * color_convert.to_rgb_array('garbagey')  # [0, 0, 0, 0]
-    */
+    **
     // Setting an invalid fillStyle leaves this unchanged
     context.fillStyle = 'rgba(0, 0, 0, 0)';
     // We're reusing the canvas, so fill it with something predictable
@@ -453,12 +456,13 @@ color_convert = function() {
   }
   return pub;
 }();
-
+*/
 
 // TOGGLE
 $(function () {
   $('.toggle-heading').on('click', function() {
-    $(this).next('.toggle-content').slideToggle(200);
+    var toslide = $(this).next('.toggle-content');
+    toslide.slideToggle(toslide.height());
   });
 });
 

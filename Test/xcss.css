@@ -49,16 +49,21 @@ body {
 .tabs li a{
   height:100%;
   text-decoration:none;
+  opacity:.5;
 }
 .tab{padding:5px 20px;margin:0;}
 .tabs li a:hover{
-  text-shadow:0px 1px;
+  opacity:1;
 }
 .tabs .active a{
-  text-shadow:0px 1px;
+  opacity:1;
 }
-a{
-  color:lightgray;
+p a{
+  text-decoration: none;
+  color:black;
+}
+p a:hover{
+  text-decoration: underline;
 }
 a:hover{
   cursor:pointer;
@@ -289,6 +294,9 @@ h1{
   padding:2px;
   border:1px solid darkgray;
 }
+.toggle-content tr:first-child td{
+  border-top:none;
+}
 .toggle-content tr:last-child td{
   border-bottom:none;
 }
@@ -311,22 +319,16 @@ h1{
   padding:2px 0;
   border-top:inherit;
 }
-.scol{
-  width:1px;
-}
-.pcol{
-  width:100px;
-}
-.tcol1{
-  width:50px;
-}
-.tcol2{
-  width:120px;
-}
-.tcol3{
-  width:300px;
-  min-width:50px;
-}
+.scol{width:1px;}
+.w50{width:50px;}
+.w60{width:60px;}
+.mw60{max-width:60px;}
+.w70{width:70px;}
+.w80{width:80px;}
+.w100{width:100px;}
+.w120{width:120px;}
+.w300{width:300px;min-width:50px;}
+
 .swegl,
 .swegr{
   padding:2px;
@@ -423,18 +425,19 @@ h1{
   border-right:1px solid darkgray;
 }
 .ncpbtn{
-  width:60px;
+  max-width:60px;
   display:block;
   margin:10px auto 0 auto;
 }
 .dink{display:none;}
 
 /* Helpful Alterations */
-.lopacity{opacity:0.75;}
+.lopacity{opacity:0.70;}
 .uline{border-bottom: 1px dashed;}
 .floatleft{float:left;}
 .floatright{float:right;}
 .alignleft{text-align:left;}
+.alignright{text-align:right;}
 .aligncenter{text-align:center;}
 .nobreak{white-space:nowrap;}
 .shrink{display:none;} /* hides this text on mobile size */
@@ -447,6 +450,7 @@ h1{
 .notop{margin-top:0;}
 .nobot{margin-bottom:0;}
 .greh{color:gray;}
+.blah{color:black;}
 .hide{display:none;}
 .padr{margin-right:2px;}
 .padl{margin-left:2px;}
