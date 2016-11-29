@@ -19,6 +19,7 @@
 
 
 <body>
+  <div class='toasty'><div class='toast' style='display:none'></div></div>
   <div class="tabcontainer">
     <div class="tabs" data-simplebar-direction="horizontal">
       <ul>
@@ -26,8 +27,6 @@
       </ul>
     </div>
   </div>
-
-
   <div class="container">
     <div class="corner">
       <button class="refresh floatleft"><i class="fa fa-refresh fa-lg" aria-hidden="true"></i></button>
@@ -50,8 +49,6 @@
     </div>
   </div>
 </div>
-
-<div class="toasty"><div class='toast' style='display:none'></div></div>
 
 <!-- Script load -->
 <script src="https://cdn.rawgit.com/Grsmto/simplebar/master/src/simplebar.js"></script>
@@ -112,7 +109,7 @@
 <script id="player-template" type="text/x-template">
   <div class="content" id="id##-content">
     <div class="topkek">
-      <img id="id##-image"></img>
+      <img class="accent##-out" id="id##-image"></img>
       <div class="head">
         <div class="clicky">
           <div class="munfo floatright">
@@ -122,7 +119,7 @@
                 <span id="id##-mun" class="tooltiptext sal">N/A</span>
               </div>
               <div class="tooltip">
-                <i class="fa fa-skype accent##" aria-hidden="true" alt="Skype"></i>
+                <a id="id##-bloglink"><i class="fa fa-skype accent##" aria-hidden="true" alt="Skype"></i></a>
                 <span id="id##-skype" class="tooltiptext sal">N/A</span>
               </div>
               <div class="tooltip">
@@ -142,6 +139,7 @@
         <div class="notimage">
           <div class="details">
             <span id="id##-fullname"></span> | <span id="id##-age"></span> | <span id="id##-pronouns"></span><br>
+            <div class="pad"></div>
             <i class="fa fa-handshake-o accent##" aria-hidden="true" alt="Timezone"></i> <span id="id##-part"></span>
           </div>
         </div>
@@ -195,19 +193,19 @@
     </div>
     <div class="about">
       <h3 class="toggle-heading accent##-bg">About</h3>
-      <div class="toggle-content aboot">
-        <img id="id##-imagecpy"></img>
-        <h4 class="notop">Entry Fee</h4><p id="id##-fee"><p>
-        <h4>Reason to Live</h4><p id="id##-reason"><p>
-        <h4>Personality</h4><p id="id##-personality"><p>
-        <h4>Appearance</h4><p id="id##-appearance"><p>
+      <div class="toggle-content accent##-out aboot">
+        <img class="accent##-out" id="id##-imagecpy"></img>
+        <h4 class="notop accent##">Entry Fee</h4><p id="id##-fee"><p>
+        <h4 class="accent##">Reason to Live</h4><p id="id##-reason"><p>
+        <h4 class="accent##">Personality</h4><p id="id##-personality"><p>
+        <h4 class="accent##">Appearance</h4><p id="id##-appearance"><p>
       </div>
     </div>
     <div class="food">
       <h3 class="toggle-heading accent##-bg">Food</h3>
-      <div class="toggle-content">
+      <div class="toggle-content accent##-out">
         <table>
-          <thead>
+          <thead id="id##-fhead" class="lopacity">
             <tr><th>Name</th><th>Boosts</th><th>Heal</th><th class="scol">Amt.</th></tr>
           </thead>
           <tbody id="id##-food"></tbody>
@@ -217,25 +215,25 @@
     </div>
     <div class="equipment">
       <h3 class="toggle-heading accent##-bg">Equipment</h3>
-      <div class="toggle-content">
-        <div class="table-title">Pins</div>
+      <div class="toggle-content accent##-out">
+        <div class="table-title accent##-bg lopacity">Pins</div>
         <table><tbody id="id##-pinquip"></tbody></table>
         <div id="empty##-pinquip"></div>
-        <div class="table-title">Threads</div>
+        <div class="table-title accent##-bg lopacity">Threads</div>
         <table><tbody id="id##-threquip"></tbody></table>
         <div id="empty##-threquip"></div>
       </div>
     </div>
     <div class="inventory">
       <h3 class="toggle-heading accent##-bg">Inventory</h3>
-      <div class="toggle-content">
-        <div class="table-title">Pins</div>
+      <div class="toggle-content accent##-out">
+        <div class="table-title accent##-bg lopacity">Pins</div>
         <table><tbody id="id##-pinventory"></tbody></table>
         <div id="empty##-pinvetory"></div>
-        <div class="table-title">Threads</div>
+        <div class="table-title accent##-bg lopacity">Threads</div>
         <table><tbody id="id##-tinventory"></tbody></table>
         <div id="empty##-tinventory"></div>
-        <div class="table-title">Swag</div>
+        <div class="table-title accent##-bg lopacity">Swag</div>
         <table><tbody id="id##-swag"></tbody></table>
       </div>
     </div>
@@ -245,7 +243,7 @@
 <script id="reaper-template" type="text/x-template">
   <div class="content" id="id##-content">
     <div class="topkek">
-      <img id="id##-image"></img>
+      <img class="accent##-out" id="id##-image"></img>
       <div class="head">
         <div class="clicky">
           <div class="munfo floatright">
@@ -275,6 +273,7 @@
         <div class="notimage">
           <div class="details">
             <span id="id##-fullname"></span> | <span id="id##-age"></span> | <span id="id##-pronouns"></span><br>
+            <div class="pad"></div>
             <i class="fa fa-briefcase accent##" aria-hidden="true" alt="Timezone"></i> <span id="id##-part"></span>
           </div>
         </div>
@@ -328,27 +327,27 @@
     </div>
     <div class="noise">
       <h3 class="toggle-heading accent##-bg">Noise Form</h3>
-      <div class="toggle-content geh">
+      <div class="toggle-content accent##-out geh">
         <div class="gweh">
-          <h1 id="noise##-name" class="accent##">LOADING...</h1>&ensp;
-          <span id="noise##-species">LOADING</span>
-          <img id="noise##-image"></img>
+          <h1 id="noise##-name" class="accent##">LOADING...</h1>
+          <span class="nobreak" id="noise##-species">LOADING</span>
+          <img class="accent##-out" id="noise##-image"></img>
           <div class="ncpbtn">
             <button class="btn" data-clipboard-target="#noise##-cp">
               <i class="fa fa-clipboard accent##" aria-hidden="true" alt="C/P"></i>
             </button>
           </div>
-          <div style="margin-right:3px">
+          <div style="margin-right:10px">
             <table class="noise-stats">
               <thead>
               <tr>
-                <th></th><th></th><th></th><th></th>
+                <th></th><th></th><th></th>
                 <th class="hp">HP</th><th>ATK</th>
                 <th>DEF</th>
               </thead>
               <tbody>
                 <tr>
-                  <td></td><td class="colhead bold accent##">Total</td>
+                  <td class="colhead bold accent##">Total</td>
                   <td><span id="noise##-currhp" style="width:30px;"></span></td>
                   <td>/</td>
                   <td><span id="noise##-totalhp">LOADING...</span><span class="dink"> HP</span></td>
@@ -356,19 +355,19 @@
                   <td><span id="noise##-totaldef">LOADING...</span><span class="dink"> DEF</span></td>
                 </tr>
                 <tr>
-                  <td></td><td class="colhead">Raw</td><td></td><td></td>
+                  <td class="colhead">Raw</td><td></td><td></td>
                   <td class="greh"><span id="noise##-rawhp">LOADING...</span><span class="dink"> HP</span></td>
                   <td class="greh"><span id="noise##-rawatk">LOADING...</span><span class="dink"> ATK</span></td>
                   <td class="greh"><span id="noise##-rawdef">LOADING...</span><span class="dink"> DEF</span></td>
                 </tr>
                 <tr>
-                  <td></td><td class="colhead">Training</td><td></td><td></td>
+                  <td class="colhead">Training</td><td></td><td></td>
                   <td class="greh"><span id="noise##-trainhp">LOADING...</span><span class="dink"> HP</span></td>
                   <td class="greh"><span id="noise##-trainatk">LOADING...</span><span class="dink"> ATK</span></td>
                   <td class="greh"><span id="noise##-traindef">LOADING...</span><span class="dink"> DEF</span></td>
                 </tr>
                 <tr>
-                  <td></td><td class="colhead">Misc</td><td></td><td></td>
+                  <td class="colhead">Misc</td><td></td><td></td>
                   <td class="greh"><span id="noise##-mischp">LOADING...</span><span class="dink"> HP</span></td>
                   <td class="greh"><span id="noise##-miscatk">LOADING...</span><span class="dink"> ATK</span></td>
                   <td class="greh"><span id="noise##-miscdef">LOADING...</span><span class="dink"> DEF</span></td>
@@ -376,30 +375,33 @@
               </tbody>
             </table>
           </div>
-          <table>
-            <thead><tr>
-              <th>Ability Name</th>
-              <th>Description</th>
-            </tr></thead>
-            <tbody id="noise##-abilities"></tbody>
-          </table>
+
         </div>
+        <table>
+          <thead id="id##-ahead"><tr>
+            <th>Ability Name</th>
+            <th>Description</th>
+          </tr></thead>
+          <tbody id="noise##-abilities"></tbody>
+        </table>
       </div>
     </div>
     <div class="about">
       <h3 class="toggle-heading accent##-bg">About</h3>
-      <div class="toggle-content aboot">
-        <img id="id##-imagecpy"></img>
-        <h4 class="notop">Personality</h4><p id="id##-personality"><p>
-        <h4>Appearance</h4><p id="id##-appearance"><p>
+      <div class="toggle-content accent##-out aboot">
+        <img class="accent##-out" id="id##-imagecpy"></img>
+        <h4 class="notop accent##">Personality</h4><p id="id##-personality"><p>
+        <h4 class="accent##">Appearance</h4><p id="id##-appearance"><p>
       </div>
     </div>
     <div class="food">
       <h3 class="toggle-heading accent##-bg">Food</h3>
-      <div class="toggle-content">
+      <div class="toggle-content accent##-out">
         <table>
-          <thead id="id##-fhead">
-            <th>Name</th><th>Boosts</th><th>Heal</th><th class="scol">Amt.</th>
+          <thead id="id##-fhead" class="lopacity">
+            <tr>
+              <th>Name</th><th>Boosts</th><th>Heal</th><th class="scol">Amt.</th>
+            </tr>
           </thead>
           <tbody id="id##-food"></tbody>
         </table>
@@ -408,25 +410,25 @@
     </div>
     <div class="equipment">
       <h3 class="toggle-heading accent##-bg">Equipment</h3>
-      <div class="toggle-content">
-        <div class="table-title">Pins</div>
+      <div class="toggle-content accent##-out">
+        <div class="table-title accent##-bg lopacity">Pins</div>
         <table><tbody id="id##-pinquip"></tbody></table>
         <div id="empty##-pinquip"></div>
-        <div class="table-title">Threads</div>
+        <div class="table-title accent##-bg lopacity">Threads</div>
         <table><tbody id="id##-threquip"></tbody></table>
         <div id="empty##-threquip"></div>
       </div>
     </div>
     <div class="inventory">
       <h3 class="toggle-heading accent##-bg">Inventory</h3>
-      <div class="toggle-content">
-        <div class="table-title">Pins</div>
+      <div class="toggle-content accent##-out">
+        <div class="table-title accent##-bg lopacity">Pins</div>
         <table><tbody id="id##-pinventory"></tbody></table>
         <div id="empty##-pinventory"></div>
-        <div class="table-title">Threads</div>
+        <div class="table-title accent##-bg lopacity">Threads</div>
         <table><tbody id="id##-tinventory"></tbody></table>
         <div id="empty##-tinventory"></div>
-        <div class="table-title">Swag</div>
+        <div class="table-title accent##-bg lopacity">Swag</div>
         <table><tbody id="id##-swag"></tbody></table>
       </div>
     </div>

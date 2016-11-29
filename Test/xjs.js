@@ -30,6 +30,7 @@ $(document).ready(function() {
   setInterval(refresh("Updated!"), 300000);
 
   $('.overview').css('display', 'block');
+  $('#overview').css('border-bottom', 'solid')
   $('#ovli').addClass('active');
   // TODO add cookies to keep track of which tab person was on
 });
@@ -40,16 +41,20 @@ $(function() {
     $(this).addClass('active').siblings().removeClass('active');
     var tablinks = document.getElementsByClassName("tab");
     var tabcontent = document.getElementsByClassName("content");
+    for(var i = 0; i < tablinks.length; i++){
+      tablinks[i].style.borderBottom = "hidden";
+    }
     for (var i = 0; i < tabcontent.length; i++) {
       tabcontent[i].style.display = "none";
     }
     tabcontent[$(this).index()].style.display = "block";
+    tablinks[$(this).index()].style.borderBottom = "solid";
   });
 });
 
 
 // Fill in the damn information.
-function fill(id) {
+function fill(id, message) {
   var sheet = id + 6;
   $.getJSON("https://spreadsheets.google.com/feeds/list/"+key+"/" + sheet + "/public/values?alt=json", function(data) {
     /* collect data that shows up multiple times */
@@ -312,23 +317,40 @@ function fill(id) {
     for (var i = 0; i < els.length; i++) {
       els[i].style.color = color;
     }
+    $('.tab.accent'+id).css("border-bottom", "3px hidden " + color);
 
     //Determine whether to use white or black text
     //Luma value is only an estimate; will require testing
     var rgb = color_convert.to_rgba_array(color);
     var luma = 0.2126 * rgb[0] + 0.7152 * rgb[1] + 0.0722 * rgb[2];
     var text_color = "black";
-    var bgcolor = "#383838";
-    if(luma <= 125){
+    var bgcolor = "black";
+    if(luma < 126){
       text_color = "white";
-      bgcolor = "#C7C7C7";
+      bgcolor = "white";
     }
     // Fill in background colors and apply appropriate text color
     var bg_els = document.getElementsByClassName('accent'+id+"-bg");
-    //$('.toggle-heading.accent'+id).css("background-color", bgcolor);
+    $('.table-title.accent'+id).css("background-color", bgcolor);
+    $('#id'+id+'-fhead>tr>th').css("background-color", color);
+    $('#id'+id+'-fhead>tr>th').css("color", text_color);
     for (var i = 0; i < bg_els.length; i++) {
       bg_els[i].style.backgroundColor = color;
       bg_els[i].style.color = text_color;
+    }
+    var outs = document.getElementsByClassName('accent'+id+'-out');
+    for(var i = 0; i < outs.length; i++){
+      outs[i].style.border = "1px solid "+color;
+    }
+
+    if(ptype == "reapr" || id == 1){ // TODO remove id for final version
+      $('#id'+id+'-ahead>tr>th').css("background-color", color);
+      $('#id'+id+'-ahead>tr>th').css("color", text_color);
+    }
+
+    if(id == numEntities-1){
+      $('.active>a').css("border-bottom", "3px solid");
+      toast(message, 1000);
     }
   });
 }
@@ -377,6 +399,8 @@ function thread_type(str){
   if(str.charAt(0) == "H"){return "Head";}
   if(str.charAt(0) == "A"){return "Acc";}
   if(str.charAt(0) == "F"){return "Foot";}
+  if(str.charAt(0) == "P"){return "Psy";}
+  return str;
 }
 //COLOR RESOLUTION -- nicked from here:
 // https://gist.github.com/njvack/02ad8efcb0d552b0230d
@@ -421,10 +445,10 @@ $(".refresh").click(function(){
 });
 function refresh(message)
 {
-  for (var i = 0; i < numEntities; i++) {
-    fill(i);
+  var i = 0;
+  for (i; i < numEntities; i++) {
+    fill(i, message);
   }
-  toast(message, 1000);
 }
 
 
