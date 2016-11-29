@@ -4,7 +4,8 @@
   <!-- TODO actually fill out the header lmao -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/Grsmto/simplebar/master/src/simplebar.css">
-  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="xcss.css">
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
@@ -21,7 +22,7 @@
   <div class="tabcontainer">
     <div class="tabs" data-simplebar-direction="horizontal">
       <ul>
-        <li><a href="#" class="tab" id="overview">Overview</a></li>
+        <li id="ovli"><a href="#" class="tab" id="overview">Overview</a></li>
       </ul>
     </div>
   </div>
@@ -60,6 +61,7 @@
 </body>
 
 <!-- Templates and Xan's javscript -->
+<!-- TODO add CD and BOOST markers -->
 <script src="xjs.js"></script>
 <script id="overview-template" type="text/x-template">
   <tr>
@@ -164,7 +166,7 @@
               <td><span id="id##-totalhp">LOADING...</span> <span class="shr1nk">HP</span></td>
               <td><span id="id##-totalatk">LOADING...</span> <span class="shr1nk">ATK</span></td>
               <td><span id="id##-totaldef">LOADING...</span> <span class="shr1nk">DEF<span></td>
-              <td></td><td><span id="id##-yen">LOADING...</span><span class="boldy accent##">¥</span></td>
+              <td></td><td><span id="id##-yen">LOADING...</span><span class="boldy accent##">&yen;</span></td>
             </tr>
             <tr>
               <td class="colhead">Raw</td><td></td><td></td>
@@ -299,7 +301,7 @@
               <td><span id="id##-totalhp">LOADING...</span> <span class="shr1nk">HP</span></td>
               <td><span id="id##-totalatk">LOADING...</span> <span class="shr1nk">ATK</span></td>
               <td><span id="id##-totaldef">LOADING...</span> <span class="shr1nk">DEF<span></td>
-              <td></td><td><span id="id##-yen">LOADING...</span><span class="boldy accent##">¥</span></td>
+              <td></td><td><span id="id##-yen">LOADING...</span><span class="boldy accent##">&yen;</span></td>
             </tr>
             <tr>
               <td class="colhead">Raw</td><td></td><td></td>
@@ -332,7 +334,7 @@
         <div class="gweh">
           <h1 id="noise##-name" class="accent##">LOADING...</h1>&ensp;
           <span id="noise##-species">LOADING</span>
-          <img class="gweh" id="noise##-image"></img>
+          <img id="noise##-image"></img>
           <table class="noise-stats">
             <thead>
             <tr>
@@ -347,9 +349,9 @@
             <tbody>
               <tr>
                 <td class="accent##">Total</td>
-                <td class="greh"><span id="noise##-totalhp">LOADING...</span><span class="dink"> HP</span></td>
-                <td class="greh"><span id="noise##-totalatk">LOADING...</span><span class="dink"> ATK</span></td>
-                <td class="greh"><span id="noise##-totaldef">LOADING...</span><span class="dink"> DEF</span></td>
+                <td><span id="noise##-totalhp">LOADING...</span><span class="dink"> HP</span></td>
+                <td><span id="noise##-totalatk">LOADING...</span><span class="dink"> ATK</span></td>
+                <td><span id="noise##-totaldef">LOADING...</span><span class="dink"> DEF</span></td>
               </tr>
               <tr>
                 <td>Raw</td>
@@ -393,7 +395,7 @@
       <h3 class="toggle-heading accent##-bg">Food</h3>
       <div class="toggle-content">
         <table>
-          <thead>
+          <thead id="id##-fhead">
             <th>Name</th><th>Boosts</th><th>Heal</th><th>Amt.</th>
           </thead>
           <tbody id="id##-food"></tbody>
@@ -429,5 +431,4 @@
     </div>
   </div>
 </script>
-<!-- TODO add noise -->
 </html>

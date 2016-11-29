@@ -1,8 +1,11 @@
 /* Main styling */
+html {
+  font-size:80%;
+}
 body {
   padding:20px 10px;
-  font-family: "Roboto", sans-serif;
-  font-size:10pt;
+  font-family: 'Roboto', sans-serif;
+  font-size:1em;
   min-width:300px;
   max-width:740px;
   margin:0;
@@ -25,7 +28,7 @@ body {
 }
 
 .tabs {
-  font-size:12pt;
+  font-size:1.2em;
   outline: 1px solid lightgray;
   height:50px;
   max-width:768px;
@@ -81,7 +84,7 @@ body {
   border:none;
   padding:5px;
 }
-.refresh:hover{
+button:hover{
   cursor:pointer;
 }
 /* Copy-paste textarea */
@@ -143,7 +146,7 @@ h1{
   max-width:200px;
   display:none;
   float:left;
-  background-color:gray;
+  outline:1px solid lightgray;
 }
 .notimage{
   float:left;
@@ -217,15 +220,14 @@ h1{
   border-bottom: 1px solid white;
   text-align:center;
   padding:5px 0;
-  font-size:11pt;
 }
 .toggle-heading:hover{
   cursor:pointer;
 }
 .toggle-content{
   display:none;
-  padding:10px 0;
-  margin-bottom:10px;
+  padding-bottom:10px;
+  margin-bottom:20px;
   border: 1px lightgray solid;
   border-top:none;
 }
@@ -243,7 +245,7 @@ h1{
 }
 .toggle-content p{
   margin-top:0;
-  font-size:10pt;
+  font-size:1em;
 }
 .toggle-content h4{
   margin-bottom:0;
@@ -272,7 +274,7 @@ h1{
   font-weight:bold;
   text-align:center;
   margin:0 2px;
-  height:18px;
+  padding:2px 0;
 }
 .scol{
   width:1px;
@@ -304,6 +306,7 @@ h1{
   color:black;
   text-align:center;
   padding:5px 0;
+  border-bottom:2px solid white;
 }
 
 /* Tooltips */
@@ -320,7 +323,7 @@ h1{
   padding: 5px 0;
   border-radius: 6px 0px 6px 6px;
   right:105%;
-  font-size:10pt;
+  font-size:0.69em;
   font-weight:normal;
 
   /* Position the tooltip text - see examples below! */
@@ -344,6 +347,10 @@ h1{
 .gweh{
   max-width:500px;
   margin:0 auto;
+}
+.gweh h1{
+  padding-left:10px;
+  margin-top:10px;
 }
 .noise-stats{
   border-collapse:collapse;
@@ -379,17 +386,18 @@ h1{
 .floatleft{float:left;}
 .floatright{float:right;}
 .alignleft{text-align:left;}
-.alignright{text-align:right;}
+.alignright{text-align:right;padding-right:2px;}
 .aligncenter{text-align:center;}
 .nobreak{white-space:nowrap;}
 .shrink{display:none;} /* hides this text on mobile size */
-.smol{font-size:8pt;}
-.smal{font-size:9pt;}
+.smol{font-size:.8em;}
+.smal{font-size:.9em;}
 .line{display:inline-block;}
-.boldy{font-weight:bold; font-size:9pt;}
+.boldy{font-weight:bold; font-size:.9em;}
 .bold{font-weight:bold;}
 .notop{margin-top:0;}
 .greh{color:gray;}
+.hide{display:none;}
 /* Window Resizing */
 /* Default is SMALL size */
 @media only screen and (min-width:350px){
@@ -426,6 +434,9 @@ h1{
   }
   .topkek img{
     display:inline;
+  }
+  .notop{
+    padding-top:10px;
   }
   .aboot img{
     display:none;

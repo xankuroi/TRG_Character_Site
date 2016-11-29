@@ -7,7 +7,7 @@ $(document).ready(function() {
   var reaper_template = $('#reaper-template').html();
   var overview_template = $('#overview-template').html();
   var cp_template = $('#cp-template').html();
-  for (i = 0; i < numEntities; i++) {
+  for (var i = 0; i < numEntities; i++) {
     var istr = i.toString();
     $('body').append(cp_template.replace(/##/g, istr));
       // TODO remove i == 1 for final version
@@ -30,7 +30,7 @@ $(document).ready(function() {
   setInterval(refresh("Updated!"), 300000);
 
   $('.overview').css('display', 'block');
-  $('#overview').addClass('active');
+  $('#ovli').addClass('active');
   // TODO add cookies to keep track of which tab person was on
 });
 
@@ -40,7 +40,7 @@ $(function() {
     $(this).addClass('active').siblings().removeClass('active');
     var tablinks = document.getElementsByClassName("tab");
     var tabcontent = document.getElementsByClassName("content");
-    for (i = 0; i < tabcontent.length; i++) {
+    for (var i = 0; i < tabcontent.length; i++) {
       tabcontent[i].style.display = "none";
     }
     tabcontent[$(this).index()].style.display = "block";
@@ -124,9 +124,10 @@ function fill(id) {
     /* Food */
     $("#id"+id+"-food tr").remove();
     var food_template = $("#food-template").html();
-    for(i = 0; i < 13; i++){
+    for(var i = 0; i < 13; i++){
       var food = data.feed.entry[15+i]['gsx$data']['$t'];
       var quantity = data.feed.entry[15+i]['gsx$n']['$t'];
+      console.log(i);
       if(food != "" && quantity != "")
       {
         var healio = data.feed.entry[7+i]['gsx$heal']['$t'];
@@ -150,7 +151,7 @@ function fill(id) {
     var thread_template = $("#thread-template").html();
     var equipped_threads = new Array(4);
     var equipped_pins = new Array(6);
-    for(i = 0; i < 9; i++){
+    for(var i = 0; i < 9; i++){
       //Pins
       var pid = data.feed.entry[11+i]['gsx$id']['$t'];
       if(pid != ""){
@@ -201,10 +202,10 @@ function fill(id) {
     }
 
     /* Equip */
-    for(i = 0; i < equipped_pins.length; i++){
+    for(var i = 0; i < equipped_pins.length; i++){
       $('#id'+id+'-pinquip').append(equipped_pins[i]);
     }
-    for(i = 0; i < equipped_threads.length; i++){
+    for(var i = 0; i < equipped_threads.length; i++){
       $('#id'+id+'-threquip').append(equipped_threads[i]);
     }
 
@@ -213,9 +214,11 @@ function fill(id) {
     $("#empty"+id+"-pinventory").removeClass("blenk").html("");
     $("#empty"+id+"-threquip").removeClass("blenk").html("");
     $("#empty"+id+"-pinquip").removeClass("blenk").html("");
+    $("#id"+id+"-fhead").removeClass("hide");
     if(!($("#id"+id+"-food tr").exists())){
       var entry = food_template.replace("FOOD", "EMPTY");
       $("#empty"+id+"-food").addClass("blenk").html("EMPTY");
+      $("#id"+id+"-fhead").addClass("hide");
     }
     if(!($("#id"+id+"-tinventory tr").exists())){
       var entry = thread_template.replace(/ID|STATS|EFFECT|TYPE|BRV/g, "");
@@ -267,7 +270,7 @@ function fill(id) {
 
       // Abilities
       $('#noise'+id+'-abilities tr').remove();
-      for(i = 0; i < 5; i++){
+      for(var i = 0; i < 5; i++){
         var ability = data.feed.entry[31+i]['gsx$name']['$t'];
         var desc = data.feed.entry[31+i]['gsx$type']['$t'];
         if(ability != "" || desc != ""){
@@ -282,7 +285,7 @@ function fill(id) {
 
     // Apply accent colors
     var els = document.getElementsByClassName('accent' + id);
-    for (i = 0; i < els.length; i++) {
+    for (var i = 0; i < els.length; i++) {
       els[i].style.color = color;
     }
 
@@ -299,7 +302,7 @@ function fill(id) {
     // Fill in background colors and apply appropriate text color
     var bg_els = document.getElementsByClassName('accent'+id+"-bg");
     //$('.toggle-heading.accent'+id).css("background-color", bgcolor);
-    for (i = 0; i < bg_els.length; i++) {
+    for (var i = 0; i < bg_els.length; i++) {
       bg_els[i].style.backgroundColor = color;
       bg_els[i].style.color = text_color;
     }
@@ -318,8 +321,9 @@ function prep(str){
   if(tokens.length == 1){
     return str;
   }
+  console.log("prep...");
   var ans = "";
-  for(i = 0; i < tokens.length - 2; i++){
+  for(var i = 0; i < tokens.length - 2; i++){
     ans += "<span class='nobreak'>" + tokens[i] +",</span> ";
   }
   return ans + "<span class='nobreak'>" + tokens[i] +"</span> ";;
@@ -394,7 +398,7 @@ $(".refresh").click(function(){
 });
 function refresh(message)
 {
-  for (i = 0; i < numEntities; i++) {
+  for (var i = 0; i < numEntities; i++) {
     fill(i);
   }
   toast(message, 1000);
