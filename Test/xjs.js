@@ -167,11 +167,11 @@ function fill(id) {
         var track = 0;
         if(data.feed.entry[11+i]['gsx$hp']['$t'] == "yes"){//CD boost
           var saa = hover_template.replace("BASE", "<sup class='uline accent"+id+"'><i class='fa fa-play-circle-o' aria-hidden='true'></i></sup>");
-          saa = saa.replace("HOVERTEXT", "+10 from CD!");
+          saa = saa.replace("HOVERTEXT", "Boosted by CD!");
           entry = entry.replace(" ATK", saa+" ATK");
           track++;
         }
-        if(data.feed.entry[11+i]['gsx$hp']['$t'] == "yes"){//res pin boost
+        if(data.feed.entry[11+i]['gsx$def']['$t'] == "yes"){//res pin boost
           var saa = hover_template.replace("BASE", "<sup class='uline accent"+id+"'><i class='fa fa-chevron-circle-up' aria-hidden='true'></i></sup>");
           saa = saa.replace("HOVERTEXT", "Boosted by resonance pin!");
           entry = entry.replace(" ATK", saa+" ATK");
