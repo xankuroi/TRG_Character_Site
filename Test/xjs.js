@@ -116,10 +116,14 @@ function fill(id) {
     }
     document.getElementById('id'+id+'-appearance').innerHTML = data.feed.entry[8]['gsx$data']['$t'];
     /* Tooltips */
-    document.getElementById('id'+id+'-mun').innerHTML = data.feed.entry[10]['gsx$data']['$t'];
-    document.getElementById('id'+id+'-timezone').innerHTML = data.feed.entry[11]['gsx$data']['$t'];
-    document.getElementById('id'+id+'-skype').innerHTML = data.feed.entry[12]['gsx$data']['$t'];
-    document.getElementById('id'+id+'-blog').innerHTML = data.feed.entry[13]['gsx$data']['$t'];
+    var mun = data.feed.entry[10]['gsx$data']['$t'];
+    var zone = data.feed.entry[11]['gsx$data']['$t'];
+    var skype = data.feed.entry[12]['gsx$data']['$t'];
+    var blog = data.feed.entry[13]['gsx$data']['$t'];
+    if(mun != ""){document.getElementById('id'+id+'-mun').innerHTML = mun;}
+    if(zone != ""){document.getElementById('id'+id+'-timezone').innerHTML = zone;}
+    if(skype != ""){document.getElementById('id'+id+'-skype').innerHTML = skype;}
+    if(blog != ""){document.getElementById('id'+id+'-blog').innerHTML = blog;}
 
     /* Food */
     $("#id"+id+"-food tr").remove();
@@ -127,7 +131,6 @@ function fill(id) {
     for(var i = 0; i < 13; i++){
       var food = data.feed.entry[15+i]['gsx$data']['$t'];
       var quantity = data.feed.entry[15+i]['gsx$n']['$t'];
-      console.log(i);
       if(food != "" && quantity != "")
       {
         var healio = data.feed.entry[7+i]['gsx$heal']['$t'];
@@ -149,6 +152,7 @@ function fill(id) {
     var swag_template = $("#swag-template").html();
     var pin_template = $("#pin-template").html();
     var thread_template = $("#thread-template").html();
+    var hover_template = $("#hover-template").html();
     var equipped_threads = new Array(4);
     var equipped_pins = new Array(6);
     for(var i = 0; i < 9; i++){
@@ -160,6 +164,23 @@ function fill(id) {
         entry = entry.replace("PIN", data.feed.entry[11+i]['gsx$name']['$t']);
         entry = entry.replace("ATK", data.feed.entry[11+i]['gsx$atk']['$t']);
         entry = entry.replace("EFFECT", data.feed.entry[11+i]['gsx$effect']['$t']);
+        var track = 0;
+        if(data.feed.entry[11+i]['gsx$hp']['$t'] == "yes"){//CD boost
+          var saa = hover_template.replace("BASE", "<sup class='uline accent"+id+"'><i class='fa fa-play-circle-o' aria-hidden='true'></i></sup>");
+          saa = saa.replace("HOVERTEXT", "+10 from CD!");
+          entry = entry.replace(" ATK", saa+" ATK");
+          track++;
+        }
+        if(data.feed.entry[11+i]['gsx$hp']['$t'] == "yes"){//res pin boost
+          var saa = hover_template.replace("BASE", "<sup class='uline accent"+id+"'><i class='fa fa-chevron-circle-up' aria-hidden='true'></i></sup>");
+          saa = saa.replace("HOVERTEXT", "Boosted by resonance pin!");
+          entry = entry.replace(" ATK", saa+" ATK");
+          track++;
+        }
+        if(track == 2){
+          entry = entry.replace('<div class="tooltip"', '<div class="line"><div class="tooltip"');
+          entry = entry.replace(" ATK", "</div> ATK");
+        }
         if(equipslot == ""){ //not equipped; put it in the inventory
           $('#id'+id+'-pinventory').append(entry);
         }
@@ -183,7 +204,9 @@ function fill(id) {
           entry = entry.replace("STATS", stat(ehp, eatk, edef));
           entry = entry.replace("BRV", data.feed.entry[21+i]['gsx$cp']['$t'] + " BRV");
           if(data.feed.entry[21+i]['gsx$equip']['$t'] == "no"){
-            entry = entry.replace(" BRV", "<span class='bold accent"+id+"'>*</span> BRV");
+            var saa = hover_template.replace("BASE", "<sup class='uline accent"+id+"'><i class='fa fa-times' aria-hidden='true'></i></sup>");
+            saa = saa.replace("HOVERTEXT", "Not enough BRV!");
+            entry = entry.replace(" BRV", saa+" BRV");
           }
           if(equipslot == ""){ //not equipped; put it in the inventory
             $('#id'+id+'-tinventory').append(entry);
@@ -255,7 +278,8 @@ function fill(id) {
 
       // Stats
       var noisehp = trim(data.feed.entry[32]['gsx$hp']['$t'], 3);
-      document.getElementById('noise'+id+'-totalhp').innerHTML = noisehp + "/" + noisehp;
+      document.getElementById('noise'+id+'-totalhp').innerHTML = noisehp;
+      document.getElementById('noise'+id+'-currhp').innerHTML = noisehp;
       document.getElementById('noise'+id+'-rawhp').innerHTML = trim(data.feed.entry[33]['gsx$hp']['$t'], 3);
       document.getElementById('noise'+id+'-trainhp').innerHTML = trim(data.feed.entry[34]['gsx$hp']['$t'], 3);
       document.getElementById('noise'+id+'-mischp').innerHTML = trim(data.feed.entry[35]['gsx$hp']['$t'], 3);
@@ -321,7 +345,6 @@ function prep(str){
   if(tokens.length == 1){
     return str;
   }
-  console.log("prep...");
   var ans = "";
   for(var i = 0; i < tokens.length - 2; i++){
     ans += "<span class='nobreak'>" + tokens[i] +",</span> ";

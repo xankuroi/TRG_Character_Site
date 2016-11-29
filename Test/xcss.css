@@ -66,8 +66,8 @@ body {
 .toast {
   max-width:75%;
   position:fixed;
-  top:10px;
-  right:10px;
+  top:70px;
+  left:10px;
   background-color: #383838;
   color: #F0F0F0;
   font-size: 15px;
@@ -77,12 +77,14 @@ body {
 }
 /* Refresh button */
 .corner{
+  height:25px;
   display:block;
   outline:1px solid lightgray;
 }
 .refresh {
   border:none;
   padding:5px;
+  height:25px;
 }
 button:hover{
   cursor:pointer;
@@ -203,7 +205,7 @@ h1{
 }
 .colhead{
   text-align: right;
-  width: 60px;
+  width: 50px;
   padding-right:5px;
 }
 .blonk{
@@ -292,13 +294,12 @@ h1{
   width:300px;
   min-width:50px;
 }
-.swegl{
-  width:100px;
-  text-align:left;
-}
+.swegl{width:100px;}}
+.swegr{width:200px;}
+.swegl,
 .swegr{
-  width:200px;
   text-align:left;
+  padding-left:5px;
 }
 .blenk{
   margin:0 2px;
@@ -310,6 +311,11 @@ h1{
 }
 
 /* Tooltips */
+.tooltip .toptt{
+  width:100px;
+  bottom: 100%;
+  border-radius: 6px 6px 0 6px;
+}
 .tooltip{
   position:relative;
   display: inline-block;
@@ -323,10 +329,7 @@ h1{
   padding: 5px 0;
   border-radius: 6px 0px 6px 6px;
   right:105%;
-  font-size:0.69em;
   font-weight:normal;
-
-  /* Position the tooltip text - see examples below! */
   position: absolute;
   z-index: 1;
 }
@@ -360,48 +363,55 @@ h1{
 .noise-stats th,
 .noise-stats td{
   background-color:white;
-  font-weight:normal;
-}
-.noise-stats tr:first-child td:first-child{
-  font-weight:bold;
 }
 .noise-stats th{
   color:black;
+  font-weight:normal;
 }
-.noise-stats td:first-child,
-.noise-stats td:nth-child(2){
-  text-align:right;
-}
-.noise-stats td{
+.noise-stats td:nth-child(n+2){
   border-right:1px solid lightgray;
 }
-.noise-stats th:nth-child(n+2),
-.noise-stats tr:last-child td:nth-child(n+2){
+.noise-stats td:nth-child(3),
+.noise-stats td:nth-child(4){
+  border-right:none;
+}
+.noise-stats th:nth-child(n+3),
+.noise-stats td:nth-child(n+3){
   border-bottom:1px solid lightgray;
 }
+.ncpbtn{
+  width:60px;
+  display:block;
+  margin:10px auto 0 auto;
+}
+/*
 .dink{display:none;}
-
+*/
 
 /* Helpful Alterations */
+.uline{border-bottom: 1px dashed;}
 .floatleft{float:left;}
 .floatright{float:right;}
 .alignleft{text-align:left;}
-.alignright{text-align:right;padding-right:2px;}
 .aligncenter{text-align:center;}
 .nobreak{white-space:nowrap;}
 .shrink{display:none;} /* hides this text on mobile size */
 .smol{font-size:.8em;}
 .smal{font-size:.9em;}
-.line{display:inline-block;}
+.sal{font-size:.6em;}
+.line{display:inline-block;padding-left:2px;}
 .boldy{font-weight:bold; font-size:.9em;}
 .bold{font-weight:bold;}
 .notop{margin-top:0;}
 .greh{color:gray;}
 .hide{display:none;}
+.padr{margin-right:2px;}
+.padl{margin-left:2px;}
 /* Window Resizing */
 /* Default is SMALL size */
 @media only screen and (min-width:350px){
   .dink{display:inline;}
+  .noise-stats{margin:10px auto;}
 }
 @media only screen and (min-width:400px){
   .shr1nk{
@@ -426,6 +436,11 @@ h1{
   }
   .shr1nk{
     display:inline;
+  }
+  .toast{
+    top:20px;
+    left:50%;
+    transform: translateX(-50%);
   }
 }
 @media only screen and (min-width:550px){

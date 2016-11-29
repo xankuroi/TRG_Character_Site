@@ -30,9 +30,9 @@
 
   <div class="container">
     <div class="corner">
-      <button class="refresh"><i class="fa fa-refresh fa-lg" aria-hidden="true"></i></button>
-      <span class="smol line">Content automatically updates every 10 min.</span>
-      <span class="smol line">Click on the button to manually trigger an update.</span>
+      <button class="refresh floatleft"><i class="fa fa-refresh fa-lg" aria-hidden="true"></i></button>
+      <span class="smol line floatleft">Content automatically updates every 10 min.</span>
+      <span class="smol line floatleft">Click on the button to manually trigger an update.</span>
     </div>
     <div class="content overview">
       <table>
@@ -45,8 +45,7 @@
             <th class="table-small">C/P</th>
           </tr>
         </thead>
-        <tbody id="ov">
-        </tbody>
+        <tbody id="ov"></tbody>
       </table>
     </div>
   </div>
@@ -108,6 +107,7 @@
 <script id="swag-template" type="text/x-template">
   <tr><td class="swegl">SWAG</td><td class="swegr">DESC</td></tr>
 </script>
+<script id="hover-template" type="text/x-template"><div class="tooltip">BASE<span class="tooltiptext toptt">HOVERTEXT</span></div></script>
 
 <script id="player-template" type="text/x-template">
   <div class="content" id="id##-content">
@@ -119,19 +119,19 @@
             <h1>
               <div class="tooltip">
                 <i class="fa fa-user accent##" aria-hidden="true" alt="Mun Info"></i>
-                <span id="id##-mun" class="tooltiptext">N/A</span>
+                <span id="id##-mun" class="tooltiptext sal">N/A</span>
               </div>
               <div class="tooltip">
                 <i class="fa fa-skype accent##" aria-hidden="true" alt="Skype"></i>
-                <span id="id##-skype" class="tooltiptext">N/A</span>
+                <span id="id##-skype" class="tooltiptext sal">N/A</span>
               </div>
               <div class="tooltip">
                 <i class="fa fa-tumblr-square accent##" aria-hidden="true" alt="Blog"></i>
-                <span id="id##-blog" class="tooltiptext">N/A</span>
+                <span id="id##-blog" class="tooltiptext sal">N/A</span>
               </div>
               <div class="tooltip">
                 <i class="fa fa-clock-o accent##" aria-hidden="true" alt="Timezone"></i>
-                <span id="id##-timezone" class="tooltiptext">N/A</span>
+                <span id="id##-timezone" class="tooltiptext sal">N/A</span>
               </div>
             </h1>
           </div>
@@ -208,7 +208,7 @@
       <div class="toggle-content">
         <table>
           <thead>
-            <tr><th>Name</th><th>Boosts</th><th>Heal</th><th>Amt.</th></tr>
+            <tr><th>Name</th><th>Boosts</th><th>Heal</th><th class="scol">Amt.</th></tr>
           </thead>
           <tbody id="id##-food"></tbody>
         </table>
@@ -224,7 +224,6 @@
         <div class="table-title">Threads</div>
         <table><tbody id="id##-threquip"></tbody></table>
         <div id="empty##-threquip"></div>
-        <div class="smol alignright"><span class="bold accent##">*</span> not enough BRV</div>
       </div>
     </div>
     <div class="inventory">
@@ -238,7 +237,6 @@
         <div id="empty##-tinventory"></div>
         <div class="table-title">Swag</div>
         <table><tbody id="id##-swag"></tbody></table>
-        <div class="smol alignright"><span class="bold accent##">*</span> not enough BRV</div>
       </div>
     </div>
   </div>
@@ -254,19 +252,19 @@
             <h1>
               <div class="tooltip">
                 <i class="fa fa-user accent##" aria-hidden="true" alt="Mun Info"></i>
-                <span id="id##-mun" class="tooltiptext">N/A</span>
+                <span id="id##-mun" class="tooltiptext sal">N/A</span>
               </div>
               <div class="tooltip">
                 <i class="fa fa-skype accent##" aria-hidden="true" alt="Skype"></i>
-                <span id="id##-skype" class="tooltiptext">N/A</span>
+                <span id="id##-skype" class="tooltiptext sal">N/A</span>
               </div>
               <div class="tooltip">
                 <i class="fa fa-tumblr-square accent##" aria-hidden="true" alt="Blog"></i>
-                <span id="id##-blog" class="tooltiptext">N/A</span>
+                <span id="id##-blog" class="tooltiptext sal">N/A</span>
               </div>
               <div class="tooltip">
                 <i class="fa fa-clock-o accent##" aria-hidden="true" alt="Timezone"></i>
-                <span id="id##-timezone" class="tooltiptext">N/A</span>
+                <span id="id##-timezone" class="tooltiptext sal">N/A</span>
               </div>
             </h1>
           </div>
@@ -335,44 +333,49 @@
           <h1 id="noise##-name" class="accent##">LOADING...</h1>&ensp;
           <span id="noise##-species">LOADING</span>
           <img id="noise##-image"></img>
-          <table class="noise-stats">
-            <thead>
-            <tr>
-              <th class="tcol1">
-                <button class="btn" data-clipboard-target="#noise##-cp">
-                  <i class="fa fa-clipboard accent##" aria-hidden="true" alt="C/P"></i>
-                </button>
-              </th>
-              <th style="width:90px">HP</th><th style="width:55px">ATK</th>
-              <th style="width:40px">DEF</th>
-            </thead>
-            <tbody>
+          <div class="ncpbtn">
+            <button class="btn" data-clipboard-target="#noise##-cp">
+              <i class="fa fa-clipboard accent##" aria-hidden="true" alt="C/P"></i>
+            </button>
+          </div>
+          <div style="margin-right:3px">
+            <table class="noise-stats">
+              <thead>
               <tr>
-                <td class="accent##">Total</td>
-                <td><span id="noise##-totalhp">LOADING...</span><span class="dink"> HP</span></td>
-                <td><span id="noise##-totalatk">LOADING...</span><span class="dink"> ATK</span></td>
-                <td><span id="noise##-totaldef">LOADING...</span><span class="dink"> DEF</span></td>
-              </tr>
-              <tr>
-                <td>Raw</td>
-                <td class="greh"><span id="noise##-rawhp">LOADING...</span><span class="dink"> HP</span></td>
-                <td class="greh"><span id="noise##-rawatk">LOADING...</span><span class="dink"> ATK</span></td>
-                <td class="greh"><span id="noise##-rawdef">LOADING...</span><span class="dink"> DEF</span></td>
-              </tr>
-              <tr>
-                <td>Training</td>
-                <td class="greh"><span id="noise##-trainhp">LOADING...</span><span class="dink"> HP</span></td>
-                <td class="greh"><span id="noise##-trainatk">LOADING...</span><span class="dink"> ATK</span></td>
-                <td class="greh"><span id="noise##-traindef">LOADING...</span><span class="dink"> DEF</span></td>
-              </tr>
-              <tr>
-                <td>Misc</td>
-                <td class="greh"><span id="noise##-mischp">LOADING...</span><span class="dink"> HP</span></td>
-                <td class="greh"><span id="noise##-miscatk">LOADING...</span><span class="dink"> ATK</span></td>
-                <td class="greh"><span id="noise##-miscdef">LOADING...</span><span class="dink"> DEF</span></td>
-              </tr>
-            </tbody>
-          </table>
+                <th></th><th></th><th></th><th></th>
+                <th class="hp">HP</th><th>ATK</th>
+                <th>DEF</th>
+              </thead>
+              <tbody>
+                <tr>
+                  <td></td><td class="colhead bold accent##">Total</td>
+                  <td><span id="noise##-currhp" style="width:30px;"></span></td>
+                  <td>/</td>
+                  <td><span id="noise##-totalhp">LOADING...</span><span class="dink"> HP</span></td>
+                  <td><span id="noise##-totalatk">LOADING...</span><span class="dink"> ATK</span></td>
+                  <td><span id="noise##-totaldef">LOADING...</span><span class="dink"> DEF</span></td>
+                </tr>
+                <tr>
+                  <td></td><td class="colhead">Raw</td><td></td><td></td>
+                  <td class="greh"><span id="noise##-rawhp">LOADING...</span><span class="dink"> HP</span></td>
+                  <td class="greh"><span id="noise##-rawatk">LOADING...</span><span class="dink"> ATK</span></td>
+                  <td class="greh"><span id="noise##-rawdef">LOADING...</span><span class="dink"> DEF</span></td>
+                </tr>
+                <tr>
+                  <td></td><td class="colhead">Training</td><td></td><td></td>
+                  <td class="greh"><span id="noise##-trainhp">LOADING...</span><span class="dink"> HP</span></td>
+                  <td class="greh"><span id="noise##-trainatk">LOADING...</span><span class="dink"> ATK</span></td>
+                  <td class="greh"><span id="noise##-traindef">LOADING...</span><span class="dink"> DEF</span></td>
+                </tr>
+                <tr>
+                  <td></td><td class="colhead">Misc</td><td></td><td></td>
+                  <td class="greh"><span id="noise##-mischp">LOADING...</span><span class="dink"> HP</span></td>
+                  <td class="greh"><span id="noise##-miscatk">LOADING...</span><span class="dink"> ATK</span></td>
+                  <td class="greh"><span id="noise##-miscdef">LOADING...</span><span class="dink"> DEF</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
           <table>
             <thead><tr>
               <th>Ability Name</th>
@@ -396,7 +399,7 @@
       <div class="toggle-content">
         <table>
           <thead id="id##-fhead">
-            <th>Name</th><th>Boosts</th><th>Heal</th><th>Amt.</th>
+            <th>Name</th><th>Boosts</th><th>Heal</th><th class="scol">Amt.</th>
           </thead>
           <tbody id="id##-food"></tbody>
         </table>
@@ -412,7 +415,6 @@
         <div class="table-title">Threads</div>
         <table><tbody id="id##-threquip"></tbody></table>
         <div id="empty##-threquip"></div>
-        <div class="smol alignright"><span class="bold accent##">*</span> not enough BRV</div>
       </div>
     </div>
     <div class="inventory">
@@ -426,7 +428,6 @@
         <div id="empty##-tinventory"></div>
         <div class="table-title">Swag</div>
         <table><tbody id="id##-swag"></tbody></table>
-        <div class="smol alignright"><span class="bold accent##">*</span> not enough BRV</div>
       </div>
     </div>
   </div>
