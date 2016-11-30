@@ -11,13 +11,15 @@ body {
   margin:0;
   overflow-y:hidden;
 }
-
+.cc{
+  width:100%;
+  border:1px solid lightgray;
+  margin-left:-1px;
+}
 .container {
   overflow: hidden;
-  outline: 1px solid lightgray;
   min-width:280px;
   width:100%;
-  min-height:80%;
 }
 
 .content {
@@ -83,11 +85,18 @@ a:hover{
   left:50%;
   bottom:10px;
   font-size: 1.25em;
+  padding:10px;
 }
 .toast {
-  margin-left:25px;
+  padding-top:5px;
   top:70px;
   font-size: 1.1em;
+  height:20px;
+  width:inherit;
+  max-width:740px;
+  margin:0 9px;
+  left:0;
+  right:0;
 }
 .toast,
 .cptoast{
@@ -95,7 +104,6 @@ a:hover{
   position:fixed;
   background-color: black;
   color: white;
-  padding:10px;
   text-align:center;
   border-radius: 2px;
 }
@@ -104,13 +112,28 @@ a:hover{
   height:25px;
   display:block;
   outline:1px solid lightgray;
+  overflow-y:hidden;
+  width:inherit;
 }
 .refresh {
-  padding:4px;
-  margin-left:-1px;
+  padding:5px;
+  background-color:lightgray;
+}
+button{
+  outline:1px solid lightgray;
+  border:none;
+  background-color:inherit;
+  opacity:0.75;
+  box-shadow: 2px 2px 0px rgba(0,0,0,0.2);
+}
+.noshadow{box-shadow:none;}
+button:active{
+  box-shadow:none;
+  background-color:white;
 }
 button:hover{
   cursor:pointer;
+  opacity:1.0;
 }
 button[disabled]:hover{
   cursor:default;
@@ -136,8 +159,6 @@ button[disabled]:hover{
 }
 .overview td:last-child{
   border-right:none;
-  border-bottom:none;
-  border-top:none;
 }
 .overview tbody tr:first-child td:last-child{
   border-top:1px solid darkgray;
@@ -496,9 +517,10 @@ h1{
   .tab{
     padding:5px 40px;
   }
-  body{
+  .toast, body{
     margin: 0 auto;
   }
+  .toast{padding: 5px 1px 0;}
   .shr1nk{
     display:inline;
   }

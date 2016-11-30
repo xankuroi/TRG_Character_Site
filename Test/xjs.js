@@ -498,9 +498,6 @@ function toast(t, text, time) {
 function toastin(text){
   $('.toast').text(text).fadeIn(200);
 }
-function toastout(){
-  $('.toast').fadeOut(200);
-}
 
 clipboard.on('success', function(e) {
   toast('.cptoast', "Copied to clipboard!", 1000);
@@ -519,7 +516,7 @@ $('textarea[readonly]').keydown(function(event) {
 
 // Adjust content height
 function updateHeight(){
-  $('.container').css("min-height", ($( window ).height() - 140)+"px");
+  $('.cc').css("min-height", ($( window ).height() - 140)+"px");
 }
 $( window ).resize(function(){updateHeight()});
 
