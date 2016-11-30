@@ -146,7 +146,7 @@ function fill(id, message) {
     }
     if(blog != ""){
       entries[3] = mun_template.replace("ICONID", "tumblr-square");
-      if(blog.includes(".")){
+      if(blog.indexOf(".") != -1){
         var index = blog.indexOf('.');
         blog = blog.substring(0, index);
       }
@@ -197,7 +197,7 @@ function fill(id, message) {
         entry = entry.replace("ATK", data.feed.entry[11+i]['gsx$atk']['$t']);
         entry = entry.replace("EFFECT", data.feed.entry[11+i]['gsx$effect']['$t']);
         var track = 0;
-        if(data.feed.entry[11+i]['gsx$hp']['$t'].includes("y")){//CD boost
+        if(data.feed.entry[11+i]['gsx$hp']['$t'].indexOf("y") != -1){//CD boost
           var saa = hover_template.replace("BASE", "<sup class='uline accent"+id+"'><i class='fa fa-play-circle-o' aria-hidden='true'></i></sup>");
           saa = saa.replace("HOVERTEXT", "Boosted by CD!");
           entry = entry.replace(" ATK", saa+" ATK");
@@ -528,3 +528,4 @@ function recalculate(){
 }
 
 // TODO add some scrolling helpers or something for tabs
+// TODO add something that will scroll with the toggle div
