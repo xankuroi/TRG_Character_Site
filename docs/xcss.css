@@ -9,12 +9,12 @@ body {
   min-width:300px;
   max-width:740px;
   margin:0;
-  overflow-y:hidden;
 }
 .cc{
   width:100%;
   border:1px solid lightgray;
   margin-left:-1px;
+  overflow-y:auto;
 }
 .container {
   overflow: hidden;
