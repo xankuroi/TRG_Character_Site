@@ -2,8 +2,13 @@
 <html>
 <head>
   <!-- TODO actually fill out the header lmao -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Test Page</title>
   <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="http://68.media.tumblr.com/avatar_bd60b5345e1c_128.png">
+  <!-- Red skull pin
+  <link rel="shortcut icon" href="http://68.media.tumblr.com/avatar_3cd34d6fcceb_128.png">
+  -->
   <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/Grsmto/simplebar/master/src/simplebar.css">
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
   <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
@@ -30,7 +35,7 @@
   </div>
   <div class="corner">
     <div class='toast' style='display:none'></div>
-    <button class="refresh noshadow floatleft" disabled="true"><i class="fa fa-spin fa-refresh fa-lg" aria-hidden="true"></i></button>
+    <button class="refresh noshadow floatleft" disabled="true"><i class="fa fa-spin fa-refresh fa-lg" aria-hidden="true" title="Update Content"></i></button>
     <span class="smol line floatleft">Content automatically updates every 10 min.</span>
     <span class="smol line floatleft">Click on the button to manually trigger an update.</span>
   </div>
@@ -70,7 +75,7 @@
     <td><span id="ov##-def"></span><span class="shrink"> DEF</span></td>
     <td>
       <button class="btn noshadow" data-clipboard-target="#ov##-cp">
-        <i class="fa fa-clipboard accent##" aria-hidden="true"></i>
+        <i class="fa fa-clipboard accent##" aria-hidden="true" title="Stat C/P"></i>
       </button>
     </td>
   </tr>
@@ -89,7 +94,7 @@
 </script>
 <script id="munfo-template" type="text/x-template">
   <div class="tooltip">
-    <i class="fa fa-ICONID accent##" aria-hidden="true"></i>
+    <i class="fa fa-ICONID accent##" aria-hidden="true" title="TYPE"></i>
     <div class="tooltiptext sal">???</div>
   </div>
 </script>
@@ -146,7 +151,7 @@
               <th class="blonk"></th>
               <th style="w60 alignright">
                 <button class="btn" data-clipboard-target="#ov##-cp">
-                  <i class="fa fa-clipboard accent##" aria-hidden="true"></i>
+                  <i class="fa fa-clipboard accent##" aria-hidden="true" title="Stat C/P"></i>
                 </button>
               </th>
             </tr>
@@ -272,7 +277,7 @@
               <th class="blonk"></th>
               <th style="w60 alignright">
                 <button class="btn" data-clipboard-target="#ov##-cp">
-                  <i class="fa fa-clipboard accent##" aria-hidden="true"></i>
+                  <i class="fa fa-clipboard accent##" aria-hidden="true" title="Stat C/P"></i>
                 </button>
               </th>
             </tr>
@@ -320,7 +325,7 @@
           <img class="accent##-out" id="noise##-image"></img>
           <div class="ncpbtn">
             <button class="btn" data-clipboard-target="#noise##-cp">
-              <i class="fa fa-clipboard accent##" aria-hidden="true"></i>
+              <i class="fa fa-clipboard accent##" aria-hidden="true" title="Stat C/P"></i>
             </button>
           </div>
           <div style="margin-right:10px">

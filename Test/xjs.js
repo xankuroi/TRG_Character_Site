@@ -133,7 +133,9 @@ function fill(id, message) {
     mun_template = mun_template.replace(/##/g, id);
     var entries = new Array(4);
     entries[0] = mun_template.replace("ICONID", "user");
+    entries[0] = entries[0].replace("TYPE", "Mun ");
     entries[1] = mun_template.replace("ICONID", "clock-o");
+    entries[1] = entries[1].replace("TYPE", " Timezone");
     if(mun != ""){
       entries[0] = entries[0].replace("???", mun);
     }
@@ -142,10 +144,12 @@ function fill(id, message) {
     }
     if(skype != ""){
       entries[2] = mun_template.replace("ICONID", "skype");
+      entries[2] = entries[2].replace("TYPE", " Skype");
       entries[2] = entries[2].replace("???", skype);
     }
     if(blog != ""){
       entries[3] = mun_template.replace("ICONID", "tumblr-square");
+      entries[3] = entries[3].replace("TYPE", " Blog");
       if(blog.indexOf(".") != -1){
         var index = blog.indexOf('.');
         blog = blog.substring(0, index);
@@ -471,6 +475,7 @@ $(function () {
   $('.toggle-heading').on('click', function() {
     var toslide = $(this).next('.toggle-content');
     toslide.slideToggle(toslide.height());
+    recalculate();
   });
 });
 
