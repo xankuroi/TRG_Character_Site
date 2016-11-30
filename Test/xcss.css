@@ -9,12 +9,15 @@ body {
   min-width:300px;
   max-width:740px;
   margin:0;
+  overflow-y:hidden;
 }
 
 .container {
   overflow: hidden;
   outline: 1px solid lightgray;
   min-width:280px;
+  width:100%;
+  min-height:80%;
 }
 
 .content {
@@ -39,8 +42,9 @@ body {
 }
 .tabs ul{
   list-style: none;
-  padding:5px;
-  margin:5px;
+  padding:5px 0;
+  margin:5px 0;
+  width:auto;
 }
 .tabs li{
   display:inline-block;
@@ -52,7 +56,9 @@ body {
   text-decoration:none;
   opacity:.5;
 }
-.tab{padding:5px 20px;margin:0;}
+.tab{padding:5px 20px;}
+.tabs li:first-child>.tab{margin-left:10px;}
+.tabs li:last-child>.tab{margin-right:10px;}
 .tabs li a:hover{
   opacity:1;
 }
@@ -70,16 +76,25 @@ a:hover{
   cursor:pointer;
 }
 /* CSS components */
-/* CP Toasts */
-.toasty{}
+/* Toasts */
+.cptoast{
+  width:200px;
+  margin-left:-100px;
+  left:50%;
+  bottom:10px;
+  font-size: 1.25em;
+}
 .toast {
-  z-index:1;
-  max-width:75%;
-  position:fixed;
+  margin-left:25px;
   top:70px;
+  font-size: 1.1em;
+}
+.toast,
+.cptoast{
+  z-index:1;
+  position:fixed;
   background-color: black;
   color: white;
-  font-size: 15px;
   padding:10px;
   text-align:center;
   border-radius: 2px;
@@ -91,12 +106,14 @@ a:hover{
   outline:1px solid lightgray;
 }
 .refresh {
-  border:none;
-  padding:5px;
-  height:25px;
+  padding:4px;
+  margin-left:-1px;
 }
 button:hover{
   cursor:pointer;
+}
+button[disabled]:hover{
+  cursor:default;
 }
 /* Copy-paste textarea */
 .cp-target{

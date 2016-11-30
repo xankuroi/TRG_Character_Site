@@ -1,3 +1,4 @@
+var count = 0;
 //LOAD PAGE
 $(document).ready(function() {
   var tab_template = $('#tab-template').html();
@@ -11,7 +12,7 @@ $(document).ready(function() {
     var istr = i.toString();
     $('body').append(cp_template.replace(/##/g, istr));
       // TODO remove i == 1 for final version
-    if(ptype == "reaper" || i == 1){
+    if(ptype == "reaper" || i%2 == 1){
       var noise_template = $('#noisecp-template').html();
       $('body').append(noise_template.replace(/##/g, istr));
     }
@@ -19,7 +20,7 @@ $(document).ready(function() {
     /* TODO switch to content_template for final version
     $('.container').append(content_template.replace(/##/g, istr));
     */
-    if(i == 0){
+    if(i%2 == 0){
       $('.container').append(player_template.replace(/##/g, istr));
     }
     else{
@@ -27,12 +28,14 @@ $(document).ready(function() {
     }
     $('#ov').append(overview_template.replace(/##/g, istr));
   }
-  setInterval(refresh("Updated!"), 300000);
+  setInterval(refresh("Loaded!"), 300000);
 
   $('.overview').css('display', 'block');
   $('#overview').css('border-bottom', 'solid')
   $('#ovli').addClass('active');
   // TODO add cookies to keep track of which tab person was on
+
+  updateHeight();
 });
 
 //TAB SELECTION
@@ -375,9 +378,13 @@ function fill(id, message) {
       $('#id'+id+'-ahead>tr>th').css("color", text_color);
     }
 
-    if(id == numEntities-1){
-      $('.active>a').css("border-bottom", "3px solid");
-      toast(message, 1000);
+    count++;
+    $('.active>a').css("border-bottom", "3px solid");
+    if(count >= numEntities-1){
+      toast('.toast', message, 1000);
+      count = 0;
+      $(".refresh").prop("disabled", false);
+      $(".refresh i").removeClass("fa-spin");
     }
   });
 }
@@ -470,29 +477,38 @@ $(function () {
 
 //REFRESH
 $(".refresh").click(function(){
-  refresh("Updated!");
+  $(".refresh").prop("disabled", true);
+  $(".refresh i").addClass("fa-spin");
+  refresh("Loaded!");
 });
 function refresh(message)
 {
+  toastin("Loading content...");
   for (var i = 0; i < numEntities; i++) {
-    fill(i, message); //TODO add asynch handling
+    fill(i, message);
   }
 }
 
 //BUTTON LISTENER
 var clipboard = new Clipboard('.btn');
 
-function toast(text, time) {
-  $('.toast').text(text).fadeIn(200).delay(time).fadeOut(200);
+function toast(t, text, time) {
+  $(t).text(text).fadeIn(200).delay(time).fadeOut(200);
+}
+function toastin(text){
+  $('.toast').text(text).fadeIn(200);
+}
+function toastout(){
+  $('.toast').fadeOut(200);
 }
 
 clipboard.on('success', function(e) {
-  toast("Copied to clipboard!", 1000);
+  toast('.cptoast', "Copied to clipboard!", 1000);
   e.clearSelection();
 });
 
 clipboard.on('error', function(e) {
-  toast("Click the button again and CTRL+C immediately aftereward to copy your stats!", 4000);
+  toast('.cptoast', "Click the button again and CTRL+C immediately aftereward to copy your stats!", 4000);
 });
 //Prevent backspace from taking page back if stuff in input is highlighted
 $('textarea[readonly]').keydown(function(event) {
@@ -500,3 +516,11 @@ $('textarea[readonly]').keydown(function(event) {
     event.preventDefault();
   }
 });
+
+// Adjust content height
+function updateHeight(){
+  $('.container').css("min-height", ($( window ).height() - 140)+"px");
+}
+$( window ).resize(function(){updateHeight()});
+
+// TODO add some scrolling helpers or something for tabs
