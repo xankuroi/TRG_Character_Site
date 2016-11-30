@@ -125,6 +125,7 @@ button{
   background-color:inherit;
   opacity:0.75;
   box-shadow: 2px 2px 0px rgba(0,0,0,0.2);
+  padding:2px;
 }
 .noshadow{box-shadow:none;}
 button:active{

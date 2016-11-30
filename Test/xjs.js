@@ -1,6 +1,7 @@
 var count = 0;
 //LOAD PAGE
 $(document).ready(function() {
+  updateHeight();
   var tab_template = $('#tab-template').html();
   var content_template = $('#'+ptype+'-template').html();
   /* TODO switch to content_template for final version */
@@ -34,8 +35,6 @@ $(document).ready(function() {
   $('#overview').css('border-bottom', 'solid')
   $('#ovli').addClass('active');
   // TODO add cookies to keep track of which tab person was on
-
-  updateHeight();
 });
 
 //TAB SELECTION
@@ -385,6 +384,7 @@ function fill(id, message) {
       count = 0;
       $(".refresh").prop("disabled", false);
       $(".refresh i").removeClass("fa-spin");
+      recalculate();
     }
   });
 }
@@ -518,6 +518,13 @@ $('textarea[readonly]').keydown(function(event) {
 function updateHeight(){
   $('.cc').css("min-height", ($( window ).height() - 140)+"px");
 }
-$( window ).resize(function(){updateHeight()});
+$( window ).resize(function(){
+  updateHeight();
+  recalculate();
+});
+function recalculate(){
+  $(".tabs").simplebar('recalculate');
+  $(".cc").simplebar('recalculate');
+}
 
 // TODO add some scrolling helpers or something for tabs
