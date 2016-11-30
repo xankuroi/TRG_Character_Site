@@ -475,7 +475,7 @@ $(function () {
   $('.toggle-heading').on('click', function() {
     var toslide = $(this).next('.toggle-content');
     toslide.slideToggle(toslide.height());
-    recalculate();
+    updateHeight();
   });
 });
 
@@ -522,6 +522,7 @@ $('textarea[readonly]').keydown(function(event) {
 // Adjust content height
 function updateHeight(){
   $('.cc').css("min-height", ($( window ).height() - 140)+"px");
+  $('.cc').css("height", ($( window ).height() - 140)+"px");
 }
 $( window ).resize(function(){
   updateHeight();

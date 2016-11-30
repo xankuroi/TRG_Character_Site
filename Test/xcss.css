@@ -9,7 +9,6 @@ body {
   min-width:300px;
   max-width:740px;
   margin:0;
-  overflow-y:hidden;
 }
 .cc{
   width:100%;
@@ -17,7 +16,6 @@ body {
   margin-left:-1px;
 }
 .container {
-  overflow: hidden;
   min-width:280px;
   width:100%;
 }
