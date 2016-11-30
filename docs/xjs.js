@@ -475,7 +475,7 @@ $(function () {
   $('.toggle-heading').on('click', function() {
     var toslide = $(this).next('.toggle-content');
     toslide.slideToggle(toslide.height());
-    recalculate();
+    updateHeight();
   });
 });
 
