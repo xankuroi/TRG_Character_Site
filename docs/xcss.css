@@ -14,10 +14,8 @@ body {
   width:100%;
   border:1px solid lightgray;
   margin-left:-1px;
-  overflow-y:auto;
 }
 .container {
-  overflow: hidden;
   min-width:280px;
   width:100%;
 }
