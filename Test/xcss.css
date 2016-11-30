@@ -3,7 +3,7 @@ html {
   font-size:80%;
 }
 body {
-  padding:20px 10px;
+  padding:20px 10px 0px;
   font-family: 'Roboto', sans-serif;
   font-size:1em;
   min-width:300px;
@@ -19,17 +19,14 @@ body {
   min-width:280px;
   width:100%;
 }
-
 .content {
   padding: 10px;
   display:none;
 }
-
 .tabcontainer{
   width:100%;
   min-width:280px;
 }
-
 .tabs {
   font-size:1.2em;
   outline: 1px solid lightgray;

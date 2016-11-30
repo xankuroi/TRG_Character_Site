@@ -118,7 +118,7 @@ function fill(id, message) {
     document.getElementById('id'+id+'-syncbp').innerHTML = data.feed.entry[8]['gsx$def']['$t'];
     /* About */
     document.getElementById('id'+id+'-personality').innerHTML = data.feed.entry[5]['gsx$data']['$t'];
-    if(ptype == "player" && id == 0){ // TODO revert to ptype only for final version
+    if(ptype == "player" && id%2 == 0){ // TODO revert to ptype only for final version
       document.getElementById('id'+id+'-fee').innerHTML = data.feed.entry[6]['gsx$data']['$t'];
       document.getElementById('id'+id+'-reason').innerHTML = data.feed.entry[7]['gsx$data']['$t'];
     }
@@ -473,11 +473,39 @@ color_convert = function() {
 // TOGGLE
 $(function () {
   $('.toggle-heading').on('click', function() {
+    //var iku = false;
     var toslide = $(this).next('.toggle-content');
-    toslide.slideToggle(toslide.height());
-    updateHeight();
+    var h = toslide.height();
+    if(toslide.is(":hidden")){
+      //iku = true;
+      h = getHeight(toslide);
+    }
+    toslide.slideToggle(h);
+    /*
+    if(iku) {
+      var heyo = $('.simplebar-content').offset().top + $('.simplebar-content').height();
+      $('.simplebar-scroll-content, .simplebar-content').animate({
+          scrollTop: heyo
+       }, h+50);
+    }
+    */
   });
 });
+
+// GETHEIGHT
+function getHeight(item){
+  var previousCss = $(item).attr("style");
+  $(item)
+      .css({
+          position:   'absolute',
+          visibility: 'hidden',
+          display:    'block'
+      });
+  var h = $(item).height();
+  $(item).attr("style", previousCss ? previousCss : "");
+  return h;
+}
+
 
 
 //REFRESH
