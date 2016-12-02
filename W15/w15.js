@@ -64,7 +64,7 @@ $(function() {
 
 // Fill in the damn information.
 function fill(id, message) {
-  var sheet = id + 6;
+  var sheet = id + 7;
   $.getJSON("https://spreadsheets.google.com/feeds/list/"+key+"/" + sheet + "/public/values?alt=json", function(data) {
     /* collect data that shows up multiple times */
     var color = data.feed.entry[7]['gsx$type']['$t'];
@@ -75,6 +75,7 @@ function fill(id, message) {
     var atk = trim(data.feed.entry[1]['gsx$atk']['$t'], 4);
     var def = trim(data.feed.entry[1]['gsx$def']['$t'], 4);
     var img = data.feed.entry[4]['gsx$data']['$t'];
+    var part = data.feed.entry[9]['gsx$data']['$t'];
     if(color.toLowerCase()=="dead"){
       color = "gray";
       $("#overview"+id).addClass("accent"+id);
@@ -102,7 +103,7 @@ function fill(id, message) {
     document.getElementById('id'+id+'-fullname').innerHTML = data.feed.entry[1]['gsx$data']['$t'];
     document.getElementById('id'+id+'-pronouns').innerHTML = data.feed.entry[2]['gsx$data']['$t'];
     document.getElementById('id'+id+'-age').innerHTML = data.feed.entry[3]['gsx$data']['$t'];
-    document.getElementById('id'+id+'-part').innerHTML = data.feed.entry[9]['gsx$data']['$t'];
+    document.getElementById('id'+id+'-part').innerHTML = part;
     /* Stats */
     document.getElementById('id'+id+'-currhp').innerHTML = currhp;
     document.getElementById('id'+id+'-totalhp').innerHTML = totalhp;

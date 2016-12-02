@@ -77,7 +77,7 @@ $(function() {
 
 // Fill in the damn information.
 function fill(id, message) {
-  var sheet = id + 6;
+  var sheet = id + 6; //TODO update to 7 for final version
   sheet = id%2 + 6; // TODO remove for final version
   $.getJSON("https://spreadsheets.google.com/feeds/list/"+key+"/" + sheet + "/public/values?alt=json", function(data) {
     /* collect data that shows up multiple times */
