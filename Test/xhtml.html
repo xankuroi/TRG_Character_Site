@@ -65,59 +65,7 @@
 </body>
 
 <!-- Templates and Xan's javscript -->
-<!-- TODO add CD and BOOST markers -->
 <script src="xjs.js"></script>
-<script id="overview-template" type="text/x-template">
-  <tr>
-    <td class="alignleft"><span class="accent##">&block;&ensp;</span><span id="ov##-name">Loading...</span></td>
-    <td><span id="ov##-hp"></span><span class="shrink"> HP</span></td>
-    <td><span id="ov##-atk"></span><span class="shrink"> ATK</span></td>
-    <td><span id="ov##-def"></span><span class="shrink"> DEF</span></td>
-    <td>
-      <button class="btn noshadow" data-clipboard-target="#ov##-cp">
-        <i class="fa fa-clipboard accent##" aria-hidden="true" title="Stat C/P"></i>
-      </button>
-    </td>
-  </tr>
-</script>
-
-<script id="tab-template" type="text/x-template">
-  <li id="id##"><a href="#" class="tab accent##" id="id##-tab">Loading...</a></li>
-</script>
-
-<script id="cp-template" type="text/x-template">
-  <textarea rows="1" type="hidden" readonly="true" class="cp-target" id="ov##-cp" value="LOADING..."></textarea>
-</script>
-
-<script id="noisecp-template" type="text/x-template">
-  <textarea rows="1" type="hidden" readonly="true" class="cp-target" id="noise##-cp" value="LOADING..."></textarea>
-</script>
-<script id="munfo-template" type="text/x-template">
-  <div class="tooltip">
-    <i class="fa fa-ICONID accent##" aria-hidden="true" title="TYPE"></i>
-    <div class="tooltiptext sal">???</div>
-  </div>
-</script>
-<script id="food-template" type="text/x-template">
-  <tr><td>FOOD</td><td>BOOSTS</td><td>HEAL</td><td>QUANTITY</td></tr>
-</script>
-
-<script id="pin-template" type="text/x-template">
-  <tr>
-    <td class="smal scol">ID</td><td class="w100">PIN</td>
-    <td class="w50">ATK</td><td class="w300">EFFECT</td>
-  </tr>
-</script>
-<script id="thread-template" type="text/x-template">
-  <tr>
-    <td class="smal scol">ID</td><td class="w120">THREAD</td><td class="smal scol">TYPE</td>
-    <td class="smal w120">STATS</td><td class="w300">EFFECT</td><td class="smal w50">BRV</td>
-  </tr>
-</script>
-<script id="swag-template" type="text/x-template">
-  <tr><td class="swegl">SWAG</td><td class="swegr">DESC</td></tr>
-</script>
-<script id="hover-template" type="text/x-template"><div class="tooltip">BASE<span class="tooltiptext toptt">HOVERTEXT</span></div></script>
 
 <script id="player-template" type="text/x-template">
   <div class="content" id="id##-content">
@@ -147,7 +95,7 @@
               <th class="scol"></th>
               <th style="w70">HP</th>
               <th style="w60">ATK</th>
-              <th style="w60">DEF</th>
+              <th style="w60">DEF<div class="tooltip"><sup><i class="fa fa-info-circle" aria-hidden="true" alt="MAX 25DEF"></i></sup><span class="tooltiptext toptt">MAX 25 DEF</span></div></th>
               <th class="blonk"></th>
               <th style="w60 alignright">
                 <button class="btn" data-clipboard-target="#ov##-cp">
@@ -273,7 +221,7 @@
               <th class="scol"></th>
               <th style="w70">HP</th>
               <th style="w60">ATK</th>
-              <th style="w60">DEF</th>
+              <th id="id##-maxdef" style="w60"></th>
               <th class="blonk"></th>
               <th style="w60 alignright">
                 <button class="btn" data-clipboard-target="#ov##-cp">
@@ -333,8 +281,8 @@
               <thead>
                 <tr>
                   <th></th><th></th><th></th>
-                  <th class="hp">HP</th><th>ATK</th>
-                  <th>DEF</th>
+                  <th class="hp">HP</th><th id='noise##-maxatk'></th>
+                  <th id='noise##-maxdef'></th>
                 </tr>
               </thead>
               <tbody>

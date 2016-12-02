@@ -1,21 +1,41 @@
 var count = 0;
+/* Templates */
+var overview_template = '<tr>\
+<td class="alignleft"><span class="accent##">&block;&ensp;</span><span id="ov##-name">Loading...</span></td>\
+<td><span id="ov##-hp"></span><span class="shrink"> HP</span></td>\
+<td><span id="ov##-atk"></span><span class="shrink"> ATK</span></td>\
+<td><span id="ov##-def"></span><span class="shrink"> DEF</span></td>\
+<td><button class="btn noshadow" data-clipboard-target="#ov##-cp">\
+<i class="fa fa-clipboard accent##" aria-hidden="true" title="Stat C/P"></i>\
+</button></td></tr>';
+var tab_template = '<li id="id##"><a href="#" class="tab accent##" id="id##-tab">Loading...</a></li>';
+var cp_template = '<textarea rows="1" type="hidden" readonly="true" class="cp-target" id="ov##-cp" value="LOADING..."></textarea>';
+var noisecp_template = '<textarea rows="1" type="hidden" readonly="true" class="cp-target" id="noise##-cp" value="LOADING..."></textarea>';
+var munfo_template = '<div class="tooltip">\
+<i class="fa fa-ICONID accent##" aria-hidden="true" title="TYPE"></i>\
+<div class="tooltiptext sal">???</div></div>';
+var food_template = '<tr><td>FOOD</td><td>BOOSTS</td><td>HEAL</td><td>QUANTITY</td></tr>';
+var pin_template = '<tr><td class="smal scol">ID</td><td class="w100">PIN</td>\
+<td class="w50">ATK</td><td class="w300">EFFECT</td></tr>';
+var thread_template = '<tr><td class="smal scol">ID</td><td class="w120">THREAD</td><td class="smal scol">TYPE</td>\
+<td class="smal w120">STATS</td><td class="w300">EFFECT</td><td class="smal w50">BRV</td></tr>';
+var swag_template = '<tr><td class="swegl">SWAG</td><td class="swegr">DESC</td></tr>';
+var hover_template = '<div class="tooltip">BASE<span class="tooltiptext toptt">HOVERTEXT</span></div>';
+var maxdef_template = 'DEF<div class="tooltip"><sup><i class="fa fa-info-circle" aria-hidden="true" alt="MAXDEF"></i></sup><span class="tooltiptext toptt">MAXDEF</span></div>';
+
 //LOAD PAGE
 $(document).ready(function() {
   updateHeight();
-  var tab_template = $('#tab-template').html();
   var content_template = $('#'+ptype+'-template').html();
   /* TODO switch to content_template for final version */
   var player_template = $('#player-template').html();
   var reaper_template = $('#reaper-template').html();
-  var overview_template = $('#overview-template').html();
-  var cp_template = $('#cp-template').html();
   for (var i = 0; i < numEntities; i++) {
     var istr = i.toString();
     $('body').append(cp_template.replace(/##/g, istr));
       // TODO remove i == 1 for final version
     if(ptype == "reaper" || i%2 == 1){
-      var noise_template = $('#noisecp-template').html();
-      $('body').append(noise_template.replace(/##/g, istr));
+      $('body').append(noisecp_template.replace(/##/g, istr));
     }
     $('ul').append(tab_template.replace(/##/g, istr));
     /* TODO switch to content_template for final version
@@ -69,6 +89,7 @@ function fill(id, message) {
     var atk = trim(data.feed.entry[1]['gsx$atk']['$t'], 4);
     var def = trim(data.feed.entry[1]['gsx$def']['$t'], 4);
     var img = data.feed.entry[4]['gsx$data']['$t'];
+    var part = data.feed.entry[9]['gsx$data']['$t'];
     if(color.toLowerCase()=="dead"){
       color = "gray";
       $("#overview"+id).addClass("accent"+id);
@@ -96,7 +117,7 @@ function fill(id, message) {
     document.getElementById('id'+id+'-fullname').innerHTML = data.feed.entry[1]['gsx$data']['$t'];
     document.getElementById('id'+id+'-pronouns').innerHTML = data.feed.entry[2]['gsx$data']['$t'];
     document.getElementById('id'+id+'-age').innerHTML = data.feed.entry[3]['gsx$data']['$t'];
-    document.getElementById('id'+id+'-part').innerHTML = data.feed.entry[9]['gsx$data']['$t'];
+    document.getElementById('id'+id+'-part').innerHTML = part;
     /* Stats */
     document.getElementById('id'+id+'-currhp').innerHTML = currhp;
     document.getElementById('id'+id+'-totalhp').innerHTML = totalhp;
@@ -111,6 +132,18 @@ function fill(id, message) {
     document.getElementById('id'+id+'-rawdef').innerHTML = trim(data.feed.entry[2]['gsx$def']['$t'], 4);
     document.getElementById('id'+id+'-thrddef').innerHTML = trim(data.feed.entry[3]['gsx$def']['$t'], 4);
     document.getElementById('id'+id+'-miscdef').innerHTML = trim(data.feed.entry[4]['gsx$def']['$t'], 4);
+    if(ptype == 'reaper' || id%2 == 1){
+      if(part == 'Active Reaper' || part == 'Support Reaper'){
+        document.getElementById('id'+id+'-maxdef').innerHTML = maxdef_template.replace(/MAXDEF/g, "MAX 30 DEF");
+      }
+      else if(part == 'Composer' || part == 'Producer'){
+        document.getElementById('id'+id+'-maxdef').innerHTML = "DEF";
+      }
+      else{
+        document.getElementById('id'+id+'-maxdef').innerHTML = maxdef_template.replace(/MAXDEF/g, "MAX 35 DEF");
+      }
+    }
+
     /* Currency */
     document.getElementById('id'+id+'-yen').innerHTML = data.feed.entry[7]['gsx$hp']['$t'];
     document.getElementById('id'+id+'-rpp').innerHTML = data.feed.entry[8]['gsx$hp']['$t'];
@@ -129,8 +162,7 @@ function fill(id, message) {
     var zone = data.feed.entry[11]['gsx$data']['$t'];
     var skype = data.feed.entry[12]['gsx$data']['$t'];
     var blog = data.feed.entry[13]['gsx$data']['$t'];
-    var mun_template = $('#munfo-template').html();
-    mun_template = mun_template.replace(/##/g, id);
+    mun_template = munfo_template.replace(/##/g, id);
     var entries = new Array(4);
     entries[0] = mun_template.replace("ICONID", "user");
     entries[0] = entries[0].replace("TYPE", "Mun ");
@@ -163,7 +195,6 @@ function fill(id, message) {
     }
     /* Food */
     $("#id"+id+"-food tr").remove();
-    var food_template = $("#food-template").html();
     for(var i = 0; i < 13; i++){
       var food = data.feed.entry[15+i]['gsx$data']['$t'];
       var quantity = data.feed.entry[15+i]['gsx$n']['$t'];
@@ -185,10 +216,6 @@ function fill(id, message) {
     $("#id"+id+"-threquip tr").remove();
     $("#id"+id+"-pinquip tr").remove();
     $("#id"+id+"-swag tr").remove();
-    var swag_template = $("#swag-template").html();
-    var pin_template = $("#pin-template").html();
-    var thread_template = $("#thread-template").html();
-    var hover_template = $("#hover-template").html();
     var equipped_threads = new Array(4);
     var equipped_pins = new Array(6);
     for(var i = 0; i < 9; i++){
@@ -327,6 +354,14 @@ function fill(id, message) {
       document.getElementById('noise'+id+'-rawdef').innerHTML = trim(data.feed.entry[33]['gsx$def']['$t'], 4);
       document.getElementById('noise'+id+'-traindef').innerHTML = trim(data.feed.entry[34]['gsx$def']['$t'], 4);
       document.getElementById('noise'+id+'-miscdef').innerHTML = trim(data.feed.entry[35]['gsx$def']['$t'], 4);
+      if(part == 'Composer' || part == 'Conductor' || part == 'Producer' || part == 'Game Master'){
+        document.getElementById('noise'+id+'-maxdef').innerHTML = "DEF";
+        document.getElementById('noise'+id+'-maxatk').innerHTML = "ATK";
+      }
+      else{
+        document.getElementById('noise'+id+'-maxdef').innerHTML = maxdef_template.replace(/MAXDEF/g, "MAX 35 DEF");
+        document.getElementById('noise'+id+'-maxatk').innerHTML = maxdef_template.replace(/MAXDEF/g, "MAX 250 ATK").replace("DEF", "ATK");
+      }
 
       // Abilities
       $('#noise'+id+'-abilities tr').remove();
