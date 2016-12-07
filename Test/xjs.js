@@ -51,7 +51,7 @@ $(document).ready(function() {
   }
   setInterval(refresh("Loaded!"), 300000);
 
-  $('.overview').css('display', 'block');
+  $('#ov-content').css('display', 'block');
   $('#overview').css('border-bottom', 'solid')
   $('#ovli').addClass('active');
   // TODO add cookies to keep track of which tab person was on

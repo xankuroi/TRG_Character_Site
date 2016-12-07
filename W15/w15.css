@@ -19,7 +19,7 @@ body {
   min-height:200px;
 }
 .content {display:none;}
-.padding{padding:10px;}
+.overview, .padding{padding:10px;}
 .tabcontainer{
   width:100%;
   min-width:280px;
@@ -500,7 +500,7 @@ h1{
   .rink{display:inline;}
 }
 @media only screen and (min-width: 760px) {
-  .content {padding:10px 40px 10px 40px;}
+  .overview, .padding {padding:10px 40px 10px 40px;}
   .toast, body{margin: 0 auto;}
   .toast{padding: 5px 1px 0;}
   .shr1nk{display:inline;}
