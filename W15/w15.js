@@ -8,7 +8,7 @@ var overview_template = '<tr>\
 <td><button class="btn noshadow" data-clipboard-target="#ov##-cp">\
 <i class="fa fa-clipboard accent##" aria-hidden="true" title="Stat C/P"></i>\
 </button></td></tr>';
-var tab_template = '<li id="id##"><a href="#" class="tab accent##" id="id##-tab">Loading...</a></li>';
+var tab_template = '<li id="id##"><a class="tab accent##" id="id##-tab">Loading...</a></li>';
 var cp_template = '<textarea rows="1" type="hidden" readonly="true" class="cp-target" id="ov##-cp" value="LOADING..."></textarea>';
 var noisecp_template = '<textarea rows="1" type="hidden" readonly="true" class="cp-target" id="noise##-cp" value="LOADING..."></textarea>';
 var munfo_template = '<div class="tooltip">\
