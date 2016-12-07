@@ -444,6 +444,7 @@ function thread_type(str){
   if(str.charAt(0) == "A"){return "Acc";}
   if(str.charAt(0) == "F"){return "Foot";}
   if(str.charAt(0) == "P"){return "Psy";}
+  if(str.charAt(0) == 'B'){return "Bot";}
   return str;
 }
 
