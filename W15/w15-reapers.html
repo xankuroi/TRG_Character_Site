@@ -36,22 +36,20 @@
     <span class="smol line floatleft">Content automatically updates every 10 min.</span>
     <span class="smol line floatleft">Click on the button to manually trigger an update.</span>
   </div>
-  <div class="cc" data-simplebar-direction="vertical">
-    <div class="container">
-      <div class="content overview">
-        <table>
-          <thead>
-            <tr>
-              <th class="table-first">Name</th>
-              <th class="table-second">HP</th>
-              <th class="table-thirds">ATK</th>
-              <th class="table-thirds">DEF</th>
-              <th class="table-small">C/P</th>
-            </tr>
-          </thead>
-          <tbody id="ov"></tbody>
-        </table>
-      </div>
+  <div class="container">
+    <div class="content overview">
+      <table>
+        <thead>
+          <tr>
+            <th class="table-first">Name</th>
+            <th class="table-second">HP</th>
+            <th class="table-thirds">ATK</th>
+            <th class="table-thirds">DEF</th>
+            <th class="table-small">C/P</th>
+          </tr>
+        </thead>
+        <tbody id="ov"></tbody>
+      </table>
     </div>
   </div>
   <p class="smol grey">Bug reports and site credit go to <span class="tooltip blah">Xan<span class="tooltiptext toptt">xankuroi @ skype, gmail, tumblr</span></span>. If you can't seem to find them, ask an officer or ping OOC chat.</p>
@@ -64,7 +62,7 @@
 <!-- Template and Xan's javscript -->
 <script src="w15.js"></script>
 <script id="reaper-template" type="text/x-template">
-  <div class="content" id="id##-content">
+  <div class="content" id="id##-content" data-simplebar-direction="vertical" style="height:inherit;">
     <div class="topkek">
       <div class="imgcontainer accent##-out"><img id="id##-image"></img></div>
       <div class="head">
@@ -242,6 +240,7 @@
         <div id="empty##-tinventory"></div>
         <div class="table-title accent##-bg lopacity">Swag</div>
         <table><tbody id="id##-swag"></tbody></table>
+        <div id="empty##-swag"></div>
       </div>
     </div>
   </div>

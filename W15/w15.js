@@ -95,9 +95,11 @@ function fill(id, message) {
     if(img != ""){
       document.getElementById('id'+id+'-image').src = img;
       document.getElementById('id'+id+'-imagecpy').src = img;
+      $('#id'+id+'-imagecpy').addClass("accent"+id+"-out");
     }
     else{
       document.getElementById('id'+id+'-image').src = "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Placeholder_no_text.svg/200px-Placeholder_no_text.svg.png";
+      $('#id'+id+'-imagecpy').removeClass("accent"+id+"-out");
     }
     document.getElementById('id' + id + '-name').innerHTML = name;
     document.getElementById('id'+id+'-fullname').innerHTML = data.feed.entry[1]['gsx$data']['$t'];
@@ -213,15 +215,15 @@ function fill(id, message) {
         entry = entry.replace("ATK", data.feed.entry[11+i]['gsx$atk']['$t']);
         entry = entry.replace("EFFECT", data.feed.entry[11+i]['gsx$effect']['$t']);
         var track = 0;
-        if(data.feed.entry[11+i]['gsx$hp']['$t'].indexOf("y") != -1){//CD boost
-          var saa = hover_template.replace("BASE", "<sup class='uline accent"+id+"'><i class='fa fa-play-circle-o' aria-hidden='true'></i></sup>");
-          saa = saa.replace("HOVERTEXT", "Boosted by CD!");
+        if(data.feed.entry[11+i]['gsx$def']['$t'].indexOf("y") != -1){//res pin boost
+          var saa = hover_template.replace("BASE", "<sup class='uline accent"+id+"'><i class='fa fa-chevron-circle-up' aria-hidden='true'></i></sup>");
+          saa = saa.replace("HOVERTEXT", "Boosted by resonance pin!");
           entry = entry.replace(" ATK", saa+" ATK");
           track++;
         }
-        if(data.feed.entry[11+i]['gsx$def']['$t'] == "yes"){//res pin boost
-          var saa = hover_template.replace("BASE", "<sup class='uline accent"+id+"'><i class='fa fa-chevron-circle-up' aria-hidden='true'></i></sup>");
-          saa = saa.replace("HOVERTEXT", "Boosted by resonance pin!");
+        if(data.feed.entry[11+i]['gsx$hp']['$t'].indexOf("y") != -1){//CD boost
+          var saa = hover_template.replace("BASE", "<sup class='uline accent"+id+"'><i class='fa fa-play-circle-o' aria-hidden='true'></i></sup>");
+          saa = saa.replace("HOVERTEXT", "Boosted by CD!");
           entry = entry.replace(" ATK", saa+" ATK");
           track++;
         }
@@ -285,32 +287,26 @@ function fill(id, message) {
     $("#empty"+id+"-pinventory").removeClass("blenk").html("");
     $("#empty"+id+"-threquip").removeClass("blenk").html("");
     $("#empty"+id+"-pinquip").removeClass("blenk").html("");
+    $("#empty"+id+"-swag").removeClass("blenk").html("");
     $("#id"+id+"-fhead").removeClass("hide");
     if(!($("#id"+id+"-food tr").exists())){
-      var entry = food_template.replace("FOOD", "EMPTY");
       $("#empty"+id+"-food").addClass("blenk").html("EMPTY");
       $("#id"+id+"-fhead").addClass("hide");
     }
     if(!($("#id"+id+"-tinventory tr").exists())){
-      var entry = thread_template.replace(/ID|STATS|EFFECT|TYPE|BRV/g, "");
       $("#empty"+id+"-tinventory").addClass("blenk").html("EMPTY");
     }
     if(!($("#id"+id+"-pinventory tr").exists())){
-      var entry = pin_template.replace(/ID|ATK|EFFECT/g, "");
       $("#empty"+id+"-pinventory").addClass("blenk").html("EMPTY");
     }
     if(!($("#id"+id+"-threquip tr").exists())){
-      var entry = thread_template.replace(/ID|STATS|EFFECT|TYPE|BRV/g, "");
       $("#empty"+id+"-threquip").addClass("blenk").html("EMPTY");
     }
     if(!($("#id"+id+"-pinquip tr").exists())){
-      var entry = pin_template.replace(/ID|ATK|EFFECT/g, "");
       $("#empty"+id+"-pinquip").addClass("blenk").html("EMPTY");
     }
     if(!($("#id"+id+"-swag tr").exists())){
-      var entry = swag_template.replace("SWAG", "NOTHING");
-      entry = entry.replace("DESC", "You don't have any swag! I wonder how you could acquire some...")
-      $("#id"+id+"-swag").append(entry);
+      $("#empty"+id+"-swag").addClass("blenk").html("EMPTY");
     }
 
     /* Noise Form */
@@ -557,7 +553,7 @@ clipboard.on('success', function(e) {
 });
 
 clipboard.on('error', function(e) {
-  toast('.cptoast', "Click the button again and CTRL+C immediately aftereward to copy your stats!", 4000);
+  toast('.cptoast', "Stats selected! Press CTRL+C now to copy your stats!", 4000);
 });
 //Prevent backspace from taking page back if stuff in input is highlighted
 $('textarea[readonly]').keydown(function(event) {
@@ -568,8 +564,7 @@ $('textarea[readonly]').keydown(function(event) {
 
 // Adjust content height
 function updateHeight(){
-  $('.cc').css("min-height", ($( window ).height() - 140)+"px");
-  $('.cc').css("height", ($( window ).height() - 140)+"px");
+  $('.container').css("height", ($( window ).height() - 140)+"px");
 }
 $( window ).resize(function(){
   updateHeight();
@@ -577,5 +572,5 @@ $( window ).resize(function(){
 });
 function recalculate(){
   $(".tabs").simplebar('recalculate');
-  $(".cc").simplebar('recalculate');
+  $(".content").simplebar('recalculate');
 }
