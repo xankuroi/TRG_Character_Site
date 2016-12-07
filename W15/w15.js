@@ -72,7 +72,8 @@ function fill(id, message) {
     var name = data.feed.entry[0]['gsx$data']['$t'];
     var cp = data.feed.entry[3]['gsx$cp']['$t'];
     var totalhp = trim(data.feed.entry[1]['gsx$hp']['$t'], 3);
-    var currhp = trim(data.feed.entry[0]['gsx$hp']['$t'], 3);
+    var currhp = Math.min(trim(data.feed.entry[0]['gsx$hp']['$t'], 3), totalhp);
+    if(isNaN(currhp)){currhp = "???";}
     var atk = trim(data.feed.entry[1]['gsx$atk']['$t'], 4);
     var def = trim(data.feed.entry[1]['gsx$def']['$t'], 4);
     var img = data.feed.entry[4]['gsx$data']['$t'];
@@ -175,7 +176,7 @@ function fill(id, message) {
         blog = blog.substring(0, index);
       }
       entries[3] = entries[3].replace("???", blog);
-      entries[3] = entries[3].replace("<i", "<a href='http://"+blog+".tumblr.com' target='_blank'><i");
+      entries[3] = entries[3].replace("<i", "<a href='http://"+blog+".tumblr.com'><i");
       entries[3] = entries[3].replace("</i>", "</i></a>");
     }
     for(var i = 0 ; i < 4; i++){

@@ -3,7 +3,7 @@ html {
   font-size:80%;
 }
 body {
-  padding:20px 10px 0px;
+  padding:5px 10px 0px;
   background-color:white;
   font-family: 'Roboto', sans-serif;
   font-size:1em;
@@ -81,7 +81,7 @@ a:hover{
 }
 .toast {
   padding-top:5px;
-  top:70px;
+  top:85px;
   font-size: 1.1em;
   height:20px;
   width:inherit;
@@ -92,7 +92,7 @@ a:hover{
 }
 .toast,
 .cptoast{
-  z-index:1;
+  z-index:998;
   position:fixed;
   background-color: black;
   color: white;
@@ -191,6 +191,32 @@ button[disabled]:hover{
   min-width:30px;
 }
 .btn{width:100%;margin:0;}
+
+/* Dropdown */
+.drop{
+  opacity:0.5;
+  margin-bottom:5px;
+  padding:5px;
+}
+.drop:hover{
+  opacity:1.0;
+}
+.dropdown{position:relative;display:inline-block;}
+.dropdown-content{
+  display:none;
+  position:absolute;
+  z-index:999;
+  background-color:white;
+  outline: 1px solid lightgray;
+}
+.dropdown-content a{
+  color: black;
+  opacity:0.5;
+  display:block;
+  text-decoration:none;
+  padding:8px;
+}
+.dropdown-content a:hover{opacity:1.0;background-color:lightgray;}
 
 /* CONTENT */
 /* Summary */
