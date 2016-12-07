@@ -36,10 +36,10 @@ $(document).ready(function() {
     $('ul').append(tab_template.replace(/##/g, istr));
     $('.container').append(content_template.replace(/##/g, istr));
     $('#ov').append(overview_template.replace(/##/g, istr));
+    $('#id'+i+'-content').simplebar();
   }
   setInterval(refresh("Loaded!"), 300000);
 
-  $('.overview').css('display', 'block');
   $('#ov-content').css('display', 'block')
   $('#overview').css('border-bottom', 'solid')
   $('#ovli').addClass('active');
@@ -396,7 +396,6 @@ function fill(id, message) {
       count = 0;
       $(".refresh").prop("disabled", false);
       $(".refresh i").removeClass("fa-spin");
-      recalculate();
     }
   });
 }

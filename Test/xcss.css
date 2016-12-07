@@ -18,7 +18,7 @@ body {
   margin-left:-1px;
   min-height:200px;
 }
-.content {display:none;}
+.content {display:none; overflow-y:auto; min-height:200px;}
 .overview, .padding{padding:10px;}
 .tabcontainer{
   width:100%;
@@ -203,7 +203,7 @@ h1{
   margin-bottom:10px;
 }
 .topkek img{
-  height:180px;
+  max-height:180px;
   max-width:180px;
   width:auto;
   display:block;

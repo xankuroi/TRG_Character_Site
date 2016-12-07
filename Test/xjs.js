@@ -48,6 +48,7 @@ $(document).ready(function() {
       $('.container').append(reaper_template.replace(/##/g, istr));
     }
     $('#ov').append(overview_template.replace(/##/g, istr));
+    $('#id'+i+'-content').simplebar();
   }
   setInterval(refresh("Loaded!"), 300000);
 
@@ -419,7 +420,6 @@ function fill(id, message) {
       count = 0;
       $(".refresh").prop("disabled", false);
       $(".refresh i").removeClass("fa-spin");
-      recalculate();
     }
   });
 }
