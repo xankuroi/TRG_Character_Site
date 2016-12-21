@@ -9,7 +9,6 @@
   <!-- Red skull pin
   <link rel="shortcut icon" href="http://68.media.tumblr.com/avatar_3cd34d6fcceb_128.png">
   -->
-  <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/Grsmto/simplebar/master/src/simplebar.css">
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
   <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="xcss.css">
@@ -27,7 +26,7 @@
 <body>
   <div class="dropdown">
     <button class="drop">Other Sites</button>
-    <div id="menu" class="dropdown-content">
+    <div id="menu" class="dropdown-content" style="display:none;">
       <a href="#">Players</a> <!-- TODO replace links -->
       <a href="#">Reapers</a>
       <a href="http://shibuyasgame.tumblr.com">Main Site</a>
@@ -36,6 +35,10 @@
       <a href="http://www.chatzy.com/primary">Primary</a>
       <a href="http://www.chatzy.com/31989133576978">Secondary</a>
     </div>
+  </div>
+  <div class="arrows">
+    <button class="arr" id="larrow"><i class="fa fa-caret-left" aria-hidden="true"></i></button>
+    <button class="arr" id="rarrow"><i class="fa fa-caret-right" aria-hidden="true"></i></button>
   </div>
   <div class='cptoast' style='display:none'></div>
   <div class="tabcontainer">
@@ -71,7 +74,6 @@
   </div>
   <p class="smol grey">Bug reports and site credit go to <span class="tooltip blah">Xan<span class="tooltiptext toptt">xankuroi @ skype, gmail, tumblr</span></span>. If you can't seem to find them, ask an officer or ping OOC chat.</p>
   <!-- Script load -->
-  <script src="https://cdn.rawgit.com/Grsmto/simplebar/master/src/simplebar.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.13/clipboard.min.js"></script>
   <script src="https://use.fontawesome.com/1cdaab7178.js"></script>
 </body>
@@ -124,7 +126,7 @@
               <td><span id="id##-totalhp"></span> <span class="shr1nk">HP</span></td>
               <td><span id="id##-totalatk"></span> <span class="shr1nk">ATK</span></td>
               <td><span id="id##-totaldef"></span> <span class="shr1nk">DEF</span></td>
-              <td></td><td><span id="id##-yen"></span><span class="boldy accent##">&yen;</span></td>
+              <td></td><td><span id="id##-yen"></span> <span class="boldy accent##">&yen;</span></td>
             </tr>
             <tr>
               <td class="colhead">Raw</td>
@@ -253,7 +255,7 @@
               <td><span id="id##-totalhp"></span> <span class="shr1nk">HP</span></td>
               <td><span id="id##-totalatk"></span> <span class="shr1nk">ATK</span></td>
               <td><span id="id##-totaldef"></span> <span class="shr1nk">DEF</span></td>
-              <td></td><td><span id="id##-yen"></span><span class="boldy accent##">&yen;</span></td>
+              <td></td><td><span id="id##-yen"></span> <span class="boldy accent##">&yen;</span></td>
             </tr>
             <tr>
               <td class="colhead">Raw</td><td></td><td></td>
