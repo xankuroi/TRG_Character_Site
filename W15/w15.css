@@ -72,20 +72,15 @@ a:hover{
 /* Toasts */
 .cptoast{
   width:200px;
-  margin-left:-100px;
-  left:50%;
-  bottom:10px;
   font-size: 1.25em;
   padding:10px;
 }
 .toast {
   padding-top:5px;
-  top:85px;
   font-size: 1.1em;
   height:20px;
-  width:inherit;
   max-width:740px;
-  margin:0 9px;
+  margin:0 9px 0 10px;
   left:0;
   right:0;
 }
@@ -208,6 +203,7 @@ button[disabled]:hover{
   background-color:white;
   outline: 1px solid lightgray;
   margin-top:-4px;
+  border-top:1px solid #aaa;
 }
 .dropdown-content a{
   color: black;
@@ -217,7 +213,7 @@ button[disabled]:hover{
   padding:8px;
 }
 .dropdown-content a:hover{opacity:1.0;background-color:lightgray;}
-.bactive{box-shadow:none;opacity:1.0;}
+.bactive{box-shadow:none;opacity:1.0;background-color:lightgray;}
 
 /* Nav arrows */
 .arrows{display:inline-block;padding-left:10px;float:right;}
@@ -566,6 +562,8 @@ https://github.com/Grsmto/simplebar */
     overflow-y: scroll;
     overflow-x: auto;
     position: absolute;
+    width:auto;
+    height:auto;
     left: 0;
     right: 0;
     top: 0;

@@ -14,7 +14,7 @@
   <!-- TODO replace with # entities and the sheet url -->
   <script type=text/javascript>
   var numEntities = 1;
-  var key = "1UG96LVjfg-txEKA1QITi6H_CDVHf-eQnu2msxmyOKDU";
+  var key = "1PCGmT4FhesUsVYNrccC16CEUsuNfdD2uN5EUYD7ROZE";
   var ptype = "player";
   </script>
 </head>
@@ -36,7 +36,6 @@
   <button class="arr" id="larrow"><i class="fa fa-caret-left" aria-hidden="true"></i></button>
   <button class="arr" id="rarrow"><i class="fa fa-caret-right" aria-hidden="true"></i></button>
 </div>
-<div class='cptoast' style='display:none'></div>
   <div class="tabcontainer">
     <div class="tabs" data-simplebar-direction="horizontal">
       <ul>
@@ -51,6 +50,7 @@
     <span class="smol line floatleft">Click on the button to manually trigger an update.</span>
   </div>
   <div class="container">
+  <div class='cptoast' style='display:none'></div>
     <div class="content" id="ov-content" data-simplebar-direction="vertical" style="height:inherit;">
       <div class='overview'>
         <table>
@@ -77,7 +77,7 @@
 <!-- Templates and Xan's javscript -->
 <script src="w15.js"></script>
 <script id="player-template" type="text/x-template">
-<div class="content simplebar" id="id##-content" style="height:inherit;">
+<div class="content" id="id##-content" style="height:inherit;" data-simplebar-direction="vertical">
   <div class="padding">
     <div class="topkek">
       <div class="imgcontainer accent##-out"><img id="id##-image"></img></div>

@@ -58,6 +58,7 @@ $(function() {
       tabcontent[i].style.display = "none";
     }
     tabcontent[$(this).index()].style.display = "block";
+    $(tabcontent[$(this).index()]).simplebar('recalculate');
     tablinks[$(this).index()].style.borderBottom = "solid";
   });
 });
@@ -475,8 +476,6 @@ function getHeight(item){
   return h;
 }
 
-
-
 //REFRESH
 $(".refresh").click(function(){
   $(".refresh").prop("disabled", true);
@@ -518,16 +517,19 @@ $('textarea[readonly]').keydown(function(event) {
 
 // Adjust content height
 function updateHeight(){
-  $('.container').css("height", ($( window ).height() - 140)+"px");
+  $('.container').css("height", ($( window ).height() - 150)+"px");
 }
 $( window ).resize(function(){
   updateHeight();
   recalculate();
 });
+
 function recalculate(){
   $(".tabs").simplebar('recalculate');
-  $(".content").simplebar('recalculate');
+  $(".content:visible").simplebar('recalculate');
+  //$(".content").each(function() {$(this).simplebar('recalculate');});
 }
+
 
 // Dropdown menu
 $('.drop').click(function(){
