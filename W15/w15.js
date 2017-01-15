@@ -134,6 +134,9 @@ function fill(id, message) {
         document.getElementById('id'+id+'-maxdef').innerHTML = maxdef_template.replace(/MAXDEF/g, "MAX 35 DEF");
       }
     }
+    else{
+      document.getElementById('id'+id+'-maxdef').innerHTML = maxdef_template.replace(/MAXDEF/g, "MAX 25 DEF");
+    }
     /* Currency */
     document.getElementById('id'+id+'-yen').innerHTML = data.feed.entry[7]['gsx$hp']['$t'];
     document.getElementById('id'+id+'-rpp').innerHTML = data.feed.entry[8]['gsx$hp']['$t'];
