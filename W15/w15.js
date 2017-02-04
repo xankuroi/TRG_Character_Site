@@ -211,6 +211,7 @@ function fill(id, message) {
     $("#id"+id+"-swag tr").remove();
     var equipped_threads = new Array(4);
     var equipped_pins = new Array(6);
+    var brv = parseInt(data.feed.entry[7]['gsx$def']['$t']);
     for(var i = 0; i < 9; i++){
       //Pins
       var pid = data.feed.entry[11+i]['gsx$id']['$t'];
@@ -245,7 +246,6 @@ function fill(id, message) {
         }
       }
       //Threads and Swag
-      var brv = data.feed.entry[7]['gsx$def']['$t'];
       if(i < 7){
         //Threads
         var eid = data.feed.entry[21+i]['gsx$id']['$t'];
@@ -260,7 +260,9 @@ function fill(id, message) {
           var edef = data.feed.entry[21+i]['gsx$def']['$t'];
           entry = entry.replace("STATS", stat(ehp, eatk, edef));
           entry = entry.replace("BRV", data.feed.entry[21+i]['gsx$cp']['$t'] + " BRV");
-          if(data.feed.entry[21+i]['gsx$cp']['$t'] > brv){
+          var temp = data.feed.entry[21+i]['gsx$cp']['$t'];
+          temp = temp.substring(temp.length - 4);
+          if(parseInt(temp) > brv){
             var saa = hover_template.replace("BASE", "<sup class='uline accent"+id+"'><i class='fa fa-times' aria-hidden='true'></i></sup>");
             saa = saa.replace("HOVERTEXT", "Not enough BRV!");
             entry = entry.replace(" BRV", saa+" BRV");
