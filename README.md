@@ -14,7 +14,7 @@ There are a few different ways you could get this in Tumblr.
 
 You could paste all the html and inline all the CSS and JavaScript into a custom layout page, for example. But let's just look at the easy ways.
 
-I recommend using an iframe in a custom page. Replace WEEKFOLDER and FILENAME with the appropriate things below, title it properly, put in your favicon link and viola.
+I recommend using an iframe in a custom page. Replace WEEKFOLDER and FILENAME with the appropriate things below, title it, put in your favicon link and viola.
 ~~~~
 <!DOCTYPE html>
 <head>
@@ -23,13 +23,17 @@ I recommend using an iframe in a custom page. Replace WEEKFOLDER and FILENAME wi
 <link rel="shortcut icon" href="FAVICON LINK GOES HERE">
 </head>
 <body>
-<iframe frameborder="0" width=100% height=100% src="https://xankuroi.github.io/TRG_Character_Site/WEEKFOLDER/FILENAME.html"></iframe>
+<iframe frameborder="0" width=100% height=100% src="https://shibuyasgame.github.io/characters/WEEKFOLDER/FILENAME.html"></iframe>
 </body>
 ~~~~
 
 You could actually even embed this into a regular post. Just change the 100% in `height=100%` to a pixel height, e.g. `height=1000px`.
 
-The other way is to just set a redirect to the appropriate page. All the pages are hosted on my Github site, and you can find them [here](https://xankuroi.github.io/TRG_Character_Site).
+The other way is to just set a redirect to the correct page. All the pages are hosted on this organization's Github site, and you can find them [here](https://shibuyasgame.github.io/characters).
+
+### Setting up for a New Week
+If there haven't been any code updates, you can just create a copy of the last week's folder and rename it to the proper week. Update `numEntities` with the number of players (for the player page) or reapers (for the reaper page). The `key` value should be the backend sheet's key. You can get it from the sheet's link: `https://docs.google.com/spreadsheets/d/THIS_IS_THE_KEY/edit`. Make sure the Publish to Web the entire backend sheet so the site can grab the data. After pushing to the master branch, it should show up on the site.
 
 ## Changelog
+W16 - Some small but important changes to make it easier to transition to the next Week.
 W15 - First usage of character sites.
