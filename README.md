@@ -36,4 +36,5 @@ If there haven't been any code updates, you can just create a copy of the last w
 
 ## Changelog
 W16 - Some small but important changes to make it easier to transition to the next Week.
+
 W15 - First usage of character sites.
