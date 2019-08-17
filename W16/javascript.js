@@ -421,10 +421,11 @@ function prep(str){
     return str;
   }
   var ans = "";
-  for(var i = 0; i < tokens.length - 2; i++){
+  var i = 0;
+  for(; i < tokens.length - 1; i++){
     ans += "<span class='nobreak'>" + tokens[i] +",</span> ";
   }
-  return ans + "<span class='nobreak'>" + tokens[i] +"</span> ";;
+  return ans + "<span class='nobreak'>" + tokens[i] +"</span> ";
 }
 // STAT COMPILATION
 function stat(hp, atk, def){
