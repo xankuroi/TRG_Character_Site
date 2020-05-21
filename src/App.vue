@@ -1,29 +1,26 @@
 <template>
   <div id="app">
     <div v-if="keyPresent">
-      This is a real page
       <div v-for="(sheet, index) in processedSheets" :key="index">
         {{ sheet }}
       </div>
       <Tab />
       <TabContent />
     </div>
-    <div v-else class="list">
+    <ul v-else class="list">
       <template v-for="week in weeks">
-        <a
-          :href="origin + '/' + week + '/players.html'"
-          :key="week + '-player'"
-        >
-          {{ week }} Players
-        </a>
-        <a
-          :href="origin + '/' + week + '/reapers.html'"
-          :key="week + '-reaper'"
-        >
-          {{ week }} Reapers
-        </a>
+        <li :key="week + '-player'">
+          <a :href="origin + '/' + week + '/players.html'">
+            {{ week }} Players
+          </a>
+        </li>
+        <li :key="week + '-reaper'">
+          <a :href="origin + '/' + week + '/reapers.html'">
+            {{ week }} Reapers
+          </a>
+        </li>
       </template>
-    </div>
+    </ul>
   </div>
 </template>
 
@@ -183,7 +180,6 @@ export default {
   },
   mounted() {
     this.origin = window.location.origin;
-    // Fetch data
     if (this.keyPresent) {
       this.loadData(this.sheetURL);
     }
@@ -201,18 +197,17 @@ export default {
   margin-top: 60px;
 }
 
-.list a {
-  display: block;
-  margin-left: 20px;
+.list {
+  list-style-type: none;
+  line-height: 2em;
 }
 
 a {
-  color: #2c3e50;
+  color: #29abdf;
   text-decoration: none;
 }
 
 a:hover {
-  color: #5fbde5;
-  font-weight: bold;
+  color: #2c3e50;
 }
 </style>

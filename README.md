@@ -40,3 +40,11 @@ npm run lint
 ### Customize configuration
 
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+## Changelog
+
+W17 - Complete rehaul of both backend to simplify user input and frontend to match.
+
+W16 - Some small but important changes to make it easier to transition to the next Week.
+
+W15 - First usage of character sites.
