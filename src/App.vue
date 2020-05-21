@@ -10,12 +10,12 @@
     <ul v-else class="list">
       <template v-for="week in weeks">
         <li :key="week + '-player'">
-          <a :href="origin + '/' + week + '/players.html'">
+          <a :href="origin + '/characters/' + week + '/players.html'">
             {{ week }} Players
           </a>
         </li>
         <li :key="week + '-reaper'">
-          <a :href="origin + '/' + week + '/reapers.html'">
+          <a :href="origin + '/characters/' + week + '/reapers.html'">
             {{ week }} Reapers
           </a>
         </li>
