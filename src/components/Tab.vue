@@ -1,7 +1,16 @@
 <template>
-  <div></div>
+  <div>
+    {{ name }}
+  </div>
 </template>
 
 <script>
-export default {};
+export default {
+  props: {
+    name: {
+      type: String,
+      required: true
+    }
+  }
+};
 </script>

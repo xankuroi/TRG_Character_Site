@@ -1,11 +1,19 @@
 <template>
   <div id="app">
     <div v-if="keyPresent">
-      <div v-for="(sheet, index) in processedSheets" :key="index">
-        {{ sheet }}
+      <button v-on:click="loadData">
+        Reload
+      </button>
+      <div class="tab-container">
+        <template v-for="(sheet, name, index) in processedSheets">
+          <Tab :name="name" :key="index" v-on:click="console.log('hi')" />
+        </template>
       </div>
-      <Tab />
-      <TabContent />
+      <div class="content-container">
+        <template v-for="(sheet, name, index) in processedSheets">
+          <TabContent :data="sheet" :key="index" />
+        </template>
+      </div>
     </div>
     <ul v-else class="list">
       <template v-for="week in weeks">
@@ -21,6 +29,7 @@
         </li>
       </template>
     </ul>
+    <div class="clear">Maintainer: Xan (@xankuroi)</div>
   </div>
 </template>
 
@@ -46,14 +55,12 @@ export default {
     };
   },
   computed: {
-    pinData() {
-      return this.keyData(this.rawData.Pins, "Name");
-    },
-    threadData() {
-      return this.keyData(this.rawData.Threads, "Name");
-    },
-    foodData() {
-      return this.keyData(this.rawData.Foods, "Name");
+    lookup() {
+      return {
+        Pins: this.keyData(this.rawData.Pins, "Name"),
+        Threads: this.keyData(this.rawData.Threads, "Name"),
+        Food: this.keyData(this.rawData.Foods, "Name")
+      };
     },
     sheetConfig() {
       return this.toJSON(this.rawData.Config);
@@ -117,7 +124,10 @@ export default {
         for (let i = 0; i < num; i++) {
           const name = sheet[this.processCoord(coord, i, 0)];
           if (name) {
-            const datum = { name: name.w };
+            let datum = { name: name.w };
+            if (this.lookup[field.NAME]) {
+              datum = this.lookup[field.NAME][name.w];
+            }
             if (nOffset) {
               const n = sheet[this.processCoord(coord, i, nOffset)];
               if (n) {
@@ -166,8 +176,8 @@ export default {
         .forEach(row => (data[row[key]] = row));
       return data;
     },
-    loadData(url) {
-      fetch(url)
+    loadData() {
+      fetch(this.sheetURL)
         .then(resp => {
           if (!resp.ok) throw new Error("Failed to load data.");
           return resp.arrayBuffer();
@@ -181,7 +191,7 @@ export default {
   mounted() {
     this.origin = window.location.origin;
     if (this.keyPresent) {
-      this.loadData(this.sheetURL);
+      this.loadData();
     }
   }
 };
@@ -197,11 +207,6 @@ export default {
   margin-top: 60px;
 }
 
-.list {
-  list-style-type: none;
-  line-height: 2em;
-}
-
 a {
   color: #29abdf;
   text-decoration: none;
@@ -209,5 +214,31 @@ a {
 
 a:hover {
   color: #2c3e50;
+}
+
+img {
+  max-width: 100%;
+}
+
+.flex {
+  align-items: center;
+  display: flex;
+}
+
+.clear {
+  clear: both;
+}
+
+.list {
+  list-style-type: none;
+  line-height: 2em;
+}
+
+.text-small {
+  font-size: 0.9em;
+}
+
+.text-smaller {
+  font-size: 0.8em;
 }
 </style>
