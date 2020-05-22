@@ -21,7 +21,7 @@ export default {
     },
     shape: {
       type: String,
-      default: "circle"
+      default: "square"
     }
   },
   data() {
@@ -62,8 +62,11 @@ export default {
   color: black;
   display: flex;
   height: 100%;
-  left: 0;
+  left: 1px;
+  max-width: 26px;
   overflow: hidden;
+  padding-left: 10px;
+  padding-right: 10px;
   position: absolute;
   top: 0;
   transition: 0.2s;
@@ -73,16 +76,21 @@ export default {
 
 .circle .info-container {
   border-radius: 48px;
-  max-width: 26px;
-  padding-left: 10px;
-  padding-right: 10px;
 }
 
-.circle img:hover + .info-container,
-.circle .info-container:hover,
-.circle.expanded .info-container {
-  padding-left: 60px;
-  max-width: 400px;
+.square .info-container {
+  --notchSize: 7px;
+
+  clip-path: polygon(
+    0% var(--notchSize),
+    var(--notchSize) 0%,
+    calc(100% - var(--notchSize)) 0%,
+    100% var(--notchSize),
+    100% calc(100% - var(--notchSize)),
+    calc(100% - var(--notchSize)) 100%,
+    var(--notchSize) 100%,
+    0% calc(100% - var(--notchSize))
+  );
 }
 
 img:hover {
@@ -92,6 +100,11 @@ img:hover {
 img:hover + .info-container,
 .info-container:hover,
 .expanded .info-container {
+  padding-left: 55px;
   max-width: 400px;
+}
+
+.text-smaller {
+  margin-right: 0.5em;
 }
 </style>

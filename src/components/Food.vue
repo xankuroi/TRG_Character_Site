@@ -1,11 +1,16 @@
 <template>
   <div>
-    <Item :url="url" :expanderStyle="{ background: 'lightgrey' }">
+    <Item :url="url" :expanderStyle="{ background: '#dfc38e' }">
       <template v-slot:info>
-        {{ data.Name }}
         <div>
-          <template v-if="data.HEAL">{{ data.HEAL }} </template>
-          <template v-if="data.Boosts">{{ data.Boosts }}</template>
+          <div>
+            <b>{{ data.Name }}</b>
+          </div>
+          <div class="text-small">
+            <template v-if="data.HEAL">Heal {{ data.HEAL }} </template>
+            <template v-if="data.HEAL && data.Boosts">||</template>
+            <template v-if="data.Boosts">{{ data.Boosts }}</template>
+          </div>
         </div>
       </template>
     </Item>
@@ -87,24 +92,3 @@ export default {
   }
 };
 </script>
-
-<style scoped>
-.food {
-  display: inline-block;
-}
-
-.info-container {
-  --notchSize: 5px;
-  clip-path: polygon(
-    0% var(--notchSize),
-    var(--notchSize) 0%,
-    calc(100% - var(--notchSize)) 0%,
-    100% var(--notchSize),
-    100% calc(100% - var(--notchSize)),
-    calc(100% - var(--notchSize)) 100%,
-    var(--notchSize) 100%,
-    0% calc(100% - var(--notchSize))
-  );
-  padding-left: 10px;
-}
-</style>

@@ -1,6 +1,7 @@
 <template>
   <Item
-    :url="publicPath + 'pins/Pin_001.png'"
+    :url="url"
+    :shape="'circle'"
     :expanderStyle="{ background: colors[data.Brand] }"
   >
     <template v-slot:info>
@@ -19,7 +20,14 @@
         v-if="hasLogo.includes(data.Brand)"
         :src="publicPath + `logos/${data.Brand}.png`"
       />
-      <div v-else :style="{ color: fontColors[data.Brand], padding: '10px' }">
+      <div
+        v-else
+        :style="{
+          color: fontColors[data.Brand],
+          fontFamily: fontFamilies[data.Brand],
+          padding: '10px'
+        }"
+      >
         {{ data.Brand }}
       </div>
     </template>
@@ -45,12 +53,15 @@ export default {
     return {
       publicPath: process.env.BASE_URL
     };
+  },
+  computed: {
+    url() {
+      const id = this.data.ID.replace("#", "");
+      if (Number(id) > 300) {
+        return this.publicPath + `pins/default.png`;
+      }
+      return this.publicPath + `pins/${id} ${this.data.Name}.png`;
+    }
   }
 };
 </script>
-
-<style scoped>
-.text-smaller {
-  margin-right: 0.5em;
-}
-</style>

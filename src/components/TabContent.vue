@@ -36,7 +36,7 @@
         :key="pin.ID"
       />
       <Thread
-        v-for="thread in equipped.threads"
+        v-for="thread in inventory.threads"
         class="pull-left"
         :data="thread"
         :key="thread.ID"
@@ -97,16 +97,16 @@ export default {
 }
 .image-container {
   display: inline-block;
-  height: 300px;
-  width: 300px;
+  height: 200px;
+  width: 200px;
   border: 1px solid black;
 }
 
 .deck {
   display: inline-block;
   overflow: visible;
-  width: 60px;
-  height: 300px;
+  width: 170px;
+  height: 200px;
 }
 
 .pull-left {

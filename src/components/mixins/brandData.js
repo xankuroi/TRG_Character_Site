@@ -17,24 +17,27 @@ export const brandData = {
         "Gatito"
       ],
       colors: {
-        "Mus Rattus": "#ccaa44",
-        "D+B": "#ee69bb",
-        "Tigre Punks": "#eeca00",
-        "Lapin Angelique": "#cc70ff",
-        "Dragon Couture": "#55cc33",
-        "Hip Snake": "#ccaaff",
-        Pegaso: "#8899dd",
-        "Sheep Heavenly": "#ddff88",
-        JotM: "#6688ee",
-        "Pavo Real": "#aaffbb",
-        "Natural Puppy": "#cceaff",
-        "Wild Boar": "#ff8888",
-        Gatito: "#ffdd33",
+        "Mus Rattus": "#fceb32",
+        "D+B": "#fc91e7",
+        "Tigre Punks": "#ff7e00",
+        "Lapin Angelique": "#ffceec",
+        "Dragon Couture": "#d6ffab",
+        "Hip Snake": "#e8d2f8",
+        Pegaso: "#e2e2e2",
+        "Sheep Heavenly": "#87a1ed",
+        JotM: "#ffd016",
+        "Pavo Real": "#e4ffd8",
+        "Natural Puppy": "#cdfbff",
+        "Wild Boar": "#ffcf4f ",
+        Gatito: "#ffb629",
         "Unbranded Misc": "#eebb33",
         "Sea★Angel": "lightblue"
       },
       fontColors: {
         "Sea★Angel": "#0b5da2"
+      },
+      fontFamilies: {
+        "Sea★Angel": "Quicksand"
       }
     };
   }

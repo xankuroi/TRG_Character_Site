@@ -29,7 +29,7 @@
         </li>
       </template>
     </ul>
-    <div class="clear">Maintainer: Xan (@xankuroi)</div>
+    <div class="clear text-smaller">Maintainer: Xan (@xankuroi).</div>
   </div>
 </template>
 
@@ -127,6 +127,9 @@ export default {
             let datum = { name: name.w };
             if (this.lookup[field.NAME]) {
               datum = this.lookup[field.NAME][name.w];
+              if (!datum) {
+                continue;
+              }
             }
             if (nOffset) {
               const n = sheet[this.processCoord(coord, i, nOffset)];
@@ -198,6 +201,7 @@ export default {
 </script>
 
 <style>
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap");
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
