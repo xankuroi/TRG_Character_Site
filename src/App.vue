@@ -18,12 +18,12 @@
     <ul v-else class="list">
       <template v-for="week in weeks">
         <li :key="week + '-player'">
-          <a :href="origin + '/characters/' + week + '/players.html'">
+          <a :href="publicPath + week + '/players.html'">
             {{ week }} Players
           </a>
         </li>
         <li :key="week + '-reaper'">
-          <a :href="origin + '/characters/' + week + '/reapers.html'">
+          <a :href="publicPath + week + '/reapers.html'">
             {{ week }} Reapers
           </a>
         </li>
@@ -46,6 +46,7 @@ export default {
   },
   data() {
     return {
+      publicPath: process.env.BASE_URL,
       keyPresent: !!window.publishKey,
       sheetURL: `https://docs.google.com/spreadsheets/d/e/${window.publishKey}/pub?output=xlsx`,
       weeks: window.weeks,
