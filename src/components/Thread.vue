@@ -31,7 +31,7 @@
 </template>
 
 <script>
-import { brandData } from "./mixins/brandData";
+import { brandData } from "./mixins/utilities";
 import Item from "./Item";
 
 export default {

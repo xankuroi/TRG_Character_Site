@@ -91,15 +91,15 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .inventory {
   width: 100%;
 }
+
 .image-container {
   display: inline-block;
   height: 200px;
   width: 200px;
-  border: 1px solid black;
 }
 
 .deck {
@@ -107,20 +107,5 @@ export default {
   overflow: visible;
   width: 170px;
   height: 200px;
-}
-
-.pull-left {
-  float: left;
-}
-
-.circle {
-  background: lightgrey;
-  border-radius: 48px;
-  border: 1px solid grey;
-  box-sizing: border-box;
-  height: 48px;
-  margin-bottom: 2px;
-  margin-left: 4px;
-  width: 48px;
 }
 </style>

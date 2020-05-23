@@ -33,11 +33,12 @@ export default {
     toggleExpand() {
       this.expanded = !this.expanded;
     }
-  }
+  },
+  mounted() {}
 };
 </script>
 
-<style>
+<style scoped>
 .item-container {
   display: inline-block;
   height: 48px;
@@ -51,10 +52,6 @@ export default {
 .item-container:hover,
 .expanded {
   z-index: 2;
-}
-
-.item-container img {
-  height: 100%;
 }
 
 .info-container {
@@ -76,6 +73,16 @@ export default {
 
 .circle .info-container {
   border-radius: 48px;
+}
+
+.circle {
+  background: lightgrey;
+  border-radius: 48px;
+  box-sizing: border-box;
+  height: 48px;
+  margin-bottom: 2px;
+  margin-left: 4px;
+  width: 48px;
 }
 
 .square .info-container {
