@@ -2,7 +2,10 @@
   <div id="app">
     <template v-if="keyPresent">
       <CharacterSheets />
-      <div class="clear text-smaller">Maintainer: Xan (@xankuroi).</div>
+      <div class="clear text-smaller">
+        Site creds: Xan (@xankuroi). Please report any issues to #hacklab or
+        #meta in the TRG Discord.
+      </div>
     </template>
     <Index v-else />
   </div>
@@ -28,12 +31,13 @@ export default {
 
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap");
+
 #app {
+  color: #2c3e50;
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: left;
-  color: #2c3e50;
   margin-top: 60px;
 }
 
@@ -66,7 +70,7 @@ img {
 }
 
 .text-small {
-  font-size: 0.9em;
+  font-size: 0.85em;
 }
 
 .text-smaller {

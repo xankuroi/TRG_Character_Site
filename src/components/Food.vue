@@ -13,6 +13,9 @@
           </div>
         </div>
       </template>
+      <template v-slot:after>
+        <div class="amt">x{{ data.n }}</div>
+      </template>
     </Item>
   </div>
 </template>
@@ -92,3 +95,15 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.amt {
+  bottom: 0;
+  color: white;
+  font-size: 0.9em;
+  position: absolute;
+  right: -0.2em;
+  text-shadow: 2px 2px 0 black, -1px -1px 0 grey, 1px -1px 0 grey,
+    -1px 1px 0 grey, 1px 1px 0 grey;
+}
+</style>

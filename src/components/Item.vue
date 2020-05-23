@@ -1,11 +1,19 @@
 <template>
-  <div @click="toggleExpand">
-    <div class="item-container" :class="[shape, expanded ? 'expanded' : '']">
-      <img :src="url" />
-      <div class="info-container" :style="expanderStyle">
-        <slot name="info"></slot>
-      </div>
+  <div
+    class="item-container"
+    :class="[shape, expanded ? 'expanded' : '']"
+    @click="toggleExpand"
+  >
+    <img :src="url" />
+    <div
+      class="info-container"
+      :class="{ left: expandLeft }"
+      ref="content"
+      :style="expanderStyle"
+    >
+      <slot name="info"></slot>
     </div>
+    <slot name="after"></slot>
   </div>
 </template>
 
@@ -26,15 +34,34 @@ export default {
   },
   data() {
     return {
-      expanded: false
+      expanded: false,
+      pageWidth: window.width,
+      position: 0
     };
+  },
+  computed: {
+    expandLeft() {
+      return this.position + 25 > this.pageWidth / 2;
+    }
   },
   methods: {
     toggleExpand() {
       this.expanded = !this.expanded;
+    },
+    handleResize() {
+      this.pageWidth = window.innerWidth;
+      this.position = this.$refs.content.getBoundingClientRect().x;
     }
   },
-  mounted() {}
+  mounted() {
+    this.handleResize();
+  },
+  created() {
+    window.addEventListener("resize", this.handleResize);
+  },
+  destroyed() {
+    window.removeEventListener("resize", this.handleResize);
+  }
 };
 </script>
 
@@ -69,6 +96,11 @@ export default {
   transition: 0.2s;
   width: max-content;
   z-index: -1;
+}
+
+.info-container.left {
+  left: auto;
+  right: 0;
 }
 
 .circle .info-container {
@@ -109,6 +141,13 @@ img:hover + .info-container,
 .expanded .info-container {
   padding-left: 55px;
   max-width: 400px;
+}
+
+img:hover + .info-container.left,
+.info-container:hover.left,
+.expanded .info-container.left {
+  padding-left: 20px;
+  padding-right: 55px;
 }
 
 .text-smaller {
