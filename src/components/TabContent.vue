@@ -1,111 +1,40 @@
 <template>
-  <div>
+  <div class="tab-content">
+    <h1 class="header" :style="color">
+      <slot name="title"></slot>
+    </h1>
     <div class="hero">
-      <div class="image-container pull-left">
-        <img :src="data['Image URL']" />
-      </div>
-      <div class="deck">
-        <template v-for="pin in equipped.pins">
-          <Pin class="pull-left" :data="pin" :key="pin.ID" />
-        </template>
-        <template v-for="index in 6 - equipped.pins.length">
-          <div class="circle pull-left" :key="index"></div>
-        </template>
-      </div>
-      <div>
-        <Thread
-          class="pull-left"
-          v-for="thread in equipped.threads"
-          :data="thread"
-          :key="thread.ID"
-        />
-      </div>
+      <slot name="hero"></slot>
     </div>
-
-    <div class="inventory clear">
-      <Food
-        v-for="food in data.Food"
-        class="pull-left"
-        :data="food"
-        :key="food.ID"
-      />
-      <Pin
-        v-for="pin in inventory.pins"
-        class="pull-left"
-        :data="pin"
-        :key="pin.ID"
-      />
-      <Thread
-        v-for="thread in inventory.threads"
-        class="pull-left"
-        :data="thread"
-        :key="thread.ID"
-      />
-    </div>
+    <slot name="content"></slot>
+    <div class="clear"></div>
   </div>
 </template>
 
 <script>
-import Food from "./Food.vue";
-import Pin from "./Pin.vue";
-import Thread from "./Thread.vue";
-
 export default {
-  components: {
-    Food,
-    Pin,
-    Thread
-  },
   props: {
-    data: {
+    color: {
       type: Object,
-      required: true
-    }
-  },
-  computed: {
-    role() {
-      return this.data.role;
-    },
-    equipped() {
-      return {
-        pins: this.getEquipped(this.data.Pins),
-        threads: this.getEquipped(this.data.Threads)
-      };
-    },
-    inventory() {
-      return {
-        pins: this.getUnequipped(this.data.Pins),
-        threads: this.getUnequipped(this.data.Threads),
-        food: this.data.Food
-      };
-    }
-  },
-  methods: {
-    getEquipped(items) {
-      return items.filter(item => item.n).sort((a, b) => a.n > b.n);
-    },
-    getUnequipped(items) {
-      return items.filter(item => !item.n);
+      default: () => {}
     }
   }
 };
 </script>
 
 <style scoped>
-.inventory {
-  width: 100%;
+.tab-content {
+  padding: 10px;
+  position: relative;
 }
 
-.image-container {
-  display: inline-block;
-  height: 200px;
-  width: 200px;
-}
-
-.deck {
-  display: inline-block;
-  overflow: visible;
-  width: 170px;
-  height: 200px;
+.header {
+  background: white;
+  border-radius: 5px;
+  margin: 0;
+  padding: 0 5px;
+  position: absolute;
+  top: -1em;
+  left: -5px;
 }
 </style>

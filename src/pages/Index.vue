@@ -22,3 +22,10 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.list {
+  list-style-type: none;
+  line-height: 2em;
+}
+</style>

@@ -8,13 +8,14 @@
           </div>
           <div class="text-small">
             <template v-if="data.HEAL">Heal {{ data.HEAL }} </template>
-            <template v-if="data.HEAL && data.Boosts">||</template>
+            <template v-if="data.HEAL && data.Boosts">|| </template>
             <template v-if="data.Boosts">{{ data.Boosts }}</template>
           </div>
         </div>
       </template>
       <template v-slot:after>
         <div class="amt">x{{ data.n }}</div>
+        <div v-if="noImage" class="item-name">{{ data.Name }}</div>
       </template>
     </Item>
   </div>
@@ -86,11 +87,14 @@ export default {
     };
   },
   computed: {
+    noImage() {
+      return !withIcons.includes(this.data.Name);
+    },
     url() {
-      if (withIcons.includes(this.data.Name)) {
-        return `${this.publicPath}food/${this.data.Name}.png`;
+      if (this.noImage) {
+        return `${this.publicPath}food/default.png`;
       }
-      return `${this.publicPath}food/default.png`;
+      return `${this.publicPath}food/${this.data.Name}.png`;
     }
   }
 };
@@ -98,12 +102,28 @@ export default {
 
 <style scoped>
 .amt {
-  bottom: 0;
+  bottom: -5px;
   color: white;
+  cursor: pointer;
   font-size: 0.9em;
   position: absolute;
-  right: -0.2em;
+  right: -5px;
   text-shadow: 2px 2px 0 black, -1px -1px 0 grey, 1px -1px 0 grey,
     -1px 1px 0 grey, 1px 1px 0 grey;
+}
+
+.item-name {
+  color: white;
+  cursor: pointer;
+  position: absolute;
+  font-size: 11px;
+  white-space: normal;
+  text-align: center;
+  font-weight: bold;
+  text-shadow: 2px 2px 0 black, -1px -1px 0 dimgray, 1px -1px 0 dimgrey,
+    -1px 1px 0 dimgrey, 1px 1px 0 dimgrey;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 </style>

@@ -12,17 +12,15 @@
 </template>
 
 <script>
-import CharacterSheets from "./pages/CharacterSheets.vue";
-import Index from "./pages/Index.vue";
-
 export default {
   name: "App",
   components: {
-    CharacterSheets,
-    Index
+    CharacterSheets: () => import("./pages/CharacterSheets"),
+    Index: () => import("./pages/Index")
   },
   data() {
     return {
+      activeIndex: 0,
       keyPresent: !!window.publishKey
     };
   }
@@ -30,17 +28,21 @@ export default {
 </script>
 
 <style>
+/* Component styles */
 @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
 
 #app {
   color: #2c3e50;
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: Montserrat;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: left;
-  margin-top: 60px;
+  margin: 0 auto;
+  max-width: 1024px;
 }
 
+/* Global styles */
 a {
   color: #29abdf;
   text-decoration: none;
@@ -55,18 +57,14 @@ img {
   max-width: 100%;
 }
 
-.flex {
-  align-items: center;
-  display: flex;
-}
-
+/* Utility classes */
 .clear {
   clear: both;
 }
 
-.list {
-  list-style-type: none;
-  line-height: 2em;
+.flex {
+  align-items: center;
+  display: flex;
 }
 
 .text-small {

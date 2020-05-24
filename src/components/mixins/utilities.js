@@ -6,6 +6,21 @@ export const publicPath = {
   }
 };
 
+export const color = {
+  computed: {
+    color() {
+      let hex = this.rawColor;
+      if (hex) {
+        hex = hex.match(/([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/);
+        if (hex) {
+          return { color: "#" + hex[0] };
+        }
+      }
+      return {};
+    }
+  }
+};
+
 export const brandData = {
   data() {
     return {

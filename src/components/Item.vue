@@ -4,12 +4,12 @@
     :class="[shape, expanded ? 'expanded' : '']"
     @click="toggleExpand"
   >
-    <img :src="url" />
+    <img class="img" :src="url" />
     <div
       class="info-container"
       :class="{ left: expandLeft }"
-      ref="content"
       :style="expanderStyle"
+      ref="content"
     >
       <slot name="info"></slot>
     </div>
@@ -81,6 +81,18 @@ export default {
   z-index: 2;
 }
 
+.item-container:hover .info-container,
+.expanded .info-container {
+  padding-left: 55px;
+  max-width: 400px;
+}
+
+.item-container:hover .info-container.left,
+.expanded .info-container.left {
+  padding-left: 20px;
+  padding-right: 55px;
+}
+
 .info-container {
   align-items: center;
   color: black;
@@ -132,22 +144,8 @@ export default {
   );
 }
 
-img:hover {
+.img:hover {
   cursor: pointer;
-}
-
-img:hover + .info-container,
-.info-container:hover,
-.expanded .info-container {
-  padding-left: 55px;
-  max-width: 400px;
-}
-
-img:hover + .info-container.left,
-.info-container:hover.left,
-.expanded .info-container.left {
-  padding-left: 20px;
-  padding-right: 55px;
 }
 
 .text-smaller {

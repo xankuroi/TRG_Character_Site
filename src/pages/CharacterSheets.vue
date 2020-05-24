@@ -4,13 +4,30 @@
       Reload
     </button>
     <div class="tab-container">
+      <Tab
+        :name="'Overview'"
+        :class="{ active: activeIndex === -1 }"
+        @click="activeIndex = -1"
+      />
       <template v-for="(sheet, name, index) in processedSheets">
-        <Tab :name="name" :key="index" v-on:click="console.log('hi')" />
+        <Tab
+          :name="name"
+          :class="{ active: activeIndex === index }"
+          :rawColor="sheet.Color"
+          :key="index"
+          @click="activeIndex = index"
+        />
       </template>
     </div>
     <div class="content-container">
+      <TabContent v-show="activeIndex === -1">
+        <template v-slot:title>Overview</template>
+        <template v-slot:hero>
+          placeholder
+        </template>
+      </TabContent>
       <template v-for="(sheet, name, index) in processedSheets">
-        <TabContent :data="sheet" :key="index" />
+        <Profile v-if="activeIndex === index" :data="sheet" :key="index" />
       </template>
     </div>
   </div>
@@ -19,15 +36,18 @@
 <script>
 import Tab from "../components/Tab.vue";
 import TabContent from "../components/TabContent.vue";
+import Profile from "../components/Profile";
 import XLSX from "xlsx";
 
 export default {
   components: {
+    Profile,
     Tab,
     TabContent
   },
   data() {
     return {
+      activeIndex: -1,
       coordRegex: new RegExp(/[a-z]+|\d+/gi),
       rawData: {},
       sheetURL: `https://docs.google.com/spreadsheets/d/e/${window.publishKey}/pub?output=xlsx`
@@ -88,7 +108,7 @@ export default {
     processField(sheet, field) {
       if (!field.LEN) {
         // standard processing
-        return sheet[field.COORD].w;
+        return sheet[field.COORD] ? sheet[field.COORD].w : "";
       }
       // special processing
       let data;
@@ -175,3 +195,18 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.content-container {
+  border: 3px solid lightgray;
+  border-radius: 5px;
+  padding: 10px;
+  min-height: 300px;
+}
+
+.tab-container {
+  padding: 10px;
+  overflow: auto;
+  width: 100%;
+}
+</style>
