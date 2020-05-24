@@ -20,37 +20,67 @@
       </template>
     </div>
     <div class="content-container">
-      <TabContent v-show="activeIndex === -1">
-        <template v-slot:title>Overview</template>
-        <template v-slot:hero>
-          placeholder
-        </template>
-      </TabContent>
-      <template v-for="(sheet, name, index) in processedSheets">
-        <Profile v-if="activeIndex === index" :data="sheet" :key="index" />
+      <Loader v-show="!loaded" />
+      <template v-show="loaded">
+        <transition-group name="fade">
+          <TabContent v-show="activeIndex === -1" :key="'overview'">
+            <template v-slot:title>Overview</template>
+            <template v-slot:hero>
+              <table>
+                <tr>
+                  <th>Name</th>
+                  <th>HP</th>
+                  <th>ATK</th>
+                  <th>DEF</th>
+                  <th>C/P</th>
+                </tr>
+                <tr
+                  v-for="(sheet, name, index) in processedSheets"
+                  :key="'ov-' + index"
+                >
+                  <td>{{ name }}</td>
+                  <td>{{ sheet.HP }}</td>
+                  <td>{{ sheet.ATK }}</td>
+                  <td>{{ sheet.DEF }}</td>
+                  <td>C/P</td>
+                </tr>
+              </table>
+            </template>
+          </TabContent>
+          <template v-for="(sheet, name, index) in processedSheets">
+            <Profile
+              v-if="activeIndex === index"
+              :data="sheet"
+              :key="'profile-' + index"
+            />
+          </template>
+        </transition-group>
       </template>
     </div>
   </div>
 </template>
 
 <script>
-import Tab from "../components/Tab.vue";
-import TabContent from "../components/TabContent.vue";
+import Tab from "../components/Tab";
+import TabContent from "../components/TabContent";
 import Profile from "../components/Profile";
+import Loader from "../components/Loader";
 import XLSX from "xlsx";
 
 export default {
   components: {
     Profile,
     Tab,
-    TabContent
+    TabContent,
+    Loader
   },
   data() {
     return {
       activeIndex: -1,
       coordRegex: new RegExp(/[a-z]+|\d+/gi),
       rawData: {},
-      sheetURL: `https://docs.google.com/spreadsheets/d/e/${window.publishKey}/pub?output=xlsx`
+      sheetURL: `https://docs.google.com/spreadsheets/d/e/${window.publishKey}/pub?output=xlsx`,
+      loaded: false
     };
   },
   computed: {
@@ -169,6 +199,8 @@ export default {
           data[field.NAME] = fieldData;
         }
       });
+      // TODO generate equipment stats
+      // TODO generate color
       return data;
     },
     keyData(sheet, key) {
@@ -179,6 +211,7 @@ export default {
       return data;
     },
     loadData() {
+      this.loaded = false;
       fetch(this.sheetURL)
         .then(resp => {
           if (!resp.ok) throw new Error("Failed to load data.");
@@ -187,7 +220,8 @@ export default {
         .then(buffer => {
           const arrBuffer = new Uint8Array(buffer);
           this.rawData = XLSX.read(arrBuffer, { type: "array" }).Sheets;
-        });
+        })
+        .then(() => this.$nextTick(() => (this.loaded = true)));
     }
   },
   mounted() {
@@ -202,6 +236,7 @@ export default {
   border-radius: 5px;
   padding: 10px;
   min-height: 300px;
+  position: relative;
 }
 
 .tab-container {

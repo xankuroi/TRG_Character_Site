@@ -1,7 +1,7 @@
 <template>
   <div class="tile">
     <b :style="color">{{ name }}</b>
-    <slot></slot>
+    <slot />
     <span v-if="total">{{ total }}</span>
     <span v-if="additional" class="add flex">
       <span class="text-smaller">▲</span>

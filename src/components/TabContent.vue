@@ -1,13 +1,13 @@
 <template>
   <div class="tab-content">
     <h1 class="header" :style="color">
-      <slot name="title"></slot>
+      <slot name="title" />
     </h1>
     <div class="hero">
-      <slot name="hero"></slot>
+      <slot name="hero" />
     </div>
     <div class="content">
-      <slot name="content"></slot>
+      <slot name="content" />
     </div>
     <div class="clear"></div>
   </div>

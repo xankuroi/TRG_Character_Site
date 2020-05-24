@@ -11,9 +11,9 @@
       :style="expanderStyle"
       ref="content"
     >
-      <slot name="info"></slot>
+      <slot name="info" />
     </div>
-    <slot name="after"></slot>
+    <slot name="after" />
   </div>
 </template>
 

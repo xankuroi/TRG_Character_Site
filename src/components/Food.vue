@@ -8,8 +8,8 @@
           </div>
           <div class="text-small">
             <template v-if="data.HEAL">Heal {{ data.HEAL }} </template>
-            <template v-if="data.HEAL && data.Boosts">|| </template>
-            <template v-if="data.Boosts">{{ data.Boosts }}</template>
+            <template v-if="data.HEAL && boosts">|| </template>
+            <template v-if="boosts">{{ boosts }}</template>
           </div>
         </div>
       </template>
@@ -87,6 +87,15 @@ export default {
     };
   },
   computed: {
+    boosts() {
+      let tokens = [];
+      ["BRV", "HP", "ATK", "DEF", "SYNC"].forEach(stat => {
+        if (this.data[stat]) {
+          tokens.push(`${this.data[stat]} ${stat}`);
+        }
+      });
+      return tokens.join(", ");
+    },
     noImage() {
       return !withIcons.includes(this.data.Name);
     },
