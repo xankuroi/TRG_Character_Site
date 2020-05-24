@@ -7,9 +7,9 @@
           ><b> {{ data.Name }}</b>
         </div>
         <div class="text-small">
-          <span v-if="data.ATK">({{ data.ATK }})</span>
-          <span v-if="data.Extras"> {{ data.Extras }}</span>
-          <span v-else> Attack once.</span>
+          {{ boosts }}
+          <span v-if="boosts && data.Other"> || </span>
+          <span v-if="data.Other">{{ data.Other }}</span>
         </div>
       </div>
       <img
@@ -57,6 +57,17 @@ export default {
         return this.publicPath + "threads/000.png";
       }
       return this.publicPath + `threads/${id} ${this.data.Name}.png`;
+    },
+    boosts() {
+      let tokens = [];
+      ["HP", "ATK", "DEF"].forEach(stat => {
+        if (this.data[stat]) {
+          tokens.push(
+            `${this.data[stat] > 0 ? "+" : ""}${this.data[stat]} ${stat}`
+          );
+        }
+      });
+      return tokens.join(", ");
     }
   }
 };

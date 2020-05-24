@@ -7,16 +7,20 @@
       <div class="image-container pull-left">
         <img :src="data['Image URL']" />
       </div>
-      <div class="stat-block flex">
-        <StatTile :stats="data.HP" :color="color" :name="'HP'">
-          <slot>
-            <b :style="hpColor">{{ data.HP.current }}</b>
-            <span class="text-smaller">/</span>
-          </slot>
-        </StatTile>
-        <StatTile :stats="data.ATK" :color="color" :name="'ATK'" />
-        <StatTile :stats="data.DEF" :color="color" :name="'DEF'" />
-        <StatTile :stats="{ brv: data.BRV }" :color="color" :name="'BRV'" />
+      <div class="stat-block">
+        <div class="flex">
+          <StatTile :stats="mergedStats.HP" :color="color" :name="'HP'">
+            <slot>
+              <b :style="hpColor">{{ data.HP.current }}</b>
+              <span class="text-smaller">/</span>
+            </slot>
+          </StatTile>
+          <StatTile :stats="mergedStats.ATK" :color="color" :name="'ATK'" />
+        </div>
+        <div class="flex">
+          <StatTile :stats="mergedStats.DEF" :color="color" :name="'DEF'" />
+          <StatTile :stats="{ brv: data.BRV }" :color="color" :name="'BRV'" />
+        </div>
       </div>
       <div class="deck">
         <template v-for="pin in equipped.pins">
@@ -26,7 +30,7 @@
           <div class="circle pull-left" :key="index"></div>
         </template>
       </div>
-      <div>
+      <div class="threads">
         <Thread
           class="pull-left"
           v-for="thread in equipped.threads"
@@ -84,7 +88,9 @@ export default {
     }
   },
   data() {
-    return { rawColor: this.data.Color };
+    return {
+      rawColor: this.data.Color
+    };
   },
   computed: {
     role() {
@@ -112,6 +118,34 @@ export default {
         threads: this.getUnequipped(this.data.Threads),
         food: this.data.Food
       };
+    },
+    equippedStats() {
+      return Object.values(this.equipped.threads).reduce(
+        (total, thread) => {
+          ["HP", "ATK", "DEF"].forEach((stat, index) => {
+            let c =
+              this.data.Pronouns === "He/Him"
+                ? "M"
+                : this.data.Pronouns === "She/Her"
+                ? "F"
+                : "T";
+            let suffix = index ? "" : `_${index}`;
+            total[stat] += (thread[stat] || 0) + (thread[c + suffix] || 0);
+          });
+          return total;
+        },
+        { HP: 0, ATK: 0, DEF: 0 }
+      );
+    },
+    mergedStats() {
+      let stats = {};
+      ["HP", "ATK", "DEF"].forEach(stat => {
+        stats[stat] = {
+          ...this.data[stat],
+          Threads: this.equippedStats[stat]
+        };
+      });
+      return stats;
     }
   },
   methods: {
@@ -139,9 +173,17 @@ export default {
   width: 200px;
 }
 
+.stat-block .flex {
+  display: inline-flex;
+  margin-bottom: 5px;
+}
+
 .deck {
   display: inline-block;
   overflow: visible;
-  height: 200px;
+}
+
+.threads {
+  display: inline-block;
 }
 </style>

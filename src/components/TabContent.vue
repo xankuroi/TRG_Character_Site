@@ -6,7 +6,9 @@
     <div class="hero">
       <slot name="hero"></slot>
     </div>
-    <slot name="content"></slot>
+    <div class="content">
+      <slot name="content"></slot>
+    </div>
     <div class="clear"></div>
   </div>
 </template>

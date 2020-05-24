@@ -33,7 +33,7 @@ export default {
       return this.sum(this.stats) - (this.stats.current || 0);
     },
     additional() {
-      return this.total - this.stats.raw - (this.stats.current || 0);
+      return this.total - this.stats.raw;
     }
   },
   methods: {
