@@ -71,8 +71,9 @@ function processCharacterData(sheet, config, lookup) {
   // TODO generate C/P
   return data;
 }
-function processCoord(coord, rowOffset, colOffset) {
-  const coordRegex = new RegExp(/[a-z]+|\d+/gi);
+
+const coordRegex = new RegExp(/[a-z]+|\d+/gi);
+function offsetCoord(coord, rowOffset, colOffset) {
   let [col, row] = coord.match(coordRegex);
   // WARNING: doesn't handle Z -> AA transition
   if (colOffset) {
@@ -83,6 +84,7 @@ function processCoord(coord, rowOffset, colOffset) {
   }
   return col + row;
 }
+
 function processField(sheet, field, lookup) {
   if (!field.LEN) {
     // standard processing
@@ -99,7 +101,7 @@ function processField(sheet, field, lookup) {
     const dOffset = Number(field.D);
     data = [];
     for (let i = 0; i < num; i++) {
-      const name = sheet[processCoord(coord, i, 0)];
+      const name = sheet[offsetCoord(coord, i, 0)];
       if (name) {
         let datum = { name: name.w };
         if (lookup[field.NAME]) {
@@ -109,13 +111,13 @@ function processField(sheet, field, lookup) {
           }
         }
         if (nOffset) {
-          const n = sheet[processCoord(coord, i, nOffset)];
+          const n = sheet[offsetCoord(coord, i, nOffset)];
           if (n) {
             datum.n = n.v;
           }
         }
         if (dOffset) {
-          const d = sheet[processCoord(coord, i, dOffset)];
+          const d = sheet[offsetCoord(coord, i, dOffset)];
           if (d) {
             datum.d = d.v;
           }
@@ -127,8 +129,8 @@ function processField(sheet, field, lookup) {
     // non-numeric LEN, so these are stats
     data = {
       raw: sheet[coord].v,
-      misc: sheet[processCoord(coord, Number(field.N), 0)].v,
-      trained: sheet[processCoord(coord, Number(field.D), 0)].v
+      misc: sheet[offsetCoord(coord, Number(field.N), 0)].v,
+      trained: sheet[offsetCoord(coord, Number(field.D), 0)].v
     };
     if (field.NAME === "HP") {
       data.current = data.trained;
