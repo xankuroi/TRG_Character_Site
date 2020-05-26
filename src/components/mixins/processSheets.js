@@ -66,6 +66,10 @@ function processCharacterData(sheet, config, lookup) {
       data[field.NAME] = fieldData;
     }
   });
+
+  // Group items by equipped
+  data.Pins = groupEquip(data.Pins);
+  data.Threads = groupEquip(data.Threads);
   // TODO generate equipment stats
 
   // Additional color parsing
@@ -79,6 +83,20 @@ function processCharacterData(sheet, config, lookup) {
   }
   // TODO generate C/P
   return data;
+}
+
+function groupEquip(items) {
+  return items.reduce(
+    (acc, curr) => {
+      if (curr.n) {
+        acc["equipped"].push(curr);
+      } else {
+        acc["unequipped"].push(curr);
+      }
+      return acc;
+    },
+    { equipped: [], unequipped: [] }
+  );
 }
 
 const coordRegex = new RegExp(/[a-z]+|\d+/gi);

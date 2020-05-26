@@ -43,17 +43,17 @@
         </div>
       </div>
       <div class="deck">
-        <template v-for="pin in equipped.pins">
+        <template v-for="pin in data.Pins.equipped">
           <Pin class="pull-left" :data="pin" :key="pin.ID" />
         </template>
-        <template v-for="index in 6 - equipped.pins.length">
+        <template v-for="index in 6 - data.Pins.equipped.length">
           <div class="circle pull-left" :key="index"></div>
         </template>
       </div>
       <div class="threads">
         <Thread
           class="pull-left"
-          v-for="thread in equipped.threads"
+          v-for="thread in data.Threads.equipped"
           :data="thread"
           :key="thread.ID"
         />
@@ -68,13 +68,13 @@
           :key="food.ID"
         />
         <Pin
-          v-for="pin in inventory.pins"
+          v-for="pin in data.Pins.unequipped"
           class="pull-left"
           :data="pin"
           :key="pin.ID"
         />
         <Thread
-          v-for="thread in inventory.threads"
+          v-for="thread in data.Threads.unequipped"
           class="pull-left"
           :data="thread"
           :key="thread.ID"
@@ -119,21 +119,8 @@ export default {
       }
       return { color: "goldenrod" };
     },
-    equipped() {
-      return {
-        pins: this.getEquipped(this.data.Pins),
-        threads: this.getEquipped(this.data.Threads)
-      };
-    },
-    inventory() {
-      return {
-        pins: this.getUnequipped(this.data.Pins),
-        threads: this.getUnequipped(this.data.Threads),
-        food: this.data.Food
-      };
-    },
     equippedStats() {
-      return Object.values(this.equipped.threads).reduce(
+      return Object.values(this.data.Threads.equipped).reduce(
         (total, thread) => {
           ["HP", "ATK", "DEF"].forEach((stat, index) => {
             let c =
@@ -162,12 +149,6 @@ export default {
     }
   },
   methods: {
-    getEquipped(items) {
-      return items.filter(item => item.n).sort((a, b) => a.n > b.n);
-    },
-    getUnequipped(items) {
-      return items.filter(item => !item.n);
-    },
     sum(statsObject) {
       return Object.values(statsObject).reduce((s, x) => s + x);
     }
