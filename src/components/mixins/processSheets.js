@@ -87,8 +87,31 @@ function processCharacterData(sheet, config, lookup) {
       data.Color = { color: "#" + hex[0] };
     }
   }
-  // TODO generate C/P
+
+  // Copy/paste
+  let cp = `**${data.Name} | ${data.HP.current}/${data.HP.total} | ${data.ATK.total} ATK`;
+  if (data.DEF.total) {
+    cp += ` | ${data.DEF.total} DEF`;
+  }
+  if (data.Role === "Player") {
+    cp += ` | ${data.SYNC}% SYNC`;
+  }
+  cp += "**\n";
+  data.CP =
+    cp +
+    data.Pins.equipped
+      .map(pin => formatPinData(pin, data.ATK.total))
+      .join(" | \n");
+
   return data;
+}
+
+function formatPinData(pin, atk) {
+  let s = `${pin.ID} ${pin.Name} ${pin.ATK} (${pin.ATK + atk})`;
+  if (pin.Extras) {
+    s += `- *${pin.Extras}*`;
+  }
+  return s;
 }
 
 function equippedStats(equipment, pronouns) {
