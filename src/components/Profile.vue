@@ -1,5 +1,5 @@
 <template>
-  <TabContent :color="color">
+  <TabContent :color="data.Color">
     <template v-slot:title>
       {{ data.Name }}
     </template>
@@ -9,21 +9,33 @@
       </div>
       <div class="stat-block">
         <div class="flex">
-          <StatTile :stats="mergedStats.HP" :color="color" :name="'HP'">
+          <StatTile :stats="mergedStats.HP" :color="data.Color" :name="'HP'">
             <template v-slot:before>
               <b :style="hpColor">{{ data.HP.current }}</b>
               <span class="text-smaller">/</span>
             </template>
           </StatTile>
-          <StatTile :stats="mergedStats.ATK" :color="color" :name="'ATK'" />
+          <StatTile
+            :stats="mergedStats.ATK"
+            :color="data.Color"
+            :name="'ATK'"
+          />
         </div>
         <div class="flex">
-          <StatTile :stats="mergedStats.DEF" :color="color" :name="'DEF'" />
-          <StatTile :stats="{ brv: data.BRV }" :color="color" :name="'BRV'" />
+          <StatTile
+            :stats="mergedStats.DEF"
+            :color="data.Color"
+            :name="'DEF'"
+          />
+          <StatTile
+            :stats="{ brv: data.BRV }"
+            :color="data.Color"
+            :name="'BRV'"
+          />
           <StatTile
             v-if="data.Role === 'Player'"
             :stats="{ sync: data.SYNC }"
-            :color="color"
+            :color="data.Color"
             :name="'SYNC'"
           >
             <template v-slot:after>% </template>
@@ -78,7 +90,6 @@ import Food from "./Food";
 import Pin from "./Pin";
 import Thread from "./Thread";
 import StatTile from "./StatTile";
-import { color } from "./mixins/utilities";
 
 export default {
   components: {
@@ -88,17 +99,11 @@ export default {
     Pin,
     Thread
   },
-  mixins: [color],
   props: {
     data: {
       type: Object,
       required: true
     }
-  },
-  data() {
-    return {
-      rawColor: this.data.Color
-    };
   },
   computed: {
     role() {

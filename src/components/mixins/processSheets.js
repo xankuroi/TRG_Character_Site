@@ -67,7 +67,16 @@ function processCharacterData(sheet, config, lookup) {
     }
   });
   // TODO generate equipment stats
-  // TODO generate color
+
+  // Additional color parsing
+  let hex = data.Color;
+  data.Color = {};
+  if (hex) {
+    hex = hex.match(/([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/);
+    if (hex) {
+      data.Color = { color: "#" + hex[0] };
+    }
+  }
   // TODO generate C/P
   return data;
 }

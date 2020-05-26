@@ -13,7 +13,6 @@
         <Tab
           :name="sheet.Name"
           :class="{ active: activeIndex === index }"
-          :rawColor="sheet.Color"
           :key="index"
           @click="activeIndex = index"
         />
