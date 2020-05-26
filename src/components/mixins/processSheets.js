@@ -57,6 +57,7 @@ function keyData(rawSheet) {
 
 function processCharacterData(sheet, config, lookup) {
   let data = { Noise: {} };
+  // Initial field assignments
   config.forEach(field => {
     const fieldData = processField(sheet, field, lookup);
 
@@ -66,11 +67,16 @@ function processCharacterData(sheet, config, lookup) {
       data[field.NAME] = fieldData;
     }
   });
-
   // Group items by equipped
   data.Pins = groupEquip(data.Pins);
   data.Threads = groupEquip(data.Threads);
-  // TODO generate equipment stats
+
+  // Add thread stats into total
+  let eStats = equippedStats(data.Threads.equipped, data.Pronouns);
+  ["HP", "ATK", "DEF"].forEach(stat => {
+    data[stat].threads = eStats[stat];
+    data[stat].total = data[stat].raw + data[stat].misc + data[stat].threads;
+  });
 
   // Additional color parsing
   let hex = data.Color;
@@ -83,6 +89,21 @@ function processCharacterData(sheet, config, lookup) {
   }
   // TODO generate C/P
   return data;
+}
+
+function equippedStats(equipment, pronouns) {
+  return equipment.reduce(
+    (total, thread) => {
+      ["HP", "ATK", "DEF"].forEach((stat, index) => {
+        let c =
+          pronouns === "He/Him" ? "M" : pronouns === "She/Her" ? "F" : "T";
+        let suffix = index ? "" : `_${index}`;
+        total[stat] += (thread[stat] || 0) + (thread[c + suffix] || 0);
+      });
+      return total;
+    },
+    { HP: 0, ATK: 0, DEF: 0 }
+  );
 }
 
 function groupEquip(items) {

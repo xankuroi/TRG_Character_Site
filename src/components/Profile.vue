@@ -9,32 +9,24 @@
       </div>
       <div class="stat-block">
         <div class="flex">
-          <StatTile :stats="mergedStats.HP" :color="data.Color" :name="'HP'">
+          <StatTile :stats="data.HP" :color="data.Color" :name="'HP'">
             <template v-slot:before>
               <b :style="hpColor">{{ data.HP.current }}</b>
               <span class="text-smaller">/</span>
             </template>
           </StatTile>
-          <StatTile
-            :stats="mergedStats.ATK"
-            :color="data.Color"
-            :name="'ATK'"
-          />
+          <StatTile :stats="data.ATK" :color="data.Color" :name="'ATK'" />
         </div>
         <div class="flex">
+          <StatTile :stats="data.DEF" :color="data.Color" :name="'DEF'" />
           <StatTile
-            :stats="mergedStats.DEF"
-            :color="data.Color"
-            :name="'DEF'"
-          />
-          <StatTile
-            :stats="{ brv: data.BRV }"
+            :stats="{ total: data.BRV }"
             :color="data.Color"
             :name="'BRV'"
           />
           <StatTile
             v-if="data.Role === 'Player'"
-            :stats="{ sync: data.SYNC }"
+            :stats="{ total: data.SYNC }"
             :color="data.Color"
             :name="'SYNC'"
           >
@@ -106,51 +98,15 @@ export default {
     }
   },
   computed: {
-    role() {
-      return this.data.Role;
-    },
     hpColor() {
       const curr = this.data.HP.current;
-      const max = this.sum(this.data.HP) - curr;
+      const max = this.data.HP.total;
       if (curr / max > 0.5) {
         return { color: "green" };
       } else if (curr / max < 0.25) {
         return { color: "red" };
       }
       return { color: "goldenrod" };
-    },
-    equippedStats() {
-      return Object.values(this.data.Threads.equipped).reduce(
-        (total, thread) => {
-          ["HP", "ATK", "DEF"].forEach((stat, index) => {
-            let c =
-              this.data.Pronouns === "He/Him"
-                ? "M"
-                : this.data.Pronouns === "She/Her"
-                ? "F"
-                : "T";
-            let suffix = index ? "" : `_${index}`;
-            total[stat] += (thread[stat] || 0) + (thread[c + suffix] || 0);
-          });
-          return total;
-        },
-        { HP: 0, ATK: 0, DEF: 0 }
-      );
-    },
-    mergedStats() {
-      let stats = {};
-      ["HP", "ATK", "DEF"].forEach(stat => {
-        stats[stat] = {
-          ...this.data[stat],
-          Threads: this.equippedStats[stat]
-        };
-      });
-      return stats;
-    }
-  },
-  methods: {
-    sum(statsObject) {
-      return Object.values(statsObject).reduce((s, x) => s + x);
     }
   }
 };

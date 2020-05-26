@@ -2,7 +2,7 @@
   <div class="tile">
     <b :style="color">{{ name }}</b>
     <slot name="before" />
-    <span>{{ total }}</span>
+    <span>{{ stats.total }}</span>
     <slot name="after" />
     <span v-if="additional" class="add flex">
       <span class="text-smaller">▲</span>
@@ -30,16 +30,8 @@ export default {
     }
   },
   computed: {
-    total() {
-      return this.sum(this.stats) - (this.stats.current || 0);
-    },
     additional() {
-      return this.total - this.stats.raw;
-    }
-  },
-  methods: {
-    sum(statsObject) {
-      return Object.values(statsObject).reduce((s, x) => s + x);
+      return this.stats.total - this.stats.raw;
     }
   }
 };
