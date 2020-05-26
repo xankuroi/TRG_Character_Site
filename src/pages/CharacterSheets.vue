@@ -9,9 +9,9 @@
         :class="{ active: activeIndex === -1 }"
         @click="activeIndex = -1"
       />
-      <template v-for="(sheet, name, index) in processedSheets">
+      <template v-for="(sheet, index) in sheets">
         <Tab
-          :name="name"
+          :name="sheet.Name"
           :class="{ active: activeIndex === index }"
           :rawColor="sheet.Color"
           :key="index"
@@ -21,40 +21,35 @@
     </div>
     <div class="content-container">
       <Loader v-show="!loaded" />
-      <template v-show="loaded">
-        <transition-group name="fade">
-          <TabContent v-show="activeIndex === -1" :key="'overview'">
-            <template v-slot:title>Overview</template>
-            <template v-slot:hero>
-              <table>
-                <tr>
-                  <th>Name</th>
-                  <th>HP</th>
-                  <th>ATK</th>
-                  <th>DEF</th>
-                  <th>C/P</th>
-                </tr>
-                <tr
-                  v-for="(sheet, name, index) in processedSheets"
-                  :key="'ov-' + index"
-                >
-                  <td>{{ name }}</td>
-                  <td>{{ sheet.HP }}</td>
-                  <td>{{ sheet.ATK }}</td>
-                  <td>{{ sheet.DEF }}</td>
-                  <td>C/P</td>
-                </tr>
-              </table>
-            </template>
-          </TabContent>
-          <template v-for="(sheet, name, index) in processedSheets">
-            <Profile
-              v-if="activeIndex === index"
-              :data="sheet"
-              :key="'profile-' + index"
-            />
+      <template v-if="loaded">
+        <TabContent v-show="activeIndex === -1" :key="'overview'">
+          <template v-slot:title>Overview</template>
+          <template v-slot:hero>
+            <table>
+              <tr>
+                <th>Name</th>
+                <th>HP</th>
+                <th>ATK</th>
+                <th>DEF</th>
+                <th>C/P</th>
+              </tr>
+              <tr v-for="(sheet, index) in sheets" :key="'ov-' + index">
+                <td>{{ sheet.Name }}</td>
+                <td>{{ sheet.HP }}</td>
+                <td>{{ sheet.ATK }}</td>
+                <td>{{ sheet.DEF }}</td>
+                <td>C/P</td>
+              </tr>
+            </table>
           </template>
-        </transition-group>
+        </TabContent>
+        <template v-for="(sheet, index) in sheets">
+          <Profile
+            v-show="activeIndex === index"
+            :data="sheets[index]"
+            :key="'pr-' + index"
+          />
+        </template>
       </template>
     </div>
   </div>
@@ -65,7 +60,7 @@ import Tab from "../components/Tab";
 import TabContent from "../components/TabContent";
 import Profile from "../components/Profile";
 import Loader from "../components/Loader";
-import XLSX from "xlsx";
+import { processSpreadsheet } from "../components/mixins/processSheets";
 
 export default {
   components: {
@@ -77,149 +72,17 @@ export default {
   data() {
     return {
       activeIndex: -1,
-      coordRegex: new RegExp(/[a-z]+|\d+/gi),
-      rawData: {},
       sheetURL: `https://docs.google.com/spreadsheets/d/e/${window.publishKey}/pub?output=xlsx`,
-      loaded: false
+      loaded: false,
+      sheets: {}
     };
   },
-  computed: {
-    lookup() {
-      return {
-        Pins: this.keyData(this.rawData.Pins, "Name"),
-        Threads: this.keyData(this.rawData.Threads, "Name"),
-        Food: this.keyData(this.rawData.Foods, "Name")
-      };
-    },
-    sheetConfig() {
-      return this.toJSON(this.rawData.Config);
-    },
-    ignoredSheets() {
-      const partialMatch = this.sheetConfig[1].UNSEEN.split(",")
-        .map(str => str.trim())
-        .join("|");
-      const exactMatch = this.sheetConfig[0].UNSEEN.split(",")
-        .map(str => str.trim())
-        .join("$|^");
-      return new RegExp(`${partialMatch}|^${exactMatch}$`);
-    },
-    dataCoords() {
-      let hsh = {};
-      this.sheetConfig.forEach(datum => {
-        if (datum.FIELD) {
-          hsh[datum.FIELD] = datum.COORD;
-        }
-      });
-      return hsh;
-    },
-    processedSheets() {
-      let hsh = {};
-      Object.keys(this.rawData || {})
-        .filter(key => !this.ignoredSheets.test(key))
-        .forEach(key => (hsh[key] = this.processSheet(this.rawData[key])));
-      return hsh;
-    }
-  },
   methods: {
-    toJSON(sheet) {
-      return XLSX.utils.sheet_to_json(sheet);
-    },
-    processCoord(coord, rowOffset, colOffset) {
-      let [col, row] = coord.match(this.coordRegex);
-      // WARNING: doesn't handle Z -> AA transition
-      if (colOffset) {
-        col = String.fromCharCode(col.charCodeAt(0) + colOffset);
-      }
-      if (rowOffset) {
-        row = Number(row) + rowOffset;
-      }
-      return col + row;
-    },
-    processField(sheet, field) {
-      if (!field.LEN) {
-        // standard processing
-        return sheet[field.COORD] ? sheet[field.COORD].w : "";
-      }
-      // special processing
-      let data;
-      const num = Number(field.LEN);
-      const coord = field.COORD;
-
-      if (num) {
-        // numeric LEN, so this is inventory
-        const nOffset = Number(field.N);
-        const dOffset = Number(field.D);
-        data = [];
-        for (let i = 0; i < num; i++) {
-          const name = sheet[this.processCoord(coord, i, 0)];
-          if (name) {
-            let datum = { name: name.w };
-            if (this.lookup[field.NAME]) {
-              datum = this.lookup[field.NAME][name.w];
-              if (!datum) {
-                continue;
-              }
-            }
-            if (nOffset) {
-              const n = sheet[this.processCoord(coord, i, nOffset)];
-              if (n) {
-                datum.n = n.v;
-              }
-            }
-            if (dOffset) {
-              const d = sheet[this.processCoord(coord, i, dOffset)];
-              if (d) {
-                datum.d = d.v;
-              }
-            }
-            data.push(datum);
-          }
-        }
-      } else {
-        // non-numeric LEN, so these are stats
-        data = {
-          raw: sheet[coord].v,
-          misc: sheet[this.processCoord(coord, Number(field.N), 0)].v,
-          trained: sheet[this.processCoord(coord, Number(field.D), 0)].v
-        };
-        if (field.NAME === "HP") {
-          data.current = data.trained;
-        }
-      }
-      return data;
-    },
-    processSheet(sheet) {
-      let data = { Noise: {} };
-      this.sheetConfig.forEach(field => {
-        const fieldData = this.processField(sheet, field);
-
-        if (field.NAME.startsWith("Noise")) {
-          data.Noise[field.NAME.substring(6)] = fieldData;
-        } else {
-          data[field.NAME] = fieldData;
-        }
-      });
-      // TODO generate equipment stats
-      // TODO generate color
-      return data;
-    },
-    keyData(sheet, key) {
-      let data = {};
-      this.toJSON(sheet)
-        .filter(row => row[key])
-        .forEach(row => (data[row[key]] = row));
-      return data;
-    },
     loadData() {
       this.loaded = false;
-      fetch(this.sheetURL)
-        .then(resp => {
-          if (!resp.ok) throw new Error("Failed to load data.");
-          return resp.arrayBuffer();
-        })
-        .then(buffer => {
-          const arrBuffer = new Uint8Array(buffer);
-          this.rawData = XLSX.read(arrBuffer, { type: "array" }).Sheets;
+      processSpreadsheet(this.sheetURL)
+        .then(stuff => {
+          this.sheets = stuff.sheets;
         })
         .then(() => this.$nextTick(() => (this.loaded = true)));
     }
@@ -236,6 +99,7 @@ export default {
   border-radius: 5px;
   padding: 10px;
   min-height: 300px;
+  height: 500px;
   position: relative;
 }
 
@@ -243,5 +107,14 @@ export default {
   padding: 10px;
   overflow: auto;
   width: 100%;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>
