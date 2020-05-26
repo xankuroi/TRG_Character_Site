@@ -10,16 +10,24 @@
       <div class="stat-block">
         <div class="flex">
           <StatTile :stats="mergedStats.HP" :color="color" :name="'HP'">
-            <slot>
+            <template v-slot:before>
               <b :style="hpColor">{{ data.HP.current }}</b>
               <span class="text-smaller">/</span>
-            </slot>
+            </template>
           </StatTile>
           <StatTile :stats="mergedStats.ATK" :color="color" :name="'ATK'" />
         </div>
         <div class="flex">
           <StatTile :stats="mergedStats.DEF" :color="color" :name="'DEF'" />
           <StatTile :stats="{ brv: data.BRV }" :color="color" :name="'BRV'" />
+          <StatTile
+            v-if="data.Role === 'Player'"
+            :stats="{ sync: data.SYNC }"
+            :color="color"
+            :name="'SYNC'"
+          >
+            <template v-slot:after>% </template>
+          </StatTile>
         </div>
       </div>
       <div class="deck">
@@ -171,6 +179,10 @@ export default {
   display: inline-block;
   height: 200px;
   width: 200px;
+}
+
+.stat-block {
+  height: 200px;
 }
 
 .stat-block .flex {

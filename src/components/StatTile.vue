@@ -1,8 +1,9 @@
 <template>
   <div class="tile">
     <b :style="color">{{ name }}</b>
-    <slot />
-    <span v-if="total">{{ total }}</span>
+    <slot name="before" />
+    <span>{{ total }}</span>
+    <slot name="after" />
     <span v-if="additional" class="add flex">
       <span class="text-smaller">▲</span>
       {{ additional }}
