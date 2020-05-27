@@ -39,4 +39,10 @@ export default {
   top: -1em;
   left: -5px;
 }
+
+@media (max-width: 450px) {
+  .tab-content {
+    padding: 10px 5px;
+  }
+}
 </style>

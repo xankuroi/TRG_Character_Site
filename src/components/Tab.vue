@@ -1,5 +1,10 @@
 <template>
-  <div class="tab" @click="$emit('click')">
+  <div
+    class="tab"
+    :class="{ active: active }"
+    :style="tabStyle"
+    @click="$emit('click')"
+  >
     {{ name }}
   </div>
 </template>
@@ -10,6 +15,23 @@ export default {
     name: {
       type: String,
       required: true
+    },
+    color: {
+      type: String
+    },
+    active: {
+      type: Boolean,
+      default: false
+    }
+  },
+  computed: {
+    tabStyle() {
+      let c = this.color ? this.color : "#2c3e50";
+      let style = { color: c };
+      if (this.active) {
+        style["border-color"] = c;
+      }
+      return style;
     }
   }
 };
@@ -29,7 +51,6 @@ export default {
 
 .active,
 .tab:hover {
-  border-bottom: 3px solid black;
   opacity: 1;
 }
 </style>

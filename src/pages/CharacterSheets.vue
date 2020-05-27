@@ -6,13 +6,14 @@
     <div class="tab-container">
       <Tab
         :name="'Overview'"
-        :class="{ active: activeIndex === -1 }"
+        :active="activeIndex === -1"
         @click="activeIndex = -1"
       />
       <template v-for="(sheet, index) in sheets">
         <Tab
           :name="sheet.Name"
-          :class="{ active: activeIndex === index }"
+          :active="activeIndex === index"
+          :color="sheet.Color.color"
           :key="index"
           @click="activeIndex = index"
         />
@@ -24,7 +25,7 @@
         <TabContent v-show="activeIndex === -1" :key="'overview'">
           <template v-slot:title>Overview</template>
           <template v-slot:hero>
-            <table>
+            <table class="overview-table">
               <tr>
                 <th>Name</th>
                 <th>HP</th>
@@ -33,11 +34,25 @@
                 <th>C/P</th>
               </tr>
               <tr v-for="(sheet, index) in sheets" :key="'ov-' + index">
-                <td>{{ sheet.Name }}</td>
-                <td>{{ sheet.HP }}</td>
-                <td>{{ sheet.ATK }}</td>
-                <td>{{ sheet.DEF }}</td>
-                <td>C/P</td>
+                <td>
+                  <span :style="sheet.Color">█ </span>
+                  {{ sheet.Name }}
+                </td>
+                <td>
+                  {{ sheet.HP.current }}/{{ sheet.HP.total }}
+                  <span class="hide-small">HP</span>
+                </td>
+                <td>
+                  {{ sheet.ATK.total }} <span class="hide-small">ATK</span>
+                </td>
+                <td>
+                  {{ sheet.DEF.total }} <span class="hide-small">DEF</span>
+                </td>
+                <td>
+                  <button type="button" v-clipboard:copy="sheet.CP">
+                    Click!
+                  </button>
+                </td>
               </tr>
             </table>
           </template>
@@ -108,6 +123,16 @@ export default {
   width: 100%;
 }
 
+.overview-table {
+  text-align: center;
+  width: 100%;
+}
+
+.overview-table td:first-child,
+.overview-table th:first-child {
+  text-align: left;
+}
+
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.5s;
@@ -115,5 +140,18 @@ export default {
 .fade-enter,
 .fade-leave-to {
   opacity: 0;
+}
+
+@media (max-width: 450px) {
+  .hide-small {
+    display: none;
+  }
+
+  .overview-table td {
+    font-size: 0.85em;
+  }
+  .content-container {
+    padding: 10px 0;
+  }
 }
 </style>

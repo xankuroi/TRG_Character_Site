@@ -96,9 +96,9 @@ function processCharacterData(sheet, config, lookup) {
   if (data.Role === "Player") {
     cp += ` | ${data.SYNC}% SYNC`;
   }
-  cp += "**\n";
   data.CP =
     cp +
+    "**\n" +
     data.Pins.equipped
       .map(pin => formatPinData(pin, data.ATK.total))
       .join(" | \n");
