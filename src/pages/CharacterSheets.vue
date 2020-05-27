@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <button v-on:click="loadData">
+  <div class="container">
+    <button class="reload" v-on:click="loadData">
       Reload
     </button>
     <div class="tab-container">
@@ -108,6 +108,18 @@ export default {
 </script>
 
 <style scoped>
+.container {
+  position: relative;
+}
+
+.reload {
+  background: var(--background-color);
+  position: absolute;
+  right: 10px;
+  top: 53px;
+  z-index: 2;
+}
+
 .content-container {
   border: 3px solid var(--border-color);
   border-radius: 5px;

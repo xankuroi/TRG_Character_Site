@@ -75,6 +75,18 @@ img {
   max-width: 100%;
 }
 
+button {
+  background: none;
+  border: none;
+  color: var(--border-color);
+  cursor: pointer;
+  font-family: inherit;
+}
+
+button:hover {
+  color: var(--text-color);
+}
+
 /* Utility classes */
 .clear {
   clear: both;
