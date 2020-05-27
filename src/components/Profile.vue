@@ -7,7 +7,17 @@
       <div class="image-container pull-left">
         <img :src="data['Image URL']" />
       </div>
-      <StatBlock :data="data" />
+      <StatBlock :data="data" @goto="$emit('goto', $event)" />
+      <div class="info">
+        <template v-if="data.Role === 'Player'">
+          <h4 :style="data.Color">Entry Fee</h4>
+          <p>{{ data["Entry Fee"] }}</p>
+          <h4 :style="data.Color">Reason to Live</h4>
+          <p>{{ data["Reason to Live"] }}</p>
+        </template>
+        <h4 :style="data.Color">Personality</h4>
+        <p>{{ data.Personality }}</p>
+      </div>
       <div class="deck">
         <template v-for="pin in data.Pins.equipped">
           <Pin class="pull-left" :data="pin" :key="pin.ID" />
@@ -75,6 +85,14 @@ export default {
 </script>
 
 <style scoped>
+h4 {
+  margin-bottom: 0;
+}
+
+p {
+  margin-top: 0;
+}
+
 .inventory {
   width: 100%;
 }

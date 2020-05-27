@@ -2,7 +2,7 @@ module.exports = {
   publicPath: process.env.NODE_ENV === "production" ? "/characters/" : "/",
   pages: {
     index: {
-      entry: "src/main.js",
+      entry: "src/index.js",
       title: "The Reaper's Game Character Sheets",
       weeks: ["W15", "W16", "W17"]
     },

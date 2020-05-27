@@ -1,14 +1,14 @@
 <template>
   <div class="stat-block">
-    {{ data.Name }}
-    {{ data.Age }}
-    {{ data.Pronouns }}
-    <template v-if="data.Role === 'Player'">
-      {{ data.Partner }}
-    </template>
-    <template v-else>
+    <div>{{ data.Name }} // {{ data.Age }} // {{ data.Pronouns }}</div>
+    <div v-if="data.Role === 'Player'" @click="$emit('goto', data.Partner)">
+      <font-awesome-icon :icon="['fas', 'handshake']" :style="data.Color" />
+      <span class="fade cursor"> {{ data.Partner }}</span>
+    </div>
+    <div v-else>
+      <font-awesome-icon :icon="['fas', 'briefcase']" :style="data.Color" />
       {{ data.Position }}
-    </template>
+    </div>
     <div class="flex">
       <StatTile :stats="data.HP" :color="data.Color" :name="'HP'">
         <template v-slot:before>
@@ -33,6 +33,15 @@
       >
         <template v-slot:after>% </template>
       </StatTile>
+    </div>
+    <div class="flex">
+      <StatTile :stats="{ total: data.Yen }" :color="data.Color" :name="'¥'" />
+      <StatTile
+        v-if="data.Role === 'Player'"
+        :stats="{ total: data.PP }"
+        :color="data.Color"
+        :name="'PP'"
+      />
     </div>
   </div>
 </template>

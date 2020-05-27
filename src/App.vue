@@ -20,7 +20,6 @@ export default {
   },
   data() {
     return {
-      activeIndex: 0,
       keyPresent: !!window.publishKey
     };
   }
@@ -28,7 +27,7 @@ export default {
 </script>
 
 <style>
-/* Component styles */
+/* Set up & component styles  */
 @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
 
@@ -46,21 +45,21 @@ export default {
   }
 }
 
-body {
-  background: var(--background-color);
-}
-
 #app {
-  color: var(--text-color);
-  font-family: Montserrat;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   text-align: left;
   margin: 0 auto;
   max-width: 1024px;
 }
 
 /* Global styles */
+body {
+  background: var(--background-color);
+  color: var(--text-color);
+  font-family: Montserrat;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 a {
   color: #29abdf;
   text-decoration: none;
@@ -81,6 +80,7 @@ button {
   color: var(--border-color);
   cursor: pointer;
   font-family: inherit;
+  font-size: inherit;
   transition: 0.2s;
 }
 
@@ -91,6 +91,19 @@ button:hover {
 /* Utility classes */
 .clear {
   clear: both;
+}
+
+.cursor {
+  cursor: pointer;
+}
+
+.fade {
+  opacity: 0.5;
+  transition: 0.2s;
+}
+
+.fade:hover {
+  opacity: 1;
 }
 
 .flex {
