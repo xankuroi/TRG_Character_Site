@@ -26,7 +26,11 @@ export default {
   },
   computed: {
     tabStyle() {
-      let c = this.color ? this.color : "#2c3e50";
+      let c = this.color
+        ? this.color
+        : getComputedStyle(document.documentElement).getPropertyValue(
+            "--text-color"
+          );
       let style = { color: c };
       if (this.active) {
         style["border-color"] = c;
@@ -39,7 +43,7 @@ export default {
 
 <style scoped>
 .tab {
-  border-bottom: 3px solid rgba(0, 0, 0, 0);
+  border-bottom: 3px solid transparent;
   cursor: pointer;
   display: inline-block;
   font-family: Montserrat, sans-serif;

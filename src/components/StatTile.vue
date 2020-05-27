@@ -40,7 +40,7 @@ export default {
 <style scoped>
 .tile {
   align-items: center;
-  border: 2px solid lightgray;
+  border: 2px solid var(--border-color);
   border-radius: 3px;
   display: flex;
   padding: 0 3px;

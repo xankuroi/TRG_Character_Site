@@ -109,7 +109,7 @@ export default {
 
 <style scoped>
 .content-container {
-  border: 3px solid lightgray;
+  border: 3px solid var(--border-color);
   border-radius: 5px;
   padding: 10px;
   min-height: 300px;

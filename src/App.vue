@@ -2,7 +2,7 @@
   <div id="app">
     <template v-if="keyPresent">
       <CharacterSheets />
-      <div class="clear text-smaller">
+      <div class="clear text-smaller" :style="{ opacity: 0.6 }">
         Site creds: Xan (@xankuroi). Please report any issues to #hacklab or
         #meta in the TRG Discord.
       </div>
@@ -32,8 +32,26 @@ export default {
 @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
 
+:root {
+  color-scheme: light dark;
+  --text-color: #2c3e50;
+  --background-color: #fff;
+  --border-color: lightgray;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --text-color: #dee4e7;
+    --background-color: #222;
+    --border-color: #666;
+  }
+}
+
+body {
+  background: var(--background-color);
+}
+
 #app {
-  color: #2c3e50;
+  color: var(--text-color);
   font-family: Montserrat;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -49,7 +67,7 @@ a {
 }
 
 a:hover {
-  color: #2c3e50;
+  color: var(--text-color);
 }
 
 img {

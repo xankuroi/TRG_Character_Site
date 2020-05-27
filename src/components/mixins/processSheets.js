@@ -15,7 +15,7 @@ export async function processSpreadsheet(url) {
       const sheetConfig = XLSX.utils.sheet_to_json(sheets.Config);
       const Pins = keyData(sheets.Pins);
       const Threads = keyData(sheets.Threads);
-      const Food = keyData(sheets.Food);
+      const Food = keyData(sheets.Foods);
 
       // Ignored sheet regex
       const partialMatch = sheetConfig[1].UNSEEN.split(",")

@@ -120,7 +120,7 @@ export default {
 }
 
 .circle {
-  background: lightgrey;
+  background: var(--border-color);
   border-radius: 48px;
   box-sizing: border-box;
   height: 48px;
