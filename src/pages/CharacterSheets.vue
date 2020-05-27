@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <button class="reload" v-on:click="loadData">
-      Reload
+      Refresh Data
     </button>
     <div class="tab-container">
       <Tab

@@ -81,6 +81,7 @@ button {
   color: var(--border-color);
   cursor: pointer;
   font-family: inherit;
+  transition: 0.2s;
 }
 
 button:hover {

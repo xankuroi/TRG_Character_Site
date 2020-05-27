@@ -1,0 +1,77 @@
+<template>
+  <div class="stat-block">
+    {{ data.Name }}
+    {{ data.Age }}
+    {{ data.Pronouns }}
+    <template v-if="data.Role === 'Player'">
+      {{ data.Partner }}
+    </template>
+    <template v-else>
+      {{ data.Position }}
+    </template>
+    <div class="flex">
+      <StatTile :stats="data.HP" :color="data.Color" :name="'HP'">
+        <template v-slot:before>
+          <b :style="hpColor">{{ data.HP.current }}</b>
+          <span class="text-smaller">/</span>
+        </template>
+      </StatTile>
+      <StatTile :stats="data.ATK" :color="data.Color" :name="'ATK'" />
+    </div>
+    <div class="flex">
+      <StatTile :stats="data.DEF" :color="data.Color" :name="'DEF'" />
+      <StatTile
+        :stats="{ total: data.BRV }"
+        :color="data.Color"
+        :name="'BRV'"
+      />
+      <StatTile
+        v-if="data.Role === 'Player'"
+        :stats="{ total: data.SYNC }"
+        :color="data.Color"
+        :name="'SYNC'"
+      >
+        <template v-slot:after>% </template>
+      </StatTile>
+    </div>
+  </div>
+</template>
+
+<script>
+import StatTile from "./StatTile";
+
+export default {
+  components: {
+    StatTile
+  },
+  props: {
+    data: {
+      type: Object,
+      required: true
+    }
+  },
+  computed: {
+    hpColor() {
+      const curr = this.data.HP.current;
+      const max = this.data.HP.total;
+      if (curr / max < 1) {
+        return { color: "goldenrod" };
+      } else if (curr / max < 0.25) {
+        return { color: "red" };
+      }
+      return { color: "green" };
+    }
+  }
+};
+</script>
+
+<style scoped>
+.stat-block {
+  height: 200px;
+}
+
+.stat-block .flex {
+  display: inline-flex;
+  margin-bottom: 5px;
+}
+</style>
