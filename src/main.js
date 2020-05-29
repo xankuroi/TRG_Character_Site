@@ -4,6 +4,7 @@ import Toasted from "vue-toasted";
 import App from "./App";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {
+  faAddressCard, // Info card
   faAdjust, // Light mode
   faBriefcase, // Position
   faClipboardCheck, // Copied!
@@ -11,7 +12,9 @@ import {
   faCopy, // Copy/Paste
   faHandshake, // Partner
   faInfoCircle, // Notes
+  faListAlt, // Overview
   faMoon, // Dark mode
+  faStickyNote, // About
   faSync, // Reload data
   faUser, // Mun
   faUserSecret,
@@ -23,6 +26,7 @@ import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 Vue.use(VueClipboard);
 Vue.use(Toasted);
 library.add(
+  faAddressCard,
   faAdjust,
   faBriefcase,
   faClipboardCheck,
@@ -31,7 +35,9 @@ library.add(
   faDiscord,
   faHandshake,
   faInfoCircle,
+  faListAlt,
   faMoon,
+  faStickyNote,
   faSync,
   faUser,
   faUserSecret,

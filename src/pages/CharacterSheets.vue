@@ -27,11 +27,11 @@
       <div class="button-popover">reload data</div>
     </div>
     <div class="tab-container">
-      <Tab
-        :name="'Overview'"
-        :active="activeIndex === -1"
-        @click="activeIndex = -1"
-      />
+      <Tab :active="activeIndex === -1" @click="activeIndex = -1">
+        <slot>
+          <font-awesome-icon :icon="['fas', 'list-alt']" />
+        </slot>
+      </Tab>
       <simplebar class="tab-scroll-container">
         <Tab
           v-for="(sheet, index) in playerSheets"
@@ -122,6 +122,10 @@ export default {
   },
   data() {
     const gs = "https://docs.google.com/spreadsheets/d/e/KEY/pub?output=xlsx";
+    // This assumes that player sheets only contain players and
+    // likewise for reapers. That is to say, if the backend contains
+    // reapers sheets in the player workbook, those reapers would be considered
+    // "players" for the sake of filtering.
     return {
       activeIndex: -1,
       playersURL: gs.replace("KEY", window.playerKey),
@@ -307,6 +311,10 @@ button:hover {
 }
 
 /* Utility classes */
+.active {
+  opacity: 1 !important;
+}
+
 .clear {
   clear: both;
 }

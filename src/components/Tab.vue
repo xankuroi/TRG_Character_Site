@@ -5,7 +5,10 @@
     :style="tabStyle"
     @click="$emit('click')"
   >
-    {{ name }}
+    <template v-if="name">
+      {{ name }}
+    </template>
+    <slot v-else />
   </div>
 </template>
 
@@ -13,8 +16,7 @@
 export default {
   props: {
     name: {
-      type: String,
-      required: true
+      type: String
     },
     color: {
       type: String
@@ -53,7 +55,6 @@ export default {
   transition: 0.2s;
 }
 
-.active,
 .tab:hover {
   opacity: 1;
 }

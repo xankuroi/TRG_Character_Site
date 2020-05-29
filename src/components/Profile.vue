@@ -4,68 +4,70 @@
       {{ data.Name }}
     </template>
     <template v-slot:hero>
-      <div v-show="!showNoise" class="top-flex">
-        <div class="image-container noshrink">
-          <img :src="data['Image URL']" />
-        </div>
-        <div class="flex-grow flex-col" style="padding-left: 10px">
-          <div class="flex">
-            <div class="flex-col">
-              <div>
-                {{ data["Full Name"] }}
-                <span class="text-small"> - {{ data.Age }} - </span>
-                <span class="text-smaller">
-                  {{ data.Pronouns }}
-                </span>
-              </div>
-              <div v-if="isPlayer" @click="$emit('goto', data.Partner)">
-                <font-awesome-icon
-                  :icon="['fas', 'handshake']"
-                  :style="data.Color"
-                />
-                <span class="fade cursor"> {{ data.Partner }}</span>
-              </div>
-              <div v-else>
-                <font-awesome-icon
-                  :icon="['fas', 'briefcase']"
-                  :style="data.Color"
-                />
-                {{ data.Position }}
-              </div>
-            </div>
-            <div class="mun noshrink">
-              <div class="flex">
-                <div class="nowrap">
-                  <font-awesome-icon
-                    :icon="['fas', data.OwO ? data.OwO : 'user']"
-                    :style="data.Color"
-                  />
-                  <span class="text-small">
-                    {{ data.Mun }}
-                  </span>
-                </div>
-                <div v-if="data.Timezone" class="nowrap">
-                  <font-awesome-icon
-                    :icon="['fas', 'clock']"
-                    :style="data.Color"
-                  />
-                  <span class="text-small">
-                    {{ data.Timezone }}
-                  </span>
-                </div>
-              </div>
-              <div v-if="data.Discord" class="nowrap">
-                <font-awesome-icon
-                  :icon="['fab', 'discord']"
-                  :style="data.Color"
-                />
-                <span class="text-small">
-                  {{ data.Discord }}
-                </span>
-              </div>
-            </div>
+      <div class="hero">
+        <div class="info-container">
+          <div class="image-container noshrink">
+            <img :src="data['Image URL']" />
           </div>
-          <simplebar data-simplebar-auto-hide="false" class="sb text-small">
+          <div class="flex-grow flex-col" style="padding-left: 10px">
+            <div class="flex">
+              <div class="flex-col">
+                <div>
+                  {{ data["Full Name"] }}
+                  <span class="text-small"> - {{ data.Age }} - </span>
+                  <span class="text-smaller">
+                    {{ data.Pronouns }}
+                  </span>
+                </div>
+                <div v-if="isPlayer" @click="$emit('goto', data.Partner)">
+                  <font-awesome-icon
+                    :icon="['fas', 'handshake']"
+                    :style="data.Color"
+                  />
+                  <span class="fade cursor"> {{ data.Partner }}</span>
+                </div>
+                <div v-else>
+                  <font-awesome-icon
+                    :icon="['fas', 'briefcase']"
+                    :style="data.Color"
+                  />
+                  {{ data.Position }}
+                </div>
+              </div>
+              <div class="mun noshrink">
+                <div class="flex">
+                  <div class="nowrap">
+                    <font-awesome-icon
+                      :icon="['fas', data.OwO ? data.OwO : 'user']"
+                    />
+                    <span class="text-small">
+                      {{ data.Mun }}
+                    </span>
+                  </div>
+                  <div v-if="data.Timezone" class="nowrap">
+                    <font-awesome-icon
+                      :icon="['fas', 'clock']"
+                      :style="data.Color"
+                    />
+                    <span class="text-small">
+                      {{ data.Timezone }}
+                    </span>
+                  </div>
+                </div>
+                <div v-if="data.Discord" class="nowrap">
+                  <font-awesome-icon
+                    :icon="['fab', 'discord']"
+                    :style="data.Color"
+                  />
+                  <span class="text-small">
+                    {{ data.Discord }}
+                  </span>
+                </div>
+              </div>
+            </div>
+            <StatBlock :data="data" @goto="$emit('goto', $event)" />
+          </div>
+          <div v-show="show === 'info'" class="info text-small">
             <div>
               <template v-if="isPlayer">
                 <h4 :style="data.Color">Entry Fee</h4>
@@ -80,22 +82,49 @@
               <h4 :style="data.Color">Appearance</h4>
               <p>{{ data.Appearance }}</p>
             </div>
-          </simplebar>
-        </div>
-      </div>
-      <div v-show="showNoise" v-if="data.Role === 'Reaper'">
-        {{ data.Noise.Name }}
-        {{ data.Noise.Species }}
-        <img :src="data.Noise['Image URL']" />
-        <StatTile :stats="noiseStats.HP" :name="'HP'" :color="data.Color" />
-        <StatTile :stats="noiseStats.ATK" :name="'ATK'" :color="data.Color" />
-        <StatTile :stats="noiseStats.DEF" :name="'DEF'" :color="data.Color" />
+          </div>
+          <div v-show="show === 'noise'" v-if="!isPlayer" class="info">
+            {{ data.Noise.Name }}
+            {{ data.Noise.Species }}
+            <img :src="data.Noise['Image URL']" />
+            <StatTile :stats="noiseStats.HP" :name="'HP'" :color="data.Color" />
+            <StatTile
+              :stats="noiseStats.ATK"
+              :name="'ATK'"
+              :color="data.Color"
+            />
+            <StatTile
+              :stats="noiseStats.DEF"
+              :name="'DEF'"
+              :color="data.Color"
+            />
 
-        {{ data.Noise.Abilities }}
+            {{ data.Noise.Abilities }}
+          </div>
+        </div>
+        <div class="tab-container">
+          <span class="tab" :class="{ active: !show }" @click="show = false">
+            <font-awesome-icon :icon="['fas', 'address-card']" />
+          </span>
+          <span
+            class="tab"
+            :class="{ active: show === 'info' }"
+            @click="show = 'info'"
+          >
+            <font-awesome-icon :icon="['fas', 'sticky-note']" />
+          </span>
+          <span
+            v-if="!isPlayer"
+            class="tab"
+            :class="{ active: show === 'noise' }"
+            @click="show = 'noise'"
+          >
+            <font-awesome-icon :icon="['fas', 'wave-square']" />
+          </span>
+        </div>
       </div>
     </template>
     <template v-slot:content>
-      <StatBlock :data="data" @goto="$emit('goto', $event)" />
       <div class="deck">
         <template v-for="pin in data.Pins.equipped">
           <Pin class="pull-left" :data="pin" :key="pin.ID" />
@@ -143,7 +172,6 @@ import Pin from "./Pin";
 import Thread from "./Thread";
 import StatBlock from "./StatBlock";
 import StatTile from "./StatTile";
-import simplebar from "simplebar-vue";
 
 export default {
   components: {
@@ -152,8 +180,7 @@ export default {
     StatTile,
     Food,
     Pin,
-    Thread,
-    simplebar
+    Thread
   },
   props: {
     data: {
@@ -163,7 +190,7 @@ export default {
   },
   data() {
     return {
-      showNoise: false
+      show: false
     };
   },
   computed: {
@@ -194,22 +221,30 @@ p {
   margin-top: 0;
 }
 
-.top-flex {
-  display: flex;
-  height: 200px;
-  width: 100%;
+.active {
+  color: var(--color);
+}
+
+.tab {
+  background: var(--background-color);
+  color: var(--border-color);
+  cursor: pointer;
+  padding: 0 5px;
+}
+
+.tab:hover,
+.active {
+  color: var(--color);
+}
+
+.tab-container {
+  position: absolute;
+  bottom: -9px;
 }
 
 .flex {
   align-items: baseline;
   justify-content: space-between;
-}
-
-.sb {
-  display: flex;
-
-  height: 160px;
-  padding-left: 10px;
 }
 
 .mun {
@@ -228,6 +263,33 @@ p {
   display: inline-block;
   height: 200px;
   width: 200px;
+}
+
+.hero {
+  position: relative;
+  margin-bottom: 10px;
+}
+
+.info-container {
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  height: 200px;
+  width: 100%;
+  padding-bottom: 10px;
+  position: relative;
+}
+
+.info {
+  background: var(--background-color);
+  display: flex;
+  height: 200px;
+  overflow: hidden;
+  position: absolute;
+  width: 100%;
+}
+
+.info h4:first-child {
+  margin: 0;
 }
 
 .deck {
