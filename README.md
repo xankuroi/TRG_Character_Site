@@ -10,7 +10,7 @@ Current frontend uses sheetjs to process an xlsx export of the workbook.
 2. Publish sheet to web (File -> Publish to the web)
 3. Take the key from the publish link (https://docs.google.com/spreadsheets/d/e/THISISTHEKEY/pubhtml)
 4. In `vue.config.js`, add the new week to the `weeks` array.
-5. In `vue.config.js`, add two more entries in the pages directory, one for players and one for reapers. Everything should be the same as the other entries except for the week numbers and the `publishKey`
+5. In `vue.config.js`, add a new entry for the week in the `pages` object.
 6. Push changes to master
 
 ## Project setup
