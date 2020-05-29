@@ -1,7 +1,15 @@
 <template>
   <div class="container">
+    <div class="top-row text-smaller">
+      Show tabs:
+      <div class="fade cursor" :class="{active: showPlayers}" @click="toggle('showPlayers')">Players</div>
+      <div class="fade cursor" :class="{active: showReapers}" @click="toggle('showReapers')">Reapers</div>
+      <button style="float: right">
+        <font-awesome-icon :icon="['fas', 'adjust']" />
+      </button>
+    </div>
     <div class="button-container text-smaller">
-      <button v-on:click="loadData">
+      <button @click="loadData">
         <font-awesome-icon :icon="['fas', 'sync']" />
       </button>
       <div class="button-popover">reload data</div>
@@ -9,24 +17,24 @@
     <div class="tab-container flex">
       <Tab :name="'Overview'" :active="activeIndex === -1" @click="activeIndex = -1" />
       <div class="tab-scroll-container">
-        <template v-for="(sheet, index) in playerSheets">
-          <Tab
-            :name="sheet.Name"
-            :active="activeIndex === index"
-            :color="sheet.Color.color"
-            :key="'tp-' + index"
-            @click="activeIndex = index"
-          />
-        </template>
-        <template v-for="(sheet, index) in reaperSheets">
-          <Tab
-            :name="sheet.Name"
-            :active="activeIndex === index + pLen"
-            :color="sheet.Color.color"
-            :key="'tr-' + index"
-            @click="activeIndex = index + pLen"
-          />
-        </template>
+        <Tab
+          v-for="(sheet, index) in playerSheets"
+          v-show="loaded && showPlayers"
+          :name="sheet.Name"
+          :active="activeIndex === index"
+          :color="sheet.Color.color"
+          :key="'tp-' + index"
+          @click="activeIndex = index"
+        />
+        <Tab
+          v-for="(sheet, index) in reaperSheets"
+          v-show="loaded && showReapers"
+          :name="sheet.Name"
+          :active="activeIndex === index + pLen"
+          :color="sheet.Color.color"
+          :key="'tr-' + index"
+          @click="activeIndex = index + pLen"
+        />
       </div>
     </div>
     <div class="content-container">
@@ -102,7 +110,9 @@ export default {
       ploaded: false,
       rloaded: false,
       playerSheets: {},
-      reaperSheets: {}
+      reaperSheets: {},
+      showPlayers: true,
+      showReapers: true
     };
   },
   computed: {
@@ -128,6 +138,9 @@ export default {
       this.activeIndex = this.playerSheets.findIndex(
         data => data.Name === name
       );
+    },
+    toggle(showKey) {
+      this[showKey] = !this[showKey];
     }
   },
   mounted() {
@@ -142,12 +155,25 @@ export default {
   width: 100%;
 }
 
+.top-row div {
+  border: 2px solid transparent;
+  border-radius: 4px;
+  display: inline-block;
+  margin-right: 2px;
+  padding: 2px;
+}
+
+.top-row .active {
+  border-color: var(--border-color);
+  border-radius: 8px;
+}
+
 .button-container {
   background: var(--background-color);
   border-radius: 25%;
   position: absolute;
   right: -3px;
-  top: 55px;
+  top: 75px;
   z-index: 2;
 }
 
@@ -176,8 +202,8 @@ export default {
   border: 3px solid var(--border-color);
   border-radius: 5px;
   padding: 10px;
-  min-height: 500px;
-  height: 80vh;
+  min-height: 300px;
+  height: 75vh;
   position: relative;
 }
 

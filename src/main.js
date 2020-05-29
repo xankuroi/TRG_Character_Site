@@ -4,11 +4,11 @@ import Toasted from "vue-toasted";
 import App from "./App";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {
+  faAdjust, //
   faBriefcase, // Position
   faClipboardCheck, // Copied!
   faClock, // Timezone
   faCopy, // Copy/Paste
-  // faDiscord, // Discord
   faHandshake, // Partner
   faSync, // Reload data
   faUser, // Mun
@@ -21,6 +21,7 @@ import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 Vue.use(VueClipboard);
 Vue.use(Toasted);
 library.add(
+  faAdjust,
   faBriefcase,
   faClipboardCheck,
   faClock,
