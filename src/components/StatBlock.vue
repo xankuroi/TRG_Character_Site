@@ -1,5 +1,12 @@
 <template>
   <div class="stat-block">
+    <button type="button" v-clipboard:copy="data.CP" @click="toast(data.Name)">
+      <font-awesome-icon
+        class="fade"
+        :icon="['fas', 'copy']"
+        :style="data.Color"
+      />
+    </button>
     <div class="flex">
       <StatTile :stats="data.HP" :color="data.Color" :name="'HP'">
         <template v-slot:before>
@@ -26,25 +33,14 @@
         <template v-slot:after>%</template>
       </StatTile>
     </div>
-    <div class="flex">
-      <StatTile :stats="{ total: data.Yen }" :color="data.Color" :name="'¥'" />
+    <div class="flex" style="float:right;">
       <StatTile
         v-if="data.Role === 'Player'"
         :stats="{ total: data.PP }"
         :color="data.Color"
         :name="'PP'"
       />
-      <button
-        type="button"
-        v-clipboard:copy="data.CP"
-        @click="toast(data.Name)"
-      >
-        <font-awesome-icon
-          class="fade"
-          :icon="['fas', 'copy']"
-          :style="data.Color"
-        />
-      </button>
+      <StatTile :stats="{ total: data.Yen }" :color="data.Color" :name="'¥'" />
     </div>
   </div>
 </template>

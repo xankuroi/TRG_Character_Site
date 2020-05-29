@@ -12,7 +12,11 @@
           <div class="flex">
             <div class="flex-col">
               <div>
-                {{ data.Name }} // {{ data.Age }} // {{ data.Pronouns }}
+                {{ data["Full Name"] }}
+                <span class="text-small"> - {{ data.Age }} - </span>
+                <span class="text-smaller">
+                  {{ data.Pronouns }}
+                </span>
               </div>
               <div v-if="isPlayer" @click="$emit('goto', data.Partner)">
                 <font-awesome-icon
@@ -39,14 +43,14 @@
                     {{ data.Mun }}
                   </span>
                 </div>
-                <div class="nowrap">
+                <div v-if="data.Timezone" class="nowrap">
                   <font-awesome-icon :icon="['fas', 'clock']" />
                   <span class="text-small">
                     {{ data.Timezone }}
                   </span>
                 </div>
               </div>
-              <div class="nowrap">
+              <div v-if="data.Discord" class="nowrap">
                 <font-awesome-icon :icon="['fab', 'discord']" />
                 <span class="text-small">
                   {{ data.Discord }}
@@ -54,7 +58,7 @@
               </div>
             </div>
           </div>
-          <simplebar data-simplebar-auto-hide="false" class="sb">
+          <simplebar data-simplebar-auto-hide="false" class="sb text-small">
             <div>
               <template v-if="isPlayer">
                 <h4 :style="data.Color">Entry Fee</h4>
@@ -179,7 +183,7 @@ h4 {
 }
 
 p {
-  font-size: 0.85em;
+  font-size: 0.9em;
   margin-top: 0;
 }
 
@@ -190,18 +194,23 @@ p {
 }
 
 .flex {
+  align-items: baseline;
   justify-content: space-between;
 }
 
 .sb {
   display: flex;
 
-  height: 150px;
+  height: 160px;
   padding-left: 10px;
 }
 
 .mun {
-  max-width: 200px;
+  max-width: 250px;
+}
+
+.mun div {
+  margin-bottom: 2px;
 }
 
 .inventory {
