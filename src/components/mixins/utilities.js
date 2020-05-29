@@ -16,6 +16,14 @@ export const publicPath = {
   }
 };
 
+export const isPlayer = {
+  methods: {
+    isPlayer(data) {
+      return data.Role === "Player";
+    }
+  }
+};
+
 export const brandData = {
   data() {
     return {

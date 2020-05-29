@@ -71,11 +71,13 @@ function processCharacterData(sheet, config, lookup) {
   data.Pins = groupEquip(data.Pins);
   data.Threads = groupEquip(data.Threads);
 
-  // Add thread stats into total
+  // Calculate stat totals
   let eStats = equippedStats(data.Threads.equipped, data.Pronouns);
   ["HP", "ATK", "DEF"].forEach(stat => {
     data[stat].threads = eStats[stat];
     data[stat].total = data[stat].raw + data[stat].misc + data[stat].threads;
+    data.Noise[stat].total =
+      data.Noise[stat].raw + data.Noise[stat].misc + data.Noise[stat].trained;
   });
 
   // Additional color parsing
@@ -107,9 +109,12 @@ function processCharacterData(sheet, config, lookup) {
 }
 
 function formatPinData(pin, atk) {
-  let s = `${pin.ID} ${pin.Name} ${pin.ATK} (${pin.ATK + atk})`;
+  let s = `${pin.ID} ${pin.Name}`;
+  if (pin.ATK !== "") {
+    s += ` ${pin.ATK} (${pin.ATK + atk})`;
+  }
   if (pin.Extras) {
-    s += `- *${pin.Extras}*`;
+    s += ` - *${pin.Extras.trim()}*`;
   }
   return s;
 }

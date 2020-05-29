@@ -273,7 +273,16 @@ export default {
 /* Global styles */
 img {
   height: 100%;
-  max-width: 100%;
+  width: auto;
+}
+
+p {
+  font-size: 0.9em;
+  margin-top: 0;
+}
+
+h4 {
+  margin: 0;
 }
 
 button {
@@ -344,7 +353,6 @@ button:hover {
 
 .flex-grow {
   flex-grow: 1;
-  min-width: 0;
 }
 
 .text-left {
