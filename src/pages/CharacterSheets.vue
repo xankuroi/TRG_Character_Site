@@ -2,8 +2,20 @@
   <div class="container">
     <div class="top-row text-smaller">
       Show tabs:
-      <div class="fade cursor" :class="{active: showPlayers}" @click="toggle('showPlayers')">Players</div>
-      <div class="fade cursor" :class="{active: showReapers}" @click="toggle('showReapers')">Reapers</div>
+      <div
+        class="fade cursor"
+        :class="{ active: showPlayers }"
+        @click="toggle('showPlayers')"
+      >
+        Players
+      </div>
+      <div
+        class="fade cursor"
+        :class="{ active: showReapers }"
+        @click="toggle('showReapers')"
+      >
+        Reapers
+      </div>
       <button style="float: right">
         <font-awesome-icon :icon="['fas', 'adjust']" />
       </button>
@@ -14,9 +26,13 @@
       </button>
       <div class="button-popover">reload data</div>
     </div>
-    <div class="tab-container flex">
-      <Tab :name="'Overview'" :active="activeIndex === -1" @click="activeIndex = -1" />
-      <div class="tab-scroll-container">
+    <div class="tab-container">
+      <Tab
+        :name="'Overview'"
+        :active="activeIndex === -1"
+        @click="activeIndex = -1"
+      />
+      <simplebar class="tab-scroll-container">
         <Tab
           v-for="(sheet, index) in playerSheets"
           v-show="loaded && showPlayers"
@@ -35,7 +51,7 @@
           :key="'tr-' + index"
           @click="activeIndex = index + pLen"
         />
-      </div>
+      </simplebar>
     </div>
     <div class="content-container">
       <Loader v-show="!loaded" />
@@ -91,15 +107,18 @@ import OverviewRow from "../components/OverviewRow";
 import Profile from "../components/Profile";
 import Tab from "../components/Tab";
 import TabContent from "../components/TabContent";
+import simplebar from "simplebar-vue";
 import { processSpreadsheet } from "../components/mixins/processSheets";
+import "simplebar/dist/simplebar.min.css";
 
 export default {
   components: {
+    Loader,
     OverviewRow,
     Profile,
     Tab,
     TabContent,
-    Loader
+    simplebar
   },
   data() {
     const gs = "https://docs.google.com/spreadsheets/d/e/KEY/pub?output=xlsx";
@@ -209,14 +228,16 @@ export default {
 
 .tab-container {
   box-sizing: border-box;
-  padding: 10px;
-  overflow: auto;
-  width: 90%;
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 20px;
+  width: 100%;
+  z-index: 100;
 }
 
 .tab-scroll-container {
-  overflow: hidden;
-  white-space: nowrap;
+  flex-grow: 1;
+  min-width: 0;
 }
 
 .overview-table {
@@ -249,5 +270,19 @@ export default {
   .hide-small {
     display: none;
   }
+}
+
+.simplebar-content {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.simplebar-scrollbar:before {
+  background: var(--border-color);
+}
+
+.simplebar-track.simplebar-horizontal {
+  height: 5px;
+  bottom: -2px;
 }
 </style>
