@@ -125,7 +125,9 @@ export default {
         .then(() => this.$nextTick(() => (this.rloaded = true)));
     },
     handleGoto(name) {
-      this.activeIndex = this.sheets.findIndex(data => data.Name === name);
+      this.activeIndex = this.playerSheets.findIndex(
+        data => data.Name === name
+      );
     }
   },
   mounted() {
@@ -206,15 +208,20 @@ export default {
 }
 
 @media (max-width: 450px) {
-  .hide-small {
-    display: none;
-  }
-
-  .overview-table td {
+  .overview-table {
     font-size: 0.85em;
   }
+
   .content-container {
     padding: 10px 0;
+  }
+}
+</style>
+
+<style>
+@media (max-width: 600px) {
+  .hide-small {
+    display: none;
   }
 }
 </style>
