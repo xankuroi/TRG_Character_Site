@@ -82,6 +82,6 @@ export default {
 <style scoped>
 .stat-block .flex {
   display: inline-flex;
-  margin-bottom: 5px;
+  margin: 5px 0;
 }
 </style>

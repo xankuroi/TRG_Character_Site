@@ -266,13 +266,33 @@ export default {
 </style>
 
 <style>
+/* Global styles */
+img {
+  height: 100%;
+  max-width: 100%;
+}
+
+button {
+  background: none;
+  border: none;
+  color: var(--border-color);
+  cursor: pointer;
+  font-family: inherit;
+  font-size: inherit;
+  transition: 0.2s;
+}
+
+button:hover {
+  color: var(--text-color);
+}
+
 @media (max-width: 600px) {
   .hide-small {
     display: none;
   }
 }
 
-.simplebar-content {
+.tab-container .simplebar-content {
   display: flex;
   flex-wrap: nowrap;
 }
@@ -284,5 +304,67 @@ export default {
 .simplebar-track.simplebar-horizontal {
   height: 5px;
   bottom: -2px;
+}
+
+/* Utility classes */
+.clear {
+  clear: both;
+}
+
+.cursor {
+  cursor: pointer;
+}
+
+.fade {
+  opacity: 0.5;
+  transition: 0.2s;
+}
+
+.fade:hover {
+  opacity: 1;
+}
+
+.flex {
+  align-items: center;
+  display: flex;
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-grow {
+  flex-grow: 1;
+  min-width: 0;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-small {
+  font-size: 0.85em;
+}
+
+.text-smaller {
+  font-size: 0.8em;
+}
+
+.pull-left {
+  float: left;
+}
+
+.inline-block {
+  display: inline-block;
+}
+
+.nowrap {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.noshrink {
+  flex-shrink: 0;
 }
 </style>
