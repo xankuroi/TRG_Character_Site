@@ -4,7 +4,7 @@ module.exports = {
     index: {
       entry: "src/index.js",
       title: "The Reaper's Game Character Sheets",
-      weeks: ["W17", "W18"]
+      weeks: ["W17"]
     },
     "W17 Characters": {
       entry: "src/main.js",

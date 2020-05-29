@@ -3,9 +3,16 @@
     <Index v-if="weeks[0]" :weeks="weeks" />
     <template v-else>
       <CharacterSheets />
-      <div class="clear text-smaller" :style="{ opacity: 0.6 }">
-        Site creds: Xan (@xankuroi). Please report any issues to #hacklab or
-        #meta in the TRG Discord.
+      <div
+        class="clear text-smaller popover-container"
+        :style="{ opacity: 0.6, position: 'absolute' }"
+      >
+        <font-awesome-icon :icon="['fas', 'info-circle']" />
+        <div class="popover">
+          Changes may take up to five minutes to reflect in the sheet.<br />Please
+          report any issues to #hacklab or #meta in the TRG Discord.<br />Site
+          creds: Xan (@xankuroi).
+        </div>
       </div>
     </template>
   </div>
@@ -48,6 +55,20 @@ export default {
   text-align: left;
   margin: 0 auto;
   max-width: 1024px;
+}
+
+.popover {
+  background: var(--background-color);
+  bottom: 10px;
+  left: 10px;
+  max-width: 0;
+  overflow: hidden;
+  position: absolute;
+  width: 90vw;
+}
+
+.popover-container:hover .popover {
+  max-width: 100vw;
 }
 
 /* Global styles */

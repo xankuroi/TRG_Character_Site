@@ -4,12 +4,14 @@ import Toasted from "vue-toasted";
 import App from "./App";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {
-  faAdjust, //
+  faAdjust, // Light mode
   faBriefcase, // Position
   faClipboardCheck, // Copied!
   faClock, // Timezone
   faCopy, // Copy/Paste
   faHandshake, // Partner
+  faInfoCircle, // Notes
+  faMoon, // Dark mode
   faSync, // Reload data
   faUser, // Mun
   faUserSecret,
@@ -28,6 +30,8 @@ library.add(
   faCopy,
   faDiscord,
   faHandshake,
+  faInfoCircle,
+  faMoon,
   faSync,
   faUser,
   faUserSecret,

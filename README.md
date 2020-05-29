@@ -1,6 +1,6 @@
 # TRG Character Sheets
 
-This is the frontend for the TRG character sheets. The "database" is a number of Google sheets. W15 and W16 are currently hard-coded pages and do not pull from any sheets due to the closing of sheets API v3.
+This is the frontend for the TRG character sheets. The "database" is a number of Google sheets. W15 and W16 are hard-coded pages and do not pull from any sheets due to the closure of Google Sheets API v3.
 
 Current frontend uses sheetjs to process an xlsx export of the workbook.
 

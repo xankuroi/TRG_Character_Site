@@ -12,8 +12,7 @@
       <li><a :href="publicPath + 'W16/players.html'"> W16 Players </a></li>
       <li><a :href="publicPath + 'W16/reapers.html'"> W16 Reapers </a></li>
     </ul>
-    <br />
-    <ul class="list">
+    <ul class="list" style="line-height:2em;">
       <li v-for="week in weeks" :key="week">
         <a :href="publicPath + week">{{ week }} Characters</a>
       </li>
@@ -37,6 +36,5 @@ export default {
 <style scoped>
 .list {
   list-style-type: none;
-  line-height: 2em;
 }
 </style>

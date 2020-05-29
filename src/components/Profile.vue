@@ -38,20 +38,27 @@
                 <div class="nowrap">
                   <font-awesome-icon
                     :icon="['fas', data.OwO ? data.OwO : 'user']"
+                    :style="data.Color"
                   />
                   <span class="text-small">
                     {{ data.Mun }}
                   </span>
                 </div>
                 <div v-if="data.Timezone" class="nowrap">
-                  <font-awesome-icon :icon="['fas', 'clock']" />
+                  <font-awesome-icon
+                    :icon="['fas', 'clock']"
+                    :style="data.Color"
+                  />
                   <span class="text-small">
                     {{ data.Timezone }}
                   </span>
                 </div>
               </div>
               <div v-if="data.Discord" class="nowrap">
-                <font-awesome-icon :icon="['fab', 'discord']" />
+                <font-awesome-icon
+                  :icon="['fab', 'discord']"
+                  :style="data.Color"
+                />
                 <span class="text-small">
                   {{ data.Discord }}
                 </span>
