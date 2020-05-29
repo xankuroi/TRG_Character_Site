@@ -1,24 +1,35 @@
 <template>
-  <ul class="list">
-    <template v-for="week in weeks">
-      <li :key="week + '-player'">
-        <a :href="publicPath + week + '/players.html'"> {{ week }} Players </a>
+  <div>
+    <ul class="list">
+      <li class="text-smaller">
+        W15 and W16 sheets are separated into players and reapers for legacy
+        reasons. Additionally, they do not have a dark theme available.
       </li>
-      <li :key="week + '-reaper'">
-        <a :href="publicPath + week + '/reapers.html'"> {{ week }} Reapers </a>
+      <li><a :href="publicPath + 'W15/players.html'"> W15 Players </a></li>
+      <li><a :href="publicPath + 'W15/reapers.html'"> W15 Reapers </a></li>
+    </ul>
+    <ul class="list">
+      <li><a :href="publicPath + 'W16/players.html'"> W16 Players </a></li>
+      <li><a :href="publicPath + 'W16/reapers.html'"> W16 Reapers </a></li>
+    </ul>
+    <br />
+    <ul class="list">
+      <li v-for="week in weeks" :key="week">
+        <a :href="publicPath + week">{{ week }} Characters</a>
       </li>
-    </template>
-  </ul>
+    </ul>
+  </div>
 </template>
 
 <script>
 import { publicPath } from "../components/mixins/utilities";
 export default {
   mixins: [publicPath],
-  data() {
-    return {
-      weeks: window.weeks
-    };
+  props: {
+    weeks: {
+      type: Array,
+      required: true
+    }
   }
 };
 </script>

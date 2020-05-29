@@ -5,10 +5,10 @@
 <style scoped>
 .lds-dual-ring {
   position: absolute;
-  width: 80px;
   height: 80px;
-  top: 50%;
-  right: 50%;
+  top: 30%;
+  left: 50%;
+  margin: -32px;
 }
 .lds-dual-ring:after {
   content: " ";

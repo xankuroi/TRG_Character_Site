@@ -1,13 +1,13 @@
 <template>
   <div id="app">
-    <template v-if="keyPresent">
+    <Index v-if="weeks[0]" :weeks="weeks" />
+    <template v-else>
       <CharacterSheets />
       <div class="clear text-smaller" :style="{ opacity: 0.6 }">
         Site creds: Xan (@xankuroi). Please report any issues to #hacklab or
         #meta in the TRG Discord.
       </div>
     </template>
-    <Index v-else />
   </div>
 </template>
 
@@ -20,7 +20,7 @@ export default {
   },
   data() {
     return {
-      keyPresent: !!window.publishKey
+      weeks: window.weeks.split(",")
     };
   }
 };
@@ -32,7 +32,6 @@ export default {
 @import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
 
 :root {
-  color-scheme: light dark;
   --text-color: #2c3e50;
   --background-color: #fff;
   --border-color: lightgray;
@@ -109,6 +108,10 @@ button:hover {
 .flex {
   align-items: center;
   display: flex;
+}
+
+.text-left {
+  text-align: left;
 }
 
 .text-small {

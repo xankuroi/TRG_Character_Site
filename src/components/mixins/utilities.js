@@ -1,3 +1,13 @@
+export const toast = {
+  methods: {
+    toast(name) {
+      this.$toasted.show(`Copied ${name}'s stats!`, {
+        duration: 1500
+      });
+    }
+  }
+};
+
 export const publicPath = {
   data() {
     return {

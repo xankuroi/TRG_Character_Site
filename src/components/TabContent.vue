@@ -3,9 +3,7 @@
     <h1 class="header" :style="color">
       <slot name="title" />
     </h1>
-    <div class="hero">
-      <slot name="hero" />
-    </div>
+    <slot name="hero" />
     <div class="content">
       <slot name="content" />
     </div>

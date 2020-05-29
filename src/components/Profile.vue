@@ -4,20 +4,60 @@
       {{ data.Name }}
     </template>
     <template v-slot:hero>
-      <div class="image-container pull-left">
-        <img :src="data['Image URL']" />
+      <div v-show="!showNoise" class="top-flex">
+        <div class="image-container pull-left">
+          <img :src="data['Image URL']" />
+        </div>
+        <div class="info flex-col">
+          <div>{{ data.Name }} // {{ data.Age }} // {{ data.Pronouns }}</div>
+          <div
+            v-if="data.Role === 'Player'"
+            @click="$emit('goto', data.Partner)"
+          >
+            <font-awesome-icon
+              :icon="['fas', 'handshake']"
+              :style="data.Color"
+            />
+            <span class="fade cursor"> {{ data.Partner }}</span>
+          </div>
+          <div v-else>
+            <font-awesome-icon
+              :icon="['fas', 'briefcase']"
+              :style="data.Color"
+            />
+            {{ data.Position }}
+          </div>
+          <template v-if="data.Role === 'Player'">
+            <h4 :style="data.Color">Entry Fee</h4>
+            <p>{{ data["Entry Fee"] }}</p>
+            <h4 :style="data.Color">Reason to Live</h4>
+            <p>{{ data["Reason to Live"] }}</p>
+          </template>
+          <h4 :style="data.Color">Personality</h4>
+          <p>{{ data.Personality }}</p>
+        </div>
+        <div class="mun flex-col">
+          <font-awesome-icon :icon="['fas', data.OwO ? data.OwO : 'user']" />
+          {{ data.Mun }}
+          <font-awesome-icon :icon="['fas', 'clock']" />
+          {{ data.Timezone }}
+          {{ data.Discord }}
+        </div>
       </div>
+
+      <div v-show="showNoise" v-if="data.Role === 'Reaper'">
+        {{ data.Noise.Name }}
+        {{ data.Noise.Species }}
+        <img :src="data.Noise['Image URL']" />
+        <StatTile :stats="noiseStats.HP" :name="'HP'" :color="data.Color" />
+        <StatTile :stats="noiseStats.ATK" :name="'ATK'" :color="data.Color" />
+        <StatTile :stats="noiseStats.DEF" :name="'DEF'" :color="data.Color" />
+
+        {{ data.Noise.Abilities }}
+      </div>
+    </template>
+    <template v-slot:content>
       <StatBlock :data="data" @goto="$emit('goto', $event)" />
-      <div class="info">
-        <template v-if="data.Role === 'Player'">
-          <h4 :style="data.Color">Entry Fee</h4>
-          <p>{{ data["Entry Fee"] }}</p>
-          <h4 :style="data.Color">Reason to Live</h4>
-          <p>{{ data["Reason to Live"] }}</p>
-        </template>
-        <h4 :style="data.Color">Personality</h4>
-        <p>{{ data.Personality }}</p>
-      </div>
       <div class="deck">
         <template v-for="pin in data.Pins.equipped">
           <Pin class="pull-left" :data="pin" :key="pin.ID" />
@@ -34,8 +74,6 @@
           :key="thread.ID"
         />
       </div>
-    </template>
-    <template v-slot:content>
       <div class="inventory">
         <Food
           v-for="food in data.Food"
@@ -66,11 +104,13 @@ import Food from "./Food";
 import Pin from "./Pin";
 import Thread from "./Thread";
 import StatBlock from "./StatBlock";
+import StatTile from "./StatTile";
 
 export default {
   components: {
     TabContent,
     StatBlock,
+    StatTile,
     Food,
     Pin,
     Thread
@@ -79,6 +119,23 @@ export default {
     data: {
       type: Object,
       required: true
+    }
+  },
+  data() {
+    return {
+      showNoise: false
+    };
+  },
+  computed: {
+    noiseStats() {
+      let moddedData = this.data.Noise;
+      ["HP", "ATK", "DEF"].forEach(stat => {
+        moddedData[stat].total = Object.values(moddedData[stat]).reduce(
+          (acc, curr) => acc + curr,
+          0
+        );
+      });
+      return moddedData;
     }
   }
 };
@@ -91,6 +148,17 @@ h4 {
 
 p {
   margin-top: 0;
+}
+
+.top-flex {
+  display: flex;
+}
+
+.flex-col {
+  flex-grow: 1;
+}
+.mun {
+  max-width: 200px;
 }
 
 .inventory {

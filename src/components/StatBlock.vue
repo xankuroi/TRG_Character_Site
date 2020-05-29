@@ -1,14 +1,5 @@
 <template>
   <div class="stat-block">
-    <div>{{ data.Name }} // {{ data.Age }} // {{ data.Pronouns }}</div>
-    <div v-if="data.Role === 'Player'" @click="$emit('goto', data.Partner)">
-      <font-awesome-icon :icon="['fas', 'handshake']" :style="data.Color" />
-      <span class="fade cursor"> {{ data.Partner }}</span>
-    </div>
-    <div v-else>
-      <font-awesome-icon :icon="['fas', 'briefcase']" :style="data.Color" />
-      {{ data.Position }}
-    </div>
     <div class="flex">
       <StatTile :stats="data.HP" :color="data.Color" :name="'HP'">
         <template v-slot:before>
@@ -21,6 +12,7 @@
     <div class="flex">
       <StatTile :stats="data.DEF" :color="data.Color" :name="'DEF'" />
       <StatTile
+        v-if="data.BRV !== undefined"
         :stats="{ total: data.BRV }"
         :color="data.Color"
         :name="'BRV'"
@@ -31,7 +23,7 @@
         :color="data.Color"
         :name="'SYNC'"
       >
-        <template v-slot:after>% </template>
+        <template v-slot:after>%</template>
       </StatTile>
     </div>
     <div class="flex">
@@ -42,17 +34,30 @@
         :color="data.Color"
         :name="'PP'"
       />
+      <button
+        type="button"
+        v-clipboard:copy="data.CP"
+        @click="toast(data.Name)"
+      >
+        <font-awesome-icon
+          class="fade"
+          :icon="['fas', 'copy']"
+          :style="data.Color"
+        />
+      </button>
     </div>
   </div>
 </template>
 
 <script>
 import StatTile from "./StatTile";
+import { toast } from "./mixins/utilities";
 
 export default {
   components: {
     StatTile
   },
+  mixins: [toast],
   props: {
     data: {
       type: Object,
@@ -75,10 +80,6 @@ export default {
 </script>
 
 <style scoped>
-.stat-block {
-  height: 200px;
-}
-
 .stat-block .flex {
   display: inline-flex;
   margin-bottom: 5px;
