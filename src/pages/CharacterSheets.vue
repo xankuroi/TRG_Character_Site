@@ -27,10 +27,8 @@
       <div class="button-popover">reload data</div>
     </div>
     <div class="tab-container">
-      <Tab :active="activeIndex === -1" @click="activeIndex = -1">
-        <slot>
-          <font-awesome-icon :icon="['fas', 'list-alt']" />
-        </slot>
+      <Tab :active="activeIndex === -1" @click="handleTabSelection(-1)">
+        <slot><font-awesome-icon :icon="['fas', 'list-alt']"/></slot>
       </Tab>
       <simplebar class="tab-scroll-container">
         <Tab
@@ -40,7 +38,7 @@
           :active="activeIndex === index"
           :color="sheet.Color.color"
           :key="'tp-' + index"
-          @click="activeIndex = index"
+          @click="handleTabSelection(index)"
         />
         <Tab
           v-for="(sheet, index) in reaperSheets"
@@ -49,7 +47,7 @@
           :active="activeIndex === index + pLen"
           :color="sheet.Color.color"
           :key="'tr-' + index"
-          @click="activeIndex = index + pLen"
+          @click="handleTabSelection(index + pLen)"
         />
       </simplebar>
     </div>
@@ -71,13 +69,13 @@
                 v-for="(sheet, index) in playerSheets"
                 :sheet="sheet"
                 :key="'ovp-' + index"
-                @click="activeIndex = index"
+                @click="handleTabSelection(index)"
               />
               <OverviewRow
                 v-for="(sheet, index) in reaperSheets"
                 :sheet="sheet"
                 :key="'ovr-' + index"
-                @click="activeIndex = index + pLen"
+                @click="handleTabSelection(index + pLen)"
               />
             </table>
           </template>
@@ -161,13 +159,21 @@ export default {
       this.activeIndex = this.playerSheets.findIndex(
         data => data.Name === name
       );
+      localStorage.activeIndex = this.activeIndex;
     },
     toggle(showKey) {
       this[showKey] = !this[showKey];
+    },
+    handleTabSelection(index) {
+      this.activeIndex = index;
+      localStorage.activeIndex = index;
     }
   },
   mounted() {
     this.loadData();
+    if (localStorage.activeIndex) {
+      this.activeIndex = Number(localStorage.activeIndex);
+    }
   }
 };
 </script>
