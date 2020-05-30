@@ -46,19 +46,22 @@
     </template>
     <template v-slot:content>
       <div class="deck">
-        <template v-for="pin in data.Pins.equipped">
-          <Pin class="pull-left" :data="pin" :key="pin.ID" />
+        <template v-for="(pin, index) in data.Pins.equipped">
+          <Pin class="pull-left" :data="pin" :key="data.Name + 'pin' + index" />
         </template>
         <template v-for="index in 6 - data.Pins.equipped.length">
-          <div class="circle pull-left" :key="index"></div>
+          <div
+            class="circle pull-left"
+            :key="data.Name + 'pin' + (6 - index)"
+          ></div>
         </template>
       </div>
-      <div class="threads">
+      <div class="gear">
         <Thread
           class="pull-left"
           v-for="thread in data.Threads.equipped"
           :data="thread"
-          :key="thread.ID"
+          :key="data.Name + 'thread' + thread.ID"
         />
       </div>
       <div class="inventory">
@@ -66,19 +69,19 @@
           v-for="food in data.Food"
           class="pull-left"
           :data="food"
-          :key="food.ID"
+          :key="data.Name + food.ID"
         />
         <Pin
-          v-for="pin in data.Pins.unequipped"
+          v-for="(pin, index) in data.Pins.unequipped"
           class="pull-left"
           :data="pin"
-          :key="pin.ID"
+          :key="data.Name + 'pin' + pin.ID + index"
         />
         <Thread
-          v-for="thread in data.Threads.unequipped"
+          v-for="(thread, index) in data.Threads.unequipped"
           class="pull-left"
           :data="thread"
-          :key="thread.ID"
+          :key="data.Name + 'thread' + thread.ID + index"
         />
       </div>
     </template>
