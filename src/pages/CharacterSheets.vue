@@ -6,16 +6,12 @@
         class="fade cursor"
         :class="{ active: showPlayers }"
         @click="toggle('showPlayers')"
-      >
-        Players
-      </div>
+      >Players</div>
       <div
         class="fade cursor"
         :class="{ active: showReapers }"
         @click="toggle('showReapers')"
-      >
-        Reapers
-      </div>
+      >Reapers</div>
       <button style="float: right">
         <font-awesome-icon :icon="['fas', 'adjust']" />
       </button>
@@ -28,7 +24,9 @@
     </div>
     <div class="tab-container">
       <Tab :active="activeIndex === -1" @click="handleTabSelection(-1)">
-        <slot><font-awesome-icon :icon="['fas', 'list-alt']"/></slot>
+        <slot>
+          <font-awesome-icon :icon="['fas', 'list-alt']" />
+        </slot>
       </Tab>
       <simplebar class="tab-scroll-container">
         <Tab
@@ -51,7 +49,8 @@
         />
       </simplebar>
     </div>
-    <div class="content-container">
+    <h1 class="header" :style="activeData.Color">{{ activeData.Name }}</h1>
+    <simplebar class="content-container">
       <Loader v-show="!loaded" />
       <template v-if="loaded">
         <TabContent v-show="activeIndex === -1" :key="'overview'">
@@ -95,7 +94,7 @@
           @goto="handleGoto"
         />
       </template>
-    </div>
+    </simplebar>
   </div>
 </template>
 
@@ -142,6 +141,16 @@ export default {
     },
     pLen() {
       return Object.keys(this.playerSheets).length;
+    },
+    activeData() {
+      if (this.loaded) {
+        if (this.activeIndex >= this.pLen) {
+          return this.reaperSheets[this.activeIndex - this.pLen];
+        } else if (this.activeIndex > 0) {
+          return this.playerSheets[this.activeIndex];
+        }
+      }
+      return { Color: {}, Name: "Overview" };
     }
   },
   methods: {
@@ -234,6 +243,17 @@ export default {
   min-height: 300px;
   height: 75vh;
   position: relative;
+}
+
+.header {
+  background: var(--background-color);
+  border-radius: 5px;
+  margin: 0;
+  padding: 0 5px;
+  position: absolute;
+  top: 2em;
+  left: 10px;
+  z-index: 666;
 }
 
 .tab-container {

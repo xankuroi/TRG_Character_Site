@@ -1,8 +1,5 @@
 <template>
   <div class="tab-content">
-    <h1 class="header" :style="color">
-      <slot name="title" />
-    </h1>
     <slot name="hero" />
     <div class="content">
       <slot name="content" />
@@ -26,16 +23,6 @@ export default {
 .tab-content {
   padding: 10px;
   position: relative;
-}
-
-.header {
-  background: var(--background-color);
-  border-radius: 5px;
-  margin: 0;
-  padding: 0 5px;
-  position: absolute;
-  top: -1em;
-  left: -5px;
 }
 
 @media (max-width: 450px) {

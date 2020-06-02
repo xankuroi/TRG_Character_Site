@@ -1,6 +1,5 @@
 <template>
   <TabContent :color="data.Color">
-    <template v-slot:title>{{ data.Name }}</template>
     <template v-slot:hero>
       <div class="hero">
         <div class="info-container">
