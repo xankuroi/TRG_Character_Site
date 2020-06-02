@@ -9,7 +9,7 @@
         </div>
         <div v-if="isPlayer(data) && data.Partner" @click="$emit('goto', data.Partner)">
           <font-awesome-icon :icon="['fas', 'handshake']" :style="data.Color" />
-          <span class="fade cursor">{{ data.Partner }}</span>
+          <span class="fade cursor">{{ ' ' + data.Partner }}</span>
         </div>
         <div v-else>
           <font-awesome-icon :icon="['fas', 'briefcase']" :style="data.Color" />
