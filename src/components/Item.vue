@@ -76,6 +76,7 @@ export default {
   margin-bottom: 2px;
   margin-left: 5px;
   min-width: 48px;
+  user-select: none;
   white-space: nowrap;
 }
 

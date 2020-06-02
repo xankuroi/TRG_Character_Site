@@ -115,28 +115,26 @@ export default {
   color: white;
   cursor: pointer;
   font-size: 0.9em;
-  position: absolute;
   left: 7px;
+  position: absolute;
   text-shadow: 2px 2px 0 black, -1px -1px 0 grey, 1px -1px 0 grey,
     -1px 1px 0 grey, 1px 1px 0 grey;
   z-index: 3;
 }
 
 .item-name {
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(0, 0, 0, 0.5);
   color: white;
   cursor: pointer;
-  position: absolute;
   font-size: 11px;
-  white-space: normal;
-  text-align: center;
   font-weight: bold;
+  padding: 0 2px;
+  position: absolute;
   text-shadow: 2px 2px 0 black, -1px -1px 0 dimgray, 1px -1px 0 dimgrey,
     -1px 1px 0 dimgrey, 1px 1px 0 dimgrey;
   top: 50%;
-  left: 50%;
   transform: translate(-50%, -50%);
-  user-select: none;
+  white-space: normal;
   z-index: 3;
 }
 </style>
