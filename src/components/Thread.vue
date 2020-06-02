@@ -3,19 +3,16 @@
     <template v-slot:info>
       <div>
         <div class="flex">
-          <span class="text-smaller">{{ data.ID }}</span
-          ><b> {{ data.Name }}</b>
+          <span class="text-smaller">{{ data.ID }}</span>
+          <b>{{ data.Name }}</b>
         </div>
         <div class="text-small">
           {{ boosts }}
-          <span v-if="boosts && data.Other"> || </span>
+          <span v-if="boosts && data.Other">||</span>
           <span v-if="data.Other">{{ data.Other }}</span>
         </div>
       </div>
-      <img
-        v-if="hasLogo.includes(data.Brand)"
-        :src="publicPath + `logos/${data.Brand}.png`"
-      />
+      <img v-if="hasLogo.includes(data.Brand)" :src="publicPath + `logos/${data.Brand}.png`" />
       <div
         v-else
         :style="{
@@ -23,9 +20,7 @@
           fontFamily: fontFamilies[data.Brand],
           padding: '10px'
         }"
-      >
-        {{ data.Brand }}
-      </div>
+      >{{ data.Brand.startsWith('Unbranded') ? '' : data.Brand }}</div>
     </template>
   </Item>
 </template>
