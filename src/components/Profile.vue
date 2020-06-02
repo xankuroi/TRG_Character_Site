@@ -1,8 +1,6 @@
 <template>
   <TabContent :color="data.Color">
-    <template v-slot:title>
-      {{ data.Name }}
-    </template>
+    <template v-slot:title>{{ data.Name }}</template>
     <template v-slot:hero>
       <div class="hero">
         <div class="info-container">
@@ -10,27 +8,14 @@
             <img :src="data['Image URL']" />
           </div>
           <CharacterInfo class="flex-col flex-grow" :data="data" />
-          <CharacterDetails
-            v-show="show === 'info'"
-            class="info"
-            :data="data"
-          />
-          <NoiseInfo
-            v-if="!isPlayer(data)"
-            v-show="show === 'noise'"
-            class="info"
-            :data="data"
-          />
+          <CharacterDetails v-show="show === 'info'" class="info" :data="data" />
+          <NoiseInfo v-if="!isPlayer(data)" v-show="show === 'noise'" class="info" :data="data" />
         </div>
         <div class="tab-container">
           <span class="tab" :class="{ active: !show }" @click="show = false">
             <font-awesome-icon :icon="['fas', 'address-card']" />
           </span>
-          <span
-            class="tab"
-            :class="{ active: show === 'info' }"
-            @click="show = 'info'"
-          >
+          <span class="tab" :class="{ active: show === 'info' }" @click="show = 'info'">
             <font-awesome-icon :icon="['fas', 'sticky-note']" />
           </span>
           <span
@@ -45,45 +30,53 @@
       </div>
     </template>
     <template v-slot:content>
-      <div class="deck">
-        <template v-for="(pin, index) in data.Pins.equipped">
-          <Pin class="pull-left" :data="pin" :key="data.Name + 'pin' + index" />
+      <Inventory>
+        <template v-slot:title>Equipped Pins</template>
+        <template v-slot>
+          <template v-for="(pin, index) in data.Pins.equipped">
+            <Pin class="pull-left" :data="pin" :key="data.Name + 'pin' + index" />
+          </template>
+          <template v-for="index in 6 - data.Pins.equipped.length">
+            <div class="circle pull-left" :key="data.Name + 'pin' + (6 - index)"></div>
+          </template>
         </template>
-        <template v-for="index in 6 - data.Pins.equipped.length">
-          <div
-            class="circle pull-left"
-            :key="data.Name + 'pin' + (6 - index)"
-          ></div>
-        </template>
-      </div>
-      <div class="gear">
+      </Inventory>
+      <Inventory>
+        <template v-slot:title>Equipped Threads</template>
         <Thread
-          class="pull-left"
           v-for="thread in data.Threads.equipped"
           :data="thread"
           :key="data.Name + 'thread' + thread.ID"
         />
-      </div>
-      <div class="inventory">
-        <Food
-          v-for="food in data.Food"
-          class="pull-left"
-          :data="food"
-          :key="data.Name + food.ID"
-        />
-        <Pin
-          v-for="(pin, index) in data.Pins.unequipped"
-          class="pull-left"
-          :data="pin"
-          :key="data.Name + 'pin' + pin.ID + index"
-        />
-        <Thread
-          v-for="(thread, index) in data.Threads.unequipped"
-          class="pull-left"
-          :data="thread"
-          :key="data.Name + 'thread' + thread.ID + index"
-        />
-      </div>
+      </Inventory>
+      <Inventory>
+        <template v-slot:title>Food</template>
+        <template v-slot>
+          <Food
+            v-for="food in data.Food"
+            class="pull-left"
+            :data="food"
+            :key="data.Name + food.ID"
+          />
+        </template>
+      </Inventory>
+      <Inventory>
+        <template v-slot:title>Inventory</template>
+        <template v-slot>
+          <Pin
+            v-for="(pin, index) in data.Pins.unequipped"
+            class="pull-left"
+            :data="pin"
+            :key="data.Name + 'pin' + pin.ID + index"
+          />
+          <Thread
+            v-for="(thread, index) in data.Threads.unequipped"
+            class="pull-left"
+            :data="thread"
+            :key="data.Name + 'thread' + thread.ID + index"
+          />
+        </template>
+      </Inventory>
     </template>
   </TabContent>
 </template>
@@ -93,6 +86,7 @@ import TabContent from "./TabContent";
 import CharacterInfo from "./CharacterInfo";
 import CharacterDetails from "./CharacterDetails";
 import NoiseInfo from "./NoiseInfo";
+import Inventory from "./Inventory";
 import Food from "./Food";
 import Pin from "./Pin";
 import Thread from "./Thread";
@@ -104,6 +98,7 @@ export default {
     CharacterInfo,
     CharacterDetails,
     NoiseInfo,
+    Inventory,
     Food,
     Pin,
     Thread
@@ -148,10 +143,6 @@ export default {
 .flex {
   align-items: baseline;
   justify-content: space-between;
-}
-
-.inventory {
-  width: 100%;
 }
 
 .image-container {

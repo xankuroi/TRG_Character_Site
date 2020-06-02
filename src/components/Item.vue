@@ -1,19 +1,12 @@
 <template>
-  <div
-    class="item-container"
-    :class="[shape, expanded ? 'expanded' : '']"
-    @click="toggleExpand"
-  >
+  <div class="item-container" :class="[shape, expanded ? 'expanded' : '']" @click="toggleExpand">
     <img class="img" :src="url" />
-    <div
-      class="info-container"
-      :class="{ left: expandLeft }"
-      :style="expanderStyle"
-      ref="content"
-    >
+    <div class="info-container" :style="expanderStyle" ref="content">
       <slot name="info" />
     </div>
-    <slot name="after" />
+    <div class="after">
+      <slot name="after" />
+    </div>
   </div>
 </template>
 
@@ -39,11 +32,6 @@ export default {
       position: 0
     };
   },
-  computed: {
-    expandLeft() {
-      return this.position + 25 > this.pageWidth / 2;
-    }
-  },
   methods: {
     toggleExpand() {
       this.expanded = !this.expanded;
@@ -66,6 +54,21 @@ export default {
 </script>
 
 <style scoped>
+.img {
+  top: 0;
+  left: 0;
+  position: absolute;
+  z-index: 1;
+}
+
+.img:hover {
+  cursor: pointer;
+}
+
+.text-smaller {
+  margin-right: 0.5em;
+}
+
 .item-container {
   display: inline-block;
   height: 48px;
@@ -74,23 +77,6 @@ export default {
   margin-left: 5px;
   min-width: 48px;
   white-space: nowrap;
-}
-
-.item-container:hover,
-.expanded {
-  z-index: 2;
-}
-
-.item-container:hover .info-container,
-.expanded .info-container {
-  padding-left: 55px;
-  max-width: 400px;
-}
-
-.item-container:hover .info-container.left,
-.expanded .info-container.left {
-  padding-left: 20px;
-  padding-right: 55px;
 }
 
 .info-container {
@@ -103,16 +89,16 @@ export default {
   overflow: hidden;
   padding-left: 10px;
   padding-right: 10px;
-  position: absolute;
   top: 0;
   transition: 0.2s;
   width: max-content;
   z-index: -1;
 }
 
-.info-container.left {
-  left: auto;
-  right: 0;
+.expanded .info-container {
+  padding-left: 55px;
+  max-width: max-content;
+  z-index: 2;
 }
 
 .circle .info-container {
@@ -122,11 +108,6 @@ export default {
 .circle {
   background: var(--border-color);
   border-radius: 48px;
-  box-sizing: border-box;
-  height: 48px;
-  margin-bottom: 2px;
-  margin-left: 4px;
-  width: 48px;
 }
 
 .square .info-container {
@@ -144,11 +125,10 @@ export default {
   );
 }
 
-.img:hover {
-  cursor: pointer;
-}
-
-.text-smaller {
-  margin-right: 0.5em;
+.after {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 24px;
 }
 </style>

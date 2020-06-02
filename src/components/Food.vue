@@ -7,8 +7,8 @@
             <b>{{ data.Name }}</b>
           </div>
           <div class="text-small">
-            <template v-if="data.HEAL">Heal {{ data.HEAL }} </template>
-            <template v-if="data.HEAL && boosts">|| </template>
+            <template v-if="data.HEAL">Heal {{ data.HEAL }}</template>
+            <template v-if="data.HEAL && boosts">||</template>
             <template v-if="boosts">{{ boosts }}</template>
           </div>
         </div>
@@ -116,12 +116,14 @@ export default {
   cursor: pointer;
   font-size: 0.9em;
   position: absolute;
-  right: -5px;
+  left: 7px;
   text-shadow: 2px 2px 0 black, -1px -1px 0 grey, 1px -1px 0 grey,
     -1px 1px 0 grey, 1px 1px 0 grey;
+  z-index: 3;
 }
 
 .item-name {
+  background: rgba(0, 0, 0, 0.3);
   color: white;
   cursor: pointer;
   position: absolute;
@@ -134,5 +136,7 @@ export default {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  user-select: none;
+  z-index: 3;
 }
 </style>
