@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div class="top-row text-smaller">
+    <div class="top-row text-smaller noselect">
       Show tabs:
       <div
         class="fade cursor"
@@ -408,5 +408,9 @@ button:hover {
 
 .noshrink {
   flex-shrink: 0;
+}
+
+.noselect {
+  user-select: none;
 }
 </style>

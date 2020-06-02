@@ -3,15 +3,18 @@
     <Index v-if="weeks[0]" :weeks="weeks" />
     <template v-else>
       <CharacterSheets />
-      <div
-        class="clear text-smaller popover-container"
-        :style="{ opacity: 0.6, position: 'absolute' }"
-      >
-        <font-awesome-icon :icon="['fas', 'info-circle']" />
+      <div class="clear text-smaller popover-container">
+        <font-awesome-icon
+          class="icon"
+          :icon="['fas', 'info-circle']"
+          :style="{color: 'var(--border-color)'}"
+        />
         <div class="popover">
-          Changes may take up to five minutes to reflect in the sheet.<br />Please
-          report any issues to #hacklab or #meta in the TRG Discord.<br />Site
-          creds: Xan (@xankuroi).
+          Changes may take up to five minutes to reflect in the sheet.
+          <br />Please
+          report any issues to #hacklab or #meta in the TRG Discord.
+          <br />
+          <span class="text-smaller">Site creds: Xan (@xankuroi).</span>
         </div>
       </div>
     </template>
@@ -60,15 +63,21 @@ export default {
 .popover {
   background: var(--background-color);
   bottom: 10px;
+  border-radius: 3px;
   left: 10px;
   max-width: 0;
   overflow: hidden;
   position: absolute;
-  width: 90vw;
 }
 
-.popover-container:hover .popover {
-  max-width: 100vw;
+.popover-container {
+  position: relative;
+}
+
+.icon:hover ~ .popover {
+  border: 1px solid var(--border-color);
+  max-width: max-content;
+  padding: 3px;
 }
 
 /* Global styles */
