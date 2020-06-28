@@ -118,11 +118,16 @@ export default {
     simplebar
   },
   data() {
-    const gs = "https://docs.google.com/spreadsheets/d/e/KEY/pub?output=xlsx";
+    // Must use a CORS proxy because the download link redirects and
+    // said redirect doesn't include CORS headers thanks Google.
+    // Maybe they'll fix it https://issuetracker.google.com/issues/36759302
+    const gs =
+      "https://cors-anywhere.herokuapp.com/" +
+      "https://docs.google.com/spreadsheets/d/e/KEY/pub?output=xlsx";
     // This assumes that player sheets only contain players and
     // likewise for reapers. That is to say, if the backend contains
     // reapers sheets in the player workbook, those reapers would be considered
-    // "players" for the sake of filtering.
+    // "players" for the sake of front-end filtering.
     return {
       activeIndex: -1,
       playersURL: gs.replace("KEY", window.playerKey),
