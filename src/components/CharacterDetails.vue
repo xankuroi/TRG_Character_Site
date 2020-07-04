@@ -20,6 +20,9 @@
       <h4 :style="data.Color">Appearance</h4>
       <p>{{ data.Appearance }}</p>
     </div>
+    <div class="image-container">
+      <img :src="data['Image URL']" />
+    </div>
   </simplebar>
 </template>
 
@@ -48,5 +51,18 @@ export default {
 
 .flex-color {
   flex-wrap: wrap;
+}
+
+.image-container {
+  display: none;
+}
+
+@media (max-width: 600px) {
+  .image-container {
+    display: block;
+    height: 200px;
+    margin: 0 auto;
+    width: 200px;
+  }
 }
 </style>

@@ -180,4 +180,10 @@ export default {
 .threads {
   display: inline-block;
 }
+
+@media (max-width: 600px) {
+  .image-container {
+    display: none;
+  }
+}
 </style>

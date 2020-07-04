@@ -303,8 +303,8 @@ export default {
 <style>
 /* Global styles */
 img {
-  height: 100%;
-  width: auto;
+  max-height: 100%;
+  max-width: 100%;
 }
 
 p {
