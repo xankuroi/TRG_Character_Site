@@ -154,6 +154,7 @@ export default {
 .image-container {
   display: inline-block;
   height: 200px;
+  text-align: center;
   width: 200px;
 }
 
