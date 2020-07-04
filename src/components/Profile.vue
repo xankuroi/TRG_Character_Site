@@ -8,7 +8,14 @@
           </div>
           <CharacterInfo class="flex-col flex-grow" :data="data" />
           <CharacterDetails v-show="show === 'info'" class="info" :data="data" />
-          <NoiseInfo v-if="!isPlayer(data)" v-show="show === 'noise'" class="info" :data="data" />
+          <template v-if="!isPlayer(data)">
+            <NoiseInfo v-show="show === 'noise'" class="info" :data="data" />
+            <div class="noise-container" v-show="show === 'noise'">
+              <div class="container-redux">
+                <img :src="data.Noise['Image URL']" />
+              </div>
+            </div>
+          </template>
         </div>
         <div class="tab-container">
           <span class="tab" :class="{ active: !show }" @click="show = false">
@@ -150,6 +157,10 @@ export default {
   width: 200px;
 }
 
+.noise-container {
+  display: none;
+}
+
 .hero {
   position: relative;
   margin-bottom: 10px;
@@ -184,6 +195,10 @@ export default {
 @media (max-width: 600px) {
   .image-container {
     display: none;
+  }
+
+  .noise-container {
+    display: block;
   }
 }
 </style>
