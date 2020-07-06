@@ -122,7 +122,7 @@ export default {
     // said redirect doesn't include CORS headers thanks Google.
     // Maybe they'll fix it https://issuetracker.google.com/issues/36759302
     const gs =
-      "https://cors-anywhere.herokuapp.com/" +
+      "http://34.74.232.155:8080/" +
       "https://docs.google.com/spreadsheets/d/e/KEY/pub?output=xlsx";
     // This assumes that player sheets only contain players and
     // likewise for reapers. That is to say, if the backend contains
@@ -278,15 +278,6 @@ export default {
 .overview-table {
   text-align: center;
   width: 100%;
-}
-
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.5s;
-}
-.fade-enter,
-.fade-leave-to {
-  opacity: 0;
 }
 
 @media (max-width: 450px) {
