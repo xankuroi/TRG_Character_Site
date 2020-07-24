@@ -36,7 +36,12 @@
       </div>
     </template>
     <template v-slot:content>
-      <Inventory>
+      <Inventory
+        v-if="data.Pins.equipped.length > 0"
+        ref="equipped_pins"
+        :expanded="false"
+        @toggle="handleToggle($event, 'equipped_pins')"
+      >
         <template v-slot:title>Equipped Pins</template>
         <template v-slot>
           <template v-for="(pin, index) in data.Pins.equipped">
@@ -47,7 +52,12 @@
           </template>
         </template>
       </Inventory>
-      <Inventory>
+      <Inventory
+        v-if="data.Threads.equipped.length > 0"
+        ref="equipped_threads"
+        :expanded="false"
+        @toggle="handleToggle($event, 'equipped_threads')"
+      >
         <template v-slot:title>Equipped Threads</template>
         <Thread
           v-for="thread in data.Threads.equipped"
@@ -55,7 +65,12 @@
           :key="data.Name + 'thread' + thread.ID"
         />
       </Inventory>
-      <Inventory>
+      <Inventory
+        v-if="data.Food.length > 0"
+        ref="food"
+        :expanded="false"
+        @toggle="handleToggle($event, 'food')"
+      >
         <template v-slot:title>Food</template>
         <template v-slot>
           <Food
@@ -66,7 +81,12 @@
           />
         </template>
       </Inventory>
-      <Inventory>
+      <Inventory
+        v-if="data.Pins.unequipped.length + data.Threads.unequipped.length > 0"
+        ref="inventory"
+        :expanded="false"
+        @toggle="handleToggle($event, 'inventory')"
+      >
         <template v-slot:title>Inventory</template>
         <template v-slot>
           <Pin
@@ -120,6 +140,12 @@ export default {
     return {
       show: false
     };
+  },
+  methods: {
+    handleToggle(ref) {
+      // let elem = this.$refs[ref]; TODO: fill this out
+      return ref;
+    }
   }
 };
 </script>
