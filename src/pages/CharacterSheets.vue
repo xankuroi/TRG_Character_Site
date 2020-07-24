@@ -22,32 +22,34 @@
       </button>
       <div class="button-popover">reload data</div>
     </div>
-    <div class="tab-container">
-      <Tab :active="activeIndex === -1" @click="handleTabSelection(-1)">
-        <slot>
-          <font-awesome-icon :icon="['fas', 'list-alt']" />
-        </slot>
-      </Tab>
-      <simplebar class="tab-scroll-container">
-        <Tab
-          v-for="(sheet, index) in playerSheets"
-          v-show="loaded && showPlayers"
-          :name="sheet.Name"
-          :active="activeIndex === index"
-          :color="sheet.Color.color"
-          :key="'tp-' + index"
-          @click="handleTabSelection(index)"
-        />
-        <Tab
-          v-for="(sheet, index) in reaperSheets"
-          v-show="loaded && showReapers"
-          :name="sheet.Name"
-          :active="activeIndex === index + pLen"
-          :color="sheet.Color.color"
-          :key="'tr-' + index"
-          @click="handleTabSelection(index + pLen)"
-        />
-      </simplebar>
+    <div class="tab-container-container">
+      <div class="tab-container">
+        <Tab :active="activeIndex === -1" @click="handleTabSelection(-1)">
+          <slot>
+            <font-awesome-icon :icon="['fas', 'list-alt']" />
+          </slot>
+        </Tab>
+        <simplebar class="tab-scroll-container">
+          <Tab
+            v-for="(sheet, index) in playerSheets"
+            v-show="loaded && showPlayers"
+            :name="sheet.Name"
+            :active="activeIndex === index"
+            :color="sheet.Color.color"
+            :key="'tp-' + index"
+            @click="handleTabSelection(index)"
+          />
+          <Tab
+            v-for="(sheet, index) in reaperSheets"
+            v-show="loaded && showReapers"
+            :name="sheet.Name"
+            :active="activeIndex === index + pLen"
+            :color="sheet.Color.color"
+            :key="'tr-' + index"
+            @click="handleTabSelection(index + pLen)"
+          />
+        </simplebar>
+      </div>
     </div>
     <h1 class="header" :style="activeData.Color">{{ activeData.Name }}</h1>
     <simplebar class="content-container">
@@ -267,7 +269,13 @@ export default {
   flex-direction: row;
   margin-bottom: 20px;
   width: 100%;
-  z-index: 100;
+  position: absolute;
+  z-index: 1000;
+}
+
+.tab-container-container {
+  height: 60px;
+  position: relative;
 }
 
 .tab-scroll-container {
@@ -336,7 +344,7 @@ button:hover {
   background: var(--border-color);
 }
 
-.simplebar-track.simplebar-horizontal {
+.simplebar-track.simplebar-horizontal .simplebar-scrollbar::before {
   height: 5px;
   bottom: -2px;
 }
