@@ -2,15 +2,15 @@ import XLSX from "xlsx";
 
 export async function processSpreadsheet(url) {
   return fetch(url)
-    .then(resp => {
+    .then((resp) => {
       if (!resp.ok) throw new Error("Failed to load data.");
       return resp.arrayBuffer();
     })
-    .then(buffer => {
+    .then((buffer) => {
       const arrBuffer = new Uint8Array(buffer);
       return XLSX.read(arrBuffer, { type: "array" }).Sheets;
     })
-    .then(sheets => {
+    .then((sheets) => {
       // Base data
       const sheetConfig = XLSX.utils.sheet_to_json(sheets.Config);
       const Pins = keyData(sheets.Pins);
@@ -19,21 +19,21 @@ export async function processSpreadsheet(url) {
 
       // Ignored sheet regex
       const partialMatch = sheetConfig[1].UNSEEN.split(",")
-        .map(str => str.trim())
+        .map((str) => str.trim())
         .join("|");
       const exactMatch = sheetConfig[0].UNSEEN.split(",")
-        .map(str => str.trim())
+        .map((str) => str.trim())
         .join("$|^");
-      const ignoRe = new RegExp(`${partialMatch}|^${exactMatch}$`);
+      const ignoRe = new RegExp(`${partialMatch}|^${exactMatch}$`, "i");
 
       // Process the character sheets
       const cSheets = Object.keys(sheets)
-        .filter(key => !ignoRe.test(key))
-        .map(key =>
+        .filter((key) => !ignoRe.test(key))
+        .map((key) =>
           processCharacterData(sheets[key], sheetConfig, {
             Pins,
             Threads,
-            Food
+            Food,
           })
         );
 
@@ -41,7 +41,7 @@ export async function processSpreadsheet(url) {
         Pins,
         Threads,
         Food,
-        sheets: cSheets
+        sheets: cSheets,
       };
     });
 }
@@ -50,15 +50,15 @@ function keyData(rawSheet) {
   let data = {};
   XLSX.utils
     .sheet_to_json(rawSheet)
-    .filter(row => row["Name"])
-    .forEach(row => (data[row["Name"]] = row));
+    .filter((row) => row["Name"])
+    .forEach((row) => (data[row["Name"]] = row));
   return data;
 }
 
 function processCharacterData(sheet, config, lookup) {
   let data = { Noise: {} };
   // Initial field assignments
-  config.forEach(field => {
+  config.forEach((field) => {
     const fieldData = processField(sheet, field, lookup);
 
     if (field.NAME.startsWith("Noise")) {
@@ -73,7 +73,7 @@ function processCharacterData(sheet, config, lookup) {
 
   // Calculate stat totals
   let eStats = equippedStats(data.Threads.equipped, data.Pronouns);
-  ["HP", "ATK", "DEF"].forEach(stat => {
+  ["HP", "ATK", "DEF"].forEach((stat) => {
     data[stat].threads = eStats[stat];
     data[stat].total = data[stat].raw + data[stat].misc + data[stat].threads;
     data.Noise[stat].total =
@@ -102,7 +102,7 @@ function processCharacterData(sheet, config, lookup) {
     cp +
     "**\n" +
     data.Pins.equipped
-      .map(pin => formatPinData(pin, data.ATK.total))
+      .map((pin) => formatPinData(pin, data.ATK.total))
       .join(" | \n");
 
   return data;
@@ -206,7 +206,7 @@ function processField(sheet, field, lookup) {
     data = {
       raw: sheet[coord].v,
       misc: sheet[offsetCoord(coord, Number(field.N), 0)].v,
-      trained: sheet[offsetCoord(coord, Number(field.D), 0)].v
+      trained: sheet[offsetCoord(coord, Number(field.D), 0)].v,
     };
     if (field.NAME === "HP") {
       data.current = data.trained;
