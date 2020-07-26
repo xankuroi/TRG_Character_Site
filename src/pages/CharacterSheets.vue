@@ -180,7 +180,6 @@ export default {
       );
 
       this.updateStoredIndex();
-      this.activeIndex;
     },
     toggle(showKey) {
       this[showKey] = !this[showKey];
@@ -191,18 +190,22 @@ export default {
     },
     updateStoredIndex() {
       localStorage.activeIndices = JSON.stringify(
-        Object.assign(JSON.parse(localStorage.activeIndices), {
-          [`${this.week}`]: this.activeIndex
+        Object.assign(this.getStoredIndices(), {
+          [this.week]: this.activeIndex
         })
       );
+    },
+    getStoredIndices() {
+      return JSON.parse(localStorage.activeIndices);
     }
   },
   mounted() {
     this.loadData();
-    if (JSON.parse(localStorage.activeIndices)[this.week]) {
-      this.activeIndex = Number(
-        JSON.parse(localStorage.activeIndices)[this.week]
-      );
+    if (!localStorage.activeIndices) {
+      localStorage.activeIndices = "{}";
+    }
+    if (this.getStoredIndices()[this.week]) {
+      this.activeIndex = Number(this.getStoredIndices()[this.week]);
     }
     this.$nextTick(() => {
       let horizontalElements = document.querySelectorAll(
