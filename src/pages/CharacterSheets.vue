@@ -193,7 +193,9 @@ export default {
       this.activeIndex = Number(localStorage.activeIndex);
     }
     this.$nextTick(() => {
-      let horizontalElements = document.querySelectorAll("[data-simplebar]");
+      let horizontalElements = document.querySelectorAll(
+        ".tab-scroll-container"
+      );
       for (let element of horizontalElements)
         element.onwheel = event => {
           event.preventDefault();

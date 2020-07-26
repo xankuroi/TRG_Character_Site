@@ -1,13 +1,15 @@
 <template>
   <div class="tile">
     <b :style="color">{{ name }}</b>
-    <slot name="before" />
-    <span>{{ stats.total }}</span>
-    <slot name="after" />
-    <span v-if="additional" class="add flex">
-      <span class="text-smaller">▲</span>
-      {{ additional }}
-    </span>
+    <div style="display: inline-block;">
+      <slot name="before" />
+      {{ stats.total }}
+      <slot name="after" />
+      <span v-if="additional" class="add flex">
+        <span class="text-smaller">▲</span>
+        {{ additional }}
+      </span>
+    </div>
   </div>
 </template>
 
@@ -43,12 +45,17 @@ export default {
   border: 2px solid var(--border-color);
   border-radius: 3px;
   display: flex;
+  justify-content: space-between;
   padding: 0 3px;
   margin: 0 2px;
 }
 
 .tile b:first-child {
-  margin-right: 5px;
+  margin-right: 10px;
+}
+
+.flex {
+  display: inline-flex;
 }
 
 .add {

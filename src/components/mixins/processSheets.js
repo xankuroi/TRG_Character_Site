@@ -91,7 +91,7 @@ function processCharacterData(sheet, config, lookup) {
   }
 
   // Copy/paste
-  let cp = `**${data.Name} | ${data.HP.current}/${data.HP.total} | ${data.ATK.total} ATK`;
+  let cp = `**${data.Name} | ${data.HP.current}/${data.HP.total} HP | ${data.ATK.total} ATK`;
   if (data.DEF.total) {
     cp += ` | ${data.DEF.total} DEF`;
   }
