@@ -1,11 +1,11 @@
 <template>
   <simplebar class="tab-scroll-container">
     <div class="text-small flex-col">
-      <div class="image-container">
+      <!-- <div class="image-container">
         <div class="container-redux">
           <img :src="data.Noise['Image URL']" />
         </div>
-      </div>
+      </div>-->
       <div>
         <div class="flex noise">
           <h2 style="margin-right:10px;">{{ data.Noise.Name }}</h2>
@@ -23,11 +23,11 @@
           <h4 :key="data.Noise.name + index + 'n'">{{ ability.name }}</h4>
           <p :key="data.Noise.name + index + 'p'">{{ ability.d }}</p>
         </template>
-        <div class="image">
+        <!-- <div class="image">
           <div class="container-redux">
             <img :src="data.Noise['Image URL']" />
           </div>
-        </div>
+        </div>-->
       </div>
     </div>
   </simplebar>

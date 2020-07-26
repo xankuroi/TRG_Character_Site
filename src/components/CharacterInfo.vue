@@ -4,8 +4,8 @@
       <div class="flex-col flex-grow">
         <div>
           {{ data["Full Name"] }}
-          <span class="text-small">- {{ data.Age }} -</span>
-          <span class="text-smaller">{{ data.Pronouns }}</span>
+          <span class="text-small">- {{ data.Age }}</span>
+          <span class="text-smaller">- {{ data.Pronouns }}</span>
         </div>
         <div v-if="isPlayer(data) && data.Partner" @click="$emit('goto', data.Partner)">
           <font-awesome-icon :icon="['fas', 'handshake']" :style="data.Color" />
@@ -27,10 +27,10 @@
             <span class="text-small">{{ data.Timezone }}</span>
           </div>
         </div>
-        <div v-if="data.Discord" class="nowrap">
+        <!-- <div v-if="data.Discord" class="nowrap">
           <font-awesome-icon :icon="['fab', 'discord']" :style="data.Color" />
           <span class="text-small">{{ data.Discord }}</span>
-        </div>
+        </div>-->
       </div>
     </div>
     <StatBlock :data="data" @goto="$emit('goto', $event)" />

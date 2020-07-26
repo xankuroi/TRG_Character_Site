@@ -2,19 +2,21 @@
   <simplebar class="text-small flex-col">
     <div class="flex">
       <template v-if="isPlayer(data)">
-        <div>
-          <h4 :style="data.Color">Entry Fee</h4>
-          <p>{{ data["Entry Fee"] }}</p>
+        <div class="flex block">
+          <div>
+            <h4 :style="data.Color">Entry Fee</h4>
+            <p>{{ data["Entry Fee"] }}</p>
+          </div>
+          <div>
+            <h4 :style="data.Color">Personality</h4>
+            <p>{{ data.Personality }}</p>
+          </div>
         </div>
-        <div>
+        <div class="block">
           <h4 :style="data.Color">Reason to Live</h4>
           <p>{{ data["Reason to Live"] }}</p>
         </div>
       </template>
-      <div>
-        <h4 :style="data.Color">Personality</h4>
-        <p>{{ data.Personality }}</p>
-      </div>
     </div>
     <div>
       <h4 :style="data.Color">Appearance</h4>
@@ -45,8 +47,14 @@ export default {
 </script>
 
 <style scoped>
+.flex {
+  align-items: start;
+  flex-wrap: wrap;
+}
+
 .flex > div {
   flex-grow: 1;
+  margin-right: 5px;
 }
 
 .flex-color {
@@ -55,6 +63,10 @@ export default {
 
 .image-container {
   display: none;
+}
+
+.block {
+  min-width: 40%;
 }
 
 @media (max-width: 600px) {
