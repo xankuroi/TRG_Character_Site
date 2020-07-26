@@ -188,6 +188,27 @@ export default {
     if (localStorage.activeIndex) {
       this.activeIndex = Number(localStorage.activeIndex);
     }
+    this.$nextTick(() => {
+      let horizontalElements = document.querySelectorAll("[data-simplebar]");
+      for (let element of horizontalElements)
+        element.onwheel = event => {
+          event.preventDefault();
+          let elementToScroll = element.querySelector(
+            ".simplebar-content-wrapper"
+          );
+
+          clearTimeout(elementToScroll.timer);
+          elementToScroll.timer = setTimeout(() => {
+            elementToScroll.scrollTo({
+              left:
+                event.deltaY > 0
+                  ? elementToScroll.scrollLeft + 250
+                  : elementToScroll.scrollLeft - 250,
+              behavior: "smooth"
+            });
+          }, 20);
+        };
+    });
   }
 };
 </script>
