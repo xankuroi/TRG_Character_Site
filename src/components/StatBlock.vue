@@ -6,7 +6,7 @@
     <div class="stat-content">
       <div>
         <StatTile :stats="data.HP" :color="data.Color" :name="'HP'">
-          <template v-slot:before>
+          <template #before>
             <b :style="hpColor">{{ data.HP.current }}</b>
             <span class="text-smaller">/</span>
           </template>
@@ -19,7 +19,7 @@
           :color="data.Color"
           :name="'SYNC'"
         >
-          <template v-slot:after>%</template>
+          <template #after>%</template>
         </StatTile>
       </div>
       <div>

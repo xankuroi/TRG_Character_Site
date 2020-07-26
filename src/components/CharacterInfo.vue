@@ -4,9 +4,14 @@
       <div class="flex-col flex-grow">
         <div>
           {{ data["Full Name"] }}
-          <span class="text-small">- {{ data.Age }}</span>
+          <span class="text-small">- {{ data.Age }}&nbsp;</span>
           <span class="text-smaller">- {{ data.Pronouns }}</span>
         </div>
+        <div
+          v-if="data.Special && data.Special.length > 0"
+          class="inline-block text-small"
+          :style="{ color: '#' + data.Special[0].n }"
+        >{{ data.Special[0].name }} DIVISION</div>
         <div v-if="isPlayer(data) && data.Partner" @click="$emit('goto', data.Partner)">
           <font-awesome-icon :icon="['fas', 'handshake']" :style="data.Color" />
           <span class="fade cursor">{{ ' ' + data.Partner }}</span>

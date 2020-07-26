@@ -1,7 +1,7 @@
 <template>
   <div>
-    <Item :url="url" :expanderStyle="{ background: '#dfc38e' }">
-      <template v-slot:info>
+    <Item :url="url" background="#dfc38e">
+      <template #info>
         <div>
           <div>
             <b>{{ data.Name }}</b>
@@ -13,7 +13,7 @@
           </div>
         </div>
       </template>
-      <template v-slot:after>
+      <template #after>
         <div class="amt">x{{ data.n }}</div>
         <div v-if="noImage" class="item-name">{{ data.Name }}</div>
       </template>

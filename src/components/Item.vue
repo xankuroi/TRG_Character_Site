@@ -1,7 +1,13 @@
 <template>
-  <div class="item-container" :class="[shape, expanded ? 'expanded' : '']" @click="toggleExpand">
+  <div
+    class="item-container"
+    ref="self"
+    :class="[shape, expanded ? 'expanded' : '']"
+    @click="toggleExpand"
+    @mouseover="onMouseover"
+  >
     <img class="img" :src="url" />
-    <div class="info-container" :style="expanderStyle" ref="content">
+    <div class="info-container" :style="containerStyle" ref="content">
       <slot name="info" />
     </div>
     <div class="after">
@@ -17,8 +23,9 @@ export default {
       type: String,
       required: true
     },
-    expanderStyle: {
-      type: Object
+    background: {
+      type: String,
+      default: ""
     },
     shape: {
       type: String,
@@ -28,27 +35,85 @@ export default {
   data() {
     return {
       expanded: false,
-      pageWidth: window.width,
-      position: 0
+      maxWidth: 0,
+      scroller: null,
+      prevLeft: 0,
+      smoothScroll: false,
+      loops: -3
     };
+  },
+  computed: {
+    containerStyle() {
+      let style = {};
+      if (this.background) {
+        style.background = this.background;
+      }
+      if (this.smoothScroll) {
+        style["scroll-behavior"] = "smooth";
+      }
+      style.width = this.maxWidth - 90 + "px";
+      return style;
+    }
   },
   methods: {
     toggleExpand() {
+      this.maxWidth = this.$refs.self.parentNode.clientWidth;
+      if (this.expanded) {
+        this.$refs.content.scrollLeft = 0;
+      }
+      this.clearTimers();
       this.expanded = !this.expanded;
+      if (this.expanded && this.diff() > 0) {
+        this.setAutoScroll();
+      }
     },
-    handleResize() {
-      this.pageWidth = window.innerWidth;
-      this.position = this.$refs.content.getBoundingClientRect().x;
+    scrollLeft() {
+      return this.$refs.content.scrollLeft;
+    },
+    contentWidth() {
+      const children = [...this.$refs.content.children];
+      return children.reduce((acc, curr) => acc + curr.offsetWidth, 0);
+    },
+    autoScroll() {
+      this.$refs.content.scrollLeft += 1;
+      if (this.$refs.content.scrollLeft === this.prevLeft) {
+        this.clearTimers();
+        this.loops += 1;
+        this.smoothScroll = true;
+        this.scroller = setTimeout(() => {
+          this.$refs.content.scrollLeft = 0;
+          this.clearTimers();
+          if (this.loops < 1) {
+            this.scroller = setTimeout(this.setAutoScroll, 500);
+          }
+        }, 500);
+      } else {
+        this.prevLeft = this.$refs.content.scrollLeft;
+      }
+    },
+    clearTimers() {
+      clearInterval(this.scroller);
+      clearTimeout(this.scroller);
+      this.scroller = null;
+    },
+    setAutoScroll() {
+      this.smoothScroll = false;
+      this.scroller = setInterval(this.autoScroll, 3500 / this.diff());
+    },
+    diff() {
+      return this.contentWidth() + 150 - this.maxWidth;
+    },
+    onMouseover() {
+      if (this.diff() > 0 && this.loops > 0) {
+        this.loops = 0;
+        if (this.expanded && !this.scroller) {
+          this.setAutoScroll();
+        }
+      }
     }
   },
   mounted() {
-    this.handleResize();
-  },
-  created() {
-    window.addEventListener("resize", this.handleResize);
-  },
-  destroyed() {
-    window.removeEventListener("resize", this.handleResize);
+    this.maxWidth = this.$refs.self.parentNode.clientWidth;
   }
 };
 </script>
@@ -92,7 +157,6 @@ export default {
   padding-right: 10px;
   top: 0;
   transition: 0.2s;
-  width: max-content;
   z-index: -1;
 }
 

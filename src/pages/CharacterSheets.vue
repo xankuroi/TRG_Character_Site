@@ -58,8 +58,8 @@
       <Loader v-show="!loaded" />
       <template v-if="loaded">
         <TabContent v-show="activeIndex === -1" :key="'overview'">
-          <template v-slot:title>Overview</template>
-          <template v-slot:hero>
+          <template #title>Overview</template>
+          <template #hero>
             <table class="overview-table">
               <tr>
                 <th class="text-left">Name</th>

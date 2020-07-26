@@ -1,6 +1,6 @@
 <template>
   <TabContent :color="data.Color">
-    <template v-slot:hero>
+    <template #hero>
       <div class="hero">
         <div class="info-container">
           <div class="image-container noshrink">
@@ -35,22 +35,20 @@
         </div>
       </div>
     </template>
-    <template v-slot:content>
+    <template #content>
       <Inventory
         v-if="data.Pins.equipped.length > 0"
         ref="equipped_pins"
         :expanded="false"
         @toggle="handleToggle($event, 'equipped_pins')"
       >
-        <template v-slot:title>Equipped Pins</template>
-        <template v-slot>
-          <template v-for="(pin, index) in data.Pins.equipped">
-            <Pin class="pull-left" :data="pin" :key="data.Name + 'pin' + index" />
-          </template>
-          <template v-for="index in 6 - data.Pins.equipped.length">
-            <div class="circle pull-left" :key="data.Name + 'pin' + (6 - index)"></div>
-          </template>
-        </template>
+        <template #title>Equipped Pins</template>
+        <Pin
+          v-for="(pin, index) in data.Pins.equipped"
+          class="pull-left"
+          :data="pin"
+          :key="data.Name + 'pin' + index"
+        />
       </Inventory>
       <Inventory
         v-if="data.Threads.equipped.length > 0"
@@ -58,7 +56,7 @@
         :expanded="false"
         @toggle="handleToggle($event, 'equipped_threads')"
       >
-        <template v-slot:title>Equipped Threads</template>
+        <template #title>Equipped Threads</template>
         <Thread
           v-for="thread in data.Threads.equipped"
           :data="thread"
@@ -71,15 +69,8 @@
         :expanded="false"
         @toggle="handleToggle($event, 'food')"
       >
-        <template v-slot:title>Food</template>
-        <template v-slot>
-          <Food
-            v-for="food in data.Food"
-            class="pull-left"
-            :data="food"
-            :key="data.Name + food.ID"
-          />
-        </template>
+        <template #title>Food</template>
+        <Food v-for="food in data.Food" class="pull-left" :data="food" :key="data.Name + food.ID" />
       </Inventory>
       <Inventory
         v-if="data.Pins.unequipped.length + data.Threads.unequipped.length > 0"
@@ -87,21 +78,19 @@
         :expanded="false"
         @toggle="handleToggle($event, 'inventory')"
       >
-        <template v-slot:title>Inventory</template>
-        <template v-slot>
-          <Pin
-            v-for="(pin, index) in data.Pins.unequipped"
-            class="pull-left"
-            :data="pin"
-            :key="data.Name + 'pin' + pin.ID + index"
-          />
-          <Thread
-            v-for="(thread, index) in data.Threads.unequipped"
-            class="pull-left"
-            :data="thread"
-            :key="data.Name + 'thread' + thread.ID + index"
-          />
-        </template>
+        <template #title>Inventory</template>
+        <Pin
+          v-for="(pin, index) in data.Pins.unequipped"
+          class="pull-left"
+          :data="pin"
+          :key="data.Name + 'pin' + pin.ID + index"
+        />
+        <Thread
+          v-for="(thread, index) in data.Threads.unequipped"
+          class="pull-left"
+          :data="thread"
+          :key="data.Name + 'thread' + thread.ID + index"
+        />
       </Inventory>
     </template>
   </TabContent>

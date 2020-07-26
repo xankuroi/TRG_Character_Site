@@ -1,6 +1,6 @@
 <template>
-  <Item :url="url" :expanderStyle="{ background: colors[data.Brand] }">
-    <template v-slot:info>
+  <Item :url="url" :background="colors[data.Brand]">
+    <template #info>
       <div>
         <div class="flex">
           <span class="text-smaller">{{ data.ID }}</span>
