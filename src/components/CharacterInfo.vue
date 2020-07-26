@@ -11,21 +11,19 @@
           <font-awesome-icon :icon="['fas', 'handshake']" :style="data.Color" />
           <span class="fade cursor">{{ ' ' + data.Partner }}</span>
         </div>
-        <div v-else>
+        <div v-if="!isPlayer(data)">
           <font-awesome-icon :icon="['fas', 'briefcase']" :style="data.Color" />
           {{ data.Position }}
         </div>
       </div>
       <div class="mun noshrink">
-        <div class="flex">
-          <div class="nowrap">
-            <font-awesome-icon :icon="['fas', data.OwO ? data.OwO : 'user']" :style="data.Color" />
-            <span class="text-small">{{ data.Mun }}</span>
-          </div>
-          <div v-if="data.Timezone" class="nowrap">
-            <font-awesome-icon :icon="['fas', 'clock']" :style="data.Color" />
-            <span class="text-small">{{ data.Timezone }}</span>
-          </div>
+        <div class="nowrap">
+          <font-awesome-icon :icon="['fas', data.OwO ? data.OwO : 'user']" :style="data.Color" />
+          <span class="text-small">{{ data.Mun }}</span>
+        </div>
+        <div v-if="data.Timezone" class="nowrap">
+          <font-awesome-icon :icon="['fas', 'clock']" :style="data.Color" />
+          <span class="text-small">{{ data.Timezone }}</span>
         </div>
         <!-- <div v-if="data.Discord" class="nowrap">
           <font-awesome-icon :icon="['fab', 'discord']" :style="data.Color" />
@@ -54,3 +52,9 @@ export default {
   }
 };
 </script>
+
+<style>
+.nowrap {
+  margin-left: 5px;
+}
+</style>
