@@ -1,7 +1,7 @@
 <template>
   <tr>
     <td class="text-left">
-      <span :style="sheet.Color">█</span>
+      <span :style="sheet.Color">█&nbsp;</span>
       <span class="fade cursor" @click="$emit('click')">{{ sheet.Name }}</span>
     </td>
     <td>
