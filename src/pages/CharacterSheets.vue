@@ -141,7 +141,8 @@ export default {
       playerSheets: {},
       reaperSheets: {},
       showPlayers: true,
-      showReapers: true
+      showReapers: true,
+      week: window.location.pathname.split("/")[1]
     };
   },
   computed: {
@@ -177,20 +178,31 @@ export default {
       this.activeIndex = this.playerSheets.findIndex(
         data => data.Name === name
       );
-      localStorage.activeIndex = this.activeIndex;
+
+      this.updateStoredIndex();
+      this.activeIndex;
     },
     toggle(showKey) {
       this[showKey] = !this[showKey];
     },
     handleTabSelection(index) {
       this.activeIndex = index;
-      localStorage.activeIndex = index;
+      this.updateStoredIndex();
+    },
+    updateStoredIndex() {
+      localStorage.activeIndices = JSON.stringify(
+        Object.assign(JSON.parse(localStorage.activeIndices), {
+          [`${this.week}`]: this.activeIndex
+        })
+      );
     }
   },
   mounted() {
     this.loadData();
-    if (localStorage.activeIndex) {
-      this.activeIndex = Number(localStorage.activeIndex);
+    if (JSON.parse(localStorage.activeIndices)[this.week]) {
+      this.activeIndex = Number(
+        JSON.parse(localStorage.activeIndices)[this.week]
+      );
     }
     this.$nextTick(() => {
       let horizontalElements = document.querySelectorAll(
