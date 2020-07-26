@@ -53,7 +53,11 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+.flex {
+  align-items: start;
+}
+
 .nowrap {
   margin-left: 5px;
 }

@@ -40,6 +40,7 @@ export default {
 /* Set up & component styles  */
 @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Girassol&display=swap");
 
 :root {
   --text-color: #2c3e50;

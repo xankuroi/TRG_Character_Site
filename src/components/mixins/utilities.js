@@ -2,26 +2,26 @@ export const toast = {
   methods: {
     toast(name) {
       this.$toasted.show(`Copied ${name}'s stats!`, {
-        duration: 1500
+        duration: 1500,
       });
-    }
-  }
+    },
+  },
 };
 
 export const publicPath = {
   data() {
     return {
-      publicPath: process.env.BASE_URL
+      publicPath: process.env.BASE_URL,
     };
-  }
+  },
 };
 
 export const isPlayer = {
   methods: {
     isPlayer(data) {
       return data.Role === "Player";
-    }
-  }
+    },
+  },
 };
 
 export const brandData = {
@@ -40,7 +40,7 @@ export const brandData = {
         "Pavo Real",
         "Natural Puppy",
         "Wild Boar",
-        "Gatito"
+        "Gatito",
       ],
       colors: {
         "Mus Rattus": "#fceb32",
@@ -57,14 +57,17 @@ export const brandData = {
         "Wild Boar": "#ffcf4f ",
         Gatito: "#ffb629",
         "Unbranded Misc": "#eebb33",
-        "Sea★Angel": "lightblue"
+        "Sea★Angel": "lightblue",
+        "Solid Scorpion": "#78bf87",
       },
       fontColors: {
-        "Sea★Angel": "#0b5da2"
+        "Sea★Angel": "#0b5da2",
+        "Solid Scorpion": "#195c29",
       },
       fontFamilies: {
-        "Sea★Angel": "Quicksand"
-      }
+        "Sea★Angel": "Quicksand",
+        "Solid Scorpion": "Girassol",
+      },
     };
-  }
+  },
 };
