@@ -25,9 +25,7 @@
     <div class="tab-container-container">
       <div class="tab-container">
         <Tab :active="activeIndex === -1" @click="handleTabSelection(-1)">
-          <slot>
-            <font-awesome-icon :icon="['fas', 'list-alt']" />
-          </slot>
+          <font-awesome-icon :icon="['fas', 'list-alt']" />
         </Tab>
         <simplebar class="tab-scroll-container">
           <Tab
