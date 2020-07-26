@@ -37,6 +37,10 @@
             :key="'tp-' + index"
             @click="handleTabSelection(index)"
           />
+          <div
+            v-show="loaded && showPlayers && showReapers"
+            style="color: var(--border-color); background: var(--border-color);"
+          >.</div>
           <Tab
             v-for="(sheet, index) in reaperSheets"
             v-show="loaded && showReapers"
