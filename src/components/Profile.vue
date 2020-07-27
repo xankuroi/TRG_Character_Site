@@ -92,7 +92,7 @@
           :key="data.Name + 'thread' + thread.ID + index"
         />
       </Inventory>
-      <Inventory>
+      <Inventory v-if="data.Swag.length > 0">
         <template #title>Swag</template>
         <div
           v-for="(swag, index) in data.Swag"
