@@ -92,6 +92,17 @@
           :key="data.Name + 'thread' + thread.ID + index"
         />
       </Inventory>
+      <Inventory>
+        <template #title>Swag</template>
+        <div
+          v-for="(swag, index) in data.Swag"
+          :key="data.Name + 'swag' + index"
+          class="text-small"
+        >
+          <i>{{ swag.name }}</i>
+          <span v-if="swag.description">&nbsp;- {{ swag.description }}</span>
+        </div>
+      </Inventory>
     </template>
   </TabContent>
 </template>
