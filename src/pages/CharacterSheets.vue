@@ -128,6 +128,7 @@ export default {
     const gs =
       "https://birbot-3961.appspot.com/" +
       "https://docs.google.com/spreadsheets/d/e/KEY/pub?output=xlsx";
+    const pathTokens = window.location.pathname.split("/")[1];
     // This assumes that player sheets only contain players and
     // likewise for reapers. That is to say, if the backend contains
     // reapers sheets in the player workbook, those reapers would be considered
@@ -142,7 +143,7 @@ export default {
       reaperSheets: {},
       showPlayers: true,
       showReapers: true,
-      week: window.location.pathname.split("/")[1]
+      week: pathTokens[1] === "characters" ? pathTokens[2] : pathTokens[1]
     };
   },
   computed: {
