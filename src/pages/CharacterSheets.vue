@@ -129,7 +129,7 @@ export default {
     const gs =
       "https://birbot-3961.appspot.com/" +
       "https://docs.google.com/spreadsheets/d/e/KEY/pub?output=xlsx";
-    const pathTokens = window.location.pathname.split("/")[1];
+    const pathTokens = window.location.pathname.split("/");
     // This assumes that player sheets only contain players and
     // likewise for reapers. That is to say, if the backend contains
     // reapers sheets in the player workbook, those reapers would be considered

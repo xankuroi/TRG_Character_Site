@@ -32,27 +32,31 @@ import Item from "./Item";
 export default {
   mixins: [brandData],
   components: {
-    Item
+    Item,
   },
   props: {
     data: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
   },
   data() {
     return {
-      publicPath: process.env.BASE_URL
+      publicPath: process.env.BASE_URL,
     };
   },
   computed: {
     url() {
       const id = this.data.ID.replace("#", "");
       if (Number(id) > 300) {
-        return this.publicPath + `pins/default.png`;
+        return `https://avatars.dicebear.com/api/jdenticon/${
+          this.data.Name
+        }.svg?radius=50&background=%23${
+          this.fontColors[this.data.Brand].substring(1) || "fff"
+        }`;
       }
       return this.publicPath + `pins/${id} ${this.data.Name}.png`;
-    }
-  }
+    },
+  },
 };
 </script>

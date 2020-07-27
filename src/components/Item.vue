@@ -21,16 +21,16 @@ export default {
   props: {
     url: {
       type: String,
-      required: true
+      required: true,
     },
     background: {
       type: String,
-      default: ""
+      default: "",
     },
     shape: {
       type: String,
-      default: "square"
-    }
+      default: "square",
+    },
   },
   data() {
     return {
@@ -39,7 +39,7 @@ export default {
       scroller: null,
       prevLeft: 0,
       smoothScroll: false,
-      loops: -3
+      loops: -3,
     };
   },
   computed: {
@@ -53,7 +53,7 @@ export default {
       }
       style.width = this.maxWidth - 90 + "px";
       return style;
-    }
+    },
   },
   methods: {
     toggleExpand(option) {
@@ -113,11 +113,11 @@ export default {
           this.setAutoScroll();
         }
       }
-    }
+    },
   },
   mounted() {
     this.maxWidth = this.$refs.self.parentNode.clientWidth;
-  }
+  },
 };
 </script>
 
@@ -125,6 +125,7 @@ export default {
 .img {
   top: 0;
   left: 0;
+  max-width: 50px;
   position: absolute;
   z-index: 1;
 }
@@ -139,11 +140,10 @@ export default {
 
 .item-container {
   display: inline-block;
-  height: 48px;
+  height: 50px;
   position: relative;
   margin-bottom: 2px;
   margin-left: 5px;
-  min-width: 48px;
   user-select: none;
   white-space: nowrap;
 }
@@ -154,7 +154,7 @@ export default {
   display: flex;
   height: 100%;
   left: 1px;
-  max-width: 26px;
+  max-width: 30px;
   overflow: hidden;
   padding-left: 10px;
   padding-right: 10px;
@@ -165,20 +165,22 @@ export default {
 
 .expanded .info-container {
   padding-left: 55px;
-  max-width: max-content;
+  max-width: max-content !important;
   z-index: 2;
 }
 
 .circle .info-container {
-  border-radius: 48px;
+  border-radius: 50px;
 }
 
 .circle {
   background: var(--border-color);
-  border-radius: 48px;
+  border-radius: 50px;
 }
 
 .square .info-container {
+  height: 48px;
+  max-width: 28px;
   --notchSize: 7px;
 
   clip-path: polygon(
