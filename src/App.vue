@@ -26,13 +26,20 @@ export default {
   name: "App",
   components: {
     CharacterSheets: () => import("./pages/CharacterSheets"),
-    Index: () => import("./pages/Index")
+    Index: () => import("./pages/Index"),
   },
   data() {
     return {
-      weeks: window.weeks.split(",")
+      weeks: window.weeks.split(","),
     };
-  }
+  },
+  beforeMount() {
+    let dark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    if (localStorage.theme === "light") {
+      dark = false;
+    }
+    document.body.setAttribute("data-theme", dark ? "dark" : "light");
+  },
 };
 </script>
 
@@ -42,17 +49,16 @@ export default {
 @import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Girassol&display=swap");
 
-:root {
+body[data-theme="light"] {
   --text-color: #2c3e50;
   --background-color: #fff;
-  --border-color: lightgray;
+  --border-color: #b3b3b3;
 }
-@media (prefers-color-scheme: dark) {
-  :root {
-    --text-color: #dee4e7;
-    --background-color: #222;
-    --border-color: #666;
-  }
+
+body[data-theme="dark"] {
+  --text-color: #dee4e7;
+  --background-color: #222;
+  --border-color: #666;
 }
 
 #app {

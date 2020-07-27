@@ -1,6 +1,6 @@
 <template>
   <simplebar class="tab-scroll-container">
-    <div class="text-small flex-col">
+    <div class="text-small flex">
       <!-- <div class="image-container">
         <div class="container-redux">
           <img :src="data.Noise['Image URL']" />
@@ -63,24 +63,24 @@ import { toast } from "./mixins/utilities";
 export default {
   components: {
     simplebar,
-    StatTile
+    StatTile,
   },
   mixins: [toast],
   props: {
     data: {
       type: Object,
-      required: true
+      required: true,
     },
     mirror: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
   computed: {
     cp() {
       if (this.mirror) {
         let tmp = this.data.CP;
-        this.data.Noise.Abilities.forEach(ability => {
+        this.data.Noise.Abilities.forEach((ability) => {
           tmp = tmp.replace(ability.d, ability.name);
         });
         tmp = tmp.replace(this.data.Name, this.data.Noise.Name);
@@ -89,13 +89,13 @@ export default {
         const hp = `${this.data.Noise.HP.total} / ${this.data.Noise.HP.total} HP`;
         const atk = `${this.data.Noise.ATK.total} ATK`;
         const def = `${this.data.Noise.DEF.total} DEF`;
-        const abilities = this.data.Noise.Abilities.map(ability => {
+        const abilities = this.data.Noise.Abilities.map((ability) => {
           return `${ability.name} - *${ability.d.trim()}*`;
         }).join("|\n");
         return `**${this.data.Noise.Name} | ${hp} | ${atk} | ${def}**\n${abilities}`;
       }
-    }
-  }
+    },
+  },
 };
 </script>
 

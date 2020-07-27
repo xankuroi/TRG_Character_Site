@@ -13,7 +13,7 @@
         @click="toggle('showReapers')"
       >Reapers</div>
       <button style="float: right">
-        <font-awesome-icon :icon="['fas', 'adjust']" />
+        <font-awesome-icon :icon="['fas', 'adjust']" @click="toggleTheme()" />
       </button>
     </div>
     <div class="button-container text-smaller">
@@ -120,7 +120,7 @@ export default {
     Profile,
     Tab,
     TabContent,
-    simplebar
+    simplebar,
   },
   data() {
     // Must use a CORS proxy because the download link redirects and
@@ -145,7 +145,7 @@ export default {
       showPlayers: true,
       showReapers: true,
       week: pathTokens[1] === "characters" ? pathTokens[2] : pathTokens[1],
-      mirror: false
+      mirror: false,
     };
   },
   computed: {
@@ -164,17 +164,17 @@ export default {
         }
       }
       return { Color: {}, Name: "Overview" };
-    }
+    },
   },
   methods: {
     loadData() {
       this.ploaded = false;
       this.rloaded = false;
       processSpreadsheet(this.playersURL)
-        .then(stuff => (this.playerSheets = stuff.sheets))
+        .then((stuff) => (this.playerSheets = stuff.sheets))
         .then(() => this.$nextTick(() => (this.ploaded = true)));
       processSpreadsheet(this.reapersURL)
-        .then(stuff => {
+        .then((stuff) => {
           this.reaperSheets = stuff.sheets;
           this.mirror = stuff.mirror;
         })
@@ -182,13 +182,17 @@ export default {
     },
     handleGoto(name) {
       this.activeIndex = this.playerSheets.findIndex(
-        data => data.Name === name
+        (data) => data.Name === name
       );
 
       this.updateStoredIndex();
     },
     toggle(showKey) {
       this[showKey] = !this[showKey];
+    },
+    toggleTheme() {
+      localStorage.theme = localStorage.theme === "dark" ? "light" : "dark";
+      document.body.setAttribute("data-theme", localStorage.theme);
     },
     handleTabSelection(index) {
       this.activeIndex = index;
@@ -197,13 +201,13 @@ export default {
     updateStoredIndex() {
       localStorage.activeIndices = JSON.stringify(
         Object.assign(this.getStoredIndices(), {
-          [this.week]: this.activeIndex
+          [this.week]: this.activeIndex,
         })
       );
     },
     getStoredIndices() {
       return JSON.parse(localStorage.activeIndices);
-    }
+    },
   },
   mounted() {
     this.loadData();
@@ -218,7 +222,7 @@ export default {
         ".tab-scroll-container"
       );
       for (let element of horizontalElements)
-        element.onwheel = event => {
+        element.onwheel = (event) => {
           event.preventDefault();
           let elementToScroll = element.querySelector(
             ".simplebar-content-wrapper"
@@ -231,12 +235,12 @@ export default {
                 event.deltaY > 0
                   ? elementToScroll.scrollLeft + 250
                   : elementToScroll.scrollLeft - 250,
-              behavior: "smooth"
+              behavior: "smooth",
             });
           }, 20);
         };
     });
-  }
+  },
 };
 </script>
 
