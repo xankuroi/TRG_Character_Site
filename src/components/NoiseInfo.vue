@@ -22,8 +22,8 @@
             <StatTile :stats="data.Noise.DEF" :name="'DEF'" :color="data.Color" />
           </div>
           <template v-for="(ability, index) in data.Noise.Abilities">
-            <h4 :key="data.Noise.name + index + 'n'">{{ ability.name }}</h4>
-            <p :key="data.Noise.name + index + 'p'">{{ ability.d }}</p>
+            <h4 :key="`${data.Noise.name}${index}n`">{{ ability.name }}</h4>
+            <p :key="`${data.Noise.name}${index}p`">{{ ability.d }}</p>
           </template>
         </template>
         <template v-else>
@@ -36,13 +36,13 @@
             <StatTile :stats="data.DEF" :name="'DEF'" :color="data.Color" />
           </div>
           <template v-for="(pin, index) in data.Pins.equipped">
-            <h4 :key="data.Noise.name + index + 'n'">
+            <h4 :key="`${data.Noise.name}${index}n`">
               {{
               (data.Noise.Abilities.find((ability) => ability.d === pin.Name) || {}).
               name || pin.Name
               }}
             </h4>
-            <p :key="data.Noise.name + index + 'p'">{{ pin.Extras || "Attack once." }}</p>
+            <p :key="`${data.Noise.name}${index}p`">{{ pin.Extras || "Attack once." }}</p>
           </template>
         </template>
         <!-- <div class="image">
