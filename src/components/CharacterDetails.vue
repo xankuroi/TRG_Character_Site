@@ -3,20 +3,20 @@
     <div class="flex">
       <template v-if="isPlayer(data)">
         <div class="flex block">
-          <div>
+          <div class="block">
             <h4 :style="data.Color">Entry Fee</h4>
             <p>{{ data["Entry Fee"] }}</p>
           </div>
-          <div>
-            <h4 :style="data.Color">Personality</h4>
-            <p>{{ data.Personality }}</p>
+          <div class="block">
+            <h4 :style="data.Color">Reason to Live</h4>
+            <p>{{ data["Reason to Live"] }}</p>
           </div>
         </div>
-        <div class="block">
-          <h4 :style="data.Color">Reason to Live</h4>
-          <p>{{ data["Reason to Live"] }}</p>
-        </div>
       </template>
+    </div>
+    <div>
+      <h4 :style="data.Color">Personality</h4>
+      <p>{{ data.Personality }}</p>
     </div>
     <div>
       <h4 :style="data.Color">Appearance</h4>
@@ -34,15 +34,15 @@ import simplebar from "simplebar-vue";
 
 export default {
   components: {
-    simplebar
+    simplebar,
   },
   mixins: [isPlayer],
   props: {
     data: {
       type: Object,
-      required: true
-    }
-  }
+      required: true,
+    },
+  },
 };
 </script>
 
@@ -65,8 +65,12 @@ export default {
   display: none;
 }
 
+.flex.block {
+  flex-wrap: nowrap;
+}
+
 .block {
-  min-width: 40%;
+  min-width: 20%;
 }
 
 @media (max-width: 600px) {
@@ -75,6 +79,10 @@ export default {
     height: 200px;
     margin: 0 auto;
     width: 200px;
+  }
+
+  .flex.block {
+    flex-wrap: wrap;
   }
 }
 </style>
