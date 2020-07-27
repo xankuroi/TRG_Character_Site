@@ -36,12 +36,12 @@ export async function processSpreadsheet(url) {
             Food,
           })
         );
-
       return {
         Pins,
         Threads,
         Food,
         sheets: cSheets,
+        mirror: !!sheetConfig[0].MIRROR,
       };
     });
 }

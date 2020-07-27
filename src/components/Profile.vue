@@ -9,7 +9,7 @@
           <CharacterInfo class="flex-col flex-grow" :data="data" />
           <CharacterDetails v-show="show === 'info'" class="info" :data="data" />
           <template v-if="!isPlayer(data)">
-            <NoiseInfo v-show="show === 'noise'" class="info" :data="data" />
+            <NoiseInfo v-show="show === 'noise'" class="info" :data="data" :mirror="mirror" />
             <div class="noise-container" v-show="show === 'noise'">
               <div class="container-redux">
                 <img :src="data.Noise['Image URL']" />
@@ -92,7 +92,7 @@
           :key="data.Name + 'thread' + thread.ID + index"
         />
       </Inventory>
-      <Inventory v-if="data.Swag.length > 0">
+      <Inventory v-if="data.Swag.length > 0" :expanded="false">
         <template #title>Swag</template>
         <div
           v-for="(swag, index) in data.Swag"
@@ -134,6 +134,10 @@ export default {
     data: {
       type: Object,
       required: true
+    },
+    mirror: {
+      type: Boolean,
+      default: false
     }
   },
   data() {

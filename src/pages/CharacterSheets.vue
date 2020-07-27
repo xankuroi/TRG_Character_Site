@@ -94,6 +94,7 @@
           v-for="(sheet, index) in reaperSheets"
           v-show="activeIndex === index + pLen"
           :data="sheet"
+          :mirror="mirror"
           :key="'pr-' + index"
           @goto="handleGoto"
         />
@@ -143,7 +144,8 @@ export default {
       reaperSheets: {},
       showPlayers: true,
       showReapers: true,
-      week: pathTokens[1] === "characters" ? pathTokens[2] : pathTokens[1]
+      week: pathTokens[1] === "characters" ? pathTokens[2] : pathTokens[1],
+      mirror: false
     };
   },
   computed: {
@@ -172,7 +174,10 @@ export default {
         .then(stuff => (this.playerSheets = stuff.sheets))
         .then(() => this.$nextTick(() => (this.ploaded = true)));
       processSpreadsheet(this.reapersURL)
-        .then(stuff => (this.reaperSheets = stuff.sheets))
+        .then(stuff => {
+          this.reaperSheets = stuff.sheets;
+          this.mirror = stuff.mirror;
+        })
         .then(() => this.$nextTick(() => (this.rloaded = true)));
     },
     handleGoto(name) {
