@@ -40,7 +40,7 @@
         v-if="data.Pins.equipped.length > 0"
         ref="equipped_pins"
         :expanded="false"
-        @toggle="handleToggle($event, 'equipped_pins')"
+        @toggle="handleToggle('equipped_pins', $event)"
       >
         <template #title>Equipped Pins</template>
         <Pin
@@ -54,7 +54,7 @@
         v-if="data.Threads.equipped.length > 0"
         ref="equipped_threads"
         :expanded="false"
-        @toggle="handleToggle($event, 'equipped_threads')"
+        @toggle="handleToggle('equipped_threads', $event)"
       >
         <template #title>Equipped Threads</template>
         <Thread
@@ -67,7 +67,7 @@
         v-if="data.Food.length > 0"
         ref="food"
         :expanded="false"
-        @toggle="handleToggle($event, 'food')"
+        @toggle="handleToggle('food', $event)"
       >
         <template #title>Food</template>
         <Food v-for="food in data.Food" class="pull-left" :data="food" :key="data.Name + food.ID" />
@@ -76,7 +76,7 @@
         v-if="data.Pins.unequipped.length + data.Threads.unequipped.length > 0"
         ref="inventory"
         :expanded="false"
-        @toggle="handleToggle($event, 'inventory')"
+        @toggle="handleToggle('inventory', $event)"
       >
         <template #title>Inventory</template>
         <Pin
@@ -92,7 +92,7 @@
           :key="data.Name + 'thread' + thread.ID + index"
         />
       </Inventory>
-      <Inventory v-if="data.Swag.length > 0" :expanded="false">
+      <Inventory v-if="data.Swag.length > 0" :showExpander="false">
         <template #title>Swag</template>
         <div
           v-for="(swag, index) in data.Swag"
@@ -146,9 +146,11 @@ export default {
     };
   },
   methods: {
-    handleToggle(ref) {
-      // let elem = this.$refs[ref]; TODO: fill this out
-      return ref;
+    handleToggle(refName, event) {
+      let elem = this.$refs[refName];
+      elem.$children.forEach(item => {
+        item.$children[0].toggleExpand(event);
+      });
     }
   }
 };

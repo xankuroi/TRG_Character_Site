@@ -56,12 +56,15 @@ export default {
     }
   },
   methods: {
-    toggleExpand() {
+    toggleExpand(option) {
       this.maxWidth = this.$refs.self.parentNode.clientWidth;
       if (this.expanded) {
         this.$refs.content.scrollLeft = 0;
       }
       this.clearTimers();
+      if (option === this.expanded) {
+        return;
+      }
       this.expanded = !this.expanded;
       if (this.expanded && this.diff() > 0) {
         this.setAutoScroll();

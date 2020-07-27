@@ -6,9 +6,11 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import {
   faAddressCard, // Info card
   faAdjust, // Light mode
-  faBriefcase, // Position
+  faArrowsAltH, // Expand
+  faBriefcase, // Position"
   faClipboardCheck, // Copied!
   faClock, // Timezone
+  faCompressAlt, // Shrink
   faCopy, // Copy/Paste
   faHandshake, // Partner
   faInfoCircle, // Notes
@@ -18,7 +20,7 @@ import {
   faSync, // Reload data
   faUser, // Mun
   faUserSecret,
-  faWaveSquare // Noise
+  faWaveSquare, // Noise
 } from "@fortawesome/free-solid-svg-icons";
 import { faDiscord } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
@@ -28,9 +30,11 @@ Vue.use(Toasted);
 library.add(
   faAddressCard,
   faAdjust,
+  faArrowsAltH,
   faBriefcase,
   faClipboardCheck,
   faClock,
+  faCompressAlt,
   faCopy,
   faDiscord,
   faHandshake,
@@ -47,5 +51,5 @@ Vue.component("font-awesome-icon", FontAwesomeIcon);
 Vue.config.productionTip = false;
 
 new Vue({
-  render: h => h(App)
+  render: (h) => h(App),
 }).$mount("#app");

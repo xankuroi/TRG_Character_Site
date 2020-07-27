@@ -3,13 +3,28 @@
     <div class="title">
       <slot name="title" />
     </div>
+    <div class="button-container">
+      <button v-if="showExpander" @click="$emit('toggle', false)">
+        <font-awesome-icon :icon="['fas', 'compress-alt']" style="transform: rotate(45deg)" />
+      </button>
+      <button v-if="showExpander" @click="$emit('toggle', true)">
+        <font-awesome-icon :icon="['fas', 'arrows-alt-h']" />
+      </button>
+    </div>
     <slot />
     <div class="clear" />
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  props: {
+    showExpander: {
+      type: Boolean,
+      default: true
+    }
+  }
+};
 </script>
 
 <style scoped>
@@ -28,5 +43,13 @@ export default {};
   padding: 0 3px;
   position: absolute;
   top: -10px;
+}
+
+.button-container {
+  background: var(--background-color);
+  padding: 0 3px;
+  position: absolute;
+  top: -10px;
+  right: 3px;
 }
 </style>
