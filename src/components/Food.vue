@@ -1,24 +1,22 @@
 <template>
-  <div>
-    <Item :url="url" background="#dfc38e">
-      <template #info>
+  <Item :url="url" background="#dfc38e">
+    <template #info>
+      <div>
         <div>
-          <div>
-            <b>{{ data.Name }}</b>
-          </div>
-          <div class="text-small">
-            <template v-if="data.HEAL">Heal {{ data.HEAL }}</template>
-            <template v-if="data.HEAL && boosts">||</template>
-            <template v-if="boosts">{{ boosts }}</template>
-          </div>
+          <b>{{ data.Name }}</b>
         </div>
-      </template>
-      <template #after>
-        <div class="amt">x{{ data.n }}</div>
-        <div v-if="noImage" class="item-name">{{ data.Name }}</div>
-      </template>
-    </Item>
-  </div>
+        <div class="text-small">
+          <template v-if="data.HEAL">Heal {{ data.HEAL }}</template>
+          <template v-if="data.HEAL && boosts">||</template>
+          <template v-if="boosts">{{ boosts }}</template>
+        </div>
+      </div>
+    </template>
+    <template #after>
+      <div class="amt">x{{ data.n }}</div>
+      <div v-if="noImage" class="item-name">{{ data.Name }}</div>
+    </template>
+  </Item>
 </template>
 
 <script>
