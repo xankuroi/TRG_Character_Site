@@ -125,7 +125,7 @@ function equippedStats(equipment, pronouns) {
       ["HP", "ATK", "DEF"].forEach((stat, index) => {
         let c =
           pronouns === "He/Him" ? "M" : pronouns === "She/Her" ? "F" : "T";
-        let suffix = index ? "" : `_${index}`;
+        let suffix = index ? `_${index}` : "";
         total[stat] += (thread[stat] || 0) + (thread[c + suffix] || 0);
       });
       return total;
