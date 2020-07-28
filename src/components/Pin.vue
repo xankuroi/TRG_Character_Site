@@ -46,14 +46,19 @@ export default {
     };
   },
   computed: {
+    color() {
+      let color = this.fontColors[this.data.Brand];
+      if (color) {
+        return color.substring(1);
+      }
+      return null;
+    },
     url() {
       const id = this.data.ID.replace("#", "");
       if (Number(id) > 300) {
         return `https://avatars.dicebear.com/api/jdenticon/${
           this.data.Name
-        }.svg?radius=50&background=%23${
-          this.fontColors[this.data.Brand].substring(1) || "fff"
-        }`;
+        }.svg?radius=50&background=%23${this.color || "fff"}`;
       }
       return this.publicPath + `pins/${id} ${this.data.Name}.png`;
     },
