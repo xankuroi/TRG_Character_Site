@@ -51,6 +51,7 @@
           v-for="(pin, index) in data.Pins.equipped"
           class="pull-left"
           :data="pin"
+          :atk="data.ATK.total"
           :key="data.Name + 'pin' + index"
         />
       </Inventory>
@@ -92,6 +93,7 @@
           v-for="(pin, index) in data.Pins.unequipped"
           class="pull-left"
           :data="pin"
+          :atk="data.ATK.total"
           :key="data.Name + 'pin' + pin.ID + index"
         />
         <Thread

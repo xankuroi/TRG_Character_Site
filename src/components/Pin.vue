@@ -7,7 +7,7 @@
           <b>{{ data.Name }}</b>
         </div>
         <div class="text-small">
-          <span v-if="data.ATK">({{ data.ATK }})</span>
+          <span v-if="data.ATK">{{ data.ATK }} ({{ data.ATK + atk }})&nbsp;</span>
           <span v-if="data.Extras">{{ data.Extras }}</span>
           <span v-else>Attack once.</span>
         </div>
@@ -38,6 +38,10 @@ export default {
     data: {
       type: Object,
       required: true,
+    },
+    atk: {
+      type: Number,
+      default: 0,
     },
   },
   data() {
