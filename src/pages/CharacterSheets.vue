@@ -88,7 +88,7 @@
           v-show="activeIndex === index"
           :data="sheet"
           :key="'pp-' + index"
-          @goto="handleGoto"
+          @goto="handleGoto($event)"
         />
         <Profile
           v-for="(sheet, index) in reaperSheets"
@@ -96,7 +96,6 @@
           :data="sheet"
           :mirror="mirror"
           :key="'pr-' + index"
-          @goto="handleGoto"
         />
       </template>
     </simplebar>

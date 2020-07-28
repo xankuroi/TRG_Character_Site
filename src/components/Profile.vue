@@ -6,7 +6,11 @@
           <div class="image-container noshrink">
             <img :src="data['Image URL']" />
           </div>
-          <CharacterInfo class="flex-col flex-grow" :data="data" />
+          <CharacterInfo
+            class="flex-col flex-grow"
+            :data="data"
+            @goto="$emit('goto', data.Partner)"
+          />
           <CharacterDetails v-show="show === 'info'" class="info" :data="data" />
           <template v-if="!isPlayer(data)">
             <NoiseInfo v-show="show === 'noise'" class="info" :data="data" :mirror="mirror" />
@@ -70,7 +74,12 @@
         @toggle="handleToggle('food', $event)"
       >
         <template #title>Food</template>
-        <Food v-for="food in data.Food" class="pull-left" :data="food" :key="data.Name + food.ID" />
+        <Food
+          v-for="food in data.Food"
+          class="pull-left"
+          :data="food"
+          :key="data.Name + food.Name"
+        />
       </Inventory>
       <Inventory
         v-if="data.Pins.unequipped.length + data.Threads.unequipped.length > 0"
@@ -127,32 +136,32 @@ export default {
     Inventory,
     Food,
     Pin,
-    Thread
+    Thread,
   },
   mixins: [isPlayer],
   props: {
     data: {
       type: Object,
-      required: true
+      required: true,
     },
     mirror: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
   data() {
     return {
-      show: false
+      show: false,
     };
   },
   methods: {
     handleToggle(refName, event) {
       let elem = this.$refs[refName];
-      elem.$children.forEach(item => {
+      elem.$children.forEach((item) => {
         item.$children[0].toggleExpand(event);
       });
-    }
-  }
+    },
+  },
 };
 </script>
 

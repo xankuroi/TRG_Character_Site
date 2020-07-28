@@ -36,7 +36,7 @@
         </div>-->
       </div>
     </div>
-    <StatBlock :data="data" @goto="$emit('goto', $event)" />
+    <StatBlock :data="data" />
   </div>
 </template>
 
@@ -46,15 +46,15 @@ import { isPlayer } from "./mixins/utilities";
 
 export default {
   components: {
-    StatBlock
+    StatBlock,
   },
   mixins: [isPlayer],
   props: {
     data: {
       type: Object,
-      required: true
-    }
-  }
+      required: true,
+    },
+  },
 };
 </script>
 
