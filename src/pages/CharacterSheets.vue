@@ -179,6 +179,10 @@ export default {
         })
         .then(() => this.$nextTick(() => (this.rloaded = true)));
     },
+    reloadData() {
+      this.loadData();
+      setTimeout(this.reloadData, 600000);
+    },
     handleGoto(name) {
       this.activeIndex = this.playerSheets.findIndex(
         (data) => data.Name === name
@@ -210,6 +214,7 @@ export default {
   },
   mounted() {
     this.loadData();
+    this.reloadData();
     if (!localStorage.activeIndices) {
       localStorage.activeIndices = "{}";
     }
