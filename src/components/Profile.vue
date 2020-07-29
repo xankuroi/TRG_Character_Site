@@ -111,7 +111,7 @@
           class="text-small"
         >
           <i>{{ swag.name }}</i>
-          <span v-if="swag.description">&nbsp;- {{ swag.description }}</span>
+          <span class="text-small" v-if="swag.d">&nbsp;- {{ swag.d }}</span>
         </div>
       </Inventory>
     </template>
