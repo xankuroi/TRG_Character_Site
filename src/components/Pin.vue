@@ -5,9 +5,10 @@
         <div class="flex">
           <span class="text-smaller">{{ data.ID }}</span>
           <b>{{ data.Name }}</b>
+          <span v-if="data.d" class="text-smaller" style="margin-left: 0.5em;">w/ CD</span>
         </div>
         <div class="text-small">
-          <span v-if="data.ATK">{{ data.ATK }} ({{ data.ATK + atk }})&nbsp;</span>
+          <span v-if="data.ATK">{{ data.ATK }} ({{ totalAttack }})&nbsp;</span>
           <span v-if="data.Extras">{{ data.Extras }}</span>
           <span v-else>Attack once.</span>
         </div>
@@ -65,6 +66,12 @@ export default {
         }.svg?radius=50&background=%23${this.color || "fff"}`;
       }
       return this.publicPath + `pins/${id} ${this.data.Name}.png`;
+    },
+    totalAttack() {
+      if (this.data.d) {
+        return this.data.ATK + this.atk + 10;
+      }
+      return this.data.ATK + this.atk;
     },
   },
 };
