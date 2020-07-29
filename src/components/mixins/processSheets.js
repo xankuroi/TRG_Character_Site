@@ -110,8 +110,9 @@ function processCharacterData(sheet, config, lookup) {
 
 function formatPinData(pin, atk) {
   let s = `${pin.ID} ${pin.Name}`;
+  let cdATK = pin.d ? 10 : 0;
   if (pin.ATK) {
-    s += ` ${pin.ATK} (${pin.ATK + atk})`;
+    s += ` ${pin.ATK} (${pin.ATK + atk + cdATK})`;
   }
   if (pin.Extras) {
     s += ` - *${pin.Extras.trim()}*`;
