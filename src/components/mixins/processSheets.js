@@ -181,7 +181,7 @@ function processField(sheet, field, lookup) {
       if (name) {
         let datum = { name: name.w };
         if (lookup[field.NAME]) {
-          datum = lookup[field.NAME][name.w];
+          datum = { ...lookup[field.NAME][name.w] };
           if (!datum) {
             continue;
           }
