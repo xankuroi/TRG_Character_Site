@@ -213,7 +213,6 @@ export default {
     },
   },
   mounted() {
-    this.loadData();
     this.reloadData();
     if (!localStorage.activeIndices) {
       localStorage.activeIndices = "{}";
