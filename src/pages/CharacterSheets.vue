@@ -135,8 +135,8 @@ export default {
     // "players" for the sake of front-end filtering.
     return {
       activeIndex: -1,
-      playersURL: gs.replace("KEY", window.playerKey),
-      reapersURL: gs.replace("KEY", window.reaperKey),
+      playersURL: window.playerKey ? gs.replace("KEY", window.playerKey) : null,
+      reapersURL: window.reaperKey ? gs.replace("KEY", window.reaperKey) : null,
       ploaded: false,
       rloaded: false,
       playerSheets: {},
@@ -169,15 +169,19 @@ export default {
     loadData() {
       this.ploaded = false;
       this.rloaded = false;
-      processSpreadsheet(this.playersURL)
-        .then((stuff) => (this.playerSheets = stuff.sheets))
-        .then(() => this.$nextTick(() => (this.ploaded = true)));
-      processSpreadsheet(this.reapersURL)
-        .then((stuff) => {
-          this.reaperSheets = stuff.sheets;
-          this.mirror = stuff.mirror;
-        })
-        .then(() => this.$nextTick(() => (this.rloaded = true)));
+      if (this.playersURL) { 
+        processSpreadsheet(this.playersURL)
+          .then((stuff) => (this.playerSheets = stuff.sheets))
+          .then(() => this.$nextTick(() => (this.ploaded = true)));
+      }
+      if (this.reapersURL) { 
+        processSpreadsheet(this.reapersURL)
+          .then((stuff) => {
+            this.reaperSheets = stuff.sheets;
+            this.mirror = stuff.mirror;
+          })
+          .then(() => this.$nextTick(() => (this.rloaded = true)));
+      }
     },
     reloadData() {
       this.loadData();
