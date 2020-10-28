@@ -24,7 +24,7 @@ module.exports = {
       reaperKey:
         "2PACX-1vQykYWNZ5q269yQrpIj3Ai6wJ2HM2qvu_1CC53LDl-gJOfki72Vq28DYP-mcz-6RXbKBnNrSlflcugI",
     },
-    "Haunted Weekened": {
+    "Haunted Weekend": {
       entry: "src/main.js",
       title: "Haunted Weekend Characters",
       filename: "haunted/index.html",
