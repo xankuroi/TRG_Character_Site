@@ -24,5 +24,12 @@ module.exports = {
       reaperKey:
         "2PACX-1vQykYWNZ5q269yQrpIj3Ai6wJ2HM2qvu_1CC53LDl-gJOfki72Vq28DYP-mcz-6RXbKBnNrSlflcugI",
     },
+    "Haunted Weekened": {
+      entry: "src/main.js",
+      title: "Haunted Weekend Characters",
+      filename: "haunted/index.html",
+      playerKey:
+        "2PACX-1vS3o5WiIoMItBrst1IIqHae4PWiqo4OZmL7TcnjmO0oeFhweV0X5N6gyGw9frt1exL7YQYwYjh5i0Wh"
+    },
   },
 };
