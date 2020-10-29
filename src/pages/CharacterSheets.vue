@@ -169,19 +169,19 @@ export default {
     loadData() {
       this.ploaded = false;
       this.rloaded = false;
-      if (this.playersURL) { 
+      if (this.playersURL) {
         processSpreadsheet(this.playersURL)
           .then((stuff) => (this.playerSheets = stuff.sheets))
           .then(() => this.$nextTick(() => (this.ploaded = true)));
-      }
-      if (this.reapersURL) { 
+      } else { this.ploaded = true; }
+      if (this.reapersURL) {
         processSpreadsheet(this.reapersURL)
           .then((stuff) => {
             this.reaperSheets = stuff.sheets;
             this.mirror = stuff.mirror;
           })
           .then(() => this.$nextTick(() => (this.rloaded = true)));
-      }
+      } else { this.rloaded = true; }
     },
     reloadData() {
       this.loadData();
