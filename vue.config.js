@@ -4,7 +4,7 @@ module.exports = {
     index: {
       entry: "src/index.js",
       title: "The Reaper's Game Character Sheets",
-      weeks: ["W17", "Haunted Weekend"],
+      weeks: ["W17", "Haunted Weekend", "Seoul Weekend"],
     },
     "Test Page": {
       entry: "src/main.js",
@@ -30,6 +30,13 @@ module.exports = {
       filename: "haunted/index.html",
       playerKey:
         "2PACX-1vS3o5WiIoMItBrst1IIqHae4PWiqo4OZmL7TcnjmO0oeFhweV0X5N6gyGw9frt1exL7YQYwYjh5i0Wh"
+    },
+     "Seoul Weekend": {
+      entry: "src/main.js",
+      title: "Seoul Characters",
+      filename: "seoul/index.html",
+      playerKey:
+        "2PACX-1vTQLr_2U1IFu0fN-JVBNLcBJt9Aja_2jMHk7k6qiqaWRNqGOsalTe-F-Bq8_ttbZyvXdmcsIE-ci7Ey"
     },
   },
 };
