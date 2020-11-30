@@ -13,8 +13,8 @@
       <li><a :href="publicPath + 'W16/reapers.html'"> W16 Reapers </a></li>
     </ul>
     <ul class="list" style="line-height:2em;">
-      <li v-for="week in weeks" :key="week">
-        <a :href="publicPath + week">{{ week }} Characters</a>
+      <li v-for="(name, slug) in weeks" :key="slug">
+        <a :href="publicPath + slug">{{ name }} Characters</a>
       </li>
     </ul>
   </div>
@@ -26,7 +26,7 @@ export default {
   mixins: [publicPath],
   props: {
     weeks: {
-      type: Array,
+      type: Object,
       required: true
     }
   }

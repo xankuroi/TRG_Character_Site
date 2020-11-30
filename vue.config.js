@@ -4,7 +4,11 @@ module.exports = {
     index: {
       entry: "src/index.js",
       title: "The Reaper's Game Character Sheets",
-      weeks: ["W17", "Haunted Weekend", "Seoul Weekend"],
+      weeks: { // [path]: [display name]
+        W17: "W17",
+        haunted: "Haunted Weekend",
+        seoul: "Seoul Weekend"
+      }
     },
     "Test Page": {
       entry: "src/main.js",
@@ -31,7 +35,7 @@ module.exports = {
       playerKey:
         "2PACX-1vS3o5WiIoMItBrst1IIqHae4PWiqo4OZmL7TcnjmO0oeFhweV0X5N6gyGw9frt1exL7YQYwYjh5i0Wh"
     },
-     "Seoul Weekend": {
+    "Seoul Weekend": {
       entry: "src/main.js",
       title: "Seoul Characters",
       filename: "seoul/index.html",

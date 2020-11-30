@@ -63,31 +63,31 @@ const withIcons = [
   "Vanilla Soft Serve",
   "Soft Serve Swirl",
   "Pancakes",
-  "Crepe"
+  "Crepe",
 ];
 export default {
   components: {
-    Item
+    Item,
   },
   props: {
     data: {
       type: Object,
-      required: true
+      required: true,
     },
     size: {
       type: String,
-      default: "small"
-    }
+      default: "small",
+    },
   },
   data() {
     return {
-      publicPath: process.env.BASE_URL
+      publicPath: process.env.BASE_URL,
     };
   },
   computed: {
     boosts() {
       let tokens = [];
-      ["BRV", "HP", "ATK", "DEF", "SYNC"].forEach(stat => {
+      ["BRV", "HP", "ATK", "DEF", "SYNC"].forEach((stat) => {
         if (this.data[stat]) {
           tokens.push(`${this.data[stat]} ${stat}`);
         }
@@ -101,9 +101,9 @@ export default {
       if (this.noImage) {
         return `${this.publicPath}food/default.png`;
       }
-      return `${this.publicPath}food/${this.data.Name}.png`;
-    }
-  }
+      return `${this.publicPath}food/${this.data.Name.replace(/"/g, "")}.png`;
+    },
+  },
 };
 </script>
 

@@ -7,9 +7,9 @@
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <title><%= htmlWebpackPlugin.options.title %></title>
   <script type=text/javascript>
-    window.weeks="<%= htmlWebpackPlugin.options.weeks %>" ;
-    window.reaperKey="<%= htmlWebpackPlugin.options.reaperKey %>" ;
-    window.playerKey="<%= htmlWebpackPlugin.options.playerKey %>" ;
+    window.weeks='<%= JSON.stringify(htmlWebpackPlugin.options.weeks || "") %>';
+    window.reaperKey="<%= htmlWebpackPlugin.options.reaperKey %>";
+    window.playerKey="<%= htmlWebpackPlugin.options.playerKey %>";
   </script>
 </head>
 

@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Index v-if="weeks[0]" :weeks="weeks" />
+    <Index v-if="weeks" :weeks="weeks" />
     <template v-else>
       <CharacterSheets />
       <div class="clear text-smaller popover-container">
@@ -30,7 +30,7 @@ export default {
   },
   data() {
     return {
-      weeks: window.weeks.split(","),
+      weeks: JSON.parse(window.weeks),
     };
   },
   beforeMount() {
