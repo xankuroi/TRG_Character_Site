@@ -42,5 +42,13 @@ module.exports = {
       playerKey:
         "2PACX-1vTQLr_2U1IFu0fN-JVBNLcBJt9Aja_2jMHk7k6qiqaWRNqGOsalTe-F-Bq8_ttbZyvXdmcsIE-ci7Ey"
     },
+    
+    "W18 Characters": {
+      entry: "src/main.js",
+      title: "Week 18 (Chicago) Characters",
+      filename: "W18/index.html",
+      playerKey:
+        "2PACX-1vTDCzoqPnaSogrZxgnSUxRAgFzNMRbog9w9UArI132tBXYAR0PwTNII0ge4NTpiAWxyvfvavZDcDzlA"
+    },
   },
 };
