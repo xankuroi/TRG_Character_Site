@@ -7,7 +7,8 @@ module.exports = {
       weeks: { // [path]: [display name]
         W17: "W17",
         haunted: "Haunted Weekend",
-        seoul: "Seoul Weekend"
+        seoul: "Seoul Weekend",
+        W18: "W18"
       }
     },
     "Test Page": {
@@ -47,7 +48,9 @@ module.exports = {
       title: "Week 18 (Chicago) Characters",
       filename: "W18/index.html",
       playerKey:
-        "2PACX-1vTDCzoqPnaSogrZxgnSUxRAgFzNMRbog9w9UArI132tBXYAR0PwTNII0ge4NTpiAWxyvfvavZDcDzlA"
+        "2PACX-1vTDCzoqPnaSogrZxgnSUxRAgFzNMRbog9w9UArI132tBXYAR0PwTNII0ge4NTpiAWxyvfvavZDcDzlA",
+      reaperKey:
+        "2PACX-1vTsvuMZfrgg5Zme1tZa8uw_rRDyIb_E4HZ0GssKES8QHBBWIKbrASTQ1_hUUr3GeEIe7KTnZ11U6Hn",
     },
   },
 };
