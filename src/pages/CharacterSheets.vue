@@ -169,14 +169,15 @@ export default {
     },
     activeData() {
       if (this.loaded) {
-        if (this.activeIndex > 0) {
-          return this.playerSheets[this.activeIndex];
-        } else if (this.activeIndex > this.pLen + this.rLen) {
+        if (this.activeIndex > this.pLen + this.rLen) {
           return this.reaperSheets[this.rLen - 1];
         } else if (this.activeIndex >= this.pLen) {
           return this.reaperSheets[this.activeIndex - this.pLen];
+        } else if (this.activeIndex > 0) {
+          return this.playerSheets[this.activeIndex];
         }
       }
+      console.log(this.$currencySymbol);
       return { Color: {}, Name: "Overview" };
     },
   },

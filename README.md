@@ -43,7 +43,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ## Changelog
 
-W18 - Decouple role from workbooks.
+W18 - Decouple role from workbooks, allow for alternate currencies.
 
 W17 - Complete rehaul of both backend to simplify user input and frontend to match.
 

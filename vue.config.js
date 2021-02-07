@@ -41,7 +41,8 @@ module.exports = {
       filename: "seoul/index.html",
       sheetKeys: [
         "2PACX-1vTQLr_2U1IFu0fN-JVBNLcBJt9Aja_2jMHk7k6qiqaWRNqGOsalTe-F-Bq8_ttbZyvXdmcsIE-ci7Ey"
-      ]
+      ],
+      currencySymbolOverride: "₩"
     },
     "Week 18": {
       entry: "src/main.js",
@@ -49,7 +50,8 @@ module.exports = {
       filename: "W18/index.html",
       sheetKeys: [
         "2PACX-1vTDCzoqPnaSogrZxgnSUxRAgFzNMRbog9w9UArI132tBXYAR0PwTNII0ge4NTpiAWxyvfvavZDcDzlA"
-      ]
+      ],
+      currencySymbolOverride: "$"
     },
   },
 };

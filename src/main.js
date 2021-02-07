@@ -49,6 +49,7 @@ library.add(
 );
 Vue.component("font-awesome-icon", FontAwesomeIcon);
 Vue.config.productionTip = false;
+Vue.prototype.$currencySymbol = window.currencySymbolOverride || "¥";
 
 new Vue({
   render: (h) => h(App),

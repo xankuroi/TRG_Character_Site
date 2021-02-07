@@ -30,7 +30,7 @@
           :name="'BRV'"
         />
         <StatTile :stats="{ total: data.PP }" :color="data.Color" :name="'PP'" />
-        <StatTile :stats="{ total: data.Yen }" :color="data.Color" :name="'¥'" />
+        <StatTile :stats="{ total: data.Yen }" :color="data.Color" :name="$currencySymbol" />
       </div>
     </div>
   </div>
