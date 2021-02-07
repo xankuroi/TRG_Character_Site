@@ -43,6 +43,8 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ## Changelog
 
+W18 - Decouple role from workbooks.
+
 W17 - Complete rehaul of both backend to simplify user input and frontend to match.
 
 W16 - Some small but important changes to make it easier to transition to the next Week.

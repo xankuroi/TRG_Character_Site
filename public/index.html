@@ -8,8 +8,7 @@
   <title><%= htmlWebpackPlugin.options.title %></title>
   <script type=text/javascript>
     window.weeks='<%= JSON.stringify(htmlWebpackPlugin.options.weeks || "") %>';
-    window.reaperKey="<%= htmlWebpackPlugin.options.reaperKey %>";
-    window.playerKey="<%= htmlWebpackPlugin.options.playerKey %>";
+    window.sheetKeys='<%= htmlWebpackPlugin.options.sheetKeys %>'.split(',');
   </script>
 </head>
 

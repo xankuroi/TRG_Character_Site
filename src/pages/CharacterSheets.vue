@@ -122,12 +122,6 @@ export default {
     simplebar,
   },
   data() {
-    // Must use a CORS proxy because the download link redirects and
-    // said redirect doesn't include CORS headers thanks Google.
-    // Maybe they'll fix it https://issuetracker.google.com/issues/36759302
-    const gs =
-      "https://birbot-3961.appspot.com/" +
-      "https://docs.google.com/spreadsheets/d/e/KEY/pub?output=xlsx";
     const pathTokens = window.location.pathname.split("/");
     // This assumes that player sheets only contain players and
     // likewise for reapers. That is to say, if the backend contains
@@ -135,12 +129,9 @@ export default {
     // "players" for the sake of front-end filtering.
     return {
       activeIndex: -1,
-      playersURL: window.playerKey ? gs.replace("KEY", window.playerKey) : null,
-      reapersURL: window.reaperKey ? gs.replace("KEY", window.reaperKey) : null,
-      ploaded: false,
-      rloaded: false,
-      playerSheets: {},
-      reaperSheets: {},
+      keys: window.sheetKeys,
+      sheetStatuses: [false],
+      sheetsByUrl: {},
       showPlayers: true,
       showReapers: true,
       week: pathTokens[1] === "characters" ? pathTokens[2] : pathTokens[1],
@@ -149,39 +140,55 @@ export default {
   },
   computed: {
     loaded() {
-      return this.ploaded && this.rloaded;
+      return this.sheetStatuses.every(Boolean);
+    },
+    sheets() {
+      return Object.values(this.sheetsByUrl)
+              .reduce((acc, sheets) => acc.concat(sheets), []);
+    },
+    playerSheets() {
+      return this.sheets.filter(sheet => sheet.Role === "Player");
+    },
+    reaperSheets() {
+      return this.sheets.filter(sheet => sheet.Role === "Reaper");
     },
     pLen() {
       return Object.keys(this.playerSheets).length;
     },
+    rLen() {
+      return Object.keys(this.reaperSheets).length;
+    },
+    urls() {
+      // Must use a CORS proxy because the download link redirects and
+      // said redirect doesn't include CORS headers thanks Google.
+      // Maybe they'll fix it https://issuetracker.google.com/issues/36759302
+      const gs =
+        "https://birbot-3961.appspot.com/" +
+        "https://docs.google.com/spreadsheets/d/e/KEY/pub?output=xlsx";
+      return this.keys.map(key => gs.replace("KEY", key));
+    },
     activeData() {
       if (this.loaded) {
-        if (this.activeIndex >= this.pLen) {
-          return this.reaperSheets[this.activeIndex - this.pLen];
-        } else if (this.activeIndex > 0) {
+        if (this.activeIndex > 0) {
           return this.playerSheets[this.activeIndex];
+        } else if (this.activeIndex > this.pLen + this.rLen) {
+          return this.reaperSheets[this.rLen - 1];
+        } else if (this.activeIndex >= this.pLen) {
+          return this.reaperSheets[this.activeIndex - this.pLen];
         }
       }
       return { Color: {}, Name: "Overview" };
     },
   },
   methods: {
+    loadSheets(url, index) {
+      processSpreadsheet(url)
+        .then(data => this.$set(this.sheetsByUrl, url, data.sheets))
+        .then(() => this.$nextTick(() => this.$set(this.sheetStatuses, index, true)))
+    },
     loadData() {
-      this.ploaded = false;
-      this.rloaded = false;
-      if (this.playersURL) {
-        processSpreadsheet(this.playersURL)
-          .then((stuff) => (this.playerSheets = stuff.sheets))
-          .then(() => this.$nextTick(() => (this.ploaded = true)));
-      } else { this.ploaded = true; }
-      if (this.reapersURL) {
-        processSpreadsheet(this.reapersURL)
-          .then((stuff) => {
-            this.reaperSheets = stuff.sheets;
-            this.mirror = stuff.mirror;
-          })
-          .then(() => this.$nextTick(() => (this.rloaded = true)));
-      } else { this.rloaded = true; }
+      this.sheetStatuses = Array(this.urls.length).fill(false);
+      this.urls.forEach((url, index) => this.loadSheets(url, index));
     },
     reloadData() {
       this.loadData();
