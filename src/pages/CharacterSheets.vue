@@ -177,7 +177,6 @@ export default {
           return this.playerSheets[this.activeIndex];
         }
       }
-      console.log(this.$currencySymbol);
       return { Color: {}, Name: "Overview" };
     },
   },
