@@ -112,7 +112,10 @@ function formatPinData(pin, atk) {
   let s = `${pin.ID} ${pin.Name}`;
   let cdATK = pin.d ? 10 : 0;
   if (pin.ATK) {
-    s += ` ${pin.ATK} (${pin.ATK + atk + cdATK})`;
+    let subtotal = pin.ATK + atk;
+    if (pin.r) { subtotal += Math.ceil(subtotal / 2.0); }
+
+    s += ` ${pin.ATK} (${subtotal + cdATK})`;
   }
   if (pin.Extras) {
     s += ` - *${pin.Extras.trim()}*`;
@@ -136,10 +139,13 @@ function equippedStats(equipment, pronouns) {
 }
 
 function groupEquip(items) {
+  let resonances =
+    items.filter(item => item.n && (item.Name === item.Brand)).map(item => item.Name);
   return items.reduce(
     (acc, curr) => {
       if (curr.n) {
         acc["equipped"].push(curr);
+        if (resonances.includes(curr.Brand)) { curr.r = true; }
       } else {
         acc["unequipped"].push(curr);
       }

@@ -5,7 +5,8 @@
         <div class="flex">
           <span class="text-smaller">{{ data.ID }}</span>
           <b>{{ data.Name }}</b>
-          <span v-if="data.d" class="text-smaller" style="margin-left: 0.5em;">w/ CD</span>
+          <font-awesome-icon v-if="data.r" class="boost-indicator" :icon="['fas', 'certificate']" />
+          <font-awesome-icon v-if="data.d" class="boost-indicator" :icon="['fas', 'compact-disc']" />
         </div>
         <div class="text-small">
           <span v-if="data.ATK">{{ data.ATK }} ({{ totalAttack }})&nbsp;</span>
@@ -68,11 +69,22 @@ export default {
       return this.publicPath + `pins/${id} ${this.data.Name}.png`;
     },
     totalAttack() {
-      if (this.data.d) {
-        return this.data.ATK + this.atk + 10;
+      let subtotal = this.data.ATK + this.atk;
+      if (this.data.r) {
+        subtotal = Math.ceil(subtotal * 1.5);
       }
-      return this.data.ATK + this.atk;
+      if (this.data.d) {
+        subtotal += 10;
+      }
+      return subtotal;
     },
   },
 };
 </script>
+
+<style scoped>
+.boost-indicator {
+  font-size: 0.7em;
+  margin-left: 2px;
+}
+</style>

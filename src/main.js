@@ -8,8 +8,10 @@ import {
   faAdjust, // Light mode
   faArrowsAltH, // Expand
   faBriefcase, // Position"
+  faCertificate, // Resonance pin boost
   faClipboardCheck, // Copied!
   faClock, // Timezone
+  faCompactDisc, // CD boost
   faCompressAlt, // Shrink
   faCopy, // Copy/Paste
   faHandshake, // Partner
@@ -32,8 +34,10 @@ library.add(
   faAdjust,
   faArrowsAltH,
   faBriefcase,
+  faCertificate,
   faClipboardCheck,
   faClock,
+  faCompactDisc,
   faCompressAlt,
   faCopy,
   faDiscord,
