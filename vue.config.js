@@ -7,7 +7,8 @@ module.exports = {
       weeks: { // [path]: [display name]
         W17: "W17",
         haunted: "Haunted Weekend",
-        seoul: "Seoul Weekend"
+        seoul: "Seoul Weekend",
+        W18: "W18"
       }
     },
     "Test Page": {
