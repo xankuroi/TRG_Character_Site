@@ -13,7 +13,7 @@
       </div>
     </template>
     <template #after>
-      <div class="amt">x{{ data.n }}</div>
+      <div class="amt">x{{ data.n || 1 }}</div>
       <div v-if="noImage" class="item-name">{{ data.Name }}</div>
     </template>
   </Item>
