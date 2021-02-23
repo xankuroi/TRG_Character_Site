@@ -183,7 +183,10 @@ export default {
   methods: {
     loadSheets(url, index) {
       processSpreadsheet(url)
-        .then(data => this.$set(this.sheetsByUrl, url, data.sheets))
+        .then(data => {
+          this.$set(this.sheetsByUrl, url, data.sheets);
+          this.mirror = data.mirror;
+        })
         .then(() => this.$nextTick(() => this.$set(this.sheetStatuses, index, true)))
     },
     loadData() {
