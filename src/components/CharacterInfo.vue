@@ -11,7 +11,7 @@
           v-if="data.Special && data.Special.length > 0"
           class="inline-block text-small"
           :style="{ color: '#' + data.Special[0].n }"
-        >{{ data.Special[0].name }} DIVISION</div>
+        >{{ data.Special[0].name }}</div>
         <div v-if="isPlayer(data) && data.Partner" @click="$emit('goto', data.Partner)">
           <font-awesome-icon :icon="['fas', 'handshake']" :style="data.Color" />
           <span class="fade cursor">{{ ' ' + data.Partner }}</span>
