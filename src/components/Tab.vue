@@ -53,6 +53,7 @@ export default {
   margin: 10px;
   opacity: 0.5;
   transition: 0.2s;
+  white-space: nowrap;
 }
 
 .tab:hover {
