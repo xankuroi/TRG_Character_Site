@@ -120,12 +120,14 @@ export default {
   z-index: 3;
 }
 
-.item-name {
+.item-name{
   background: rgba(0, 0, 0, 0.5);
   color: white;
   cursor: pointer;
   font-size: 11px;
   font-weight: bold;
+  max-height: 42px;
+  overflow: hidden;
   padding: 0 2px;
   position: absolute;
   text-shadow: 2px 2px 0 black, -1px -1px 0 dimgray, 1px -1px 0 dimgrey,
