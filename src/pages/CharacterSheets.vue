@@ -136,6 +136,7 @@ export default {
       showReapers: true,
       week: pathTokens[1] === "characters" ? pathTokens[2] : pathTokens[1],
       mirror: false,
+      reloadTimer: null
     };
   },
   computed: {
@@ -194,8 +195,9 @@ export default {
       this.urls.forEach((url, index) => this.loadSheets(url, index));
     },
     reloadData() {
+      clearTimeout(this.reloadTimer);
       this.loadData();
-      setTimeout(this.reloadData, 600000);
+      this.reloadTimer = setTimeout(this.reloadData, 600000);
     },
     handleGoto(name) {
       this.activeIndex = this.playerSheets.findIndex(
