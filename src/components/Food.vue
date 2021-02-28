@@ -1,5 +1,5 @@
 <template>
-  <Item :url="url" background="#dfc38e">
+  <Item v-if="data.n" :url="url" background="#dfc38e">
     <template #info>
       <div>
         <div>
@@ -13,7 +13,7 @@
       </div>
     </template>
     <template #after>
-      <div class="amt">x{{ data.n || 1 }}</div>
+      <div class="amt">x{{ data.n }}</div>
       <div v-if="noImage" class="item-name">{{ data.Name }}</div>
     </template>
   </Item>
