@@ -97,8 +97,7 @@ function processCharacterData(sheet, config, lookup) {
   // Copy/paste
   let cp = `**${data.Name} | ${data.HP.current}/${data.HP.total} HP | ${data.ATK.total} ATK`;
   if (data.DEF.total) {
-    if (data.DEF.total > data.DEF.CAP) { data.DEF.total = data.DEF.CAP }
-    cp += ` | ${data.DEF.total} DEF`;
+    cp += ` | ${data.DEF.total > data.DEF.cap ? data.DEF.cap : data.DEF.total} DEF`;
   }
   if (data.Role === "Player") {
     cp += ` | ${data.SYNC}% SYNC`;
