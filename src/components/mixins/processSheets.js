@@ -66,6 +66,10 @@ function processCharacterData(sheet, config, lookup) {
     } else {
       data[field.NAME] = fieldData;
     }
+
+    if (field.CAP && !isNaN(field.CAP)) {
+      data[field.NAME].cap = field.CAP;
+    }
   });
   // Group items by equipped
   data.Pins = groupEquip(data.Pins);
@@ -93,6 +97,7 @@ function processCharacterData(sheet, config, lookup) {
   // Copy/paste
   let cp = `**${data.Name} | ${data.HP.current}/${data.HP.total} HP | ${data.ATK.total} ATK`;
   if (data.DEF.total) {
+    if (data.DEF.total > data.DEF.CAP) { data.DEF.total = data.DEF.CAP }
     cp += ` | ${data.DEF.total} DEF`;
   }
   if (data.Role === "Player") {

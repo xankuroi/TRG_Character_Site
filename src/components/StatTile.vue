@@ -3,7 +3,7 @@
     <b :style="color">{{ name }}</b>
     <div style="display: inline-block;">
       <slot name="before" />
-      {{ stats.total }}
+      <span :style="{'text-decoration': capped ? 'underline' : ''}">{{ total }}</span>
       <slot name="after" />
       <span v-if="additional" class="add flex">
         <span class="text-smaller">▲</span>
@@ -34,6 +34,13 @@ export default {
   computed: {
     additional() {
       return this.stats.total - this.stats.raw;
+    },
+    capped() {
+      return this.stats.cap && this.stats.total >= this.stats.cap;
+    },
+    total() {
+      if (this.capped) { return this.stats.cap; }
+      return this.stats.total;
     }
   }
 };
