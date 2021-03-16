@@ -8,7 +8,8 @@ module.exports = {
         W17: "W17",
         haunted: "Haunted Weekend",
         seoul: "Seoul Weekend",
-        W18: "W18"
+        W18: "W18",
+        lyoko: "Code Lyoko Weekend"
       }
     },
     "Test Page": {
@@ -51,6 +52,15 @@ module.exports = {
       filename: "W18/index.html",
       sheetKeys: [
         "2PACX-1vTDCzoqPnaSogrZxgnSUxRAgFzNMRbog9w9UArI132tBXYAR0PwTNII0ge4NTpiAWxyvfvavZDcDzlA"
+      ],
+      currencySymbolOverride: "$"
+    },
+    "Code Lyoko": {
+      entry: "src/main.js",
+      title: "Code Lyoko Characters",
+      filename: "lyoko/index.html",
+      sheetKeys: [
+        "2PACX-1vR1jiRpXTIuuNHmV4GwcAQA7UcgUN-sW-jm5Lc3jResxRRQKc8Diop4f2ivJ0CQAigUYtjym4MKUAbT"
       ],
       currencySymbolOverride: "$"
     },
