@@ -8,7 +8,7 @@
         <StatTile v-if="!hide.HP" :stats="data.HP" :color="data.Color" :name="names.HP">
           <template #before>
             <b :style="hpColor">{{ data.HP.current }}</b>
-            <span class="text-smaller">/</span>
+            <span class="text-smaller">/ </span>
           </template>
         </StatTile>
         <StatTile v-if="!hide.ATK" :stats="data.ATK" :color="data.Color" :name="names.ATK" />
