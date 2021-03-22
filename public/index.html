@@ -11,7 +11,7 @@
   <script type=text/javascript>
     window.weeks='<%= JSON.stringify(htmlWebpackPlugin.options.weeks || "") %>';
     window.sheetKeys='<%= htmlWebpackPlugin.options.sheetKeys %>'.split(',');
-    window.overrides='<%= JSON.stringify(htmlWebpackPlugin.options.overrides) %>';
+    window.overrides='<%= JSON.stringify(htmlWebpackPlugin.options.overrides || {}) %>';
     window.legacyPinImages='<%= htmlWebpackPlugin.options.legacyPinImages %>';
   </script>
 </head>
