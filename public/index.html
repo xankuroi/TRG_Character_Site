@@ -5,11 +5,13 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
-  <title><%= htmlWebpackPlugin.options.title %></title>
+  <title>
+    <%= htmlWebpackPlugin.options.title %>
+  </title>
   <script type=text/javascript>
     window.weeks='<%= JSON.stringify(htmlWebpackPlugin.options.weeks || "") %>';
     window.sheetKeys='<%= htmlWebpackPlugin.options.sheetKeys %>'.split(',');
-    window.currencySymbolOverride='<%= htmlWebpackPlugin.options.currencySymbolOverride %>';
+    window.overrides='<%= JSON.stringify(htmlWebpackPlugin.options.overrides) %>';
   </script>
 </head>
 

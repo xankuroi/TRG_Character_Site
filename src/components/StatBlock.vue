@@ -5,32 +5,32 @@
     </button>
     <div class="stat-content">
       <div>
-        <StatTile :stats="data.HP" :color="data.Color" :name="'HP'">
+        <StatTile v-if="!hide.HP" :stats="data.HP" :color="data.Color" :name="names.HP">
           <template #before>
             <b :style="hpColor">{{ data.HP.current }}</b>
             <span class="text-smaller">/</span>
           </template>
         </StatTile>
-        <StatTile :stats="data.ATK" :color="data.Color" :name="'ATK'" />
-        <StatTile :stats="data.DEF" :color="data.Color" :name="'DEF'" />
+        <StatTile v-if="!hide.ATK" :stats="data.ATK" :color="data.Color" :name="names.ATK" />
+        <StatTile v-if="!hide.DEF" :stats="data.DEF" :color="data.Color" :name="names.DEF" />
         <StatTile
-          v-if="data.Role === 'Player'"
+          v-if="data.Role === 'Player' && !hide.SYNC"
           :stats="{ total: data.SYNC }"
           :color="data.Color"
-          :name="'SYNC'"
+          :name="names.SYNC"
         >
           <template #after>%</template>
         </StatTile>
       </div>
       <div>
         <StatTile
-          v-if="data.BRV !== undefined"
+          v-if="data.BRV !== undefined && !hide.BRV"
           :stats="{ total: data.BRV }"
           :color="data.Color"
-          :name="'BRV'"
+          :name="names.BRV"
         />
-        <StatTile :stats="{ total: data.PP }" :color="data.Color" :name="'PP'" />
-        <StatTile :stats="{ total: data.Yen }" :color="data.Color" :name="$currencySymbol" />
+        <StatTile v-if="!hide.PP" :stats="{ total: data.PP }" :color="data.Color" :name="names.PP" />
+        <StatTile v-if="!hide.Yen" :stats="{ total: data.Yen }" :color="data.Color" :name="names.Yen" />
       </div>
     </div>
   </div>
@@ -61,6 +61,28 @@ export default {
         return { color: "red" };
       }
       return { color: "green" };
+    },
+    names() {
+      return {
+        HP: this.$overrides?.HP?.name ?? "HP",
+        ATK: this.$overrides?.ATK?.name ?? "ATK",
+        DEF: this.$overrides?.DEF?.name ?? "DEF",
+        SYNC: this.$overrides?.SYNC?.name ?? "SYNC",
+        PP: this.$overrides?.PP?.name ?? "PP",
+        BRV: this.$overrides?.BRV?.name ?? "BRV",
+        Yen: this.$overrides?.Yen?.name ?? "¥"
+      }
+    },
+    hide() {
+      return {
+        HP: this.$overrides?.HP?.hide,
+        ATK: this.$overrides?.ATK?.hide,
+        DEF: this.$overrides?.DEF?.hide,
+        SYNC: this.$overrides?.SYNC?.hide,
+        PP: this.$overrides?.PP?.hide,
+        BRV: this.$overrides?.BRV?.hide,
+        Yen: this.$overrides?.Yen?.hide,
+      }
     }
   }
 };

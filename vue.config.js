@@ -44,7 +44,9 @@ module.exports = {
       sheetKeys: [
         "2PACX-1vTQLr_2U1IFu0fN-JVBNLcBJt9Aja_2jMHk7k6qiqaWRNqGOsalTe-F-Bq8_ttbZyvXdmcsIE-ci7Ey"
       ],
-      currencySymbolOverride: "₩"
+      overrides: {
+        Yen: { name: "₩" }
+      }
     },
     "Week 18": {
       entry: "src/main.js",
@@ -53,7 +55,9 @@ module.exports = {
       sheetKeys: [
         "2PACX-1vTDCzoqPnaSogrZxgnSUxRAgFzNMRbog9w9UArI132tBXYAR0PwTNII0ge4NTpiAWxyvfvavZDcDzlA"
       ],
-      currencySymbolOverride: "$"
+      overrides: {
+        Yen: { name: "$" }
+      }
     },
     "Code Lyoko": {
       entry: "src/main.js",
@@ -62,7 +66,10 @@ module.exports = {
       sheetKeys: [
         "2PACX-1vR1jiRpXTIuuNHmV4GwcAQA7UcgUN-sW-jm5Lc3jResxRRQKc8Diop4f2ivJ0CQAigUYtjym4MKUAbT"
       ],
-      currencySymbolOverride: "$"
+      overrides: {
+        SYNC: { name: "SPD" },
+        Yen: { name: "$" }
+      }
     },
   },
 };
