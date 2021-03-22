@@ -12,7 +12,7 @@
             @goto="$emit('goto', data.Partner)"
           />
           <CharacterDetails v-show="show === 'info'" class="info" :data="data" />
-          <template v-if="!isPlayer(data)">
+          <template v-if="!isPlayer(data) || $overrides.enableNoiseBlockForPlayers">
             <NoiseInfo v-show="show === 'noise'" class="info" :data="data" :mirror="mirror" />
             <div class="noise-container" v-show="show === 'noise'">
               <div class="container-redux">
@@ -29,7 +29,7 @@
             <font-awesome-icon :icon="['fas', 'sticky-note']" />
           </span>
           <span
-            v-if="!isPlayer(data)"
+            v-if="!isPlayer(data) || $overrides.enableNoiseBlockForPlayers"
             class="tab"
             :class="{ active: show === 'noise' }"
             @click="show = 'noise'"

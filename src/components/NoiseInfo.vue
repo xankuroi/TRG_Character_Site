@@ -1,12 +1,11 @@
 <template>
   <simplebar class="tab-scroll-container">
     <div class="text-small flex">
-      <!-- <div class="image-container">
+      <div class="image-container">
         <div class="container-redux">
           <img :src="data.Noise['Image URL']" />
         </div>
-      </div>-->
-      <div v-if="mirror"></div>
+      </div>
       <div>
         <div class="flex noise">
           <h2 style="margin-right:10px;">{{ data.Noise.Name }}</h2>
@@ -45,11 +44,11 @@
             <p :key="`${data.Noise.name}${index}p`">{{ pin.Extras || "Attack once." }}</p>
           </template>
         </template>
-        <!-- <div class="image">
+        <div v-if="imgURL" class="image">
           <div class="container-redux">
-            <img :src="data.Noise['Image URL']" />
+            <img :src="imgURL" />
           </div>
-        </div>-->
+        </div>
       </div>
     </div>
   </simplebar>
@@ -95,6 +94,9 @@ export default {
         return `**${this.data.Noise.Name} | ${hp} | ${atk} | ${def}**\n${abilities}`;
       }
     },
+    imgURL() {
+      return this.data.Noise['Image URL'];
+    }
   },
 };
 </script>
@@ -106,8 +108,8 @@ h2 {
 
 .image-container {
   display: inline-flex;
-  align-items: center;
-  height: 200px;
+  align-self: flex-start;
+  max-height: 100%;
   width: 200px;
 }
 
@@ -133,11 +135,12 @@ h2 {
   }
 
   .image {
-    display: inline-flex;
-    align-items: center;
-    height: 200px;
-    width: 100%;
-  }
+  display: inline-flex;
+  align-self: flex-start;
+  max-height: 100%;
+  width: 100%;
+}
+
 
   .flex-col {
     align-items: center;

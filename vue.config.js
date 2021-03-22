@@ -72,7 +72,10 @@ module.exports = {
       ],
       overrides: {
         SYNC: { name: "SPD" },
-        Yen: { name: "$" }
+        Yen: { name: "$" },
+        PP: { name: "EXP" },
+        hidePlayerBlock: true,
+        enableNoiseBlockForPlayers: true
       }
     },
   },
