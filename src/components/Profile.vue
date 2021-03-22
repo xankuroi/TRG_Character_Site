@@ -14,11 +14,6 @@
           <CharacterDetails v-show="show === 'info'" class="info" :data="data" />
           <template v-if="!isPlayer(data) || $overrides.enableNoiseBlockForPlayers">
             <NoiseInfo v-show="show === 'noise'" class="info" :data="data" :mirror="mirror" />
-            <div class="noise-container" v-show="show === 'noise'">
-              <div class="container-redux">
-                <img :src="data.Noise['Image URL']" />
-              </div>
-            </div>
           </template>
         </div>
         <div class="tab-container">

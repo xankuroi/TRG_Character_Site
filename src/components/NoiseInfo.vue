@@ -1,12 +1,12 @@
 <template>
   <simplebar class="tab-scroll-container">
     <div class="text-small flex">
-      <div class="image-container">
+      <div v-if="imgURL" class="image-container">
         <div class="container-redux">
-          <img :src="data.Noise['Image URL']" />
+          <img :src="imgURL" />
         </div>
       </div>
-      <div>
+      <div class="margin-left">
         <div class="flex noise">
           <h2 style="margin-right:10px;">{{ data.Noise.Name }}</h2>
           {{ data.Noise.Species }}
@@ -127,6 +127,10 @@ h2 {
 
 .flex {
   margin-bottom: 10px;
+}
+
+.margin-left {
+  margin-left: 10px;
 }
 
 @media (max-width: 600px) {
