@@ -87,6 +87,7 @@
           v-for="(sheet, index) in playerSheets"
           v-show="activeIndex === index"
           :data="sheet"
+          :mirror="mirror"
           :key="'pp-' + index"
           @goto="handleGoto($event)"
         />
