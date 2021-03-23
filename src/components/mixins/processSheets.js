@@ -82,6 +82,9 @@ function processCharacterData(sheet, config, lookup) {
     data[stat].total = data[stat].raw + data[stat].misc + data[stat].threads;
     data.Noise[stat].total =
       data.Noise[stat].raw + data.Noise[stat].misc + data.Noise[stat].trained;
+
+    // Insert overrides for the CP if applicable
+    data[stat].name = window?.overrides?.[stat]?.name || stat;
   });
 
   // Additional color parsing
@@ -95,12 +98,13 @@ function processCharacterData(sheet, config, lookup) {
   }
 
   // Copy/paste
-  let cp = `**${data.Name} | ${data.HP.current}/${data.HP.total} HP | ${data.ATK.total} ATK`;
+  let cp = `**${data.Name} | ${data.HP.current}/${data.HP.total} ` +
+    `${data.HP.name} | ${data.ATK.total} ${data.ATK.name}`;
   if (data.DEF.total) {
-    cp += ` | ${data.DEF.total > data.DEF.cap ? data.DEF.cap : data.DEF.total} DEF`;
+    cp += ` | ${data.DEF.total > data.DEF.cap ? data.DEF.cap : data.DEF.total} ${data.DEF.name}`;
   }
   if (data.Role === "Player") {
-    cp += ` | ${data.SYNC}% SYNC`;
+    cp += ` | ${data.SYNC}% ${window?.overrides?.SYNC?.name ?? "SYNC"}`;
   }
   data.CP =
     cp +

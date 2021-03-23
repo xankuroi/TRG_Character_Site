@@ -60,13 +60,18 @@ export default {
       return null;
     },
     url() {
-      const id = this.data.ID.replace("#", "");
-      if (Number(id) > 300) {
-        return `https://avatars.dicebear.com/api/jdenticon/${
-          this.data.Name
-        }.svg?radius=50&background=%23${this.color || "fff"}`;
+      if (this.$legacyPinImages) {
+        const id = this.data.ID.replace("#", "");
+        if (Number(id) < 300) {
+          return this.publicPath + `pins/${id} ${this.data.Name}.png`;
+        }
       }
-      return this.publicPath + `pins/${id} ${this.data.Name}.png`;
+      if (this.data.ImgSM) {
+        return this.data.ImgSM;
+      }
+      return `https://avatars.dicebear.com/api/jdenticon/${
+        this.data.Name
+      }.svg?radius=50&background=%23${this.color || "fff"}`;
     },
     totalAttack() {
       let subtotal = this.data.ATK + this.atk;

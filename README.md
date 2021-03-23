@@ -43,6 +43,8 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ## Changelog
 
+Post-W18 - Expand override options, allow for hosted item links.
+
 W18 - Decouple role from workbooks, allow for alternate currencies, resonance display.
 
 W17 - Complete rehaul of both backend to simplify user input and frontend to match.

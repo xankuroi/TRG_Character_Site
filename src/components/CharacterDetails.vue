@@ -1,7 +1,7 @@
 <template>
   <simplebar class="text-small flex-col">
     <div class="flex">
-      <template v-if="isPlayer(data)">
+      <template v-if="isPlayer(data) && !$overrides.hidePlayerBlock">
         <div class="flex block">
           <div class="block">
             <h4 :style="data.Color">Entry Fee</h4>
