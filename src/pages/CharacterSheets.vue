@@ -205,9 +205,10 @@ export default {
           if (this.version === null) { this.version = version; }
           else if (this.version != version) { location.reload(); }
         }
+      }).finally(() => {
+        this.sheetStatuses = Array(this.urls.length).fill(false);
+        this.urls.forEach((url, index) => this.loadSheets(url, index));
       });
-      this.sheetStatuses = Array(this.urls.length).fill(false);
-      this.urls.forEach((url, index) => this.loadSheets(url, index));
     },
     reloadData() {
       clearTimeout(this.reloadTimer);
