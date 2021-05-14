@@ -78,5 +78,16 @@ module.exports = {
         enableNoiseBlockForPlayers: true
       }
     },
+    "Seoul Weekend 2": {
+      entry: "src/main.js",
+      title: "Seoul Characters (2)",
+      filename: "seoul2/index.html",
+      sheetKeys: [
+        "2PACX-1vQtgjd9RGFEd2p9wYQd7kFpVW2DYpAzPGL5b5xtzybeO0m7pSonBJSKcWt3-IBI-4HDqmO0F9kzPkJ2"
+      ],
+      overrides: {
+        Yen: { name: "₩" }
+      }
+    },
   },
 };
