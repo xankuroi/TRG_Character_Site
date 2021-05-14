@@ -8,7 +8,7 @@
       </div>
       <div class="margin-left">
         <div class="flex noise">
-          <h2 style="margin-right:10px;">{{ data.Noise.Name }}</h2>
+          <h2>{{ data.Noise.Name }}</h2>
           {{ data.Noise.Species }}
         </div>
         <template v-if="!mirror">
@@ -119,6 +119,7 @@ h2 {
 
 .container-redux {
   margin: 0 auto;
+  min-width: 200px;
 }
 
 .flex.noise {
@@ -139,11 +140,15 @@ h2 {
   }
 
   .image {
-  display: inline-flex;
-  align-self: flex-start;
-  max-height: 100%;
-  width: 100%;
-}
+    display: inline-flex;
+    align-self: flex-start;
+    max-height: 100%;
+    width: 100%;
+  }
+
+  .image img {
+    width: 200px;
+  }
 
 
   .flex-col {

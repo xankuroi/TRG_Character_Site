@@ -87,6 +87,7 @@
           v-for="(sheet, index) in playerSheets"
           v-show="activeIndex === index"
           :data="sheet"
+          :mirror="mirror"
           :key="'pp-' + index"
           @goto="handleGoto($event)"
         />
@@ -123,10 +124,6 @@ export default {
   },
   data() {
     const pathTokens = window.location.pathname.split("/");
-    // This assumes that player sheets only contain players and
-    // likewise for reapers. That is to say, if the backend contains
-    // reapers sheets in the player workbook, those reapers would be considered
-    // "players" for the sake of front-end filtering.
     return {
       activeIndex: -1,
       keys: window.sheetKeys,
@@ -136,7 +133,8 @@ export default {
       showReapers: true,
       week: pathTokens[1] === "characters" ? pathTokens[2] : pathTokens[1],
       mirror: false,
-      reloadTimer: null
+      reloadTimer: null,
+      version: null
     };
   },
   computed: {
@@ -182,6 +180,17 @@ export default {
     },
   },
   methods: {
+    checkVersion() {
+      return fetch("https://birbot-3961.appspot.com/https://github.com/shibuyasgame/characters/commits/gh-pages")
+        .then((resp) => resp.text())
+        .then((text) => {
+          const parser = new DOMParser();
+          const doc = parser.parseFromString(text, 'text/html');
+          let test = doc.querySelector("a[href*='/shibuyasgame/characters/commit/'].btn").text.trim();
+          return test;
+        })
+        .catch(() => false);
+    },
     loadSheets(url, index) {
       processSpreadsheet(url)
         .then(data => {
@@ -191,8 +200,15 @@ export default {
         .then(() => this.$nextTick(() => this.$set(this.sheetStatuses, index, true)))
     },
     loadData() {
-      this.sheetStatuses = Array(this.urls.length).fill(false);
-      this.urls.forEach((url, index) => this.loadSheets(url, index));
+      this.checkVersion().then((version) => {
+        if (version) {
+          if (this.version === null) { this.version = version; }
+          else if (this.version != version) { location.reload(); }
+        }
+      }).finally(() => {
+        this.sheetStatuses = Array(this.urls.length).fill(false);
+        this.urls.forEach((url, index) => this.loadSheets(url, index));
+      });
     },
     reloadData() {
       clearTimeout(this.reloadTimer);
