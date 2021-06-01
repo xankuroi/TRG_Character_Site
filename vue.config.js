@@ -7,9 +7,10 @@ module.exports = {
       weeks: { // [path]: [display name]
         W17: "W17",
         haunted: "Haunted Weekend",
-        seoul: "Seoul Weekend",
+        seoul: "Seoul Weekend (1)",
         W18: "W18",
-        lyoko: "Code Lyoko Weekend"
+        lyoko: "Code Lyoko Weekend",
+        seoul2: "Seoul Weekend (2)"
       }
     },
     "Test Page": {
