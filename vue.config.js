@@ -10,7 +10,8 @@ module.exports = {
         seoul: "Seoul Weekend (1)",
         W18: "W18",
         lyoko: "Code Lyoko Weekend",
-        seoul2: "Seoul Weekend (2)"
+        seoul2: "Seoul Weekend (2)",
+        W19: "W19"
       }
     },
     "Test Page": {
@@ -89,6 +90,14 @@ module.exports = {
       overrides: {
         Yen: { name: "₩" }
       }
+    },
+    "Week 19": {
+     entry: "src/main.js",
+     title: "Week 19 Characters",
+     filename: "W19/index.html",
+     sheetKeys: [
+       "2PACX-1vQ-xmqo11pUYYzajjyjmOZoTKuVPRDlDWjXX4pfBcnbYkGslslONfXCC9DrztCIUhCGsa1Sz6Rgbr5Y"
+     ],
     },
   },
 };
