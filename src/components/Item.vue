@@ -150,6 +150,7 @@ export default {
 
 .info-container {
   align-items: center;
+  background: var(--item-info-default-color);
   color: black;
   display: flex;
   height: 100%;

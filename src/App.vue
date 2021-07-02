@@ -7,12 +7,12 @@
         <font-awesome-icon
           class="icon"
           :icon="['fas', 'info-circle']"
-          :style="{color: 'var(--border-color)'}"
+          :style="{ color: 'var(--border-color)' }"
         />
         <div class="popover">
           Changes may take up to five minutes to reflect in the sheet.
-          <br />Please
-          report any issues to #hacklab or #meta in the TRG Discord.
+          <br />Please report any issues to #hacklab or #meta in the TRG
+          Discord.
           <br />
           <span class="text-smaller">Site creds: Xan (@xankuroi).</span>
         </div>
@@ -53,12 +53,14 @@ body[data-theme="light"] {
   --text-color: #2c3e50;
   --background-color: #fff;
   --border-color: #b3b3b3;
+  --item-info-default-color: rgb(180, 180, 180);
 }
 
 body[data-theme="dark"] {
   --text-color: #dee4e7;
   --background-color: #222;
   --border-color: #666;
+  --item-info-default-color: #eee;
 }
 
 #app {
