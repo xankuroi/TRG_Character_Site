@@ -98,10 +98,13 @@ export default {
       return !withIcons.includes(this.data.Name);
     },
     url() {
-      if (this.noImage) {
-        return `${this.publicPath}food/default.png`;
+      if (this.$legacyItemImages && !this.noImage) {
+        return `${this.publicPath}food/${this.data.Name.replace(/"/g, "")}.png`;
       }
-      return `${this.publicPath}food/${this.data.Name.replace(/"/g, "")}.png`;
+      if (this.data.ImgSM) {
+        return this.data.ImgSM;
+      }
+      return `${this.publicPath}food/default.png`;
     },
   },
 };
@@ -120,7 +123,7 @@ export default {
   z-index: 3;
 }
 
-.item-name{
+.item-name {
   background: rgba(0, 0, 0, 0.5);
   color: white;
   cursor: pointer;

@@ -30,7 +30,7 @@ module.exports = {
         "2PACX-1vQ9mahGpwePTKAx8tV8qAM43iY-2VgxPFSG_gL-seTTifV-HNxcOrHm8FYvm8a4gU02HLULbnCwvzhp",
         "2PACX-1vQykYWNZ5q269yQrpIj3Ai6wJ2HM2qvu_1CC53LDl-gJOfki72Vq28DYP-mcz-6RXbKBnNrSlflcugI",
       ],
-      legacyPinImages: true
+      legacyItemImages: true
     },
     "Haunted Weekend": {
       entry: "src/main.js",
@@ -39,7 +39,7 @@ module.exports = {
       sheetKeys: [
         "2PACX-1vS3o5WiIoMItBrst1IIqHae4PWiqo4OZmL7TcnjmO0oeFhweV0X5N6gyGw9frt1exL7YQYwYjh5i0Wh"
       ],
-      legacyPinImages: true
+      legacyItemImages: true
     },
     "Seoul Weekend": {
       entry: "src/main.js",
@@ -51,7 +51,7 @@ module.exports = {
       overrides: {
         Yen: { name: "₩" }
       },
-      legacyPinImages: true
+      legacyItemImages: true
     },
     "Week 18": {
       entry: "src/main.js",
@@ -63,7 +63,7 @@ module.exports = {
       overrides: {
         Yen: { name: "$" }
       },
-      legacyPinImages: true
+      legacyItemImages: true
     },
     "Code Lyoko": {
       entry: "src/main.js",
@@ -92,12 +92,12 @@ module.exports = {
       }
     },
     "Week 19": {
-     entry: "src/main.js",
-     title: "Week 19 Characters",
-     filename: "W19/index.html",
-     sheetKeys: [
-       "2PACX-1vQ-xmqo11pUYYzajjyjmOZoTKuVPRDlDWjXX4pfBcnbYkGslslONfXCC9DrztCIUhCGsa1Sz6Rgbr5Y"
-     ],
+      entry: "src/main.js",
+      title: "Week 19 Characters",
+      filename: "W19/index.html",
+      sheetKeys: [
+        "2PACX-1vQ-xmqo11pUYYzajjyjmOZoTKuVPRDlDWjXX4pfBcnbYkGslslONfXCC9DrztCIUhCGsa1Sz6Rgbr5Y"
+      ],
     },
   },
 };

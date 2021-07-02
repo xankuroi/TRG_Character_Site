@@ -5,8 +5,16 @@
         <div class="flex">
           <span class="text-smaller">{{ data.ID }}</span>
           <b>{{ data.Name }}</b>
-          <font-awesome-icon v-if="data.r" class="boost-indicator" :icon="['fas', 'certificate']" />
-          <font-awesome-icon v-if="data.d" class="boost-indicator" :icon="['fas', 'compact-disc']" />
+          <font-awesome-icon
+            v-if="data.r"
+            class="boost-indicator"
+            :icon="['fas', 'certificate']"
+          />
+          <font-awesome-icon
+            v-if="data.d"
+            class="boost-indicator"
+            :icon="['fas', 'compact-disc']"
+          />
         </div>
         <div class="text-small">
           <span v-if="data.ATK">{{ data.ATK }} ({{ totalAttack }})&nbsp;</span>
@@ -14,15 +22,20 @@
           <span v-else>Attack once.</span>
         </div>
       </div>
-      <img v-if="hasLogo.includes(data.Brand)" :src="publicPath + `logos/${data.Brand}.png`" />
+      <img
+        v-if="hasLogo.includes(data.Brand)"
+        :src="publicPath + `logos/${data.Brand}.png`"
+      />
       <div
         v-else
         :style="{
           color: fontColors[data.Brand],
           fontFamily: fontFamilies[data.Brand],
-          padding: '10px'
+          padding: '10px',
         }"
-      >{{ data.Brand.startsWith('Unbranded') ? '' : data.Brand }}</div>
+      >
+        {{ data.Brand.startsWith("Unbranded") ? "" : data.Brand }}
+      </div>
     </template>
   </Item>
 </template>
@@ -60,11 +73,9 @@ export default {
       return null;
     },
     url() {
-      if (this.$legacyPinImages) {
-        const id = this.data.ID.replace("#", "");
-        if (Number(id) < 300) {
-          return this.publicPath + `pins/${id} ${this.data.Name}.png`;
-        }
+      const id = this.data.ID.replace("#", "");
+      if (this.$legacyItemImages && Number(id) < 300) {
+        return this.publicPath + `pins/${id} ${this.data.Name}.png`;
       }
       if (this.data.ImgSM) {
         return this.data.ImgSM;

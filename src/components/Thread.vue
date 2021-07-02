@@ -12,15 +12,20 @@
           <span v-if="data.Other">{{ data.Other }}</span>
         </div>
       </div>
-      <img v-if="hasLogo.includes(data.Brand)" :src="publicPath + `logos/${data.Brand}.png`" />
+      <img
+        v-if="hasLogo.includes(data.Brand)"
+        :src="publicPath + `logos/${data.Brand}.png`"
+      />
       <div
         v-else
         :style="{
           color: fontColors[data.Brand],
           fontFamily: fontFamilies[data.Brand],
-          padding: '10px'
+          padding: '10px',
         }"
-      >{{ data.Brand.startsWith('Unbranded') ? '' : data.Brand }}</div>
+      >
+        {{ data.Brand.startsWith("Unbranded") ? "" : data.Brand }}
+      </div>
     </template>
   </Item>
 </template>
@@ -32,30 +37,33 @@ import Item from "./Item";
 export default {
   mixins: [brandData],
   components: {
-    Item
+    Item,
   },
   props: {
     data: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
   },
   data() {
     return {
-      publicPath: process.env.BASE_URL
+      publicPath: process.env.BASE_URL,
     };
   },
   computed: {
     url() {
       const id = this.data.ID.replace("#", "");
-      if (Number(id) > 300) {
-        return this.publicPath + "threads/000.png";
+      if (this.$legacyItemImages && id < 300) {
+        return this.publicPath + `threads/${id} ${this.data.Name}.png`;
       }
-      return this.publicPath + `threads/${id} ${this.data.Name}.png`;
+      if (this.data.ImgSM) {
+        return this.data.ImgSM;
+      }
+      return this.publicPath + "threads/000.png";
     },
     boosts() {
       let tokens = [];
-      ["HP", "ATK", "DEF"].forEach(stat => {
+      ["HP", "ATK", "DEF"].forEach((stat) => {
         if (this.data[stat]) {
           tokens.push(
             `${this.data[stat] > 0 ? "+" : ""}${this.data[stat]} ${stat}`
@@ -63,7 +71,7 @@ export default {
         }
       });
       return tokens.join(", ");
-    }
-  }
+    },
+  },
 };
 </script>
