@@ -64,6 +64,7 @@ const withIcons = [
   "Soft Serve Swirl",
   "Pancakes",
   "Crepe",
+  "Crepes",
 ];
 export default {
   components: {
