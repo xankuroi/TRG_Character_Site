@@ -14,7 +14,9 @@ import {
   faCompactDisc, // CD boost
   faCompressAlt, // Shrink
   faCopy, // Copy/Paste
+  faStream, // sSettings
   faHandshake, // Partner
+  faHome, // Home
   faInfoCircle, // Notes
   faListAlt, // Overview
   faMoon, // Dark mode
@@ -41,7 +43,9 @@ library.add(
   faCompressAlt,
   faCopy,
   faDiscord,
+  faStream,
   faHandshake,
+  faHome,
   faInfoCircle,
   faListAlt,
   faMoon,

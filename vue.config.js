@@ -98,6 +98,10 @@ module.exports = {
       sheetKeys: [
         "2PACX-1vQ-xmqo11pUYYzajjyjmOZoTKuVPRDlDWjXX4pfBcnbYkGslslONfXCC9DrztCIUhCGsa1Sz6Rgbr5Y"
       ],
+      additionalLinks: {
+        "Data": "https://docs.google.com/spreadsheets/d/1Ot8C6djwjiUK204VCdaUrSa1IoiTvQneqmiEylq134g",
+        "Rank-up Objectives": "https://soseido.carrd.co",
+      }
     },
   },
 };
